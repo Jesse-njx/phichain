@@ -5,7 +5,11 @@ import json
 import math
 from pathlib import Path
 import socket
+import subprocess
 import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from local_tools import LocalTools
 
 VERSIONS = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
 MAX_MESSAGE = 1_048_576
@@ -69,6 +73,23 @@ TOOLS = [
     tool("save", "Save the current live chart and metadata to the open project's files. Requires fresh session/revision. Use when the user asks to save; edits remain in memory until saved or autosaved by PhiChain.",
          obj(GUARD, ("session", "revision")), destructive=True),
 ]
+PATH = {"type":"string", "minLength":1, "description":"Absolute local filesystem path"}
+INT = {"type":"integer"}
+TOOLS += [
+    tool("editor_status", "Identify the MCP-connected build/PID, pending load, last load error and open project. Works before opening a project; unreachable endpoints return connected=false.", obj({}), True),
+    tool("launch_editor", "Launch the configured PhiChain build with MCP and asset paths. Reuses a reachable editor; refuses an unreachable existing endpoint. Poll editor_status for readiness.", obj({"project_path":PATH})),
+    tool("create_project", "Create a new project from prepared audio and metadata, including a visible default line. Refuses existing destinations. Does not open it; use open_project.", obj({"path":PATH,"audio_path":PATH,"meta":META,"illustration_path":PATH}, ("path","audio_path","meta"))),
+    tool("open_project", "Request loading a project into an empty editor. Close/save the current project first. Poll editor_status; acknowledgment is not successful loading.", obj({"path":PATH}, ("path",))),
+    tool("close_project", "Close the current saved project with fresh session/revision. Refuses unsaved work and active human edits. Poll editor_status to verify.", obj(GUARD,("session","revision"))),
+    tool("project_snapshot", "Read native serialized chart and metadata at a guarded revision, including unsaved edits and asset paths. Used by render/export without saving or changing the live project.", obj(GUARD,("session","revision")),True),
+    tool("find_local_audio", "Search explicit local directories for audio by normalized filename terms, including NCM. Bounded traversal; reports truncation. Inspect candidates for embedded metadata.", obj({"roots":{"type":"array","items":PATH,"minItems":1,"maxItems":20},"query":STRING,"limit":{"type":"integer","minimum":1,"maximum":200}},("roots",)),True),
+    tool("inspect_audio", "Inspect actual codec, bitrate, duration, tags and artwork. Supports local NCM extraction in a temporary directory. Requires ffprobe and openssl for NCM.", obj({"path":PATH},("path",)),True),
+    tool("import_audio", "Prepare local audio at a new explicit path; extract NCM, preserve matching original codec or convert as required. Return source hash, reencoding status and optional artwork. Never overwrite source/output.", obj({"source_path":PATH,"output_path":PATH,"format":{"enum":["mp3","wav","flac","ogg"]},"artwork_output":PATH},("source_path","output_path"))),
+    tool("render_preview", "Render a snapshot of this exact live revision, including unsaved edits, into an MP4. Range is elapsed audio seconds. Returns persistent job ID immediately; poll render_status. Does not save or change editor playback.", obj({**GUARD,"output_path":PATH,"from_seconds":{"type":"number","minimum":0},"to_seconds":{"type":"number","exclusiveMinimum":0},"width":INT,"height":INT,"fps":INT},("session","revision","output_path","from_seconds","to_seconds"))),
+    tool("capture_preview", "Render a PNG still at elapsed audio time from a guarded live chart snapshot. Returns job ID; poll render_status.", obj({**GUARD,"output_path":PATH,"time_seconds":{"type":"number","minimum":0},"width":INT,"height":INT},("session","revision","output_path","time_seconds"))),
+    tool("render_status", "Read persistent render/capture/export job state, revision, output path or diagnostic error. Jobs survive MCP adapter restarts.", obj({"job_id":STRING},("job_id",)),True),
+    tool("export_chart", "Export the exact live revision through PhiChain's converter into a new file. Returns job ID; poll render_status. Converter diagnostics are reported; conversion can lose unsupported format features.", obj({**GUARD,"output_path":PATH,"format":{"enum":["phichain","official","rpe"]}},("session","revision","output_path","format"))),
+]
 BY_NAME = {tool["name"]: tool for tool in TOOLS}
 INSTRUCTIONS = (
     "Coordinate with the human in the live PhiChain editor. Start with get_context, then read_section for relevant beats. "
@@ -105,6 +126,8 @@ def validate(value, schema, path="arguments"):
             raise ValueError(f"{path} must be a finite {kind}")
         if kind == "integer" and not isinstance(value, int):
             raise ValueError(f"{path} must be an integer")
+        if "maximum" in schema and value > schema["maximum"]:
+            raise ValueError(f"{path} is above maximum")
         if "minimum" in schema and value < schema["minimum"]:
             raise ValueError(f"{path} is below minimum")
         if "exclusiveMinimum" in schema and value <= schema["exclusiveMinimum"]:
@@ -151,8 +174,9 @@ def call_editor(endpoint, name, arguments):
 
 
 class Server:
-    def __init__(self, endpoint):
+    def __init__(self, endpoint, config=None):
         self.endpoint = endpoint
+        self.local = LocalTools(endpoint, lambda name, args: call_editor(self.endpoint, name, args), config)
         self.initialized = False
 
     def dispatch(self, request):
@@ -174,7 +198,7 @@ class Server:
             self.initialized = True
             result = {"protocolVersion": version if version in VERSIONS else VERSIONS[0],
                       "capabilities": {"tools": {"listChanged": False}},
-                      "serverInfo": {"name": "phichain", "version": "0.1.0"},
+                      "serverInfo": {"name": "phichain", "version": "0.2.0"},
                       "instructions": INSTRUCTIONS}
         elif method == "ping":
             result = {}
@@ -189,13 +213,13 @@ class Server:
             arguments = params.get("arguments", {})
             try:
                 validate(arguments, BY_NAME[name]["inputSchema"])
-                data = call_editor(self.endpoint, name, arguments)
-                is_error = isinstance(data, dict) and "error" in data
+                data = self.local.call(name, arguments) if name in LocalTools.NAMES else call_editor(self.endpoint, name, arguments)
+                is_error = isinstance(data, dict) and "error" in data and name != "render_status"
                 result = {"content": [{"type": "text", "text": json.dumps(data, ensure_ascii=False)}],
                           "isError": is_error}
                 if not is_error:
                     result["structuredContent"] = data
-            except (OSError, ValueError, KeyError, OverflowError) as error:
+            except (OSError, ValueError, KeyError, OverflowError, subprocess.SubprocessError) as error:
                 result = {"content": [{"type": "text", "text": str(error)}], "isError": True}
         else:
             return self.error(request_id, -32601, f"Unknown method: {method}")
@@ -211,7 +235,10 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--endpoint", required=True, help="Endpoint JSON created by PhiChain --mcp-endpoint")
-    server = Server(parser.parse_args().endpoint)
+    for name in ("editor", "renderer", "converter", "ffmpeg", "ffprobe"):
+        parser.add_argument("--"+name, help="Absolute executable path override")
+    options = parser.parse_args()
+    server = Server(options.endpoint, {name:getattr(options,name) for name in ("editor", "renderer", "converter", "ffmpeg", "ffprobe")})
     for line in sys.stdin:
         try:
             if len(line.encode("utf-8")) > MAX_MESSAGE:

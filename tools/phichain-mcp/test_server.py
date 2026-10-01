@@ -26,7 +26,7 @@ class ProtocolTests(unittest.TestCase):
 
     def test_initialize_list_and_notifications(self):
         response = self.adapter.dispatch({"jsonrpc": "2.0", "id": 1, "method": "tools/list"})
-        self.assertEqual(len(response["result"]["tools"]), 6)
+        self.assertEqual(len(response["result"]["tools"]), len(server.TOOLS))
         self.assertIsNone(self.adapter.dispatch({"jsonrpc": "2.0", "method": "notifications/initialized"}))
         self.assertEqual(server.Server("unused").dispatch({"jsonrpc": "2.0", "id": 1, "method": "tools/list"})["error"]["code"], -32000)
 

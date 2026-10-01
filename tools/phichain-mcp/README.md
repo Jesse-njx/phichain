@@ -5,7 +5,9 @@ application. The Rust bridge runs inside the editor; `server.py` adapts MCP stdi
 requests to that bridge. See [ROADMAP.md](ROADMAP.md) for repository provenance,
 the current boundary, and proposed tools informed by the Override opening study.
 
-A local stdio MCP server for coordinating Codex with the **running** PhiChain editor. No embedded chat, model API key, or Python packages are needed. Python 3.9+ is sufficient.
+A local stdio MCP server for coordinating Codex with the **running** PhiChain editor. No embedded chat, model API key, or Python packages are needed. Python 3.9+ is sufficient for the adapter. Audio tools use `ffmpeg`/`ffprobe`;
+NCM extraction also uses `openssl`. Rendering and export use the existing
+PhiChain renderer and converter executables.
 
 ## Start the editor
 
@@ -102,3 +104,33 @@ python3 -m unittest discover -s tools/phichain-mcp -p 'test_*.py' -v
 ```
 
 Rust tests cover actual editor commands, grouped undo/redo, stale sessions and human edits, invalid-batch atomicity, malformed beats, curve protections, serialization/save, bridge authentication, endpoint cleanup, and a full stdio MCP subprocess editing a live Bevy World through the bridge. Python tests cover MCP lifecycle, schema validation, JSON-RPC errors, and loopback transport.
+
+## Project, audio, and artifact tools
+
+The adapter now provides `editor_status`, `launch_editor`, `create_project`,
+`open_project`, `close_project`, `project_snapshot`, `find_local_audio`,
+`inspect_audio`, `import_audio`, `render_preview`, `capture_preview`,
+`render_status`, and `export_chart`.
+
+Use `editor_status` even on the home screen. `launch_editor` launches the configured
+build and supplies asset paths; poll status until the bridge is connected. An
+existing unreachable endpoint is never overwritten. Opening requires an empty
+editor; closing requires a saved project and current session/revision. Poll
+status after either request; loading errors appear as `last_error`.
+
+All paths must be absolute. Source songs remain untouched. Import and project
+creation refuse existing destinations, and imports report whether they reencoded
+the original audio. Search uses normalized filename terms and explicit roots;
+inspect candidates to read embedded title/artist metadata. NCM artwork can be
+embedded or stored in NetEase's adjacent `meta` directory.
+
+Render, capture, and export accept current `session`/`revision` guards and take a
+native chart snapshot without saving. They return a `job_id`; poll `render_status`
+for `completed` or `failed`, an absolute output path, and diagnostics. Jobs persist
+under the local temporary directory across adapter restarts. Render ranges use
+elapsed audio seconds and are limited to ten minutes per job. Outputs never
+replace existing files. Temporary chart/audio snapshots are removed when jobs end.
+
+The adapter finds source builds in `target/debug` or `target/release`, then the
+local macOS bundle. Override executable paths with `--editor`, `--renderer`,
+`--converter`, `--ffmpeg`, or `--ffprobe`; each override takes an absolute path.

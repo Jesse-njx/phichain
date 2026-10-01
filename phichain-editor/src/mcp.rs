@@ -41,6 +41,20 @@ use std::{
 };
 
 pub struct McpPlugin;
+
+#[derive(Resource, Default)]
+struct Lifecycle {
+    pending: Option<String>,
+    error: Option<String>,
+}
+fn loading_result(
+    event: On<phichain_game::loader::nonblocking::ProjectLoadingResult>,
+    mut state: ResMut<Lifecycle>,
+) {
+    state.pending = None;
+    state.error = event.0.as_ref().err().map(ToString::to_string);
+}
+
 struct Request {
     body: Value,
     reply: mpsc::SyncSender<Value>,
@@ -75,6 +89,8 @@ impl Plugin for McpPlugin {
         match start_bridge(path) {
             Ok(bridge) => {
                 app.insert_resource(bridge)
+                    .init_resource::<Lifecycle>()
+                    .add_observer(loading_result)
                     .add_systems(Last, process_requests);
             }
             Err(error) => error!("Cannot start PhiChain MCP bridge: {error:#}"),
@@ -296,9 +312,72 @@ fn context(world: &mut World, data: &Value) -> Value {
 fn handle(world: &mut World, request: &Value) -> Result<Value> {
     let method = request["tool"].as_str().context("Missing tool")?;
     let args = &request["arguments"];
+    // Lifecycle tools must also work on the home screen, before any project exists.
+    match method {
+        "editor_status" => {
+            let project = if world.contains_resource::<Project>() {
+                let data = snapshot(world)?;
+                Some(context(world, &data))
+            } else {
+                None
+            };
+            let state = world.get_resource::<Lifecycle>();
+            return Ok(json!({"connected":true,"pid":std::process::id(),
+                "version":env!("CARGO_PKG_VERSION"),"executable":std::env::current_exe().ok(),
+                "project":project,"pending":state.and_then(|s|s.pending.as_ref()),
+                "last_error":state.and_then(|s|s.error.as_ref())}));
+        }
+        "open_project" => {
+            if world.contains_resource::<Project>() {
+                bail!("Close the current project first; unsaved work is never discarded")
+            }
+            if world
+                .get_resource::<Lifecycle>()
+                .is_some_and(|s| s.pending.is_some())
+            {
+                bail!("A project lifecycle request is still pending")
+            }
+            let path = PathBuf::from(args["path"].as_str().context("path must be a string")?)
+                .canonicalize()?;
+            let project = Project::open(path.clone())?;
+            phichain_chart::serialization::PhichainChart::from_json_str(&std::fs::read_to_string(
+                project.path.chart_path(),
+            )?)?;
+            world.init_resource::<Lifecycle>();
+            world.resource_mut::<Lifecycle>().pending = Some("open".into());
+            world.resource_mut::<Lifecycle>().error = None;
+            world.write_message(crate::project::LoadProject(path.clone()));
+            return Ok(json!({"status":"requested","path":path,"next":"editor_status"}));
+        }
+        _ => {}
+    }
     let data = snapshot(world)?;
     match method {
         "get_context" => Ok(context(world, &data)),
+        "close_project" => {
+            check_revision(args, &data)?;
+            idle(world)?;
+            if !world.resource::<EditorHistory>().0.is_saved() {
+                bail!("Save the current project before closing it")
+            }
+            world.write_message(crate::project::UnloadProject);
+            Ok(json!({"status":"requested","next":"editor_status"}))
+        }
+        "project_snapshot" => {
+            check_revision(args, &data)?;
+            idle(world)?;
+            let chart = world
+                .run_system_once(|c: SerializeChartParam, l: SerializeLineParam| {
+                    serialize_chart(c, l)
+                })
+                .map_err(|e| anyhow!("{e}"))?;
+            let project = world.resource::<Project>();
+            Ok(
+                json!({"session":data["session"],"revision":data["revision"],"chart":chart,
+                "meta":project.meta,"music_path":project.path.music_path(),
+                "illustration_path":project.path.illustration_path()}),
+            )
+        }
         "read_section" => read_section(&data, args),
         "apply_edits" => apply_edits(world, args, &data),
         "preview" => {
@@ -944,7 +1023,7 @@ def tool(name, args):
     assert not result['isError'], result
     return result['structuredContent']
 rpc('initialize', {'protocolVersion':'2025-11-25'})
-assert len(rpc('tools/list', {})['tools']) == 6
+assert {'get_context','create_project','render_preview'} <= {t['name'] for t in rpc('tools/list', {})['tools']}
 ctx = tool('get_context', {})
 result = tool('apply_edits', {'session':ctx['session'],'revision':ctx['revision'],'operations':[{'op':'create_note','line_id':ctx['lines'][0]['id'],'note':{'kind':'tap','above':True,'beat':[4,1,2],'x':120,'speed':1}}]})
 note_id = result['changes'][0]['id']
@@ -1065,5 +1144,39 @@ assert p.wait(timeout=2) == 0
         )
         .unwrap();
         assert_eq!(w.resource::<Messages<SeekTo>>().len(), 1);
+    }
+    #[test]
+    fn lifecycle_status_works_without_project_and_unsaved_close_is_blocked() {
+        let mut empty = App::new();
+        let status = call(empty.world_mut(), "editor_status", json!({})).unwrap();
+        assert_eq!(status["connected"], true);
+        assert!(status["project"].is_null());
+        let (mut app, line) = editor();
+        app.add_message::<crate::project::UnloadProject>();
+        let w = app.world_mut();
+        let args = edits(
+            w,
+            json!([{"op":"create_note","line_id":id(line),"note":note(1)}]),
+        );
+        call(w, "apply_edits", args).unwrap();
+        let data = snapshot(w).unwrap();
+        let guard = json!({"session":data["session"],"revision":data["revision"]});
+        assert!(call(w, "close_project", guard.clone())
+            .unwrap_err()
+            .to_string()
+            .contains("Save"));
+        let snap = call(w, "project_snapshot", guard.clone()).unwrap();
+        assert_eq!(
+            snap["chart"]["lines"][0]["notes"].as_array().unwrap().len(),
+            1
+        );
+        assert!(!w.resource::<EditorHistory>().0.is_saved());
+        w.resource_mut::<EditorHistory>().0.set_saved();
+        call(w, "close_project", guard).unwrap();
+        assert_eq!(
+            w.resource::<Messages<crate::project::UnloadProject>>()
+                .len(),
+            1
+        );
     }
 }

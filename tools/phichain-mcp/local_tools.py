@@ -1,5 +1,7 @@
 """Local preparation and persistent subprocess jobs. No desktop automation."""
 import base64
+import re
+import array
 import hashlib
 import json
 import os
@@ -98,7 +100,7 @@ def ncm_extract(source, directory):
 
 class LocalTools:
     NAMES = {'editor_status', 'launch_editor', 'create_project', 'find_local_audio', 'inspect_audio',
-             'import_audio', 'render_preview', 'render_status', 'capture_preview', 'export_chart'}
+             'import_audio', 'analyze_audio', 'render_preview', 'render_status', 'capture_preview', 'export_chart'}
     def __init__(self, endpoint, bridge, config=None):
         self.endpoint = absolute(str(Path(endpoint).absolute()))
         self.bridge = bridge
@@ -162,10 +164,11 @@ class LocalTools:
         threading.Thread(target=proc.wait,daemon=True).start()
         return {'status':'starting', 'pid':proc.pid, 'executable':exe, 'log_path':str(log_path), 'next':'editor_status'}
 
-    def find_local_audio(self, roots, query='', limit=50):
+    def find_local_audio(self, roots, query='', limit=50, search_metadata=True, metadata_limit=200):
         if not roots or not 1 <= limit <= 200: raise ValueError('Provide roots and a limit between 1 and 200')
+        if not 1<=metadata_limit<=500:raise ValueError('metadata_limit must be 1–500')
         terms = unicodedata.normalize('NFKC', query).casefold().split()
-        matches=[]; visited=0; truncated=False
+        matches=[]; visited=0; truncated=False; metadata_scanned=0; metadata_limit_reached=False
         for root in roots:
             root = absolute(root)
             if not root.is_dir(): raise ValueError(f'Not a directory: {root}')
@@ -176,12 +179,24 @@ class LocalTools:
                     if visited > 100000: truncated=True; break
                     path = Path(directory)/filename
                     name = unicodedata.normalize('NFKC', filename).casefold()
-                    if path.suffix.lower() in AUDIO_EXTENSIONS and all(t in name for t in terms):
-                        matches.append({'path':str(path), 'bytes':path.stat().st_size, 'container':path.suffix[1:]})
+                    audio_candidate=path.suffix.lower() in AUDIO_EXTENSIONS
+                    matched=audio_candidate and all(t in name for t in terms)
+                    metadata_match=False
+                    if audio_candidate and not matched and terms and search_metadata:
+                        if metadata_scanned<metadata_limit:
+                            metadata_scanned+=1
+                            try:
+                                tags=read_ncm_metadata(path) if path.suffix.lower()=='.ncm' else self.probe(path)['tags']
+                                haystack=unicodedata.normalize('NFKC',json.dumps(tags,ensure_ascii=False)).casefold()
+                                matched=all(t in haystack for t in terms);metadata_match=matched
+                            except (OSError,ValueError,subprocess.SubprocessError):pass
+                        else:metadata_limit_reached=True
+                    if matched:
+                        matches.append({'path':str(path), 'bytes':path.stat().st_size, 'container':path.suffix[1:], 'metadata_match':metadata_match})
                         if len(matches)>=limit: truncated=True; break
                 if truncated: break
             if truncated: break
-        return {'matches':matches,'truncated':truncated,'files_scanned':visited,'matching':'normalized filename terms; inspect_audio reads embedded title/artist'}
+        return {'matches':matches,'truncated':truncated,'files_scanned':visited,'metadata_scanned':metadata_scanned,'metadata_scan_limit_reached':metadata_limit_reached,'matching':'normalized filename terms or embedded metadata/NetEase aliases; metadata inspection is bounded'}
 
     def probe(self, path):
         info = json.loads(run([self.binary('ffprobe'), '-v','error','-show_format','-show_streams','-of','json',path]))
@@ -240,6 +255,27 @@ class LocalTools:
             for chunk in iter(lambda:f.read(1024*1024),b''):digest.update(chunk)
         return {'source_path':str(source),'source_sha256':digest.hexdigest(),'output_path':str(output),
                 'reencoded':not passthrough,'audio':verified,'metadata':meta,'artwork_path':art_path}
+
+    def analyze_audio(self, path=None, from_seconds=0, to_seconds=None, bpm_min=80, bpm_max=240, lyrics_path=None):
+        if path is None:
+            context=self.bridge('get_context',{})
+            if 'error' in context:raise ValueError(context['error'])
+            path=context['music_path']
+        source=absolute(path).resolve(strict=True)
+        if source.suffix.lower()=='.ncm':raise ValueError('Use import_audio on NCM before analysis')
+        info=self.probe(source)
+        # Reference gapless decode for a measured comparison, not a guessed MP3 offset.
+        raw=run([self.binary('ffmpeg'),'-v','error','-nostdin','-i',source,'-t','2','-ac','2','-ar',str(info['sample_rate']),'-f','f32le','-c:a','pcm_f32le','pipe:1'],timeout=30)
+        samples=array.array('f');samples.frombytes(raw)
+        if sys.byteorder!='little':samples.byteswap()
+        first=next((i//2/info['sample_rate'] for i,v in enumerate(samples) if abs(v)>0.0005),None)
+        args={'path':str(source),'from_seconds':from_seconds,'to_seconds':to_seconds if to_seconds is not None else from_seconds+60,
+              'bpm_min':bpm_min,'bpm_max':bpm_max,'reference_first_audible_seconds':first,
+              'reference_decoder':'ffmpeg gapless f32le per-channel amplitude threshold 0.0005'}
+        if lyrics_path:args['lyric_cues']=read_lyrics(absolute(lyrics_path))
+        result=self.bridge('analyze_audio',args)
+        if 'error' in result:raise ValueError(result['error'])
+        return result
 
     def create_project(self, path, audio_path, meta, illustration_path=None):
         destination = absolute(path)
@@ -327,3 +363,39 @@ class LocalTools:
         argv=[converter,str(directory/'chart.json'),str(directory/'export.json'),'--from','phichain','--to',format,'--no-telemetry']
         try:return self.start_job([argv],output_path,session,revision,str(directory))
         except Exception:shutil.rmtree(directory);raise
+
+
+def read_lyrics(path):
+    if path.stat().st_size>1024*1024:raise ValueError('Lyric file exceeds 1 MiB')
+    text=path.read_text(encoding='utf-8-sig')
+    # Standard LRC [mm:ss.xx] and NetEase [mm:ss:xx] are both accepted.
+    cues=[]
+    pattern=re.compile(r'\[(\d+):(\d{1,2})(?:[.:](\d{1,3}))?\]')
+    for line in text.splitlines():
+        matches=list(pattern.finditer(line))
+        if not matches:continue
+        content=line[matches[-1].end():].strip()
+        for match in matches:
+            minutes,seconds,fraction=match.groups()
+            if int(seconds)>=60:raise ValueError('Invalid lyric timestamp seconds')
+            stamp=int(minutes)*60+int(seconds)+(int(fraction)/10**len(fraction) if fraction else 0)
+            cues.append({'time_seconds':stamp,'text':content})
+    if not cues:raise ValueError('No LRC timestamps found')
+    if len(cues)>5000:raise ValueError('Too many lyric cues')
+    return sorted(cues,key=lambda c:c['time_seconds'])
+
+
+def read_ncm_metadata(path):
+    with path.open('rb') as f:
+        def read(n):
+            if not 0<=n<=1024*1024:raise ValueError('NCM metadata field exceeds 1 MiB')
+            value=f.read(n)
+            if len(value)!=n:raise ValueError('Truncated NCM metadata')
+            return value
+        def u32():return struct.unpack('<I',read(4))[0]
+        if read(8)!=b'CTENFDAM':raise ValueError('Unsupported NCM header')
+        read(2);read(u32())
+        envelope=bytes(x^0x63 for x in read(u32()))
+        if not envelope:return {}
+        decoded=run(['openssl','enc','-d','-aes-128-ecb','-K','2331346C6A6B5F215C5D2630553C2728'],input=base64.b64decode(envelope[22:],validate=True))
+        return json.loads(decoded[6:])

@@ -40,6 +40,7 @@ use std::{
     time::{Duration, Instant},
 };
 
+pub(crate) mod analysis;
 mod quality;
 pub(crate) mod structure;
 
@@ -317,6 +318,8 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
     let args = &request["arguments"];
     // Lifecycle tools must also work on the home screen, before any project exists.
     match method {
+        "analyze_audio" => return analysis::start(world, args),
+        "read_audio_features" => return analysis::read(world, args),
         "editor_status" => {
             let project = if world.contains_resource::<Project>() {
                 let data = snapshot(world)?;
@@ -386,6 +389,11 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
         "select_objects" => quality::select_objects(world, args, &data),
         "set_editor_view" => quality::set_editor_view(world, args, &data),
         "apply_edits" => apply_edits(world, args, &data),
+        "set_bpm_list" => apply_edits(
+            world,
+            &json!({"session":args["session"],"revision":args["revision"],"operations":[{"op":"set_bpm_list","bpm_list":args["bpm_list"]}]}),
+            &data,
+        ),
         "preview" => {
             if args["session"] != data["session"] {
                 bail!("Project changed; read context again")
@@ -804,6 +812,16 @@ fn apply_edits(world: &mut World, args: &Value, data: &Value) -> Result<Value> {
                         commands.push(EditorCommand::RemoveEvent(RemoveEvent::new(target)));
                     }
                 }
+            }
+            "set_bpm_list" => {
+                if ops.iter().filter(|o| o["op"] == "set_bpm_list").count() > 1 {
+                    bail!("Only one set_bpm_list per batch")
+                }
+                let from = world.resource::<BpmList>().clone();
+                let to = analysis::parse_bpm(&op["bpm_list"])?;
+                change["before"] = json!(from);
+                change["after"] = json!(to);
+                commands.push(EditorCommand::SetBpmList(analysis::SetBpmList { from, to }));
             }
             "set_offset" => {
                 if ops.iter().filter(|o| o["op"] == "set_offset").count() > 1 {
@@ -1512,5 +1530,36 @@ assert p.wait(timeout=2) == 0
         .unwrap();
         assert_eq!(w.resource::<Messages<SeekTo>>().len(), 1);
         assert_eq!(before["revision"], snapshot(w).unwrap()["revision"]);
+    }
+    #[test]
+    fn bpm_replacement_is_atomic_undoable_and_recomputes_timing() {
+        let (mut app, _) = editor();
+        let w = app.world_mut();
+        let before = snapshot(w).unwrap();
+        let args = json!({"session":before["session"],"revision":before["revision"],"bpm_list":[{"beat":[0,0,1],"bpm":150},{"beat":[8,0,1],"bpm":180}]});
+        let result = call(w, "set_bpm_list", args.clone()).unwrap();
+        assert_eq!(result["undo_steps"], 1);
+        assert!((w.resource::<BpmList>().time_at(phichain_chart::beat!(11)) - 4.2).abs() < 0.001);
+        assert!(call(w, "set_bpm_list", args).is_err());
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| h.undo(w));
+        assert_eq!(w.resource::<BpmList>().0[0].bpm, 120.0);
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| h.redo(w));
+        assert_eq!(w.resource::<BpmList>().0[1].bpm, 180.0);
+        let before = snapshot(w).unwrap();
+        for points in [
+            json!([]),
+            json!([{"beat":[1,0,1],"bpm":120}]),
+            json!([{"beat":[0,0,1],"bpm":120},{"beat":[0,0,1],"bpm":150}]),
+            json!([{"beat":[0,0,1],"bpm":0}]),
+            json!([{"beat":[0,0,0],"bpm":120}]),
+        ] {
+            assert!(call(
+                w,
+                "set_bpm_list",
+                json!({"session":before["session"],"revision":before["revision"],"bpm_list":points})
+            )
+            .is_err());
+            assert_eq!(before["revision"], snapshot(w).unwrap()["revision"]);
+        }
     }
 }

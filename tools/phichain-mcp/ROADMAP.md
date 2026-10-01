@@ -2,60 +2,61 @@
 
 ## Repository and architecture
 
-The repository is a clone of <https://github.com/Ivan-1F/phichain>, based on
-commit `1409c19` (`v1.0.0-beta.7`). Local MCP development begins on branch
-`mcp-charting`. Upstream history is preserved. The existing `origin` remote
-still points to upstream; a personal hosted fork has not been created.
+This repository extends [upstream PhiChain](https://github.com/Ivan-1F/phichain),
+based on `1409c19` (`v1.0.0-beta.7`), on branch `mcp-charting`. Upstream history
+is preserved; `origin` still points to upstream. It is an editor extension,
+not a separate charting application or a hosted personal fork.
 
-The current implementation has two parts:
+The authenticated loopback bridge in `phichain-editor/src/mcp.rs` executes
+commands on Bevy's main thread. Its `structure.rs`, `quality.rs`, and
+`analysis.rs` modules handle chart structure, review/validation, and native audio
+analysis. Mutations share the editor's undo history and session/revision guards.
 
-- `phichain-editor/src/mcp.rs`: an opt-in authenticated loopback bridge that
-  executes chart commands on the editor's main thread, using shared undo history.
-- `tools/phichain-mcp/server.py`: a dependency-free Python stdio MCP adapter
-  that validates arguments and forwards them to the running editor.
+`tools/phichain-mcp/server.py` exposes MCP stdio with argument validation.
+`local_tools.py` prepares local audio and projects and launches binaries;
+`worker.py` runs persisted render/export jobs. Rendering and export reuse the
+existing PhiChain renderer and converter. See [README.md](README.md) for usage.
 
-Chart rendering remains the existing `phichain-renderer` executable. Song
-preparation, analysis, project bootstrapping, and rendering were orchestrated
-outside MCP for the first Override study. That project is stored separately at
-`/Users/jesse/Music/PhiChain/Override-opening`; its chart and audio are not part
-of this source repository.
+## Implemented groups
 
-The available tools are `get_context`, `read_section`, `apply_edits`, `preview`,
-`history`, and `save`. All tools below are proposals, not implemented features.
+| Commit | Capabilities |
+| --- | --- |
+| `no more computer use` | Editor status/launch/open/close, project creation and snapshots, local audio search/inspection/import including NCM, asynchronous preview rendering, still capture, job status, and chart export. |
+| `charting QoL` | Atomic line hierarchy/reordering/deletion and curve-track edits, shared undo, chart validation including generated notes and transforms, selection and editor view controls. |
+| `song analysis` | Metadata-aware song search, native-decoder onset/energy analysis, BPM/offset candidates, decoder-delay measurement, supplied LRC cues, feature pagination, and atomic BPM-list editing. |
 
-## Proposed tools, in implementation order
+The original context, section read, note/event editing, preview, history, and save
+tools remain available. A local song can now become an open project, receive
+reviewed timing and chart edits, and produce a rendered opening through MCP,
+without desktop automation or hand-written project JSON.
 
-| Priority | Tools | What they remove from the workflow |
-| --- | --- | --- |
-| 1 | `editor_status`, `launch_editor`, `create_project`, `open_project`, `close_project` | Manual file dialogs, blank-project JSON creation, asset-path launch errors, and confusion between the MCP build and an older packaged app. Return the connected PID/build, endpoint state, project/session, and save state. Refuse to silently replace an unsaved project. |
-| 2 | `find_local_audio`, `inspect_audio`, `import_audio` | Manual searches and one-off conversion scripts. Search specified local roots by title/artist; inspect actual codec, bitrate, duration, metadata, and artwork; extract supported local NCM files or convert only when necessary. Return an exact output path, source provenance, and whether audio was re-encoded. Preserve the source. |
-| 3 | `analyze_audio`, `read_audio_features`, `set_bpm_list` | Ad hoc numerical analysis and the inability to set BPM through MCP. Return candidate BPM/offset with confidence, onset times, energy/section summaries, and optional supplied lyric cues. Measure decoder delay with the same decoder as PhiChain. Analysis suggests timing; an explicit edit applies it. |
-| 4 | Extend `apply_edits` with line creation/update/reorder/delete and curve-track editing | Bootstrapping lines on disk before opening the project. This should remain one atomic edit API with session/revision guards and a shared undo step, rather than a second mutation path. Line deletion must account for dependent notes/events. |
-| 5 | `render_preview`, `render_status`, `capture_preview` | Shell renderer invocation, polling, frame extraction, and opening the wrong app for visual checks. Accept an explicit time range, return a job ID immediately, then expose progress and absolute video/still paths. Render a snapshot of the current revision, including unsaved edits, and record that revision with the output. |
-| 6 | `validate_chart` | Custom one-off chart checks. Report simultaneous contact demand, duplicate notes, overlapping events, holds crossing the requested boundary, offscreen hit positions, missing line speed/visibility, and timing outliers. Evaluate transforms at note times; distinguish hard errors from design choices. |
-| 7 | `select_objects`, `set_editor_view`, `export_chart` | Manual navigation during joint review and command-line format conversion. Focus a beat range and objects, choose preview/timeline layout, and export a named format with a validation report. |
+## Limits and review
 
-Audio preparation and render jobs belong in the adapter or small local worker
-modules. Live chart mutations belong in the Rust bridge so validation, undo,
-session protection, and the user's editor remain consistent. Reuse PhiChain's
-decoder, renderer, and converter rather than building competing implementations.
-
-## First milestone
-
-Given a local song query and an opening duration, the tools should find and
-inspect the audio, create and open a project, supply timing candidates, create
-lines/BPM/notes/events through guarded edits, validate the chosen range, and
-return a rendered clip. No file dialogs or hand-written project JSON should be
-required. The agent still makes the musical and visual charting decisions.
+The agent still makes musical and visual charting decisions. Tempo confidence
+is heuristic, downbeat placement requires review, and energy boundaries do not
+classify musical semantics. Supplied lyrics retain their original timestamps.
+Validation reports design warnings and conservative contact demand rather than
+proving playability. Export uses converter diagnostics; call `validate_chart`
+separately for native chart findings. Local imports and outputs never overwrite
+existing files, and the source song remains untouched.
 
 ## Verification
 
 ```sh
-cargo test -p phichain mcp::tests
+cargo test -p phichain
 python3 -m unittest discover -s tools/phichain-mcp -p 'test_*.py' -v
+cargo fmt --all -- --check
 git diff --check
 ```
 
-The initial baseline passes 13 Rust MCP tests and 5 Python adapter tests,
-including a stdio MCP subprocess editing a live Bevy world. Build artifacts,
-local app bundles, endpoint credentials, and Python bytecode remain untracked.
+The implementation has 21 Rust MCP tests and 15 Python adapter tests. Live stdio
+smoke tests additionally exercised the actual rebuilt editor: NCM import,
+project lifecycle, unsaved snapshots/render/export, line/curve editing and undo,
+selection/view, validation, and analysis of the downloaded Override recording.
+That opening produced a 204 BPM candidate and approximately 25.06 ms measured
+native MP3 decoder delay. Analysis did not change the live chart; setting BPM
+was separately tested with undo. The study audio/chart remain outside this repo.
+
+Build artifacts, local bundles, endpoint credentials, and Python bytecode remain
+untracked. New native tools require launching the rebuilt editor; clients also
+need to reload the adapter's updated tool inventory.

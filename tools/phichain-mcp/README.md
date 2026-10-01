@@ -3,7 +3,7 @@
 This is an extension of the upstream PhiChain editor, not a separate charting
 application. The Rust bridge runs inside the editor; `server.py` adapts MCP stdio
 requests to that bridge. See [ROADMAP.md](ROADMAP.md) for repository provenance,
-the current boundary, and proposed tools informed by the Override opening study.
+the implemented tool groups and verification from the Override opening study.
 
 A local stdio MCP server for coordinating Codex with the **running** PhiChain editor. No embedded chat, model API key, or Python packages are needed. Python 3.9+ is sufficient for the adapter. Audio tools use `ffmpeg`/`ffprobe`;
 NCM extraction also uses `openssl`. Rendering and export use the existing
@@ -35,7 +35,7 @@ From the repository root, register the stdio server:
 codex mcp add phichain -- python3 "$PWD/tools/phichain-mcp/server.py" --endpoint "$PWD/.phichain-mcp.json"
 ```
 
-Restart the Codex chat/client as needed to load the newly configured server. The server can initialize before the editor starts; tool calls require an open project. The adapter re-reads the endpoint on each call, so it can reconnect after an editor restart. Do not run the adapter directly in a terminal expecting an interactive prompt: stdin/stdout carry MCP JSON-RPC messages.
+Restart the Codex chat/client as needed to load the newly configured server. The server can initialize before the editor starts; live chart tools require an open project; search, import, launch, and explicit-path analysis do not. The adapter re-reads the endpoint on each call, so it can reconnect after an editor restart. Do not run the adapter directly in a terminal expecting an interactive prompt: stdin/stdout carry MCP JSON-RPC messages.
 
 Alternatively, add this entry to a trusted project's `.codex/config.toml` (replace the absolute paths):
 
@@ -63,7 +63,7 @@ Try: **“Look at my selected notes, simplify their rhythm while keeping the fir
 1. Read context and the relevant section first. Object IDs are opaque strings scoped to the project session.
 2. Send `session` and `revision` from the latest read with edits, history actions, or save. The revision is a content fingerprint, not a sequence number; it includes project data, editable object IDs, curve track configuration, and the history cursor, but excludes playback and selection.
 3. If the human changes chart data, a stale batch fails before any changes are applied. Read again and regenerate the intended edits. Active mouse/text interactions, edits marked `Pending`, and queued human commands also block writes. Inspector undo baselines are refreshed after agent edits and history operations.
-4. Updates replace the entire note/event. Preserve fields you were not asked to change. Existing targets may appear only once per batch. Create operations reference existing lines; creating lines, changing BPM, and editing curve tracks are outside this initial tool set.
+4. Updates replace the entire note/event. Preserve fields you were not asked to change. Existing targets may appear only once per batch. Create operations reference existing lines; line and curve operations are described below; BPM changes use `set_bpm_list`.
 5. Each successful batch is one history entry. History is shared with the human; do not blindly undo after a human edit.
 6. Edits remain in memory until `save`, normal editor save, or existing autosave behavior. `preview` returns a request acknowledgment; read context afterward to observe actual playback state. Seek positions are clamped by the editor to the audio duration.
 7. After a transport timeout, read state before retrying an edit: it may already have executed. Queued requests expire before execution after ten seconds. No automatic mutation retries occur.
@@ -99,7 +99,7 @@ Audio offset uses PhiChain's native serialized units (milliseconds). Preview `ti
 ## Verification
 
 ```sh
-cargo test -p phichain mcp::tests
+cargo test -p phichain mcp::
 python3 -m unittest discover -s tools/phichain-mcp -p 'test_*.py' -v
 ```
 
@@ -120,8 +120,10 @@ status after either request; loading errors appear as `last_error`.
 
 All paths must be absolute. Source songs remain untouched. Import and project
 creation refuse existing destinations, and imports report whether they reencoded
-the original audio. Search uses normalized filename terms and explicit roots;
-inspect candidates to read embedded title/artist metadata. NCM artwork can be
+the original audio. Search uses normalized filename terms and explicit roots, and checks embedded
+title/artist aliases by default (`search_metadata=true`). `metadata_limit` bounds
+these inspections to 200 by default, at most 500; the result reports that bound.
+Use `inspect_audio` for full codec and metadata details. NCM artwork can be
 embedded or stored in NetEase's adjacent `meta` directory.
 
 Render, capture, and export accept current `session`/`revision` guards and take a
@@ -165,3 +167,37 @@ clears selection. `set_editor_view` accepts session and optional focus_beat,
 zoom (0.1–5), density (1–256), show_spectrogram, or layout (default/preview).
 These change the shared review UI, not chart history. Focus queues a seek and
 pauses playback; observe context afterward.
+
+## Song analysis
+
+`analyze_audio` starts a background job and returns `analysis_id`. Supply an absolute
+`path`, or omit it to use the open project's audio. Import NCM first. Optional
+`from_seconds` / `to_seconds` bound a 2–600 second range (default first 60 seconds);
+`bpm_min` / `bpm_max` default to 80–240 and allow 30–400. Optional `lyrics_path` supplies local LRC timestamps and text. `read_audio_features` polls the job and
+returns timing candidates, onsets, energy, possible section boundaries, and cues.
+
+Analysis uses PhiChain's own decoder and estimates BPM/offset from spectral flux
+and onset timing. Confidence is heuristic; the first strong onset is a proposed
+beat-zero anchor, and the musical downbeat is unverified. Energy changes do not
+identify vocals or instruments. Silence returns no tempo candidate. Nothing is
+applied to the chart automatically.
+
+The adapter compares the first audible sample in a short ffmpeg reference decode
+with the native decoder and reports a measured decoder delay with uncertainty.
+Native onset times remain in the editor's audio clock. A `lyrics_path` can supply
+standard LRC or NetEase colon-separated fractional timestamps; lyric timestamps
+are preserved, without automatic delay correction.
+
+Jobs are cached in the editor process (up to 16 retained, two running). Adapter
+restarts preserve access; editor restarts clear this cache. Feature reads accept
+`from_seconds` / `to_seconds` and `onset_offset` / `limit` for pagination.
+
+`set_bpm_list` takes current `session`, `revision`, and a `bpm_list` of
+`{"beat":[0,0,1],"bpm":204.0}` entries. The first entry must start at beat zero;
+subsequent beats must increase strictly. The entire list is validated and applied
+as one shared undo step, using PhiChain's native beat/time conversion. Set audio
+offset separately with `apply_edits` after reviewing the proposed timing.
+
+A complete workflow is: search → inspect/import → create project → launch/open
+and poll status → analyze and poll features → set BPM/offset → edit and validate
+→ render and poll output → save. These steps use MCP tools without file dialogs.

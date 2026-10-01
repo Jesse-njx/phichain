@@ -67,6 +67,9 @@ for action,fields in (
     required=[key for key in fields if key not in ("parent_id","cascade")]
     OPERATIONS.append(obj({"op":{"const":action},**fields},("op",*required)))
 
+BPM_LIST = {"type":"array","minItems":1,"maxItems":1000,"items":obj({"beat":BEAT,"bpm":{"type":"number","minimum":1,"maximum":1000}},("beat","bpm"))}
+OPERATIONS.append(obj({"op":{"const":"set_bpm_list"},"bpm_list":BPM_LIST},("op","bpm_list")))
+
 
 def tool(name, description, schema, read_only=False, destructive=False):
     return {"name": name, "description": description, "inputSchema": schema,
@@ -97,7 +100,7 @@ TOOLS += [
     tool("open_project", "Request loading a project into an empty editor. Close/save the current project first. Poll editor_status; acknowledgment is not successful loading.", obj({"path":PATH}, ("path",))),
     tool("close_project", "Close the current saved project with fresh session/revision. Refuses unsaved work and active human edits. Poll editor_status to verify.", obj(GUARD,("session","revision"))),
     tool("project_snapshot", "Read native serialized chart and metadata at a guarded revision, including unsaved edits and asset paths. Used by render/export without saving or changing the live project.", obj(GUARD,("session","revision")),True),
-    tool("find_local_audio", "Search explicit local directories for audio by normalized filename terms, including NCM. Bounded traversal; reports truncation. Inspect candidates for embedded metadata.", obj({"roots":{"type":"array","items":PATH,"minItems":1,"maxItems":20},"query":STRING,"limit":{"type":"integer","minimum":1,"maximum":200}},("roots",)),True),
+    tool("find_local_audio", "Search explicit directories by normalized filename, embedded tags or NetEase aliases. Metadata inspection is bounded (default 200 candidates); reports truncation and skipped metadata. No desktop UI.", obj({"roots":{"type":"array","items":PATH,"minItems":1,"maxItems":20},"query":STRING,"limit":{"type":"integer","minimum":1,"maximum":200},"search_metadata":{"type":"boolean"},"metadata_limit":{"type":"integer","minimum":1,"maximum":500}},("roots",)),True),
     tool("inspect_audio", "Inspect actual codec, bitrate, duration, tags and artwork. Supports local NCM extraction in a temporary directory. Requires ffprobe and openssl for NCM.", obj({"path":PATH},("path",)),True),
     tool("import_audio", "Prepare local audio at a new explicit path; extract NCM, preserve matching original codec or convert as required. Return source hash, reencoding status and optional artwork. Never overwrite source/output.", obj({"source_path":PATH,"output_path":PATH,"format":{"enum":["mp3","wav","flac","ogg"]},"artwork_output":PATH},("source_path","output_path"))),
     tool("render_preview", "Render a snapshot of this exact live revision, including unsaved edits, into an MP4. Range is elapsed audio seconds. Returns persistent job ID immediately; poll render_status. Does not save or change editor playback.", obj({**GUARD,"output_path":PATH,"from_seconds":{"type":"number","minimum":0},"to_seconds":{"type":"number","exclusiveMinimum":0},"width":INT,"height":INT,"fps":INT},("session","revision","output_path","from_seconds","to_seconds"))),
@@ -110,6 +113,13 @@ TOOLS += [
     tool("select_objects", "Replace editor selection with explicit editable note/event/curve IDs; optional line_id changes selected line. Empty ids clears selection. Requires current session; does not create history.", obj({"session":STRING,"ids":{"type":"array","items":ID,"maxItems":1000},"line_id":ID},("session","ids"))),
     tool("set_editor_view", "Focus a chart beat, set timeline zoom/density/spectrogram, or switch layout to default or preview. Requires current session. Focus pauses playback and queues a seek; read context to observe it. Changes shared review UI without chart history.", obj({"session":STRING,"focus_beat":NUMBER,"zoom":{"type":"number","minimum":0.1,"maximum":5},"density":{"type":"integer","minimum":1,"maximum":256},"show_spectrogram":{"type":"boolean"},"layout":{"enum":["default","preview"]}},("session",))),
 ]
+TOOLS += [
+    tool("analyze_audio", "Start background audio analysis using PhiChain's native playback decoder. Optional path defaults to open project's music; import NCM first. Returns analysis_id, then poll read_audio_features. Reports onset/energy features, BPM/offset candidates, heuristic confidence and decoder timing compared with a short ffmpeg reference. Optional local LRC supplies preserved lyric cues. Never edits the chart.", obj({"path":PATH,"from_seconds":{"type":"number","minimum":0},"to_seconds":{"type":"number","exclusiveMinimum":0},"bpm_min":{"type":"number","minimum":30,"maximum":400},"bpm_max":{"type":"number","minimum":30,"maximum":400},"lyrics_path":PATH}),True),
+    tool("read_audio_features", "Poll a native analysis job and read features within elapsed-audio range. Onsets support onset_offset/limit pagination; energy/lyric/section rows are capped at 2000 per range. Analyses are immutable and scoped to this editor process (16 retained, at most two running).", obj({"analysis_id":STRING,"from_seconds":{"type":"number","minimum":0},"to_seconds":NUMBER,"onset_offset":{"type":"integer","minimum":0},"limit":{"type":"integer","minimum":1,"maximum":2000}} ,("analysis_id",)),True),
+    tool("set_bpm_list", "Replace BPM map in one guarded undo step. Canonical beat fractions, first point at zero, strictly increasing beats and positive finite BPM required. An analysis never applies timing automatically. Also available as a set_bpm_list operation in apply_edits.", obj({**GUARD,"bpm_list":BPM_LIST},("session","revision","bpm_list"))),
+]
+for definition in TOOLS:
+    if definition["name"]=="analyze_audio":definition["annotations"]["idempotentHint"]=False
 BY_NAME = {tool["name"]: tool for tool in TOOLS}
 INSTRUCTIONS = (
     "Coordinate with the human in the live PhiChain editor. Start with get_context, then read_section for relevant beats. "
@@ -222,7 +232,7 @@ class Server:
             self.initialized = True
             result = {"protocolVersion": version if version in VERSIONS else VERSIONS[0],
                       "capabilities": {"tools": {"listChanged": False}},
-                      "serverInfo": {"name": "phichain", "version": "0.2.0"},
+                      "serverInfo": {"name": "phichain", "version": "0.3.0"},
                       "instructions": INSTRUCTIONS}
         elif method == "ping":
             result = {}
@@ -238,7 +248,7 @@ class Server:
             try:
                 validate(arguments, BY_NAME[name]["inputSchema"])
                 data = self.local.call(name, arguments) if name in LocalTools.NAMES else call_editor(self.endpoint, name, arguments)
-                is_error = isinstance(data, dict) and "error" in data and name != "render_status"
+                is_error = isinstance(data, dict) and "error" in data and name not in ("render_status", "read_audio_features")
                 result = {"content": [{"type": "text", "text": json.dumps(data, ensure_ascii=False)}],
                           "isError": is_error}
                 if not is_error:

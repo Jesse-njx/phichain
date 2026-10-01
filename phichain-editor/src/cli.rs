@@ -8,6 +8,10 @@ pub struct Args {
     /// Load project from this path when launch
     #[arg(short, long)]
     pub project: Option<String>,
+
+    /// Enable the local MCP bridge and write its credentials to a new endpoint file
+    #[arg(long)]
+    pub mcp_endpoint: Option<std::path::PathBuf>,
 }
 
 pub struct CliPlugin;

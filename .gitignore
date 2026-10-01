@@ -12,3 +12,9 @@ Chart*.json
 *.mp4
 *.mov
 *.m4a
+
+# Local MCP endpoint credentials
+/.phichain-mcp.json
+
+# Local macOS app bundles and packaged build outputs
+/local/

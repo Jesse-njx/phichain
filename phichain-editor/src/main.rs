@@ -21,6 +21,7 @@ mod ime;
 mod l10n;
 mod layout;
 mod logging;
+mod mcp;
 mod metronome;
 mod misc;
 mod notification;
@@ -169,6 +170,7 @@ fn main() {
         .add_plugins(selection::SelectionPlugin)
         .add_plugins(TabPlugin)
         .add_plugins(EditingPlugin)
+        .add_plugins(mcp::McpPlugin)
         .add_plugins(FrameTimeDiagnosticsPlugin::default())
         .add_plugins(AssetsPlugin)
         .add_plugins(NotificationPlugin)

@@ -52,6 +52,21 @@ for action, fields in (
 ):
     OPERATIONS.append(obj({"op": {"const": action}, **fields}, ("op", *fields)))
 
+PARENT = {"oneOf":[ID,{"type":"null"}]}
+CURVE_OPTIONS = obj({"kind":{"enum":["tap","drag","flick","hold"]},"hold_beat":BEAT,
+    "density":{"type":"integer","minimum":1,"maximum":256},"curve":{"type":"object"}},("kind","density","curve"))
+for action,fields in (
+    ("create_line",{"name":STRING,"parent_id":PARENT}),
+    ("update_line",{"id":ID,"name":STRING,"parent_id":PARENT}),
+    ("delete_line",{"id":ID,"cascade":{"type":"boolean"}}),
+    ("reorder_lines",{"line_ids":{"type":"array","items":ID,"minItems":1}}),
+    ("create_curve_track",{"line_id":ID,"from_id":ID,"to_id":ID,"options":CURVE_OPTIONS}),
+    ("update_curve_track",{"id":ID,"from_id":ID,"to_id":ID,"options":CURVE_OPTIONS}),
+    ("delete_curve_track",{"id":ID}),
+):
+    required=[key for key in fields if key not in ("parent_id","cascade")]
+    OPERATIONS.append(obj({"op":{"const":action},**fields},("op",*required)))
+
 
 def tool(name, description, schema, read_only=False, destructive=False):
     return {"name": name, "description": description, "inputSchema": schema,
@@ -90,6 +105,11 @@ TOOLS += [
     tool("render_status", "Read persistent render/capture/export job state, revision, output path or diagnostic error. Jobs survive MCP adapter restarts.", obj({"job_id":STRING},("job_id",)),True),
     tool("export_chart", "Export the exact live revision through PhiChain's converter into a new file. Returns job ID; poll render_status. Converter diagnostics are reported; conversion can lose unsupported format features.", obj({**GUARD,"output_path":PATH,"format":{"enum":["phichain","official","rpe"]}},("session","revision","output_path","format"))),
 ]
+TOOLS += [
+    tool("validate_chart", "Read-only chart checks including generated curves, contact demand, duplicate notes, offscreen hit centers with native easing/ancestor transforms, invisible lines, nonpositive scroll speed, overlapping events and audio/range boundaries. Warnings are design findings; conservative contact counts are not a playability proof. Default viewport aspect is 16:9.", obj({"start_beat":NUMBER,"end_beat":NUMBER,"aspect_ratio":NUMBER,"max_contacts":{"type":"integer","minimum":1,"maximum":10}}),True),
+    tool("select_objects", "Replace editor selection with explicit editable note/event/curve IDs; optional line_id changes selected line. Empty ids clears selection. Requires current session; does not create history.", obj({"session":STRING,"ids":{"type":"array","items":ID,"maxItems":1000},"line_id":ID},("session","ids"))),
+    tool("set_editor_view", "Focus a chart beat, set timeline zoom/density/spectrogram, or switch layout to default or preview. Requires current session. Focus pauses playback and queues a seek; read context to observe it. Changes shared review UI without chart history.", obj({"session":STRING,"focus_beat":NUMBER,"zoom":{"type":"number","minimum":0.1,"maximum":5},"density":{"type":"integer","minimum":1,"maximum":256},"show_spectrogram":{"type":"boolean"},"layout":{"enum":["default","preview"]}},("session",))),
+]
 BY_NAME = {tool["name"]: tool for tool in TOOLS}
 INSTRUCTIONS = (
     "Coordinate with the human in the live PhiChain editor. Start with get_context, then read_section for relevant beats. "
@@ -118,6 +138,10 @@ def validate(value, schema, path="arguments"):
     if "enum" in schema and value not in schema["enum"]:
         raise ValueError(f"{path} must be one of {schema['enum']}")
     kind = schema.get("type")
+    if kind == "null" and value is not None:
+        raise ValueError(f"{path} must be null")
+    if kind == "string" and isinstance(value,str) and len(value) < schema.get("minLength", 0):
+        raise ValueError(f"{path} is too short")
     types = {"object": dict, "array": list, "string": str, "boolean": bool}
     if kind in types and not isinstance(value, types[kind]):
         raise ValueError(f"{path} must be {kind}")

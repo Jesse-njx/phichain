@@ -18,6 +18,7 @@ use undo::Edit;
 
 #[derive(Debug, Clone)]
 pub enum EditorCommand {
+    McpStructure(crate::mcp::structure::StructureCommand),
     CreateNote(CreateNote),
     RemoveNote(RemoveNote),
     EditNote(EditNote),
@@ -91,6 +92,7 @@ macro_rules! impl_edit_for_command {
 }
 
 impl_edit_for_command!(
+    McpStructure,
     CreateNote,
     RemoveNote,
     EditNote,

@@ -40,6 +40,9 @@ use std::{
     time::{Duration, Instant},
 };
 
+mod quality;
+pub(crate) mod structure;
+
 pub struct McpPlugin;
 
 #[derive(Resource, Default)]
@@ -379,6 +382,9 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
             )
         }
         "read_section" => read_section(&data, args),
+        "validate_chart" => quality::validate_chart(world, args, &data),
+        "select_objects" => quality::select_objects(world, args, &data),
+        "set_editor_view" => quality::set_editor_view(world, args, &data),
         "apply_edits" => apply_edits(world, args, &data),
         "preview" => {
             if args["session"] != data["session"] {
@@ -579,6 +585,7 @@ fn apply_edits(world: &mut World, args: &Value, data: &Value) -> Result<Value> {
     if ops.is_empty() || ops.len() > 1000 {
         bail!("Provide 1–1000 operations")
     }
+    structure::validate_batch(world, ops)?;
     let mut commands = Vec::new();
     let mut touched = HashSet::new();
     let mut summary = Vec::new();
@@ -586,6 +593,146 @@ fn apply_edits(world: &mut World, args: &Value, data: &Value) -> Result<Value> {
         let action = op["op"].as_str().context("Missing operation op")?;
         let mut change = json!({"op":action});
         match action {
+            "create_line" => {
+                let name = op["name"]
+                    .as_str()
+                    .context("Line name must be a string")?
+                    .to_owned();
+                if name.trim().is_empty() || name.len() > 256 {
+                    bail!("Line name must be 1–256 bytes")
+                }
+                let parent = match op.get("parent_id") {
+                    None | Some(Value::Null) => None,
+                    _ => Some(entity(op, "parent_id")?),
+                };
+                if parent.is_some_and(|p| world.get::<Line>(p).is_none()) {
+                    bail!("Unknown parent line")
+                }
+                commands.push(EditorCommand::McpStructure(
+                    structure::StructureCommand::Create {
+                        name: name.clone(),
+                        parent,
+                        entity: None,
+                        saved: None,
+                    },
+                ));
+                change["after"] = json!({"name":name,"parent_id":parent.map(id)});
+            }
+            "update_line" | "delete_line" => {
+                let target = entity(op, "id")?;
+                if !touched.insert(target) {
+                    bail!("Each target may appear only once per batch")
+                }
+                let from = world.get::<Line>(target).context("Unknown line")?.clone();
+                change["id"] = json!(id(target));
+                change["before"] = json!(from);
+                if action == "delete_line" {
+                    commands.push(EditorCommand::McpStructure(
+                        structure::StructureCommand::Remove {
+                            entity: target,
+                            saved: None,
+                        },
+                    ));
+                } else {
+                    let name = op["name"]
+                        .as_str()
+                        .context("Line name must be a string")?
+                        .to_owned();
+                    if name.trim().is_empty() || name.len() > 256 {
+                        bail!("Line name must be 1–256 bytes")
+                    }
+                    let old_parent = world.get::<ChildOf>(target).map(|p| p.parent());
+                    let new_parent = match op.get("parent_id") {
+                        None => old_parent,
+                        Some(Value::Null) => None,
+                        _ => Some(entity(op, "parent_id")?),
+                    };
+                    let to = Line { name };
+                    change["after"] = json!(to);
+                    commands.push(EditorCommand::McpStructure(
+                        structure::StructureCommand::Update {
+                            entity: target,
+                            from,
+                            to,
+                            old_parent,
+                            new_parent,
+                        },
+                    ));
+                }
+            }
+            "reorder_lines" => {
+                if ops.iter().any(|o| {
+                    ["create_line", "update_line", "delete_line"]
+                        .contains(&o["op"].as_str().unwrap_or(""))
+                }) || ops.iter().filter(|o| o["op"] == "reorder_lines").count() > 1
+                {
+                    bail!("Reordering must be separate from structural line edits")
+                }
+                let roots: Vec<_> = world
+                    .query_filtered::<(Entity, &LineOrder), (With<Line>, Without<ChildOf>)>()
+                    .iter(world)
+                    .map(|(e, o)| (e, o.0))
+                    .collect();
+                let values = op["line_ids"]
+                    .as_array()
+                    .context("line_ids must be an array")?;
+                let to: Vec<_> = values
+                    .iter()
+                    .enumerate()
+                    .map(|(i, v)| Ok((entity(&json!({"id":v}), "id")?, i as u64)))
+                    .collect::<Result<_>>()?;
+                let keys: HashSet<_> = to.iter().map(|(e, _)| *e).collect();
+                if keys.len() != to.len() || keys != roots.iter().map(|(e, _)| *e).collect() {
+                    bail!("Provide every root line exactly once")
+                }
+                commands.push(EditorCommand::McpStructure(
+                    structure::StructureCommand::Reorder { from: roots, to },
+                ));
+            }
+            "create_curve_track" | "update_curve_track" | "delete_curve_track" => {
+                use crate::editing::command::curve_note_track::{
+                    CreateCurveNoteTrack, RemoveCurveNoteTrack,
+                };
+                if action == "create_curve_track" {
+                    let line = entity(op, "line_id")?;
+                    if world.get::<Line>(line).is_none() {
+                        bail!("Unknown line")
+                    }
+                    let track = structure::parse_curve(world, op, line)?;
+                    change["line_id"] = json!(id(line));
+                    commands.push(EditorCommand::CreateCurveNoteTrack(
+                        CreateCurveNoteTrack::new(line, track),
+                    ));
+                } else {
+                    let target = entity(op, "id")?;
+                    if !touched.insert(target) {
+                        bail!("Each target may appear only once per batch")
+                    }
+                    let from = world
+                        .get::<CurveNoteTrack>(target)
+                        .context("Unknown curve track")?
+                        .clone();
+                    change["id"] = json!(id(target));
+                    if action == "delete_curve_track" {
+                        commands.push(EditorCommand::RemoveCurveNoteTrack(
+                            RemoveCurveNoteTrack::new(target),
+                        ));
+                    } else {
+                        let line = world
+                            .get::<ChildOf>(target)
+                            .context("Track has no line")?
+                            .parent();
+                        let to = structure::parse_curve(world, op, line)?;
+                        commands.push(EditorCommand::McpStructure(
+                            structure::StructureCommand::CurveUpdate {
+                                entity: target,
+                                from,
+                                to,
+                            },
+                        ));
+                    }
+                }
+            }
             "create_note" | "create_event" => {
                 let line = entity(op, "line_id")?;
                 if world.get::<Line>(line).is_none() {
@@ -695,6 +842,13 @@ fn apply_edits(world: &mut World, args: &Value, data: &Value) -> Result<Value> {
                 match command {
                     EditorCommand::CreateNote(c) => change["id"] = json!(c.note_entity.map(id)),
                     EditorCommand::CreateEvent(c) => change["id"] = json!(c.event_entity.map(id)),
+                    EditorCommand::CreateCurveNoteTrack(c) => {
+                        change["id"] = json!(c.track_entity.map(id))
+                    }
+                    EditorCommand::McpStructure(structure::StructureCommand::Create {
+                        entity,
+                        ..
+                    }) => change["id"] = json!(entity.map(id)),
                     _ => {}
                 }
             }
@@ -734,6 +888,17 @@ fn parse_event(value: &Value) -> Result<LineEvent> {
         if ![x1, y1, x2, y2].iter().all(|v| v.is_finite()) {
             bail!("Custom easing coordinates must be finite")
         }
+    }
+    match event.value.easing() {
+        phichain_chart::easing::Easing::Elastic { omega }
+            if !omega.is_finite() || omega.abs() < 0.001 =>
+        {
+            bail!("Elastic omega must be finite and nonzero")
+        }
+        phichain_chart::easing::Easing::Steps { count } if !(1..=10000).contains(&count) => {
+            bail!("Steps count must be 1–10000")
+        }
+        _ => {}
     }
     Ok(event)
 }
@@ -1178,5 +1343,174 @@ assert p.wait(timeout=2) == 0
                 .len(),
             1
         );
+    }
+    #[test]
+    fn line_creation_reparent_reorder_and_subtree_undo_preserve_ids() {
+        let (mut app, root) = editor();
+        let w = app.world_mut();
+        w.insert_resource(SelectedLine(root));
+        let args = edits(w, json!([{"op":"create_line","name":"second"}]));
+        let result = call(w, "apply_edits", args).unwrap();
+        let second = entity(&result["changes"][0], "id").unwrap();
+        let args = edits(
+            w,
+            json!([{"op":"create_line","name":"child","parent_id":id(second)}]),
+        );
+        let result = call(w, "apply_edits", args).unwrap();
+        let child = entity(&result["changes"][0], "id").unwrap();
+        let args = edits(
+            w,
+            json!([{"op":"create_note","line_id":id(child),"note":note(1)}]),
+        );
+        let result = call(w, "apply_edits", args).unwrap();
+        let n = entity(&result["changes"][0], "id").unwrap();
+        let args = edits(w, json!([{"op":"delete_line","id":id(second)}]));
+        assert!(call(w, "apply_edits", args).is_err());
+        let before = snapshot(w).unwrap();
+        let args = edits(
+            w,
+            json!([{"op":"update_line","id":id(second),"name":"cycle","parent_id":id(child)}]),
+        );
+        assert!(call(w, "apply_edits", args).is_err());
+        assert_eq!(before["revision"], snapshot(w).unwrap()["revision"]);
+        w.resource_mut::<SelectedLine>().0 = child;
+        let args = edits(
+            w,
+            json!([{"op":"delete_line","id":id(second),"cascade":true}]),
+        );
+        call(w, "apply_edits", args).unwrap();
+        assert!(w.get::<Line>(second).is_none());
+        assert!(w.get::<Note>(n).is_none());
+        assert_eq!(w.resource::<SelectedLine>().0, root);
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| h.undo(w));
+        assert_eq!(w.get::<ChildOf>(child).unwrap().parent(), second);
+        assert_eq!(w.get::<Note>(n).unwrap().beat, phichain_chart::beat!(1));
+        assert_eq!(w.resource::<SelectedLine>().0, child);
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| h.redo(w));
+        assert!(w.get::<Note>(n).is_none());
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| h.undo(w));
+        let args = edits(
+            w,
+            json!([{"op":"reorder_lines","line_ids":[id(second),id(root)]}]),
+        );
+        call(w, "apply_edits", args).unwrap();
+        assert_eq!(w.get::<LineOrder>(second).unwrap().0, 0);
+        let args = edits(
+            w,
+            json!([{"op":"delete_line","id":id(root),"cascade":true},{"op":"delete_line","id":id(second),"cascade":true}]),
+        );
+        assert!(call(w, "apply_edits", args).is_err());
+    }
+    #[test]
+    fn curve_operations_are_guarded_undoable_and_validation_includes_generated_notes() {
+        let (mut app, line) = editor();
+        let w = app.world_mut();
+        let args = edits(
+            w,
+            json!([{"op":"create_note","line_id":id(line),"note":note(0)},{"op":"create_note","line_id":id(line),"note":note(2)}]),
+        );
+        let result = call(w, "apply_edits", args).unwrap();
+        let a = result["changes"][0]["id"].clone();
+        let b = result["changes"][1]["id"].clone();
+        let options = json!({"kind":"drag","density":2,"curve":{"type":"linear"}});
+        let args = edits(
+            w,
+            json!([{"op":"create_curve_track","line_id":id(line),"from_id":a,"to_id":b,"options":options}]),
+        );
+        let result = call(w, "apply_edits", args).unwrap();
+        let track = entity(&result["changes"][0], "id").unwrap();
+        let validation = call(w, "validate_chart", json!({"end_beat":3})).unwrap();
+        assert_eq!(validation["generated_notes_checked"], 3);
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| h.undo(w));
+        assert!(w.get::<CurveNoteTrack>(track).is_none());
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| h.redo(w));
+        assert!(w.get::<CurveNoteTrack>(track).is_some());
+        let before = snapshot(w).unwrap();
+        let args = edits(
+            w,
+            json!([{"op":"update_curve_track","id":id(track),"from_id":b,"to_id":a,"options":options}]),
+        );
+        assert!(call(w, "apply_edits", args).is_err());
+        assert_eq!(before["revision"], snapshot(w).unwrap()["revision"]);
+        let args = edits(w, json!([{"op":"delete_curve_track","id":id(track)}]));
+        call(w, "apply_edits", args).unwrap();
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| h.undo(w));
+        assert!(w.get::<CurveNoteTrack>(track).is_some());
+    }
+    #[test]
+    fn quality_checks_hold_boundaries_contacts_and_ancestor_positions() {
+        let (mut app, line) = editor();
+        let w = app.world_mut();
+        let args = edits(
+            w,
+            json!([{"op":"create_line","name":"child","parent_id":id(line)}]),
+        );
+        let result = call(w, "apply_edits", args).unwrap();
+        let child = entity(&result["changes"][0], "id").unwrap();
+        let mut hold = note(1);
+        hold["kind"] = json!("hold");
+        hold["hold_beat"] = json!([4, 0, 1]);
+        let args = edits(
+            w,
+            json!([
+                {"op":"create_note","line_id":id(child),"note":hold},
+                {"op":"create_note","line_id":id(child),"note":note(2)},
+                {"op":"create_note","line_id":id(line),"note":note(2)},
+                {"op":"create_event","line_id":id(line),"event":{"kind":"x","start_beat":[0,0,1],"end_beat":[10,0,1],"value":{"type":"constant","value":2000}}}
+            ]),
+        );
+        call(w, "apply_edits", args).unwrap();
+        let validation = call(w, "validate_chart", json!({"end_beat":3})).unwrap();
+        assert_eq!(validation["maximum_contacts"], 3);
+        let codes: HashSet<_> = validation["findings"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|v| v["code"].as_str().unwrap())
+            .collect();
+        assert!(codes.contains("hold_crosses_boundary"));
+        assert!(codes.contains("offscreen_hit"));
+        assert!(codes.contains("contact_demand"));
+    }
+    #[test]
+    fn selection_and_view_do_not_change_chart_revision_and_invalid_view_is_atomic() {
+        let (mut app, line) = editor();
+        app.add_message::<SeekTo>()
+            .init_resource::<crate::timeline::settings::TimelineSettings>()
+            .init_resource::<crate::layout::ui_state::UiState>();
+        let w = app.world_mut();
+        let args = edits(
+            w,
+            json!([{"op":"create_note","line_id":id(line),"note":note(1)}]),
+        );
+        let result = call(w, "apply_edits", args).unwrap();
+        let n = result["changes"][0]["id"].clone();
+        let before = snapshot(w).unwrap();
+        call(
+            w,
+            "select_objects",
+            json!({"session":before["session"],"ids":[n],"line_id":id(line)}),
+        )
+        .unwrap();
+        assert_eq!(before["revision"], snapshot(w).unwrap()["revision"]);
+        assert!(call(
+            w,
+            "set_editor_view",
+            json!({"session":before["session"],"zoom":3,"layout":"invalid"})
+        )
+        .is_err());
+        assert_eq!(
+            w.resource::<crate::timeline::settings::TimelineSettings>()
+                .zoom,
+            2.0
+        );
+        call(
+            w,
+            "set_editor_view",
+            json!({"session":before["session"],"zoom":3,"focus_beat":4,"layout":"preview"}),
+        )
+        .unwrap();
+        assert_eq!(w.resource::<Messages<SeekTo>>().len(), 1);
+        assert_eq!(before["revision"], snapshot(w).unwrap()["revision"]);
     }
 }

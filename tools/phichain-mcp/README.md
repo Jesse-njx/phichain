@@ -134,3 +134,34 @@ replace existing files. Temporary chart/audio snapshots are removed when jobs en
 The adapter finds source builds in `target/debug` or `target/release`, then the
 local macOS bundle. Override executable paths with `--editor`, `--renderer`,
 `--converter`, `--ffmpeg`, or `--ffprobe`; each override takes an absolute path.
+
+## Charting QoL
+
+`apply_edits` also supports `create_line` (name, optional parent_id),
+`update_line` (id, name, optional parent_id; null moves to root),
+`delete_line` (id, explicit cascade=true for lines with dependent objects),
+`reorder_lines` (every root line_id exactly once), and
+`create_curve_track` / `update_curve_track` / `delete_curve_track`.
+Create a line first, then use its returned ID in a subsequent batch for notes.
+Root reordering must be separate from line create/update/delete operations.
+Hierarchy cycles, conflicting subtree edits, and deleting the final existing
+root line are rejected. Subtree undo/redo preserves editable IDs.
+
+Curve creation takes line_id, from_id, to_id, and options:
+`{"kind":"drag","density":16,"curve":{"type":"linear"}}`.
+Updating takes the track id and the same endpoints/options; deletion takes id.
+Endpoints must be editable notes on the track's line, ordered in time. Density
+is bounded to 1–256 and generated count to 10,000. Hold curve options also need
+hold_beat. Generated curve notes remain read-only.
+
+`validate_chart` accepts a beat range, aspect_ratio (default 16:9), and
+max_contacts (default 2). Findings include native curve notes, transformed hit
+positions, audio and hold boundaries, duplicate notes, event overlaps, scroll
+speed, and judge-line visibility. Contact demand is a conservative onset/hold
+count: it is a warning, not proof of playability. Findings are capped at 2,000.
+
+`select_objects` accepts session, ids, and optional line_id; an empty ids array
+clears selection. `set_editor_view` accepts session and optional focus_beat,
+zoom (0.1–5), density (1–256), show_spectrogram, or layout (default/preview).
+These change the shared review UI, not chart history. Focus queues a seek and
+pauses playback; observe context afterward.

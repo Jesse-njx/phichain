@@ -69,6 +69,15 @@ class ProtocolTests(unittest.TestCase):
                 self.assertEqual(received[0]["tool"], "get_context")
                 self.assertEqual(result["session"], "live")
 
+    def test_structural_operation_schemas_and_null_parent(self):
+        with patch.object(server, "call_editor", return_value={"changes":[]}):
+            for parent in (None, "123"):
+                result=self.request("apply_edits",{"session":"s","revision":"r","operations":[{"op":"create_line","name":"Lead","parent_id":parent}]})
+                self.assertFalse(result["result"]["isError"],result)
+        with patch.object(server, "call_editor") as bridge:
+            result=self.request("apply_edits",{"session":"s","revision":"r","operations":[{"op":"create_line","name":"Lead","parent_id":False}]})
+            self.assertTrue(result["result"]["isError"]);bridge.assert_not_called()
+
     def test_actual_stdio_process_and_parse_errors(self):
         requests = ["{bad", json.dumps({"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}}),
                     json.dumps({"jsonrpc": "2.0", "method": "notifications/initialized"}),

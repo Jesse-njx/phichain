@@ -4,7 +4,7 @@
 
 The repository is a clone of <https://github.com/Ivan-1F/phichain>, based on
 commit `1409c19` (`v1.0.0-beta.7`). Local MCP development begins on branch
-`codex/mcp-charting`. Upstream history is preserved. The existing `origin` remote
+`mcp-charting`. Upstream history is preserved. The existing `origin` remote
 still points to upstream; a personal hosted fork has not been created.
 
 The current implementation has two parts:

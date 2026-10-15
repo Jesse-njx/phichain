@@ -1,3 +1,5 @@
+> **Agent-assisted charting fork:** [Jesse-njx/phichain](https://github.com/Jesse-njx/phichain), based on [Ivan-1F/phichain](https://github.com/Ivan-1F/phichain). The live editor MCP server is included in [`tools/phichain-mcp`](tools/phichain-mcp/README.md), with its Rust bridge in `phichain-editor/src/mcp.rs`. See the [development roadmap](tools/phichain-mcp/ROADMAP.md).
+
 > [!WARNING]
 > Still in early stages of development, expect incomplete feature and unexpected behavior
 

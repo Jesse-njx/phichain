@@ -201,3 +201,81 @@ offset separately with `apply_edits` after reviewing the proposed timing.
 A complete workflow is: search → inspect/import → create project → launch/open
 and poll status → analyze and poll features → set BPM/offset → edit and validate
 → render and poll output → save. These steps use MCP tools without file dialogs.
+
+## Bulk tap arrangement tool
+
+`compose_tap_arrangements` composes authored phrases in one MCP call, or adjusts
+an existing tap set. It uses the currently open project and its audio. Read
+`get_context` first and supply its `session` and `revision`. `line_id` defaults
+to the selected line. Modes are `append`, `replace` (within the specified beat
+range), and `transform` (preserving note timings and sides).
+
+For creation, each example contains `name` and `phrases`. Each phrase contains
+`duration_seconds` and an `events` array of `{time_seconds, x}`: time is relative
+to the phrase, and `x` is an array of positions in screen-width units from center
+(e.g. `[-0.2, 0.2]` is a jump). Phrase durations must total the example duration.
+Phrase `horizontal_scale` / `horizontal_shift` change width and translate groups;
+use authored variations to make hands travel. Optional `end_chord` lands exactly
+at the example end. Without it, the duration describes the section window, which
+can include a rest after its last hit. Defaults are ten-second examples, a
+three-second window gap, and first onset at audio second one. BPM changes and
+audio offset are accounted for when converting seconds to native beats.
+
+Global `horizontal_scale`, `horizontal_shift` and `speed_multiplier` affect all
+generated or targeted taps. `speed_multiplier` changes approach speed, not hit
+timing. A 1.5× multiplier turns an 0.8-second approach into approximately 0.53
+seconds. New note centers are limited to ±600 native x units. This is a local
+coordinate bound; native validation also checks transformed hit positions.
+The default contact limit is two; an explicit `max_contacts` can allow up to six.
+
+Example adjustment:
+
+```json
+{
+  "session": "session-from-context",
+  "revision": "revision-from-context",
+  "mode": "transform",
+  "horizontal_scale": 1.2,
+  "speed_multiplier": 1.5,
+  "save": true,
+  "render_output_path": "/absolute/new/review.mp4"
+}
+```
+
+Example authored section (use the same session/revision guards):
+
+```json
+{
+  "session": "session-from-context",
+  "revision": "revision-from-context",
+  "mode": "replace",
+  "examples": [{
+    "name": "Jump and moving answer",
+    "phrases": [{
+      "duration_seconds": 10,
+      "events": [
+        {"time_seconds": 0, "x": [-0.2, 0.2]},
+        {"time_seconds": 0.125, "x": [0.1]},
+        {"time_seconds": 0.25, "x": [-0.15]},
+        {"time_seconds": 0.375, "x": [0.25]}
+      ]
+    }],
+    "end_chord": [-0.2, 0.2]
+  }],
+  "dry_run": true
+}
+```
+
+The tool preflights the entire prospective line, including duplicate notes,
+contact limits, timing, audio bounds and unsupported targets, before writing.
+`dry_run` returns a numbered guide and sample notes without changing the chart.
+After edits, native validation runs; optional `save` and asynchronous rendering
+follow only when it passes. Poll the returned render job with `render_status`.
+
+Large requests use guarded chunks of up to 1,000 operations, each one shared
+undo step. The complete call is **not globally atomic**. A failed later chunk
+returns the completed counts and recovery guidance; no edits are automatically
+retried or undone. After transport failure, read current context because the
+last chunk may have executed. Limits are 10,000 planned taps, 20,000 operations,
+100 examples, and the adapter's existing 1 MiB request limit. The tool does not
+invent patterns or substitute contact counts for a human playtest.

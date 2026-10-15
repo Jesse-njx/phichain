@@ -100,7 +100,8 @@ def ncm_extract(source, directory):
 
 class LocalTools:
     NAMES = {'editor_status', 'launch_editor', 'create_project', 'find_local_audio', 'inspect_audio',
-             'import_audio', 'analyze_audio', 'render_preview', 'render_status', 'capture_preview', 'export_chart'}
+             'import_audio', 'analyze_audio', 'render_preview', 'render_status', 'capture_preview', 'export_chart',
+             'compose_tap_arrangements'}
     def __init__(self, endpoint, bridge, config=None):
         self.endpoint = absolute(str(Path(endpoint).absolute()))
         self.bridge = bridge
@@ -127,6 +128,10 @@ class LocalTools:
 
     def call(self, name, args):
         return getattr(self, name)(**args)
+
+    def compose_tap_arrangements(self, **args):
+        from arrangement_tools import compose
+        return compose(self, **args)
 
     def editor_status(self):
         try:

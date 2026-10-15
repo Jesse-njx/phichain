@@ -93,7 +93,30 @@ TOOLS = [
 ]
 PATH = {"type":"string", "minLength":1, "description":"Absolute local filesystem path"}
 INT = {"type":"integer"}
+TAP_ONSET = obj({"time_seconds":{"type":"number","minimum":0},
+    "x":{"type":"array","minItems":1,"maxItems":6,"items":{"type":"number","minimum":-.5,"maximum":.5}}},
+    ("time_seconds","x"))
+TAP_PHRASE = obj({"duration_seconds":{"type":"number","minimum":.01,"maximum":600},
+    "events":{"type":"array","maxItems":10000,"items":TAP_ONSET},
+    "horizontal_scale":{"type":"number","minimum":.01,"maximum":10},
+    "horizontal_shift":{"type":"number","minimum":-.5,"maximum":.5}},("duration_seconds","events"))
+TAP_EXAMPLE = obj({"name":STRING,"duration_seconds":{"type":"number","minimum":.01,"maximum":600},
+    "phrases":{"type":"array","minItems":1,"maxItems":100,"items":TAP_PHRASE},
+    "end_chord":{"type":"array","minItems":1,"maxItems":6,"items":{"type":"number","minimum":-.5,"maximum":.5}}},("name","phrases"))
 TOOLS += [
+    tool("compose_tap_arrangements", "Compose authored tap examples OR bulk-transform existing taps on one live line. Read context first. Modes: append, replace (only the target beat range), transform (preserves rhythm/kind/side). Phrase events use relative seconds and x in screen-width units from center; durations must sum to each example duration. Defaults: 10-second examples, 3-second gaps, 1-second lead-in, at most 2 contacts. Phrase scales/shifts plus global horizontal_scale/shift support moving groups; speed_multiplier changes approach, not rhythm. Requires existing project/audio. Preflights the whole plan, uses guarded chunks of at most 1000 operations (one undo step EACH; not globally atomic), reports partial failures without retries/rollback. Optional dry_run, save and asynchronous render. Does not invent patterns or guarantee human playability. Returns guide, validation and render job. New note centers must fit within ±600 native x units.",
+        obj({**GUARD,"mode":{"enum":["append","replace","transform"]},"line_id":ID,
+             "examples":{"type":"array","minItems":1,"maxItems":100,"items":TAP_EXAMPLE},
+             "start_seconds":{"type":"number","minimum":0},
+             "duration_seconds":{"type":"number","minimum":.01,"maximum":600},
+             "gap_seconds":{"type":"number","minimum":0,"maximum":600},
+             "horizontal_scale":{"type":"number","minimum":.01,"maximum":10},
+             "horizontal_shift":{"type":"number","minimum":-.5,"maximum":.5},
+             "speed_multiplier":{"type":"number","minimum":.01,"maximum":10},
+             "start_beat":NUMBER,"end_beat":NUMBER,
+             "max_contacts":{"type":"integer","minimum":1,"maximum":6},
+             "dry_run":{"type":"boolean"},"save":{"type":"boolean"},
+             "render_output_path":PATH,"width":INT,"height":INT,"fps":INT},("session","revision","mode")), destructive=True),
     tool("editor_status", "Identify the MCP-connected build/PID, pending load, last load error and open project. Works before opening a project; unreachable endpoints return connected=false.", obj({}), True),
     tool("launch_editor", "Launch the configured PhiChain build with MCP and asset paths. Reuses a reachable editor; refuses an unreachable existing endpoint. Poll editor_status for readiness.", obj({"project_path":PATH})),
     tool("create_project", "Create a new project from prepared audio and metadata, including a visible default line. Refuses existing destinations. Does not open it; use open_project.", obj({"path":PATH,"audio_path":PATH,"meta":META,"illustration_path":PATH}, ("path","audio_path","meta"))),

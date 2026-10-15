@@ -4,8 +4,15 @@
 
 This repository extends [upstream PhiChain](https://github.com/Ivan-1F/phichain),
 based on `1409c19` (`v1.0.0-beta.7`), on branch `mcp-charting`. Upstream history
-is preserved; `origin` still points to upstream. It is an editor extension,
-not a separate charting application or a hosted personal fork.
+is preserved. Our fork is https://github.com/Jesse-njx/phichain; `origin` points
+to the fork and `upstream` points to Ivan-1F/phichain. The editor and its MCP
+server are developed together in this repository.
+
+The running editor is the source of truth for chart authoring. New planning,
+evidence and review capabilities belong in this live bridge, using the shared
+project session, revision guards and undo history. Do not introduce a parallel
+offline chart store. The separate phigros-chart-mcp project is historical work;
+its useful capabilities still need to be ported to this bridge.
 
 The authenticated loopback bridge in `phichain-editor/src/mcp.rs` executes
 commands on Bevy's main thread. Its `structure.rs`, `quality.rs`, and

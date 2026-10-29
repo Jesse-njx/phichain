@@ -1,4 +1,5 @@
 mod action_panel;
+mod density;
 pub mod bpm_list;
 pub mod chart_basic_setting;
 pub mod game;
@@ -64,6 +65,7 @@ pub enum EditorTab {
     LineList,
     BpmList,
     Settings,
+    Density,
 }
 
 impl IntoIdentifier for EditorTab {
@@ -77,6 +79,7 @@ impl IntoIdentifier for EditorTab {
             EditorTab::LineList => "line_list".into(),
             EditorTab::BpmList => "bpm_list".into(),
             EditorTab::Settings => "settings".into(),
+            EditorTab::Density => "density".into(),
         }
     }
 }
@@ -94,6 +97,7 @@ impl Plugin for TabPlugin {
             .register_tab(EditorTab::BpmList, bpm_list_tab)
             .register_tab(EditorTab::LineList, line_list_tab)
             .register_tab(EditorTab::Settings, settings_tab)
+            .register_tab(EditorTab::Density, density::density_tab)
             // TODO: move this upper
             .add_plugins(InspectorPlugin)
             .add_plugins(ActionPanelPlugin);

@@ -62,7 +62,7 @@ impl Plugin for LayoutPlugin {
         let layout_path = config_dir.join("editor_layout.json");
 
         // try to load layout from file, fallback to default
-        let ui_state = if layout_path.exists() {
+        let mut ui_state = if layout_path.exists() {
             match std::fs::read_to_string(&layout_path)
                 .ok()
                 .and_then(|s| serde_json::from_str::<UiState>(&s).ok())
@@ -81,6 +81,7 @@ impl Plugin for LayoutPlugin {
             UiState::default()
         };
 
+        ui_state.initialize_density_panel();
         app.insert_resource(layout_presets)
             .insert_resource(ui_state.clone())
             .insert_resource(LastSavedLayout(Some(ui_state)))

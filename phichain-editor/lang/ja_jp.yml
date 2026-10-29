@@ -37,6 +37,11 @@ menu_bar:
         cancel: キャンセル
 
 tab:
+  density:
+    title: "ノーツ密度"
+    total: "%{count} ノーツ"
+    peak: "最大 %{value} ノーツ/秒"
+    hover: "%{start}–%{end} 秒：%{count} ノーツ · %{nps} ノーツ/秒\nクリックまたはドラッグで移動。Hold は始点で1回だけ数えます。"
   game:
     title: プレビュー
   timeline:

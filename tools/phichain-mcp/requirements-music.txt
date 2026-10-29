@@ -1,0 +1,2 @@
+# Apple Silicon runtime; isolated from the dependency-free MCP adapter.
+mlx-audio @ git+https://github.com/Blaizzy/mlx-audio.git@8c244a1faff44cfa69e3151c195f52a4c1c90be5

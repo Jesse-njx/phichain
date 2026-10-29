@@ -70,6 +70,9 @@ def templates():
     }
 
 
+INSTRUCTIONS = server.MUSIC_FIRST_INSTRUCTIONS + INSTRUCTIONS
+
+
 class AgentServer(server.Server):
     def __init__(self, endpoint, renderer=None):
         super().__init__(endpoint,renderer,catalog=TOOLS,executor=self.execute,instructions=INSTRUCTIONS)

@@ -37,6 +37,11 @@ menu_bar:
         cancel: Cancel
 
 tab:
+  density:
+    title: "Note Density"
+    total: "%{count} notes"
+    peak: "Peak %{value} notes/s"
+    hover: "%{start}–%{end}s: %{count} notes · %{nps} notes/s\nClick or drag to seek. Holds count once at their head."
   game:
     title: Preview
   timeline:

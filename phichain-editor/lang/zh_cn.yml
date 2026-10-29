@@ -37,6 +37,11 @@ menu_bar:
         cancel: 取消
 
 tab:
+  density:
+    title: "音符密度"
+    total: "%{count} 个音符"
+    peak: "峰值 %{value} 音符/秒"
+    hover: "%{start}–%{end} 秒：%{count} 个音符 · %{nps} 音符/秒\n点击或拖动跳转。Hold 仅在头部计数一次。"
   game:
     title: 预览
   timeline:

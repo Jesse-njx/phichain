@@ -14,11 +14,25 @@ See [README.md](README.md) for contracts and current limits.
 There is no planned AI-charting framework. Add capabilities only when the user
 explicitly designs or requests them, rather than anticipating charting needs.
 
+## Local music question answering (2026-10-29)
+
+User-requested `music_server.py` adds a separate read-only music MCP with
+`get_context` and `music_chat`. A local MLX MOSS-Music Instruct worker answers
+questions about guarded clips of the open project's audio. Explicit caller
+history supports follow-ups; no model edits charts, no parallel authoring state,
+and no automatic model downloads or remote inference. Setup and limits are in
+README.md. The chart-editing tool catalogs remain unchanged. This supersedes
+the historical audio-model-setup exclusion below for this specific capability.
+
 
 Current focus is human-facing editor authoring: persisted Simple, Complex and
 Decorative line labels and an undoable inspector selector. These labels do not
 yet enforce complex-note occupancy or implement decorative note-shaped objects.
 No additional MCP capabilities or animation presets are introduced by this work.
+
+The editor also includes a whole-chart Note Density pane in the lower-right
+default layout, with live note-head counts, a playback cursor and shared seeking.
+Existing saved layouts receive this pane once. MCP tool catalogs are unchanged.
 
 ## Experimental rpe-next-style authoring branch
 

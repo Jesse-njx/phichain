@@ -46,13 +46,15 @@ impl Plugin for CoreGamePlugin {
             Update,
             (
                 spawn_hold_component_system,
-                update_hold_components_scale_system
-                    // otherwise heads & tails will keep twitching
-                    .after(update_note_y_system),
+                update_hold_components_scale_system,
                 update_hold_component_texture_system,
                 hide_hold_head_system,
                 despawn_hold_component_system,
             )
+                .chain()
+                // Initialize newly spawned heads/tails in the same frame, after
+                // the body has its final scale (including newly edited holds).
+                .after(update_note_y_system)
                 .in_set(GameSet),
         );
     }

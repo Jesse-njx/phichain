@@ -104,7 +104,15 @@ TOOLS += [
 BY_NAME = {tool["name"]: tool for tool in TOOLS}
 for name in ("inspect_motion", "preview_passage"):
     BY_NAME[name]["annotations"]["idempotentHint"] = False
-INSTRUCTIONS = (
+MUSIC_FIRST_INSTRUCTIONS = (
+    "Please get a full grasp of the entire piece before starting charting. "
+    "Listen to and understand the whole song: its structure, emotional arc, recurring motifs, "
+    "instrumentation, transitions, climaxes and resolution. Use the music MCP when available; "
+    "cover the complete audio in overlapping passages and synthesize a whole-piece understanding "
+    "before placing notes or designing motion. Do not infer the whole piece from a short excerpt. "
+    "If full-song listening is unavailable or uncertain, state the gap rather than claiming understanding. "
+)
+INSTRUCTIONS = MUSIC_FIRST_INSTRUCTIONS + (
     "Coordinate with the human in the live PhiChain editor; no offline chart state. Start with get_context, then read_section for relevant beats. "
     "Use selection IDs to resolve 'these notes'. Preserve fields not requested to change. "
     "Apply edits through apply_edits using the latest session/revision; each batch is one undo step. "

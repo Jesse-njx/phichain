@@ -95,14 +95,20 @@ impl Plugin for McpPlugin {
         };
         match start_bridge(path) {
             Ok(bridge) => {
-                app.insert_resource(bridge)
-                    .init_resource::<Lifecycle>()
-                    .add_observer(loading_result)
-                    .add_systems(Last, process_requests);
+                configure_bridge(app, bridge);
             }
             Err(error) => error!("Cannot start PhiChain MCP bridge: {error:#}"),
         }
     }
+}
+
+fn configure_bridge(app: &mut App, bridge: Bridge) {
+    app.insert_resource(bridge)
+        .init_resource::<Lifecycle>()
+        .add_observer(loading_result)
+        // New sprites must pass through gameplay initialization and transform /
+        // visibility propagation before this frame is extracted for rendering.
+        .add_systems(PreUpdate, process_requests);
 }
 
 fn start_bridge(path: PathBuf) -> Result<Bridge> {
@@ -180,7 +186,7 @@ fn serve(stream: &mut TcpStream, token: &str, sender: &mpsc::SyncSender<Request>
 }
 
 fn process_requests(world: &mut World) {
-    // One request per frame: audio/game systems see edits before the next response.
+    // One request per frame, before gameplay and render-state initialization.
     let request = world
         .resource::<Bridge>()
         .requests
@@ -1054,6 +1060,80 @@ mod tests {
         let line = app.world_mut().spawn(Line::default()).id();
         (app, line)
     }
+
+    #[test]
+    fn queued_edits_initialize_sprites_before_the_first_rendered_frame() {
+        use phichain_assets::{HoldParts, ImageAssets, RespackDimensions};
+        use phichain_game::core::{CoreGamePlugin, HoldHead, HoldTail};
+
+        let (mut app, line) = editor();
+        app.add_plugins((bevy::transform::TransformPlugin, CoreGamePlugin))
+            .insert_resource(phichain_game::GameViewport(Rect::from_corners(
+                Vec2::ZERO, Vec2::new(960.0, 540.0),
+            )))
+            .insert_resource(phichain_game::ChartTime(0.0))
+            .init_resource::<phichain_game::GameConfig>()
+            .init_resource::<ButtonInput<KeyCode>>()
+            .insert_resource(RespackDimensions {
+                note_width: 989.0,
+                hold_body_height: 100.0,
+                hold_highlight_body_height: 100.0,
+            })
+            .insert_resource(ImageAssets {
+                tap: default(), tap_highlight: default(), drag: default(),
+                drag_highlight: default(), flick: default(), flick_highlight: default(),
+                hit: default(), line: default(),
+            })
+            .insert_resource(HoldParts {
+                body: default(), head: default(), tail: default(),
+                body_highlight: default(), head_highlight: default(), tail_highlight: default(),
+            });
+        let (sender, receiver) = mpsc::sync_channel(16);
+        configure_bridge(&mut app, Bridge {
+            requests: Mutex::new(receiver),
+            endpoint: PathBuf::new(),
+            token: String::new(),
+            stopped: Arc::new(AtomicBool::new(false)),
+        });
+        app.update();
+
+        // Queue real MCP edits between frames, as the socket thread does. The
+        // very first rendered frame must already contain normalized sprites,
+        // including children created by the hold system during that frame.
+        for kind in ["tap", "hold"] {
+            let mut n = note(4);
+            n["kind"] = json!(kind);
+            if kind == "hold" { n["hold_beat"] = json!([2, 0, 1]); }
+            let arguments = edits(app.world_mut(), json!([
+                {"op":"create_note","line_id":id(line),"note":n}
+            ]));
+            let (reply, response) = mpsc::sync_channel(1);
+            sender.send(Request {
+                body: json!({"tool":"apply_edits","arguments":arguments}),
+                reply,
+                deadline: Instant::now() + Duration::from_secs(10),
+            }).unwrap();
+            app.update();
+            let result = response.try_recv().unwrap();
+            assert!(result.get("error").is_none(), "{result}");
+            let world = app.world_mut();
+            let expected = phichain_game::scale::texel_unit(960.0, 989.0, 1.0);
+            let mut count = 0;
+            for (transform, note, head, tail) in world.query::<(
+                &GlobalTransform, Option<&Note>, Option<&HoldHead>, Option<&HoldTail>
+            )>().iter(world) {
+                if note.is_none() && head.is_none() && tail.is_none() { continue; }
+                count += 1;
+                let scale = transform.to_scale_rotation_translation().0;
+                assert!((scale.x - expected).abs() < 0.0001, "{scale:?}");
+                if head.is_some() || tail.is_some() {
+                    assert!((scale.y - expected).abs() < 0.0001, "{scale:?}");
+                }
+            }
+            assert_eq!(count, if kind == "tap" { 1 } else { 4 });
+        }
+    }
+
     fn note(beat: i32) -> Value {
         json!({"kind":"tap","above":true,"beat":[beat,0,1],"x":0.0,"speed":1.0})
     }

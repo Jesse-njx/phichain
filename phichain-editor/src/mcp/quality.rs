@@ -111,6 +111,7 @@ pub fn set_editor_view(w: &mut World, args: &Value, data: &Value) -> Result<Valu
         } else {
             UiState {
                 state: egui_dock::DockState::new(vec!["game".into()]),
+                density_panel_initialized: true,
             }
         };
     }

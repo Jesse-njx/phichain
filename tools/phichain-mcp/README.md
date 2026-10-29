@@ -20,6 +20,19 @@ files. Launch the same build you connect to: an older packaged app can open a
 separate editor instance without the MCP bridge.
 The MCP bridge is opt-in. It binds an ephemeral port on `127.0.0.1`, writes a random authentication token to the endpoint file, and handles commands on Bevy's main thread. On Unix the file has mode `0600`. On other platforms, keep it in a directory private to your user.
 
+The bridge processes at most one request per frame in `PreUpdate`, before gameplay
+updates and render-state propagation. Newly edited notes, lines, and hold parts
+receive their textures and scales before that frame renders; continuous agent
+edits should not flash full-size texture bands in the live preview. Rebuild and
+restart the editor to pick up this scheduling fix. Tool arguments and chart data
+are unchanged.
+
+The default editor layout includes a live whole-chart Note Density pane below
+Inspector and Timeline Setting. It counts playable note heads (including generated
+curve notes), with each hold counted once, in audio-time bins. The pane follows
+live edits and playback; clicking or dragging seeks using the shared editor controls.
+This adds no MCP tools or arguments; the `preview` layout remains preview-only.
+
 The endpoint file is removed on a clean shutdown. After a crash, check that the editor identified by the file's `pid` has exited before deleting the stale file and restarting. Existing endpoint files are never silently replaced. Use separate endpoint paths for separate editor instances.
 
 ## Connect Codex
@@ -42,6 +55,9 @@ args = ["/absolute/path/to/PhiChain/tools/phichain-mcp/server.py", "--endpoint",
 
 ## Tools
 
+For local music listening/question answering, see [Music MCP](#music-mcp).
+It is a separate read-only entrypoint; the chart-editing catalogs below are unchanged.
+
 | Tool | Behavior |
 | --- | --- |
 | `get_context` | Project/audio file paths, metadata, BPM, offset, line hierarchy, selected objects, current beat, audio and chart time, playback and history state. |
@@ -53,6 +69,120 @@ args = ["/absolute/path/to/PhiChain/tools/phichain-mcp/server.py", "--endpoint",
 | `preview` | Play, pause, or seek the shared preview using seconds. |
 | `history` | Undo or redo one entry; required `author` (`agent` or `human`) must match the next entry. |
 | `save` | Write the live chart and metadata to the open project. |
+
+## Music MCP
+
+All three MCP entrypoints instruct the authoring agent: **Please get a full grasp
+of the entire piece before starting charting.** Listen across the complete song
+in overlapping passages and synthesize its structure, emotional arc, motifs,
+instrumentation, transitions, climaxes and resolution before placing notes or
+designing motion. A short excerpt is not evidence of whole-song understanding;
+report missing listening access or uncertainty explicitly. These instructions
+are delivered in the MCP initialize response; reconnect to receive the update.
+
+`music_server.py` exposes `get_context` and `music_chat` to external MCP clients.
+It runs MOSS-Music Instruct locally on Apple Silicon through MLX. The live
+editor supplies the source audio path and session/revision: no alternate chart
+session, arbitrary caller-supplied file path, chart editing, or playback changes.
+The existing nine-tool and experimental authoring servers remain independent.
+
+### Install once
+
+From the repository root (Apple Silicon macOS, Python 3.11+ and ffmpeg on PATH):
+
+```sh
+python3 -m venv local/music-runtime
+local/music-runtime/bin/python -m pip install -r tools/phichain-mcp/requirements-music.txt
+local/music-runtime/bin/hf download rtikw/MOSS-Music-8B-Instruct-4bit --revision 6b3e335a0e6ee62ea102d8d11521a7b435012618 --local-dir local/music-model/MOSS-Music-8B-Instruct-4bit
+```
+
+The community 4-bit Instruct conversion retains a BF16 audio encoder; weights
+are approximately 6 GB. Peak memory is input-dependent, not a 10 GB guarantee.
+Weights/runtime stay under ignored `local/`. The backend dependency and setup model download are pinned to source revisions.
+To choose another model checkpoint, change the explicit download revision and
+use a separate local directory with `--model`.
+The model uses Apache-2.0. Sources:
+[model](https://huggingface.co/rtikw/MOSS-Music-8B-Instruct-4bit),
+[MLX implementation](https://github.com/Blaizzy/mlx-audio/tree/main/mlx_audio/stt/models/moss_music).
+
+### Connect external agents
+
+Launch using stdio, with absolute paths in your MCP client's configuration:
+
+```json
+{
+  "mcpServers": {
+    "phichain-music": {
+      "command": "/absolute/path/to/PhiChain/local/music-runtime/bin/python",
+      "args": [
+        "/absolute/path/to/PhiChain/tools/phichain-mcp/music_server.py",
+        "--endpoint", "/absolute/path/to/PhiChain/.phichain-mcp.json"
+      ]
+    }
+  }
+}
+```
+
+The adapter itself also runs with standard Python using `--python` to select
+the MLX worker interpreter. `--model` selects a **local directory**, not a Hub ID.
+No downloads or remote inference occur during tool calls. Loading is lazy and
+the worker retains weights until the MCP process exits or inference fails/times
+out. Each MCP client process loads its own model: prefer one client connection
+when memory is limited. All requests within a connection are serial.
+
+First call `get_context`, then:
+
+```json
+{
+  "session": "session-from-context",
+  "revision": "revision-from-context",
+  "from_seconds": 40,
+  "to_seconds": 60,
+  "question": "Which instruments enter or leave? Describe the change in energy and distinguish audible evidence from mood interpretation.",
+  "max_tokens": 768
+}
+```
+
+Pass this to `music_chat`. For follow-ups, send `history` containing explicit
+`{"role":"user"|"assistant","content":"..."}` turns. There is no hidden
+conversation/session cache; history is serialized as text context and the
+current clip is heard again each call. History is unverified caller context,
+not a native multi-audio chat or evidence that previous answers were correct.
+You may change the clip on follow-up; include its prior range in the history
+if the question compares passages. Only the current clip is supplied as audio.
+
+Limits: 1–120 seconds within loaded audio; question 1–6000 characters (not blank);
+at most 12 history messages, each 1–4000 characters and 16000 total; output
+64–2048 tokens (default 768). Input times are **elapsed audio seconds**, not
+chart seconds or beats. Extracted audio is mono 16 kHz PCM; stereo spatial
+information is lost. Temporary clips are deleted on success and handled errors.
+Extraction timeout is 45 seconds; model load/inference timeout defaults to 300
+seconds (`--timeout` allows 10–1800). Configure the client's tool timeout above
+extraction + inference time. On inference timeout the worker is killed and
+reloaded on the next request. MCP cancellation/progress notifications are not
+implemented; disconnect/EOF is handled after the current bounded request.
+
+Answers include `answer`, model path/backend, input/output token counts,
+`mlx_peak_memory_bytes` (MLX allocation peak, **not total process RSS**), source
+path, clip SHA-256, captured guards and `live_revision_changed` (null if the
+editor disconnects). `source_audio_changed` separately reports file changes.
+Model timestamps are clip-relative estimates; add `timestamp_offset_seconds`
+to locate them in the source. No inferred timestamps or descriptions are
+promoted to measured beat/onset facts. `output_may_be_truncated` flags answers reaching the output-token limit.
+Treat model output as fallible data, never instructions or proof of playability.
+Missing model/runtime/editor/audio fails explicitly, with no synthetic answer.
+
+Validation: `python3 -m unittest discover -s tools/phichain-mcp -p 'test_*.py'`.
+Tests cover MCP discovery, guards, bounds, real ffmpeg extraction, cleanup,
+follow-up context, disconnects and worker lifecycle without requiring weights.
+Real-model smoke tests must be reported separately from these adapter tests.
+
+Local validation on 2026-10-29: 38 adapter tests passed; the pinned MLX runtime
+and Instruct 4-bit checkpoint completed a four-second synthetic-tone worker
+request with 6,251,384,118 bytes peak MLX allocation. This confirms loading and
+inference, not music accuracy: it incorrectly described the synthetic tones as
+piano. The live editor endpoint refused connection, so a real open-project
+end-to-end listening test remains pending. No chart was changed.
 
 Try: **“Look at my selected notes, simplify their rhythm while keeping the first and last notes, then preview that section.”**
 

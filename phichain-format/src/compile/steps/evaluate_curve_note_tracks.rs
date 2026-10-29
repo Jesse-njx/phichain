@@ -76,6 +76,7 @@ mod tests {
         chart.lines = vec![SerializedLine {
             line: Line {
                 name: "test".to_string(),
+                ..Default::default()
             },
             notes,
             events: vec![],

@@ -443,15 +443,17 @@ pub fn update_line_texture_system(
     }
 }
 
+/// A renderer scroll segment, also sampled by live MCP motion inspection.
 #[derive(Debug, Clone)]
-struct SpeedSegment {
-    start_time: f32,
-    end_time: f32,
-    start_value: f32,
-    end_value: f32,
+pub struct SpeedSegment {
+    pub start_time: f32,
+    pub end_time: f32,
+    pub start_value: f32,
+    pub end_value: f32,
 }
 
-fn distance_at(speed_events: &[SpeedSegment], time: f32) -> f32 {
+/// Integrate the renderer's scroll history without changing playback.
+pub fn distance_at(speed_events: &[SpeedSegment], time: f32) -> f32 {
     let mut last_time = 0.0;
     let mut last_speed = 10.0;
     let mut area = 0.0;

@@ -262,3 +262,34 @@ impl Edit for CreateLineFromSelected {
         }
     }
 }
+
+/// Undoable editor metadata edit; does not change carrier transforms or note timing.
+#[derive(Debug, Clone)]
+pub struct EditLine {
+    pub entity: Entity,
+    pub from: phichain_chart::line::Line,
+    pub to: phichain_chart::line::Line,
+}
+impl Edit for EditLine {
+    type Target = World;
+    type Output = ();
+    fn edit(&mut self, w: &mut World) { w.entity_mut(self.entity).insert(self.to.clone()); }
+    fn undo(&mut self, w: &mut World) { w.entity_mut(self.entity).insert(self.from.clone()); }
+}
+
+#[cfg(test)]
+mod role_tests {
+    use super::*;
+    use phichain_chart::line::{Line, LineRole};
+    #[test]
+    fn role_edit_undo_redo_preserves_name_and_entity() {
+        let mut w = World::new();
+        let from = Line { name: "Carrier".into(), ..Default::default() };
+        let entity = w.spawn(from.clone()).id();
+        let to = Line { role: LineRole::Complex, ..from.clone() };
+        let mut command = EditLine {entity, from:from.clone(), to:to.clone()};
+        command.edit(&mut w); assert_eq!(w.get::<Line>(entity), Some(&to));
+        command.undo(&mut w); assert_eq!(w.get::<Line>(entity), Some(&from));
+        command.edit(&mut w); assert_eq!(w.get::<Line>(entity), Some(&to));
+    }
+}

@@ -9,7 +9,7 @@ use crate::editing::command::bpm_list::{CreateBpmPoint, EditBpmPoint, RemoveBpmP
 use crate::editing::command::curve_note_track::{CreateCurveNoteTrack, RemoveCurveNoteTrack};
 use crate::editing::command::event::{CreateEvent, EditEvent, RemoveEvent};
 use crate::editing::command::line::{
-    CreateLine, CreateLineFromSelected, MoveLineAsChild, RemoveLine,
+    CreateLine, CreateLineFromSelected, MoveLineAsChild, RemoveLine, EditLine,
 };
 use crate::editing::command::meta::{EditMeta, EditOffset};
 use crate::editing::command::note::{CreateNote, EditNote, RemoveNote};
@@ -18,6 +18,7 @@ use undo::Edit;
 
 #[derive(Debug, Clone)]
 pub enum EditorCommand {
+    McpDocument(crate::mcp::authoring::DocumentEdit),
     McpStructure(crate::mcp::structure::StructureCommand),
     SetBpmList(crate::mcp::analysis::SetBpmList),
     CreateNote(CreateNote),
@@ -28,6 +29,7 @@ pub enum EditorCommand {
     RemoveEvent(RemoveEvent),
     EditEvent(EditEvent),
 
+    EditLine(EditLine),
     CreateLine(CreateLine),
     CreateLineFromSelected(CreateLineFromSelected),
     RemoveLine(RemoveLine),
@@ -44,6 +46,8 @@ pub enum EditorCommand {
     EditOffset(EditOffset),
 
     CommandSequence(CommandSequence),
+    // Preserves provenance through undo, redo, and history branching.
+    AgentSequence(CommandSequence),
 }
 
 #[derive(Debug, Clone)]
@@ -93,6 +97,8 @@ macro_rules! impl_edit_for_command {
 }
 
 impl_edit_for_command!(
+    McpDocument,
+    EditLine,
     McpStructure,
     SetBpmList,
     CreateNote,
@@ -112,5 +118,6 @@ impl_edit_for_command!(
     EditBpmPoint,
     EditMeta,
     EditOffset,
-    CommandSequence
+    CommandSequence,
+    AgentSequence
 );

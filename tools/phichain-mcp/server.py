@@ -5,11 +5,10 @@ import json
 import math
 from pathlib import Path
 import socket
-import subprocess
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from local_tools import LocalTools
+import motion
 
 VERSIONS = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
 MAX_MESSAGE = 1_048_576
@@ -78,74 +77,35 @@ def tool(name, description, schema, read_only=False, destructive=False):
 
 
 TOOLS = [
-    tool("get_context", "Read the open project's session/revision, lines, BPM, offset, selected objects and IDs, selected line, playback and undo state. Start here. IDs are opaque strings valid only in this project session.", obj({}), True),
+    tool("get_context", "Read the open project's session/revision, lines, BPM, offset, selected objects and IDs, selected line, playback and undo state, including undo_author/redo_author (agent, human, or null). Start here. IDs are opaque strings valid only in this project session.", obj({}), True),
     tool("read_section", "Read editable notes, overlapping holds and line events in [start_beat,end_beat). Defaults to beats 0–32. Optionally filter by line_id. Includes curve track references; generated curve notes are not editable. Returns fresh session/revision.", obj({"start_beat": NUMBER, "end_beat": NUMBER, "line_id": ID}), True),
+    tool("inspect_motion", "Inspect 1–32 explicit note IDs, or the current selected editable notes. Requires live session/revision and an elapsed-audio range of at most 12 seconds. Returns 2–12 actual rendered frames (default 6), screen trajectories, landing positions, carrier/ancestor IDs, sampled transforms and contributing events, including hidden lines. Read-only: no playback, chart, selection or history changes. Requires local phichain-renderer, ffmpeg and GPU; never falls back to an offline chart. Frames use default styling at 960×540 and 30 fps, with hit effects hidden. A local HTML report overlays IDs, carriers and trajectories. Results remain tied to the captured revision; check live_revision_changed. Generated notes appear in frames but cannot be selected as targets.",
+         obj({**GUARD, "note_ids": {"type":"array","items":ID,"minItems":1,"maxItems":32,"uniqueItems":True},
+              "from_seconds":{"type":"number","minimum":0,"maximum":86400}, "to_seconds":{"type":"number","exclusiveMinimum":0,"maximum":86400},
+              "frames":{"type":"integer","minimum":2,"maximum":12}}, ("session","revision","from_seconds","to_seconds")), True),
     tool("apply_edits", "Validate and apply 1–1000 operations as ONE undo step. Supply session/revision from the latest read. Update operations replace the full note/event: preserve unmodified fields. Each existing ID may occur once. Hold notes require positive hold_beat. Curve endpoints cannot be deleted. Returns before/after changes and created IDs. Does not save. Stale edits fail without mutation; re-read and regenerate.",
          obj({**GUARD, "operations": {"type": "array", "minItems": 1, "maxItems": 1000,
                                       "items": {"oneOf": OPERATIONS}}}, ("session", "revision", "operations")), destructive=True),
     tool("preview", "Play, pause, or seek the editor preview. Supply the current project session. time_seconds is elapsed audio time, including chart offset. Optional time_seconds seeks before play/pause; seek requires time_seconds. Seeking is processed on the next editor frame. Read context to observe actual playback position. This changes the human's shared playback controls.",
          obj({"session": STRING, "action": {"enum": ["play", "pause", "seek"]},
               "time_seconds": {"type": "number", "minimum": 0}}, ("session", "action"))),
-    tool("history", "Undo or redo ONE entry in the shared human/agent history. Requires fresh session/revision. This may undo a human edit; only use when requested or when reverting your known latest batch.",
-         obj({**GUARD, "action": {"enum": ["undo", "redo"]}}, ("session", "revision", "action")), destructive=True),
+    tool("history", "Undo or redo ONE entry in the shared history. Explicitly choose author: agent or human. Must match the next undo_author/redo_author from get_context; mismatch fails without mutation. Cannot skip entries. Requires fresh session/revision. This may undo a human edit; only use when requested or when reverting your known latest batch.",
+         obj({**GUARD, "action": {"enum": ["undo", "redo"]}, "author": {"enum": ["agent", "human"]}}, ("session", "revision", "action", "author")), destructive=True),
     tool("save", "Save the current live chart and metadata to the open project's files. Requires fresh session/revision. Use when the user asks to save; edits remain in memory until saved or autosaved by PhiChain.",
          obj(GUARD, ("session", "revision")), destructive=True),
 ]
-PATH = {"type":"string", "minLength":1, "description":"Absolute local filesystem path"}
-INT = {"type":"integer"}
-TAP_ONSET = obj({"time_seconds":{"type":"number","minimum":0},
-    "x":{"type":"array","minItems":1,"maxItems":6,"items":{"type":"number","minimum":-.5,"maximum":.5}}},
-    ("time_seconds","x"))
-TAP_PHRASE = obj({"duration_seconds":{"type":"number","minimum":.01,"maximum":600},
-    "events":{"type":"array","maxItems":10000,"items":TAP_ONSET},
-    "horizontal_scale":{"type":"number","minimum":.01,"maximum":10},
-    "horizontal_shift":{"type":"number","minimum":-.5,"maximum":.5}},("duration_seconds","events"))
-TAP_EXAMPLE = obj({"name":STRING,"duration_seconds":{"type":"number","minimum":.01,"maximum":600},
-    "phrases":{"type":"array","minItems":1,"maxItems":100,"items":TAP_PHRASE},
-    "end_chord":{"type":"array","minItems":1,"maxItems":6,"items":{"type":"number","minimum":-.5,"maximum":.5}}},("name","phrases"))
 TOOLS += [
-    tool("compose_tap_arrangements", "Compose authored tap examples OR bulk-transform existing taps on one live line. Read context first. Modes: append, replace (only the target beat range), transform (preserves rhythm/kind/side). Phrase events use relative seconds and x in screen-width units from center; durations must sum to each example duration. Defaults: 10-second examples, 3-second gaps, 1-second lead-in, at most 2 contacts. Phrase scales/shifts plus global horizontal_scale/shift support moving groups; speed_multiplier changes approach, not rhythm. Requires existing project/audio. Preflights the whole plan, uses guarded chunks of at most 1000 operations (one undo step EACH; not globally atomic), reports partial failures without retries/rollback. Optional dry_run, save and asynchronous render. Does not invent patterns or guarantee human playability. Returns guide, validation and render job. New note centers must fit within ±600 native x units.",
-        obj({**GUARD,"mode":{"enum":["append","replace","transform"]},"line_id":ID,
-             "examples":{"type":"array","minItems":1,"maxItems":100,"items":TAP_EXAMPLE},
-             "start_seconds":{"type":"number","minimum":0},
-             "duration_seconds":{"type":"number","minimum":.01,"maximum":600},
-             "gap_seconds":{"type":"number","minimum":0,"maximum":600},
-             "horizontal_scale":{"type":"number","minimum":.01,"maximum":10},
-             "horizontal_shift":{"type":"number","minimum":-.5,"maximum":.5},
-             "speed_multiplier":{"type":"number","minimum":.01,"maximum":10},
-             "start_beat":NUMBER,"end_beat":NUMBER,
-             "max_contacts":{"type":"integer","minimum":1,"maximum":6},
-             "dry_run":{"type":"boolean"},"save":{"type":"boolean"},
-             "render_output_path":PATH,"width":INT,"height":INT,"fps":INT},("session","revision","mode")), destructive=True),
-    tool("editor_status", "Identify the MCP-connected build/PID, pending load, last load error and open project. Works before opening a project; unreachable endpoints return connected=false.", obj({}), True),
-    tool("launch_editor", "Launch the configured PhiChain build with MCP and asset paths. Reuses a reachable editor; refuses an unreachable existing endpoint. Poll editor_status for readiness.", obj({"project_path":PATH})),
-    tool("create_project", "Create a new project from prepared audio and metadata, including a visible default line. Refuses existing destinations. Does not open it; use open_project.", obj({"path":PATH,"audio_path":PATH,"meta":META,"illustration_path":PATH}, ("path","audio_path","meta"))),
-    tool("open_project", "Request loading a project into an empty editor. Close/save the current project first. Poll editor_status; acknowledgment is not successful loading.", obj({"path":PATH}, ("path",))),
-    tool("close_project", "Close the current saved project with fresh session/revision. Refuses unsaved work and active human edits. Poll editor_status to verify.", obj(GUARD,("session","revision"))),
-    tool("project_snapshot", "Read native serialized chart and metadata at a guarded revision, including unsaved edits and asset paths. Used by render/export without saving or changing the live project.", obj(GUARD,("session","revision")),True),
-    tool("find_local_audio", "Search explicit directories by normalized filename, embedded tags or NetEase aliases. Metadata inspection is bounded (default 200 candidates); reports truncation and skipped metadata. No desktop UI.", obj({"roots":{"type":"array","items":PATH,"minItems":1,"maxItems":20},"query":STRING,"limit":{"type":"integer","minimum":1,"maximum":200},"search_metadata":{"type":"boolean"},"metadata_limit":{"type":"integer","minimum":1,"maximum":500}},("roots",)),True),
-    tool("inspect_audio", "Inspect actual codec, bitrate, duration, tags and artwork. Supports local NCM extraction in a temporary directory. Requires ffprobe and openssl for NCM.", obj({"path":PATH},("path",)),True),
-    tool("import_audio", "Prepare local audio at a new explicit path; extract NCM, preserve matching original codec or convert as required. Return source hash, reencoding status and optional artwork. Never overwrite source/output.", obj({"source_path":PATH,"output_path":PATH,"format":{"enum":["mp3","wav","flac","ogg"]},"artwork_output":PATH},("source_path","output_path"))),
-    tool("render_preview", "Render a snapshot of this exact live revision, including unsaved edits, into an MP4. Range is elapsed audio seconds. Returns persistent job ID immediately; poll render_status. Does not save or change editor playback.", obj({**GUARD,"output_path":PATH,"from_seconds":{"type":"number","minimum":0},"to_seconds":{"type":"number","exclusiveMinimum":0},"width":INT,"height":INT,"fps":INT},("session","revision","output_path","from_seconds","to_seconds"))),
-    tool("capture_preview", "Render a PNG still at elapsed audio time from a guarded live chart snapshot. Returns job ID; poll render_status.", obj({**GUARD,"output_path":PATH,"time_seconds":{"type":"number","minimum":0},"width":INT,"height":INT},("session","revision","output_path","time_seconds"))),
-    tool("render_status", "Read persistent render/capture/export job state, revision, output path or diagnostic error. Jobs survive MCP adapter restarts.", obj({"job_id":STRING},("job_id",)),True),
-    tool("export_chart", "Export the exact live revision through PhiChain's converter into a new file. Returns job ID; poll render_status. Converter diagnostics are reported; conversion can lose unsupported format features.", obj({**GUARD,"output_path":PATH,"format":{"enum":["phichain","official","rpe"]}},("session","revision","output_path","format"))),
+    tool("preview_passage", "Render a guarded live passage of at most 12 audio seconds to a local MP4 and HTML video with play/pause, looping and scrubbing. Does not open the report or alter editor playback, chart or history. Uses PhiChain rendering as visual ground truth; 960×540, 30 fps, default styling, hidden hit effects. Requires renderer, ffmpeg and GPU. Returns captured revision and live_revision_changed.",
+         obj({**GUARD,"from_seconds":{"type":"number","minimum":0,"maximum":86400},"to_seconds":{"type":"number","exclusiveMinimum":0,"maximum":86400}}, ("session","revision","from_seconds","to_seconds")), True),
+    tool("animate_selection", "Apply explicit motion groups on existing carriers, as one undo step. dry_run must be explicit. Every note on each affected carrier must be included (including future notes); child lines and curve dependencies reject. Merge only identical event timelines with the same parent; preserve note IDs, kinds, hit times, local x, speed and hold durations. Supplied event channels replace their ENTIRE timelines on the destination carrier; omitted channels stay unchanged. Supports zero/negative line speed for early-visible playable notes. Never allocates lines or deletes source carriers. Default budget 24 counts ALL lines, including decoration; explicitly raise for larger charts. Review full visibility and landing motion before applying.",
+         obj({**GUARD,"dry_run":{"type":"boolean"},"line_budget":{"type":"integer","minimum":1,"maximum":1024},
+              "groups":{"type":"array","minItems":1,"maxItems":24,"items":obj({"carrier_id":ID,"note_ids":{"type":"array","items":ID,"minItems":1,"maxItems":1000,"uniqueItems":True},"events":{"type":"array","items":EVENT,"minItems":1,"maxItems":512}},("carrier_id","note_ids","events"))}}, ("session","revision","dry_run","groups")), destructive=True),
 ]
-TOOLS += [
-    tool("validate_chart", "Read-only chart checks including generated curves, contact demand, duplicate notes, offscreen hit centers with native easing/ancestor transforms, invisible lines, nonpositive scroll speed, overlapping events and audio/range boundaries. Warnings are design findings; conservative contact counts are not a playability proof. Default viewport aspect is 16:9.", obj({"start_beat":NUMBER,"end_beat":NUMBER,"aspect_ratio":NUMBER,"max_contacts":{"type":"integer","minimum":1,"maximum":10}}),True),
-    tool("select_objects", "Replace editor selection with explicit editable note/event/curve IDs; optional line_id changes selected line. Empty ids clears selection. Requires current session; does not create history.", obj({"session":STRING,"ids":{"type":"array","items":ID,"maxItems":1000},"line_id":ID},("session","ids"))),
-    tool("set_editor_view", "Focus a chart beat, set timeline zoom/density/spectrogram, or switch layout to default or preview. Requires current session. Focus pauses playback and queues a seek; read context to observe it. Changes shared review UI without chart history.", obj({"session":STRING,"focus_beat":NUMBER,"zoom":{"type":"number","minimum":0.1,"maximum":5},"density":{"type":"integer","minimum":1,"maximum":256},"show_spectrogram":{"type":"boolean"},"layout":{"enum":["default","preview"]}},("session",))),
-]
-TOOLS += [
-    tool("analyze_audio", "Start background audio analysis using PhiChain's native playback decoder. Optional path defaults to open project's music; import NCM first. Returns analysis_id, then poll read_audio_features. Reports onset/energy features, BPM/offset candidates, heuristic confidence and decoder timing compared with a short ffmpeg reference. Optional local LRC supplies preserved lyric cues. Never edits the chart.", obj({"path":PATH,"from_seconds":{"type":"number","minimum":0},"to_seconds":{"type":"number","exclusiveMinimum":0},"bpm_min":{"type":"number","minimum":30,"maximum":400},"bpm_max":{"type":"number","minimum":30,"maximum":400},"lyrics_path":PATH}),True),
-    tool("read_audio_features", "Poll a native analysis job and read features within elapsed-audio range. Onsets support onset_offset/limit pagination; energy/lyric/section rows are capped at 2000 per range. Analyses are immutable and scoped to this editor process (16 retained, at most two running).", obj({"analysis_id":STRING,"from_seconds":{"type":"number","minimum":0},"to_seconds":NUMBER,"onset_offset":{"type":"integer","minimum":0},"limit":{"type":"integer","minimum":1,"maximum":2000}} ,("analysis_id",)),True),
-    tool("set_bpm_list", "Replace BPM map in one guarded undo step. Canonical beat fractions, first point at zero, strictly increasing beats and positive finite BPM required. An analysis never applies timing automatically. Also available as a set_bpm_list operation in apply_edits.", obj({**GUARD,"bpm_list":BPM_LIST},("session","revision","bpm_list"))),
-]
-for definition in TOOLS:
-    if definition["name"]=="analyze_audio":definition["annotations"]["idempotentHint"]=False
 BY_NAME = {tool["name"]: tool for tool in TOOLS}
+for name in ("inspect_motion", "preview_passage"):
+    BY_NAME[name]["annotations"]["idempotentHint"] = False
 INSTRUCTIONS = (
-    "Coordinate with the human in the live PhiChain editor. Start with get_context, then read_section for relevant beats. "
+    "Coordinate with the human in the live PhiChain editor; no offline chart state. Start with get_context, then read_section for relevant beats. "
     "Use selection IDs to resolve 'these notes'. Preserve fields not requested to change. "
     "Apply edits through apply_edits using the latest session/revision; each batch is one undo step. "
     "On stale state, re-read and reconsider. On transport timeout, read state before retrying: the edit may have executed. "
@@ -173,8 +133,11 @@ def validate(value, schema, path="arguments"):
     kind = schema.get("type")
     if kind == "null" and value is not None:
         raise ValueError(f"{path} must be null")
-    if kind == "string" and isinstance(value,str) and len(value) < schema.get("minLength", 0):
-        raise ValueError(f"{path} is too short")
+    if kind == "string" and isinstance(value, str):
+        if len(value) < schema.get("minLength", 0):
+            raise ValueError(f"{path} is too short")
+        if len(value) > schema.get("maxLength", sys.maxsize):
+            raise ValueError(f"{path} is too long")
     types = {"object": dict, "array": list, "string": str, "boolean": bool}
     if kind in types and not isinstance(value, types[kind]):
         raise ValueError(f"{path} must be {kind}")
@@ -205,6 +168,8 @@ def validate(value, schema, path="arguments"):
             else:
                 validate(item, properties[key], f"{path}.{key}")
     if kind == "array":
+        if schema.get("uniqueItems") and len({json.dumps(item, sort_keys=True) for item in value}) != len(value):
+            raise ValueError(f"{path} must contain unique values")
         if len(value) < schema.get("minItems", 0) or len(value) > schema.get("maxItems", sys.maxsize):
             raise ValueError(f"{path} has invalid length")
         for index, item in enumerate(value):
@@ -219,8 +184,9 @@ def call_editor(endpoint, name, arguments):
         raise ValueError("Invalid editor endpoint port")
     payload = json.dumps({"token": descriptor["token"], "tool": name, "arguments": arguments},
                          allow_nan=False, separators=(",", ":")).encode() + b"\n"
-    if len(payload) > MAX_MESSAGE:
-        raise ValueError("Request exceeds 1 MiB")
+    limit = 16 * MAX_MESSAGE if name == "authoring_commit" else MAX_MESSAGE
+    if len(payload) > limit:
+        raise ValueError("Editor request exceeds bridge byte limit")
     with socket.create_connection(("127.0.0.1", port), timeout=12) as connection:
         connection.sendall(payload)
         with connection.makefile("rb") as reader:
@@ -231,10 +197,14 @@ def call_editor(endpoint, name, arguments):
 
 
 class Server:
-    def __init__(self, endpoint, config=None):
+    def __init__(self, endpoint, renderer=None, catalog=None, executor=None, instructions=None):
         self.endpoint = endpoint
-        self.local = LocalTools(endpoint, lambda name, args: call_editor(self.endpoint, name, args), config)
+        self.renderer = renderer
         self.initialized = False
+        self.tools = TOOLS if catalog is None else catalog
+        self.by_name = {tool["name"]: tool for tool in self.tools}
+        self.executor = executor
+        self.instructions = INSTRUCTIONS if instructions is None else instructions
 
     def dispatch(self, request):
         request_id = request.get("id")
@@ -255,28 +225,38 @@ class Server:
             self.initialized = True
             result = {"protocolVersion": version if version in VERSIONS else VERSIONS[0],
                       "capabilities": {"tools": {"listChanged": False}},
-                      "serverInfo": {"name": "phichain", "version": "0.3.0"},
-                      "instructions": INSTRUCTIONS}
+                      "serverInfo": {"name": "phichain", "version": "0.5.0"},
+                      "instructions": self.instructions}
         elif method == "ping":
             result = {}
         elif not self.initialized:
             return self.error(request_id, -32000, "Initialize the MCP server first")
         elif method == "tools/list":
-            result = {"tools": TOOLS}
+            result = {"tools": self.tools}
         elif method == "tools/call":
             name = params.get("name")
-            if not isinstance(name, str) or name not in BY_NAME:
+            if not isinstance(name, str) or name not in self.by_name:
                 return self.error(request_id, -32602, "Unknown tool")
             arguments = params.get("arguments", {})
             try:
-                validate(arguments, BY_NAME[name]["inputSchema"])
-                data = self.local.call(name, arguments) if name in LocalTools.NAMES else call_editor(self.endpoint, name, arguments)
-                is_error = isinstance(data, dict) and "error" in data and name not in ("render_status", "read_audio_features")
+                validate(arguments, self.by_name[name]["inputSchema"])
+                images = []
+                if self.executor is not None and name not in BY_NAME:
+                    data = self.executor(name, arguments)
+                elif name == "inspect_motion":
+                    data, images = motion.inspect(lambda method, args: call_editor(self.endpoint, method, args), arguments, self.renderer)
+                elif name == "preview_passage":
+                    data = motion.preview_passage(lambda method, args: call_editor(self.endpoint, method, args), arguments, self.renderer)
+                else:
+                    data = call_editor(self.endpoint, name, arguments)
+                is_error = isinstance(data, dict) and "error" in data
                 result = {"content": [{"type": "text", "text": json.dumps(data, ensure_ascii=False)}],
                           "isError": is_error}
                 if not is_error:
                     result["structuredContent"] = data
-            except (OSError, ValueError, KeyError, OverflowError, subprocess.SubprocessError) as error:
+                    for frame, image in zip(data.get("frames", []), images):
+                        result["content"].extend([{"type":"text","text":f"Frame at {frame['time_seconds']:.4f}s audio; note/carrier IDs and pixel positions are in structuredContent."}, image])
+            except (OSError, ValueError, TypeError, KeyError, OverflowError, ZeroDivisionError) as error:
                 result = {"content": [{"type": "text", "text": str(error)}], "isError": True}
         else:
             return self.error(request_id, -32601, f"Unknown method: {method}")
@@ -292,10 +272,9 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--endpoint", required=True, help="Endpoint JSON created by PhiChain --mcp-endpoint")
-    for name in ("editor", "renderer", "converter", "ffmpeg", "ffprobe"):
-        parser.add_argument("--"+name, help="Absolute executable path override")
+    parser.add_argument("--renderer", help="Absolute phichain-renderer executable for inspect_motion")
     options = parser.parse_args()
-    server = Server(options.endpoint, {name:getattr(options,name) for name in ("editor", "renderer", "converter", "ffmpeg", "ffprobe")})
+    server = Server(options.endpoint, options.renderer)
     for line in sys.stdin:
         try:
             if len(line.encode("utf-8")) > MAX_MESSAGE:

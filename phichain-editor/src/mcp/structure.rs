@@ -134,6 +134,7 @@ pub fn descendants(w: &mut World, root: Entity) -> HashSet<Entity> {
 
 #[derive(Debug, Clone)]
 pub enum StructureCommand {
+    ReparentNote { entity: Entity, from: Entity, to: Entity },
     Create {
         name: String,
         parent: Option<Entity>,
@@ -166,6 +167,7 @@ impl Edit for StructureCommand {
     type Output = ();
     fn edit(&mut self, w: &mut World) {
         match self {
+            Self::ReparentNote { entity, to, .. } => { w.entity_mut(*entity).insert(ChildOf(*to)); },
             Self::Create {
                 name,
                 parent,
@@ -218,6 +220,7 @@ impl Edit for StructureCommand {
     }
     fn undo(&mut self, w: &mut World) {
         match self {
+            Self::ReparentNote { entity, from, .. } => { w.entity_mut(*entity).insert(ChildOf(*from)); },
             Self::Create { entity, saved, .. } => {
                 let tree = Subtree::capture(w, entity.unwrap());
                 tree.remove(w);

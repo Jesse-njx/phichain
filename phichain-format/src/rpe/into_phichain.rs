@@ -180,7 +180,7 @@ fn build_flattened_line(
     let events = convert_event_layer(&first_layer)?;
 
     Ok(SerializedLine {
-        line: Line { name },
+        line: Line { name, ..Default::default() },
         notes,
         events,
         children: vec![],
@@ -414,6 +414,7 @@ mod tests {
             line: SerializedLine {
                 line: Line {
                     name: name.to_string(),
+                    ..Default::default()
                 },
                 notes: vec![],
                 events: vec![],

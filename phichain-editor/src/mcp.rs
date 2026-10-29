@@ -42,6 +42,9 @@ use std::{
 
 pub(crate) mod analysis;
 mod quality;
+mod motion;
+mod animation;
+pub(crate) mod authoring;
 pub(crate) mod structure;
 
 pub struct McpPlugin;
@@ -153,11 +156,13 @@ fn serve(stream: &mut TcpStream, token: &str, sender: &mpsc::SyncSender<Request>
     stream.set_read_timeout(Some(Duration::from_secs(2)))?;
     stream.set_write_timeout(Some(Duration::from_secs(2)))?;
     let mut body = String::new();
-    BufReader::new((&mut *stream).take(1_048_577)).read_line(&mut body)?;
-    if body.len() > 1_048_576 {
-        bail!("Request exceeds 1 MiB")
+    BufReader::new((&mut *stream).take(16_777_217)).read_line(&mut body)?;
+    if body.len() > 16_777_216 {
+        bail!("Bridge request exceeds 16 MiB")
     }
+    let body_bytes = body.len();
     let body: Value = serde_json::from_str(&body)?;
+    if body_bytes > 1_048_576 && body["tool"] != "authoring_commit" { bail!("Request exceeds 1 MiB") }
     if body["token"].as_str() != Some(token) {
         bail!("Invalid bridge token")
     }
@@ -210,7 +215,7 @@ fn snapshot(world: &mut World) -> Result<Value> {
         .context("Open a project in PhiChain first")?
         .clone();
     let mut lines: Vec<_> = world.query::<(Entity, &Line, Option<&ChildOf>, Option<&LineOrder>)>().iter(world)
-        .map(|(e,l,p,o)| json!({"id":id(e),"name":l.name,"parent_id":p.map(|p|id(p.parent())),"order":o.map(|o|o.0)})).collect();
+        .map(|(e,l,p,o)| json!({"id":id(e),"name":l.name,"role":l.role,"parent_id":p.map(|p|id(p.parent())),"order":o.map(|o|o.0)})).collect();
     let mut notes: Vec<_> = world
         .query_filtered::<(Entity, &Note, &ChildOf), (Without<CurveNote>, Without<Pending>)>()
         .iter(world)
@@ -309,6 +314,8 @@ fn context(world: &mut World, data: &Value) -> Value {
         "current_beat": world.get_resource::<ChartTime>().zip(world.get_resource::<BpmList>()).map(|(t,b)|b.beat_at_f32(t.0)),
         "paused": world.get_resource::<Paused>().map(|p|p.0),
         "can_undo": history.map(|h|h.0.can_undo()), "can_redo": history.map(|h|h.0.can_redo()),
+        "undo_author": history.and_then(|h| h.next_author(false)),
+        "redo_author": history.and_then(|h| h.next_author(true)),
         "saved": history.map(|h|h.0.is_saved())
     })
 }
@@ -360,6 +367,13 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
     let data = snapshot(world)?;
     match method {
         "get_context" => Ok(context(world, &data)),
+        "authoring_read" => {
+            check_revision(args, &data)?; idle(world)?;
+            Ok(json!({"session":data["session"],"revision":data["revision"],"document":authoring::document(&data)}))
+        },
+        "authoring_commit" => authoring::commit(world, args, &data),
+        "authoring_diagnose" => { check_revision(args,&data)?; quality::validate_chart(world,args,&data) },
+        "authoring_view" => { check_revision(args,&data)?; quality::select_objects(world,args,&data) },
         "close_project" => {
             check_revision(args, &data)?;
             idle(world)?;
@@ -385,14 +399,18 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
             )
         }
         "read_section" => read_section(&data, args),
+        "inspect_motion" => motion::inspect(world, args, &data),
+        "animate_selection" => animation::animate(world, args, &data),
         "validate_chart" => quality::validate_chart(world, args, &data),
         "select_objects" => quality::select_objects(world, args, &data),
         "set_editor_view" => quality::set_editor_view(world, args, &data),
-        "apply_edits" => apply_edits(world, args, &data),
+        "apply_edits" => apply_edits(world, args, &data, false),
+        "validate_edits" => apply_edits(world, args, &data, true),
         "set_bpm_list" => apply_edits(
             world,
             &json!({"session":args["session"],"revision":args["revision"],"operations":[{"op":"set_bpm_list","bpm_list":args["bpm_list"]}]}),
             &data,
+            false,
         ),
         "preview" => {
             if args["session"] != data["session"] {
@@ -445,6 +463,10 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
                 Some("redo") => true,
                 _ => bail!("action must be undo or redo"),
             };
+            let author = match args["author"].as_str() {
+                Some(author @ ("agent" | "human")) => author,
+                _ => bail!("author must be agent or human"),
+            };
             let history = world.resource::<EditorHistory>();
             if !(if redo {
                 history.0.can_redo()
@@ -452,6 +474,10 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
                 history.0.can_undo()
             }) {
                 bail!("No history entry available")
+            }
+            if history.next_author(redo) != Some(author) {
+                bail!("Next history entry belongs to {}; requested {}. No changes made",
+                    history.next_author(redo).unwrap(), author)
             }
             world.resource_scope(
                 |w, mut h: Mut<EditorHistory>| {
@@ -583,7 +609,7 @@ fn validate_beats(value: &Value) -> Result<()> {
     Ok(())
 }
 
-fn apply_edits(world: &mut World, args: &Value, data: &Value) -> Result<Value> {
+fn apply_edits(world: &mut World, args: &Value, data: &Value, dry_run: bool) -> Result<Value> {
     check_revision(args, data)?;
     idle(world)?;
     validate_beats(args)?;
@@ -655,7 +681,7 @@ fn apply_edits(world: &mut World, args: &Value, data: &Value) -> Result<Value> {
                         Some(Value::Null) => None,
                         _ => Some(entity(op, "parent_id")?),
                     };
-                    let to = Line { name };
+                    let to = Line { name, role: from.role };
                     change["after"] = json!(to);
                     commands.push(EditorCommand::McpStructure(
                         structure::StructureCommand::Update {
@@ -850,10 +876,18 @@ fn apply_edits(world: &mut World, args: &Value, data: &Value) -> Result<Value> {
         }
         summary.push(change);
     }
+    // Build and validate commands without executing them during agent planning.
+    if dry_run {
+        return Ok(
+            json!({"session":data["session"],"revision":data["revision"],
+            "valid":true,"changes":summary,"undo_steps":0,
+            "limitations":["Structural edit validation, not prospective rendered geometry"]}),
+        );
+    }
     // No mutation until the entire batch is validated.
     world.resource_scope(|w, mut h: Mut<EditorHistory>| {
-        h.edit(w, EditorCommand::CommandSequence(CommandSequence(commands)));
-        if let Some(EditorCommand::CommandSequence(sequence)) =
+        h.edit(w, EditorCommand::AgentSequence(CommandSequence(commands)));
+        if let Some(EditorCommand::AgentSequence(sequence)) =
             h.0.entries().last().map(|entry| entry.as_ref())
         {
             for (command, change) in sequence.0.iter().zip(summary.iter_mut()) {
@@ -929,6 +963,83 @@ mod tests {
         project::{ProjectMeta, ProjectPath},
     };
 
+    #[test]
+    fn human_line_role_changes_invalidate_guard_and_mcp_rename_preserves_role() {
+        let (mut app, line) = editor(); let w = app.world_mut();
+        let before = snapshot(w).unwrap();
+        w.get_mut::<Line>(line).unwrap().role = phichain_chart::line::LineRole::Complex;
+        let after = snapshot(w).unwrap();
+        assert_ne!(before["revision"], after["revision"]);
+        assert_eq!(after["lines"][0]["role"], "complex");
+        let ops=json!([{"op":"update_line","id":id(line),"name":"Renamed"}]);
+        assert!(call(w,"apply_edits",json!({"session":before["session"],"revision":before["revision"],"operations":ops})).is_err());
+        let args=edits(w,ops);call(w,"apply_edits",args).unwrap();
+        assert_eq!(w.get::<Line>(line).unwrap().role,phichain_chart::line::LineRole::Complex);
+    }
+
+    #[test]
+    fn animation_rejects_incompatible_groups_dependencies_and_budget_without_mutation() {
+        let (mut app, line) = editor(); let w = app.world_mut();
+        let other = w.spawn(Line::default()).id();
+        let a=w.spawn((parse_note(&note(10)).unwrap(),ChildOf(line))).id();
+        let b=w.spawn((parse_note(&note(20)).unwrap(),ChildOf(other))).id();
+        let event=json!({"kind":"x","start_beat":[0,0,1],"end_beat":[4,0,1],"value":{"type":"constant","value":120}});
+        let before=snapshot(w).unwrap();
+        let args=json!({"session":before["session"],"revision":before["revision"],"dry_run":false,
+            "groups":[{"carrier_id":id(line),"note_ids":[id(a)],"events":[event.clone()]}]});
+        let mut bad=args.clone(); bad["line_budget"]=json!(1);
+        assert!(call(w,"animate_selection",bad).is_err());
+        let mut bad=args.clone(); bad["groups"].as_array_mut().unwrap().push(json!({"carrier_id":id(other),"note_ids":[id(b)],"events":[event.clone(),event.clone()]}));
+        assert!(call(w,"animate_selection",bad).is_err()); assert_eq!(snapshot(w).unwrap(),before);
+        let child=w.spawn((Line::default(),ChildOf(line))).id();
+        let mut bad=args.clone();bad["revision"]=snapshot(w).unwrap()["revision"].clone();
+        assert!(call(w,"animate_selection",bad).is_err());w.despawn(child);
+        w.spawn((parse_event(&event).unwrap(),EventOf(other)));
+        let before=snapshot(w).unwrap();
+        let mut bad=args; bad["revision"]=before["revision"].clone();bad["groups"][0]["note_ids"]=json!([id(a),id(b)]);
+        assert!(call(w,"animate_selection",bad).is_err());assert_eq!(snapshot(w).unwrap(),before);
+    }
+
+    #[test]
+    fn animation_groups_merge_atomically_preserve_notes_and_undo() {
+        let (mut app, line) = editor(); let w = app.world_mut();
+        let other = w.spawn(Line::default()).id();
+        let a = w.spawn((parse_note(&note(10)).unwrap(), ChildOf(line))).id();
+        let b = w.spawn((parse_note(&note(20)).unwrap(), ChildOf(other))).id();
+        let before_note = *w.get::<Note>(b).unwrap();
+        let before = snapshot(w).unwrap();
+        let mut args = json!({"session":before["session"],"revision":before["revision"],"dry_run":true,
+            "groups":[{"carrier_id":id(line),"note_ids":[id(a),id(b)],"events":[
+                {"kind":"speed","start_beat":[0,0,1],"end_beat":[8,0,1],"value":{"type":"constant","value":0}},
+                {"kind":"speed","start_beat":[8,0,1],"end_beat":[9,0,1],"value":{"type":"constant","value":-12}},
+                {"kind":"speed","start_beat":[9,0,1],"end_beat":[30,0,1],"value":{"type":"constant","value":2.4}}
+            ]}]});
+        call(w,"animate_selection",args.clone()).unwrap();
+        assert_eq!(snapshot(w).unwrap(),before);
+        let mut bad=args.clone(); bad["groups"][0]["note_ids"]=json!([id(a)]);
+        // Destination ownership includes future notes, not only passage judgments.
+        let future=w.spawn((parse_note(&note(50)).unwrap(),ChildOf(line))).id();
+        let current=snapshot(w).unwrap(); bad["revision"]=current["revision"].clone();
+        assert!(call(w,"animate_selection",bad).is_err()); w.despawn(future);
+        for mutation in [json!({"start_beat":[0,0,0]}),json!({"end_beat":[0,0,1]})] {
+            let mut bad=args.clone(); for (k,v) in mutation.as_object().unwrap() { bad["groups"][0]["events"][0][k]=v.clone(); }
+            assert!(call(w,"animate_selection",bad).is_err());
+        }
+        args["dry_run"]=json!(false);
+        let applied=call(w,"animate_selection",args.clone()).unwrap();
+        assert_eq!(applied["undo_steps"],1); assert_eq!(applied["new_lines"],0);
+        assert_eq!(w.get::<ChildOf>(b).unwrap().parent(),line);
+        assert_eq!(json!(w.get::<Note>(b).unwrap()),json!(before_note));
+        assert!(call(w,"animate_selection",args).is_err());
+        call(w,"history",json!({"session":applied["session"],"revision":applied["revision"],"action":"undo","author":"agent"})).unwrap();
+        assert_eq!(w.get::<ChildOf>(b).unwrap().parent(),other);
+        assert_eq!(w.query::<&LineEvent>().iter(w).count(),0);
+        let undone=snapshot(w).unwrap();
+        call(w,"history",json!({"session":undone["session"],"revision":undone["revision"],"action":"redo","author":"agent"})).unwrap();
+        assert_eq!(w.get::<ChildOf>(b).unwrap().parent(),line);
+        assert_eq!(w.query::<&LineEvent>().iter(w).count(),3);
+    }
+
     fn editor() -> (App, Entity) {
         let mut app = App::new();
         app.add_plugins(phichain_game::line::LinePlugin);
@@ -954,6 +1065,190 @@ mod tests {
         handle(world, &json!({"tool":tool,"arguments":arguments}))
     }
     #[test]
+    fn authoring_document_creates_dependencies_moves_ids_and_undo_redo_atomically() {
+        let (mut app, line) = editor(); let w=app.world_mut();
+        let n=w.spawn((parse_note(&note(8)).unwrap(),ChildOf(line),Selected)).id();
+        w.insert_resource(SelectedLine(line));
+        let before=snapshot(w).unwrap();
+        let mut doc=authoring::document(&before);
+        doc["lines"]["new:carrier"]=json!({"name":"Motion","role":"complex","parent_id":id(line),"order":1});
+        doc["notes"][id(n)]["line_id"]=json!("new:carrier");
+        doc["notes"][id(n)]["note"]["x"]=json!(120);
+        doc["notes"]["new:hold"]=json!({"line_id":"new:carrier","note":{"kind":"hold","above":true,"beat":[9,0,1],"hold_beat":[2,0,1],"x":-50,"speed":1}});
+        doc["events"]["new:motion"]=json!({"line_id":"new:carrier","event":{"kind":"x","start_beat":[4,0,1],"end_beat":[8,0,1],"value":{"type":"transition","start":-200,"end":0,"easing":{"type":"ease_out_sine"}}}});
+        let args=json!({"session":before["session"],"revision":before["revision"],"dry_run":true,"document":doc});
+        let dry=call(w,"authoring_commit",args.clone()).unwrap(); assert_eq!(dry["undo_steps"],0);
+        assert_eq!(snapshot(w).unwrap(),before);
+        let mut actual=args.clone();actual["dry_run"]=json!(false);
+        let result=call(w,"authoring_commit",actual.clone()).unwrap();
+        assert_eq!(result["undo_steps"],1);
+        let carrier=entity(&json!({"id":result["created_ids"]["new:carrier"]}),"id").unwrap();
+        let hold=entity(&json!({"id":result["created_ids"]["new:hold"]}),"id").unwrap();
+        assert_eq!(w.get::<ChildOf>(n).unwrap().parent(),carrier);
+        assert_eq!(w.get::<Note>(n).unwrap().x,120.);
+        assert_eq!(w.get::<Note>(n).unwrap().beat,beat!(8));
+        assert!(w.get::<Selected>(n).is_some());
+        assert!(call(w,"authoring_commit",actual).is_err());
+        w.resource_scope(|w,mut h:Mut<EditorHistory>|h.undo(w));
+        assert_eq!(snapshot(w).unwrap()["notes"],before["notes"]);
+        assert_eq!(w.get::<ChildOf>(n).unwrap().parent(),line);
+        assert!(w.get::<Note>(hold).is_none()); assert!(w.get::<Line>(carrier).is_none());
+        w.resource_scope(|w,mut h:Mut<EditorHistory>|h.redo(w));
+        assert!(w.get::<Note>(hold).is_some()); assert_eq!(w.get::<ChildOf>(n).unwrap().parent(),carrier);
+        assert_eq!(w.resource::<EditorHistory>().next_author(false),Some("agent"));
+        // Native renderer serialization sees the same live result.
+        let captured=snapshot(w).unwrap();
+        let live=call(w,"project_snapshot",json!({"session":captured["session"],"revision":captured["revision"]})).unwrap();
+        assert!(live["chart"].is_object());
+    }
+
+    #[test]
+    fn authoring_rejects_invalid_candidates_and_pending_state_without_partial_changes() {
+        let (mut app,line)=editor();let w=app.world_mut();
+        let n=w.spawn((parse_note(&note(4)).unwrap(),ChildOf(line))).id();
+        let before=snapshot(w).unwrap();let valid=authoring::document(&before);
+        let mut candidates=vec![];
+        let mut v=valid.clone();v["notes"][id(n)]["line_id"]=json!("new:missing");candidates.push(v);
+        let mut v=valid.clone();v["lines"][id(line)]["parent_id"]=json!(id(line));candidates.push(v);
+        let mut v=valid.clone();v["notes"][id(n)]["note"]["beat"]=json!([0,1,0]);candidates.push(v);
+        let mut v=valid.clone();v["notes"][id(n)]["note"]["isFake"]=json!(1);candidates.push(v);
+        let mut v=valid.clone();v["meta"]["unknown"]=json!(true);candidates.push(v);
+        let mut v=valid.clone();v["notes"]["123"]=json!({"line_id":id(line),"note":note(8)});candidates.push(v);
+        let mut v=valid.clone();v["lines"]=json!({});candidates.push(v);
+        for doc in candidates {
+            let args=json!({"session":before["session"],"revision":before["revision"],"dry_run":false,"document":doc});
+            assert!(call(w,"authoring_commit",args).is_err());assert_eq!(snapshot(w).unwrap(),before);
+            assert_eq!(w.resource::<EditorHistory>().0.len(),0);
+        }
+        w.entity_mut(n).insert(Pending);
+        let data=snapshot(w).unwrap();
+        assert!(call(w,"authoring_commit",json!({"session":data["session"],"revision":data["revision"],"dry_run":false,"document":valid})).is_err());
+    }
+
+    #[test]
+    fn authoring_checks_curve_ownership_and_noop_has_no_history() {
+        let (mut app,line)=editor();let w=app.world_mut();
+        let a=w.spawn((parse_note(&note(4)).unwrap(),ChildOf(line))).id();
+        let b=w.spawn((parse_note(&note(8)).unwrap(),ChildOf(line))).id();
+        let track=w.spawn((CurveNoteTrack{from:Some(a),to:Some(b),options:Default::default()},ChildOf(line))).id();
+        let data=snapshot(w).unwrap(); let doc=authoring::document(&data);
+        let args=json!({"session":data["session"],"revision":data["revision"],"dry_run":false,"document":doc});
+        assert_eq!(call(w,"authoring_commit",args.clone()).unwrap()["undo_steps"],0);
+        let mut bad=args.clone();bad["document"]["notes"].as_object_mut().unwrap().remove(&id(a));
+        assert!(call(w,"authoring_commit",bad).is_err());
+        assert!(w.get::<CurveNoteTrack>(track).is_some());
+        let mut valid=args;valid["document"]["notes"][id(a)]["note"]["x"]=json!(50);
+        call(w,"authoring_commit",valid).unwrap();assert_eq!(w.get::<Note>(a).unwrap().x,50.);
+        let current=snapshot(w).unwrap();let mut decimal=authoring::document(&current);
+        decimal["notes"][id(a)]["note"]["x"]=json!(0.1);
+        call(w,"authoring_commit",json!({"session":current["session"],"revision":current["revision"],"dry_run":false,"document":decimal})).unwrap();
+        assert_eq!(w.get::<Note>(a).unwrap().x,0.1_f32);
+    }
+
+    #[test]
+    fn motion_inspection_uses_hidden_carriers_parent_rotation_and_offset_without_mutation() {
+        use phichain_chart::event::{LineEventKind, LineEventValue};
+        let (mut app, parent) = editor();
+        let w = app.world_mut();
+        w.insert_resource(Offset(500.0));
+        let child = w.spawn((Line::default(), ChildOf(parent))).id();
+        let n = w.spawn((Note::new(NoteKind::Tap, true, beat!(4), 100.0, 1.0), ChildOf(child), Selected)).id();
+        let h = w.spawn((Note::new(NoteKind::Hold { hold_beat: beat!(2) }, false, beat!(2), 0.0, 1.0), ChildOf(child))).id();
+        for (line,kind,value) in [(parent,LineEventKind::Rotation,90.0),(child,LineEventKind::X,200.0),
+                (child,LineEventKind::Opacity,0.0),(child,LineEventKind::Speed,0.0)] {
+            w.spawn((LineEvent {kind,start_beat:beat!(0),end_beat:beat!(10),value:LineEventValue::constant(value)}, EventOf(line)));
+        }
+        let before = snapshot(w).unwrap();
+        let args = json!({"session":before["session"],"revision":before["revision"],"from_seconds":0.5,"to_seconds":1.5,"frames":3});
+        let result = call(w,"inspect_motion",args.clone()).unwrap();
+        assert_eq!(result["notes"].as_array().unwrap().len(),1);
+        assert_eq!(result["notes"][0]["id"],id(n));
+        assert_eq!(result["lines"].as_array().unwrap().len(),2);
+        for frame in result["frames"].as_array().unwrap() {
+            let head=&frame["notes"][0]["head"];
+            assert!((head["x"].as_f64().unwrap()-480.0).abs()<0.01);
+            assert!((head["y"].as_f64().unwrap()-(270.0-300.0*960.0/1350.0)).abs()<0.01);
+            assert_eq!(frame["notes"][0]["visible_by_timing_and_cover"],true);
+        }
+        assert_eq!(result["frames"][0]["chart_time_seconds"],0.0);
+        assert_eq!(before,snapshot(w).unwrap());
+        assert!(w.get::<Selected>(n).is_some());
+        assert_eq!(w.resource::<EditorHistory>().0.len(),0);
+        let mut explicit=args.clone(); explicit["note_ids"]=json!([id(h)]);
+        let holds=call(w,"inspect_motion",explicit).unwrap();
+        assert!(holds["frames"][0]["notes"][0]["tail"].is_object());
+        for change in [json!({"revision":"stale"}),json!({"note_ids":[]}),json!({"note_ids":[id(n),id(n)]}),
+                json!({"note_ids":[id(parent)]}),json!({"frames":13}),json!({"to_seconds":20.0}),json!({"from_seconds":-1.0}),json!({"from_seconds":1e100,"to_seconds":1e100})] {
+            let mut bad=args.clone();for (k,v) in change.as_object().unwrap(){bad[k]=v.clone();}
+            assert!(call(w,"inspect_motion",bad).is_err());
+        }
+        assert_eq!(before,snapshot(w).unwrap());
+    }
+
+    #[test]
+    fn history_requires_matching_author_and_preserves_provenance() {
+        let (mut app, line) = editor();
+        let w = app.world_mut();
+        let args = edits(w, json!([{"op":"create_note","line_id":id(line),"note":note(4)}]));
+        call(w, "apply_edits", args).unwrap();
+        let offset = w.resource::<Offset>().0;
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| {
+            h.edit(w, EditorCommand::EditOffset(EditOffset::new(offset, offset + 10.0)));
+        });
+        for (action, author) in [("undo", "human"), ("undo", "agent"),
+                                 ("redo", "agent"), ("redo", "human")] {
+            let data = call(w, "get_context", json!({})).unwrap();
+            assert_eq!(data[format!("{}_author", action)], author);
+            for wrong in [Value::Null, json!("invalid"), json!(if author == "agent" { "human" } else { "agent" })] {
+                let args = json!({"session":data["session"],"revision":data["revision"],"action":action,"author":wrong});
+                assert!(call(w, "history", args).is_err());
+                assert_eq!(snapshot(w).unwrap()["revision"], data["revision"]);
+            }
+            call(w, "history", json!({"session":data["session"],"revision":data["revision"],"action":action,"author":author})).unwrap();
+        }
+        // Human UI undo and a new human edit must not inherit agent provenance.
+        w.resource_scope(|w, mut h: Mut<EditorHistory>| {
+            h.undo(w);
+            h.undo(w);
+            h.edit(w, EditorCommand::EditOffset(EditOffset::new(offset, offset + 20.0)));
+        });
+        let data = call(w, "get_context", json!({})).unwrap();
+        assert_eq!(data["undo_author"], "human");
+        assert!(data["redo_author"].is_null());
+    }
+
+    #[test]
+    fn preflight_validates_without_changing_chart_or_history() {
+        let (mut app, line) = editor();
+        let w = app.world_mut();
+        let before = snapshot(w).unwrap();
+        let args = edits(
+            w,
+            json!([{"op":"create_note","line_id":id(line),"note":note(4)}]),
+        );
+        let result = call(w, "validate_edits", args.clone()).unwrap();
+        assert_eq!(result["undo_steps"], 0);
+        assert_eq!(snapshot(w).unwrap(), before);
+        let mut invalid = args.clone();
+        invalid["operations"]
+            .as_array_mut()
+            .unwrap()
+            .push(json!({"op":"delete_note","id":"0"}));
+        assert!(call(w, "validate_edits", invalid).is_err());
+        assert_eq!(snapshot(w).unwrap(), before);
+        let applied = call(w, "apply_edits", args.clone()).unwrap();
+        assert_eq!(applied["undo_steps"], 1);
+        assert!(call(w, "validate_edits", args).is_err());
+        call(
+            w,
+            "history",
+            json!({"session":applied["session"],"revision":applied["revision"],"action":"undo","author":"agent"}),
+        )
+        .unwrap();
+        assert_eq!(snapshot(w).unwrap()["notes"], before["notes"]);
+    }
+
+    #[test]
     fn batch_is_one_undo_step_and_created_ids_survive_redo() {
         let (mut app, line) = editor();
         let w = app.world_mut();
@@ -970,7 +1265,7 @@ mod tests {
         call(
             w,
             "history",
-            json!({"action":"undo","session":data["session"],"revision":data["revision"]}),
+            json!({"action":"undo","author":"agent","session":data["session"],"revision":data["revision"]}),
         )
         .unwrap();
         assert_eq!(w.query::<&Note>().iter(w).count(), 0);
@@ -978,7 +1273,7 @@ mod tests {
         call(
             w,
             "history",
-            json!({"action":"redo","session":data["session"],"revision":data["revision"]}),
+            json!({"action":"redo","author":"agent","session":data["session"],"revision":data["revision"]}),
         )
         .unwrap();
         assert_eq!(w.query::<&Note>().iter(w).count(), 2);
@@ -1206,16 +1501,54 @@ def tool(name, args):
     assert not result['isError'], result
     return result['structuredContent']
 rpc('initialize', {'protocolVersion':'2025-11-25'})
-assert {'get_context','create_project','render_preview'} <= {t['name'] for t in rpc('tools/list', {})['tools']}
+assert {'get_context','read_section','inspect_motion','preview_passage','animate_selection','apply_edits','preview','history','save'} == {t['name'] for t in rpc('tools/list', {})['tools']}
 ctx = tool('get_context', {})
 result = tool('apply_edits', {'session':ctx['session'],'revision':ctx['revision'],'operations':[{'op':'create_note','line_id':ctx['lines'][0]['id'],'note':{'kind':'tap','above':True,'beat':[4,1,2],'x':120,'speed':1}}]})
 note_id = result['changes'][0]['id']
 section = tool('read_section', {'start_beat':4,'end_beat':5})
 assert section['notes'][0]['id'] == note_id, section
-ctx = tool('history', {'session':result['session'],'revision':result['revision'],'action':'undo'})
+ctx = tool('history', {'session':result['session'],'revision':result['revision'],'action':'undo','author':'agent'})
 assert tool('read_section', {'start_beat':4,'end_beat':5})['notes'] == []
-ctx = tool('history', {'session':ctx['session'],'revision':ctx['revision'],'action':'redo'})
+ctx = tool('history', {'session':ctx['session'],'revision':ctx['revision'],'action':'redo','author':'agent'})
 assert tool('read_section', {'start_beat':4,'end_beat':5})['notes'][0]['id'] == note_id
+p.stdin.close()
+assert p.wait(timeout=2) == 0
+# Exercise the new flavour over real stdio -> authenticated bridge -> Bevy.
+from pathlib import Path
+p = subprocess.Popen([sys.executable, str(Path(sys.argv[1]).with_name('agent_server.py')), '--endpoint', sys.argv[2]], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+rpc('initialize', {'protocolVersion':'2025-11-25'})
+assert 'chart_script' in {t['name'] for t in rpc('tools/list', {})['tools']}
+ctx = tool('editor_context', {})
+g = {k:ctx[k] for k in ('session','revision')}
+args = {**g, 'dry_run':True, 'operations':[{'op':'set','path':'/notes/'+note_id+'/note/x','value':240}]}
+assert tool('chart_patch',args)['undo_steps'] == 0
+assert tool('chart_read',{**g,'path':'/notes/'+note_id+'/note/x'})['value'] == 120
+args['dry_run'] = False
+changed = tool('chart_patch',args)
+g = {k:changed[k] for k in ('session','revision')}
+changed = tool('chart_transform',{**g,'dry_run':False,'path':'/notes','ids':[note_id],'expressions':{'/note/x':'-x'}})
+g = {k:changed[k] for k in ('session','revision')}
+source = 'chart.lines["new:carrier"]=api.createLine("Independent",99); chart.notes[input.note_id].line_id="new:carrier"; api.report({moved:1});'
+changed = tool('chart_script',{**g,'dry_run':False,'source':source,'input':{'note_id':note_id}})
+carrier = changed['created_ids']['new:carrier']
+g = {k:changed[k] for k in ('session','revision')}
+row = tool('chart_read',{**g,'path':'/notes/'+note_id})['value']
+assert row['line_id'] == carrier and row['note']['x'] == -240, row
+ctx = tool('history',{**g,'action':'undo','author':'agent'})
+g = {k:ctx[k] for k in ('session','revision')}
+assert tool('chart_read',{**g,'path':'/notes/'+note_id})['value']['line_id'] != carrier
+ctx = tool('history',{**g,'action':'redo','author':'agent'})
+g = {k:ctx[k] for k in ('session','revision')}
+assert tool('chart_read',{**g,'path':'/notes/'+note_id})['value']['line_id'] == carrier
+# Large generation exercises a candidate exceeding the public 1 MiB call size.
+template = {'line_id':carrier,'note':{'kind':'tap','above':True,'beat':[0,0,1],'x':0,'speed':1}}
+generated = tool('chart_generate',{**g,'dry_run':False,'path':'/notes','count':10000,'template':template,'expressions':{'/note/beat':'100+i/4'}})
+assert len(generated['created_ids']) == 10000
+ctx = tool('editor_context',{})
+assert ctx['note_count'] == 10001, ctx['note_count']
+g = {k:generated[k] for k in ('session','revision')}
+ctx = tool('history',{**g,'action':'undo','author':'agent'})
+assert tool('editor_context',{})['note_count'] == 1
 p.stdin.close()
 assert p.wait(timeout=2) == 0
 "#;
@@ -1228,7 +1561,7 @@ assert p.wait(timeout=2) == 0
             .stderr(std::process::Stdio::piped())
             .spawn()
             .unwrap();
-        let deadline = Instant::now() + Duration::from_secs(20);
+        let deadline = Instant::now() + Duration::from_secs(40);
         while child.try_wait().unwrap().is_none() {
             if Instant::now() > deadline {
                 child.kill().unwrap();

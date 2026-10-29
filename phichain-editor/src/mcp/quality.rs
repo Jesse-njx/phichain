@@ -128,7 +128,7 @@ pub fn set_editor_view(w: &mut World, args: &Value, data: &Value) -> Result<Valu
     )
 }
 
-fn evaluated(events: &[LineEvent], kind: LineEventKind, beat: f32, default: f32) -> f32 {
+pub(super) fn evaluated(events: &[LineEvent], kind: LineEventKind, beat: f32, default: f32) -> f32 {
     events
         .iter()
         .filter(|e| e.kind == kind)
@@ -139,11 +139,11 @@ fn evaluated(events: &[LineEvent], kind: LineEventKind, beat: f32, default: f32)
         .unwrap_or(default)
 }
 #[derive(Clone)]
-struct LineInfo {
-    parent: Option<Entity>,
-    events: Vec<LineEvent>,
+pub(super) struct LineInfo {
+    pub(super) parent: Option<Entity>,
+    pub(super) events: Vec<LineEvent>,
 }
-fn position(
+pub(super) fn position(
     lines: &HashMap<Entity, LineInfo>,
     line: Entity,
     beat: f32,

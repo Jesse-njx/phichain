@@ -190,6 +190,13 @@ impl<'w, 's> LineList<'w, 's> {
                 ui.horizontal(|ui| {
                     ui.add_space(level as f32 * 10.0);
 
+                    let role_color = match line.role {
+                        phichain_chart::line::LineRole::Simple => Color32::LIGHT_BLUE,
+                        phichain_chart::line::LineRole::Complex => Color32::from_rgb(220, 165, 255),
+                        phichain_chart::line::LineRole::Decorative => Color32::from_rgb(240, 195, 110),
+                    };
+                    ui.label(RichText::new(line.role.label()).small().color(role_color))
+                        .on_hover_text(line.role.description());
                     let mut text = RichText::new(&line.name);
                     if selected {
                         text = text.color(Color32::LIGHT_GREEN);

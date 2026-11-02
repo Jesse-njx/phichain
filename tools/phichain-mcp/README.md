@@ -1,8 +1,8 @@
 # PhiChain MCP
 
 A minimal, dependency-free Python 3.9+ stdio adapter for the running PhiChain
-editor. It exposes nine tools and forwards validated requests to the live Rust
-bridge. Open the editor and a project yourself before using chart tools.
+runtime, in GUI or headless mode. It exposes 13 tools and forwards validated
+requests to the native Rust bridge. Projects and music can be imported through MCP.
 
 ## Start the editor
 
@@ -35,6 +35,61 @@ This adds no MCP tools or arguments; the `preview` layout remains preview-only.
 
 The endpoint file is removed on a clean shutdown. After a crash, check that the editor identified by the file's `pid` has exited before deleting the stale file and restarting. Existing endpoint files are never silently replaced. Use separate endpoint paths for separate editor instances.
 
+## Headless project workflow
+
+Run from the repository root in a separate process and use a unique endpoint:
+
+```sh
+cargo run -p phichain -- --headless --mcp-endpoint "$PWD/local/headless-endpoint.json"
+python3 tools/phichain-mcp/agent_server.py --endpoint "$PWD/local/headless-endpoint.json"
+```
+
+The second command is an MCP stdio entrypoint for your client, not an interactive
+shell. `server.py` also supports the same lifecycle tools. `--headless` requires
+`--mcp-endpoint`; optional `--project /absolute/path` starts an asynchronous open.
+The executable uses the same native Bevy entities, loader, validation, commands,
+revision guards, undo/redo and serializer as the GUI. It does not create a window,
+initialize a GPU/audio output device, load UI assets or touch GUI settings/recent
+projects. Its editing loop runs at 60 Hz. No standalone chart store is maintained.
+The current binary still links the GUI dependencies; this is a runtime headless
+mode, not a separate dependency-minimized build.
+
+1. Call `editor_status` and verify the expected PID, executable and `headless`.
+2. Call `create_project` with absolute `path` and `music_path`, plus optional
+   `illustration_path` and `meta` (name, composer, charter, illustrator, level).
+3. Poll `editor_status` until `pending` is null. Check `last_error` is null and
+   use `created_path` for `open_project`. Creation does not open automatically.
+4. Poll again until `project` is present and `last_error` is null. Obtain fresh
+   guards from `get_context`/`editor_context`, then edit, undo/redo and save normally.
+5. Save with fresh guards before `close_project`; wait for `pending` and `project`
+   to both become null before starting another project.
+
+Example `create_project` arguments (replace paths):
+
+```json
+{"path":"/absolute/path/new-project","music_path":"/absolute/path/song.mp3","meta":{"name":"Example","composer":"","charter":"","illustrator":"","level":""}}
+```
+
+The destination must not exist and its parent must exist. Audio is copied as
+`music.mp3/wav/ogg/flac`; a cover becomes `illustration.png/jpg/jpeg` (extensions
+are normalized to lowercase). Sources are validated using native decoders and
+left unchanged. No dialogs, conversion, model download, overwrite, or source-file
+move occurs. Music is required at creation, so importing a song is part of this
+single tool. Replacing audio in an existing project is not exposed. Creation and
+opening run asynchronously; a failure is reported in `last_error` and releases
+the lifecycle slot. Failed creation removes only files it created; an interrupted
+process may leave an incomplete destination, which is never silently reused.
+
+`preview` in headless mode controls a **silent clock**, including seek/play/pause
+and automatic pause at the audio duration. It does not emit sound. `inspect_motion`
+and `preview_passage` still use the independent native renderer and require its
+GPU/ffmpeg prerequisites; ordinary editing requires neither. GUI panels, file
+pickers and interactive audio output belong to GUI mode. Save explicitly: the
+headless host does not run GUI autosave. Never connect experiments to another
+agent's endpoint or open the same on-disk project in multiple editing processes.
+Terminate your own host when finished; forced termination may leave a stale
+endpoint, which must be removed only after confirming its PID has exited.
+
 ## Connect Codex
 
 From the repository root, register the stdio server:
@@ -43,7 +98,7 @@ From the repository root, register the stdio server:
 codex mcp add phichain -- python3 "$PWD/tools/phichain-mcp/server.py" --endpoint "$PWD/.phichain-mcp.json"
 ```
 
-Restart the Codex chat/client as needed to load the newly configured server. The server can initialize before the editor starts; all nine tools require an open project. The adapter re-reads the endpoint on each call, so it can reconnect after an editor restart. Do not run the adapter directly in a terminal expecting an interactive prompt: stdin/stdout carry MCP JSON-RPC messages.
+Restart the Codex chat/client as needed to load the newly configured server. The server can initialize before the editor starts; project lifecycle tools work before a project is open; chart tools require one. The adapter re-reads the endpoint on each call, so it can reconnect after an editor restart. Do not run the adapter directly in a terminal expecting an interactive prompt: stdin/stdout carry MCP JSON-RPC messages.
 
 Alternatively, add this entry to a trusted project's `.codex/config.toml` (replace the absolute paths):
 
@@ -60,6 +115,10 @@ It is a separate read-only entrypoint; the chart-editing catalogs below are unch
 
 | Tool | Behavior |
 | --- | --- |
+| `editor_status` | Runtime mode, project, pending lifecycle operation, last error and created path; works without a project. |
+| `create_project` | Create a new project and copy/validate music and optional cover from absolute paths; poll status, then open it. |
+| `open_project` | Open an existing native project without dialogs; poll status until loaded. |
+| `close_project` | Guarded close; refuses unsaved work. |
 | `get_context` | Project/audio file paths, metadata, BPM, offset, line hierarchy, selected objects, current beat, audio and chart time, playback and history state. |
 | `read_section` | Notes, overlapping holds and line events in a beat range, optionally on one line; curve track references. |
 | `preview_passage` | Render a guarded live passage as a local looping, scrubbable video without touching editor playback. |
@@ -84,7 +143,7 @@ are delivered in the MCP initialize response; reconnect to receive the update.
 It runs MOSS-Music Instruct locally on Apple Silicon through MLX. The live
 editor supplies the source audio path and session/revision: no alternate chart
 session, arbitrary caller-supplied file path, chart editing, or playback changes.
-The existing nine-tool and experimental authoring servers remain independent.
+The base and experimental authoring servers remain independent.
 
 ### Install once
 
@@ -290,23 +349,25 @@ An older editor reports an unknown command rather than using another chart sourc
 ```sh
 cargo test -p phichain mcp::
 python3 -m unittest discover -s tools/phichain-mcp -p 'test_*.py' -v
+cargo build -p phichain
+python3 tools/phichain-mcp/smoke_headless.py --binary target/debug/phichain
 ```
 
-Rust tests cover actual editor commands, grouped undo/redo, stale sessions and human edits, invalid-batch atomicity, malformed beats, curve protections, serialization/save, bridge authentication, endpoint cleanup, and a full stdio MCP subprocess editing a live Bevy World through the bridge. Python tests cover MCP lifecycle, schema validation, JSON-RPC errors, and loopback transport.
+Rust tests cover actual editor commands, grouped undo/redo, stale sessions and human edits, invalid-batch atomicity, malformed beats, curve protections, serialization/save, bridge authentication, endpoint cleanup, and a full stdio MCP subprocess editing a live Bevy World through the bridge. Python tests cover MCP lifecycle, schema validation, JSON-RPC errors, and loopback transport. The headless smoke test launches its own executable and both real stdio adapters, creates synthetic audio in a temporary directory, then verifies create/import/open, dry-run/edit, undo/redo, silent seek/end pause, save/close/reopen. It never connects to an existing host.
 
 Rebuild and restart PhiChain and refresh the MCP client for the required history author argument. Example: `{"session":"session-from-read","revision":"revision-from-read","action":"undo","author":"agent"}`. Authorship stays attached to each history entry through undo/redo and branching.
 
 ## Scope
 
-The MCP interface contains only the nine tools above. `apply_edits` provides
+The MCP interface contains the 13 tools above. `apply_edits` provides
 literal editor operations; charting decisions belong to the user and agent.
-There are no presets, authoring plans, evidence caches, analysis tools, project
-management, audio import, background render jobs, MCP resources, or prompts.
+Project creation includes local audio/cover import. There are no presets,
+authoring plans, evidence caches, MCP resources, or prompts.
 New tools will be added when the user designs and requests them.
 
 The adapter accepts `--endpoint` and optional `--renderer` (an absolute executable
 path used by `inspect_motion` and `preview_passage`). Other legacy executable overrides are unsupported. Restart the MCP client to refresh the tool list.
-The six core tools and `animate_selection` are direct bridge calls.
+All tools except the two rendering tools are direct bridge calls.
 `inspect_motion` and `preview_passage` render immutable snapshots captured from the live editor.
 
 
@@ -407,8 +468,8 @@ codex mcp add phichain-agent -- python3 "$PWD/tools/phichain-mcp/agent_server.py
 Restart/refresh the MCP client afterward. Prefer enabling one PhiChain entry in a
 chat to avoid duplicate tool names. Do not restart an editor containing unsaved
 work without saving through the normal UI first. The existing `server.py` still
-advertises its original nine tools; `agent_server.py` advertises those nine plus
-18 authoring tools (27 total). Python 3.9+ supports patch/read operations; **Node.js
+advertises 13 tools; `agent_server.py` advertises those 13 plus
+18 authoring tools (31 total). Python 3.9+ supports patch/read operations; **Node.js
 22.13+ with permission-mode support** is additionally required for transform,
 generate and JavaScript scripts. No npm packages are required. `node` must be on
 the MCP process's PATH. Render tools retain their renderer/ffmpeg/GPU prerequisites.

@@ -12,6 +12,10 @@ pub struct Args {
     /// Enable the local MCP bridge and write its credentials to a new endpoint file
     #[arg(long)]
     pub mcp_endpoint: Option<std::path::PathBuf>,
+
+    /// Run the native editing engine without a window, GPU, or audio output device
+    #[arg(long, requires = "mcp_endpoint")]
+    pub headless: bool,
 }
 
 pub struct CliPlugin;

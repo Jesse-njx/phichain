@@ -132,6 +132,10 @@ fn load_project_system(
                 // results will be handled in `handle_project_loading_result_system`
             }
             Err(error) => {
+                let bridge_error = error.to_string();
+                commands.queue(move |world: &mut World| {
+                    crate::mcp::finish_lifecycle(world, Some(bridge_error));
+                });
                 let message = match error {
                     OpenProjectError::MissingFile(file) => {
                         t!("error.open_project.missing_file", file = file)

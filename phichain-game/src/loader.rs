@@ -78,7 +78,7 @@ fn load_line(line: SerializedLine, commands: &mut Commands, parent: Option<Entit
 }
 
 /// Load a chart to the world using a [`Commands`]
-fn load(chart: PhichainChart, commands: &mut Commands) {
+pub fn load(chart: PhichainChart, commands: &mut Commands) {
     commands.insert_resource(chart.offset);
     commands.insert_resource(chart.bpm_list);
 

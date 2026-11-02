@@ -3,7 +3,8 @@
 This fork keeps the editor and its live MCP bridge together. The running editor
 is the single source of truth, with session/revision guards and shared undo.
 
-The MCP server exposes nine user-approved tools: `get_context`, `read_section`,
+The MCP server exposes 13 user-approved tools: `editor_status`, `create_project`,
+`open_project`, `close_project`, `get_context`, `read_section`,
 `apply_edits`, `preview`, `history`, `save`, `inspect_motion`, `preview_passage`,
 and `animate_selection`. Inspection and passage preview render guarded live
 snapshots. Animation operates on explicit motion groups with complete carrier
@@ -38,8 +39,8 @@ Existing saved layouts receive this pane once. MCP tool catalogs are unchanged.
 
 Explicitly requested by the user on 2026-10-27: retain PhiChain as the live editor
 and port the rpe-next Agent chart-write vocabulary into an MCP server. The new
-`agent_server.py` is a separate experimental entrypoint with 27 tools; the minimal
-nine-tool `server.py` entrypoint remains available. This request expands the
+`agent_server.py` is a separate experimental entrypoint with 31 tools; the minimal
+13-tool `server.py` entrypoint remains available. This request expands the
 previous user-approved scope for this branch.
 
 Implemented: ID-keyed native chart reads and queries, partial patch, vendored safe
@@ -58,3 +59,17 @@ Validation covers mechanical correctness and integration, not whether a model no
 produces good charts. A real creative-task comparison with the same model is still
 needed before drawing that conclusion. Vendored expression code remains under
 its source PolyForm Noncommercial license with required notices.
+
+## GUI-free project lifecycle and headless host (2026-11-02)
+
+User-requested scope: create native projects/import songs through MCP and run
+the editing application without laptop GUI interaction. Both chart MCP catalogs
+now expose status, create (including validated audio/optional cover copy), open
+and guarded close. Creation/open report asynchronous completion through status.
+
+`phichain --headless --mcp-endpoint PATH` hosts the existing Bevy chart and shared
+command/history/serialization code without window, GPU or audio output device
+initialization. Preview timing is silent; renderer-backed artifacts retain their
+GPU/ffmpeg requirements. This is runtime headless support, not a build stripped
+of GUI dependencies. No UI panel automation, audio replacement, model loop or
+parallel authoring state is introduced. Save explicitly; no headless autosave.

@@ -15,6 +15,7 @@ mod fps;
 mod graphics;
 mod hit_sound;
 mod home;
+mod headless;
 mod hotkey;
 mod identifier;
 mod ime;
@@ -106,6 +107,15 @@ use std::sync::Arc;
 i18n!("lang", fallback = "en_us");
 
 fn main() {
+    use clap::Parser;
+    let args = Args::parse();
+    if args.headless {
+        if let Err(error) = headless::run(args) {
+            eprintln!("Headless startup failed: {error:#}");
+            std::process::exit(1);
+        }
+        return;
+    }
     if let Err(err) = logging::roll_latest() {
         error!("Failed to roll latest.log: {}", err);
     }

@@ -44,6 +44,7 @@ class ProtocolTests(unittest.TestCase):
 
     def test_minimal_interface_and_removed_tools(self):
         self.assertEqual(set(server.BY_NAME), {
+            "editor_status", "create_project", "open_project", "close_project",
             "get_context", "read_section", "inspect_motion", "preview_passage", "animate_selection", "apply_edits", "preview", "history", "save"})
         initialized = self.adapter.dispatch({"jsonrpc": "2.0", "id": 2,
             "method": "initialize", "params": {"protocolVersion": "2025-11-25"}})
@@ -64,6 +65,23 @@ class ProtocolTests(unittest.TestCase):
             self.assertEqual(result["structuredContent"]["session"], "s")
         with patch.object(server, "call_editor", return_value={"error": "Chart changed"}):
             self.assertTrue(self.request("get_context", {})["result"]["isError"])
+
+    def test_project_lifecycle_routes_and_validates_before_bridge(self):
+        cases = [("editor_status", {}),
+                 ("create_project", {"path": "/new/project", "music_path": "/song.mp3"}),
+                 ("open_project", {"path": "/new/project"}),
+                 ("close_project", {"session": "s", "revision": "r"})]
+        with patch.object(server, "call_editor", return_value={"status": "requested"}) as bridge:
+            for name, args in cases:
+                self.assertFalse(self.request(name, args)["result"]["isError"])
+                bridge.assert_called_with("unused", name, args)
+        with patch.object(server, "call_editor") as bridge:
+            for name, args in [("create_project", {"path": "/new/project"}),
+                               ("create_project", {"path": "/new", "music_path": 42}),
+                               ("open_project", {}), ("close_project", {"session": "s"}),
+                               ("editor_status", {"discard_unsaved": True})]:
+                self.assertTrue(self.request(name, args)["result"]["isError"])
+            bridge.assert_not_called()
 
     def test_motion_returns_images_and_rejects_invalid_requests_before_bridge(self):
         args = {"session":"s","revision":"r","from_seconds":0,"to_seconds":1,"frames":2}

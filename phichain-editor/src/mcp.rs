@@ -48,11 +48,40 @@ pub(crate) mod authoring;
 pub(crate) mod structure;
 
 pub struct McpPlugin;
+mod lifecycle;
+#[cfg(test)]
+mod headless_tests;
 
 #[derive(Resource, Default)]
 struct Lifecycle {
     pending: Option<String>,
     error: Option<String>,
+    created_path: Option<PathBuf>,
+}
+
+pub(crate) fn begin_lifecycle(world: &mut World, operation: &str) -> Result<()> {
+    if world.contains_resource::<Project>() { bail!("Close the current project first; unsaved work is never discarded") }
+    if world.query::<&phichain_game::loader::nonblocking::LoadingProject>().iter(world).next().is_some() {
+        bail!("A project is already loading")
+    }
+    world.init_resource::<Lifecycle>();
+    let mut state = world.resource_mut::<Lifecycle>();
+    if state.pending.is_some() { bail!("A project lifecycle request is still pending") }
+    state.pending = Some(operation.into());
+    state.error = None;
+    state.created_path = None;
+    Ok(())
+}
+
+pub(crate) fn finish_lifecycle(world: &mut World, error: Option<String>) {
+    let Some(mut state) = world.get_resource_mut::<Lifecycle>() else { return };
+    state.pending = None;
+    state.error = error;
+}
+
+pub(crate) fn start_headless_bridge(app: &mut App, path: PathBuf) -> Result<()> {
+    configure_bridge(app, start_bridge(path)?);
+    Ok(())
 }
 fn loading_result(
     event: On<phichain_game::loader::nonblocking::ProjectLoadingResult>,
@@ -106,6 +135,7 @@ fn configure_bridge(app: &mut App, bridge: Bridge) {
     app.insert_resource(bridge)
         .init_resource::<Lifecycle>()
         .add_observer(loading_result)
+        .add_systems(Update, lifecycle::poll)
         // New sprites must pass through gameplay initialization and transform /
         // visibility propagation before this frame is extracted for rendering.
         .add_systems(PreUpdate, process_requests);
@@ -331,6 +361,7 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
     let args = &request["arguments"];
     // Lifecycle tools must also work on the home screen, before any project exists.
     match method {
+        "create_project" => return lifecycle::create(world, args),
         "analyze_audio" => return analysis::start(world, args),
         "read_audio_features" => return analysis::read(world, args),
         "editor_status" => {
@@ -343,7 +374,9 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
             let state = world.get_resource::<Lifecycle>();
             return Ok(json!({"connected":true,"pid":std::process::id(),
                 "version":env!("CARGO_PKG_VERSION"),"executable":std::env::current_exe().ok(),
+                "headless":world.contains_resource::<crate::headless::Headless>(),
                 "project":project,"pending":state.and_then(|s|s.pending.as_ref()),
+                "created_path":state.and_then(|s|s.created_path.as_ref()),
                 "last_error":state.and_then(|s|s.error.as_ref())}));
         }
         "open_project" => {
@@ -356,19 +389,25 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
             {
                 bail!("A project lifecycle request is still pending")
             }
-            let path = PathBuf::from(args["path"].as_str().context("path must be a string")?)
-                .canonicalize()?;
+            let path = PathBuf::from(args["path"].as_str().context("path must be a string")?);
+            if !path.is_absolute() { bail!("path must be absolute") }
+            let path = path.canonicalize()?;
+            if world.contains_resource::<crate::headless::Headless>() {
+                crate::headless::open(world, path.clone())?;
+                return Ok(json!({"status":"requested","path":path,"next":"editor_status"}));
+            }
             let project = Project::open(path.clone())?;
             phichain_chart::serialization::PhichainChart::from_json_str(&std::fs::read_to_string(
                 project.path.chart_path(),
             )?)?;
-            world.init_resource::<Lifecycle>();
-            world.resource_mut::<Lifecycle>().pending = Some("open".into());
-            world.resource_mut::<Lifecycle>().error = None;
+            begin_lifecycle(world, "open")?;
             world.write_message(crate::project::LoadProject(path.clone()));
             return Ok(json!({"status":"requested","path":path,"next":"editor_status"}));
         }
         _ => {}
+    }
+    if world.get_resource::<Lifecycle>().is_some_and(|state| state.pending.is_some()) {
+        bail!("A project lifecycle request is still pending; poll editor_status")
     }
     let data = snapshot(world)?;
     match method {
@@ -386,6 +425,12 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
             if !world.resource::<EditorHistory>().0.is_saved() {
                 bail!("Save the current project before closing it")
             }
+            if world.contains_resource::<crate::headless::Headless>() {
+                crate::headless::close(world);
+                return Ok(json!({"status":"closed","next":"editor_status"}));
+            }
+            world.init_resource::<Lifecycle>();
+            world.resource_mut::<Lifecycle>().pending = Some("close".into());
             world.write_message(crate::project::UnloadProject);
             Ok(json!({"status":"requested","next":"editor_status"}))
         }
@@ -422,7 +467,8 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
             if args["session"] != data["session"] {
                 bail!("Project changed; read context again")
             }
-            if !world.contains_resource::<phichain_game::audio::InstanceHandle>() {
+            let headless = world.contains_resource::<crate::headless::Headless>();
+            if !headless && !world.contains_resource::<phichain_game::audio::InstanceHandle>() {
                 bail!("Audio is not ready")
             }
             let action = args["action"].as_str().context("Missing preview action")?;
@@ -437,6 +483,13 @@ fn handle(world: &mut World, request: &Value) -> Result<Value> {
                 if !seconds.is_finite() || seconds < 0.0 || seconds > f32::MAX as f64 {
                     bail!("Invalid preview time")
                 }
+            }
+            if action == "seek" && seconds.is_none() { bail!("seek requires time_seconds") }
+            if headless {
+                crate::headless::preview(world, action, seconds.map(|s|s as f32));
+                return Ok(json!({"status":"applied","action":action,"silent":true,"session":data["session"]}));
+            }
+            if let Some(seconds) = seconds {
                 world.write_message(SeekTo(seconds as f32));
             }
             match args["action"].as_str() {
@@ -1581,7 +1634,7 @@ def tool(name, args):
     assert not result['isError'], result
     return result['structuredContent']
 rpc('initialize', {'protocolVersion':'2025-11-25'})
-assert {'get_context','read_section','inspect_motion','preview_passage','animate_selection','apply_edits','preview','history','save'} == {t['name'] for t in rpc('tools/list', {})['tools']}
+assert {'editor_status','create_project','open_project','close_project','get_context','read_section','inspect_motion','preview_passage','animate_selection','apply_edits','preview','history','save'} == {t['name'] for t in rpc('tools/list', {})['tools']}
 ctx = tool('get_context', {})
 result = tool('apply_edits', {'session':ctx['session'],'revision':ctx['revision'],'operations':[{'op':'create_note','line_id':ctx['lines'][0]['id'],'note':{'kind':'tap','above':True,'beat':[4,1,2],'x':120,'speed':1}}]})
 note_id = result['changes'][0]['id']
@@ -1769,6 +1822,8 @@ assert p.wait(timeout=2) == 0
         assert!(!w.resource::<EditorHistory>().0.is_saved());
         w.resource_mut::<EditorHistory>().0.set_saved();
         call(w, "close_project", guard).unwrap();
+        let args = edits(w, json!([{"op":"create_note","line_id":id(line),"note":note(2)}]));
+        assert!(call(w, "apply_edits", args).unwrap_err().to_string().contains("pending"));
         assert_eq!(
             w.resource::<Messages<crate::project::UnloadProject>>()
                 .len(),

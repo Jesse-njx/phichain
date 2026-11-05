@@ -15,6 +15,32 @@ See [README.md](README.md) for contracts and current limits.
 There is no planned AI-charting framework. Add capabilities only when the user
 explicitly designs or requests them, rather than anticipating charting needs.
 
+## MP3 note-decision analysis (2026-11-02)
+
+The user explicitly requested a toolchain accepting MP3 audio and returning note
+selection decisions, timestamps, per-decision musical intensity, and climax
+sections. `tools/music-analysis/analyze.py` now provides a local CLI with JSON/CSV
+and an offline audition/review report. It retains omitted candidates, separates
+intensity from priority/confidence, and accepts source-bound review corrections
+and optionally aligned stems. It does not edit charts or maintain authoring state;
+MCP catalogs and the Rust bridge are unchanged.
+
+The implemented selection and climax methods are acoustic heuristic baselines,
+not learned musical judgment or verified transcription. Polyphonic voice choice,
+hold boundaries and emotional/functional climax interpretation remain subject to
+review. No difficulty, finger, lane or decorative decisions are inferred.
+See [the analyzer documentation](../music-analysis/README.md) for executable
+commands, exact scoring policy, outputs and validation limits.
+
+The same-day user-requested `to_phichain.py` visualization now imports analysis
+JSON into a new empty live experiment through the existing `chart_script` API.
+Primary-layer tracks preserve one object per selected decision; reason tracks
+are explicitly multi-label and duplicate objects for inspection. In-track x
+encodes intensity and judgment-line brightness marks climax candidates.
+Names use the editor line list; arbitrary gameplay text is unsupported. The
+importer is guarded, dry-run first and undoable, and retains an ID/evidence receipt.
+It does not create offline chart state or alter MCP/bridge capabilities.
+
 ## Local music question answering (2026-10-29)
 
 User-requested `music_server.py` adds a separate read-only music MCP with

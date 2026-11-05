@@ -16,5 +16,16 @@ Chart*.json
 # Local MCP endpoint credentials
 /.phichain-mcp.json
 
-# Local macOS app bundles and packaged build outputs
-/local/
+# Workspace data that stays outside this repository
+/charts/
+/deployments/
+/research/
+/runtime/
+/artifacts/
+/apps/
+.env
+.env.*
+*.env
+
+__pycache__/
+*.pyc

@@ -9,7 +9,7 @@ import agent_server
 import server
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / 'local/mcp-reference'
+OUT = ROOT / 'docs/mcp-reference'
 G = {'session':'<session from latest read>','revision':'<revision from latest read>'}
 W = {**G,'dry_run':True}
 EXAMPLES = {
@@ -83,7 +83,7 @@ codex mcp add phichain-agent -- python3 "$PWD/tools/phichain-mcp/agent_server.py
  parts.append('''<h2 id="scope">What was ported</h2><p>This branch ports the agent-to-chart writing vocabulary into PhiChain: field patches, batched expressions, templates and whole-candidate scripts. The expression parser and numbered easing functions were copied from rpe-next commit 274bc55866dc5893e68c95bb4107f79711f1aa1d; editor translation calls were replaced with standalone error messages. Those files retain PolyForm Noncommercial 1.0.0 and their required notices under tools/phichain-mcp/vendor/rpe-next/.</p>
 <p>No foreign editor assets/runtime, noise areas, shader model, fake notes, text/noise fitting, aggregate trajectories, audio models, built-in model/chat loop, file workspace, VCS or collaboration were ported. Unsupported capabilities are not advertised as working tools. Native note/event algorithms can use chart_script, with PhiChain's existing rendering for review.</p>
 <p><a href="index.html">Minimal 13-tool reference</a> · <a href="../rpe-next-mcp-reference/index.html">Earlier hypothetical rpe-next mapping</a> · <a href="agent-verification.json">Schema/navigation verification</a></p>
-<footer>Generated from the implemented agent_server.py by build_agent_reference.py via local/mcp-reference/build.py. No editor calls or chart writes occur during documentation generation.</footer></main></div></body></html>''')
+<footer>Generated from the implemented agent_server.py by build_agent_reference.py via docs/mcp-reference/build.py. No editor calls or chart writes occur during documentation generation.</footer></main></div></body></html>''')
  page='\n'.join(parts)
  class Nav(HTMLParser):
   def __init__(self):super().__init__();self.ids=[];self.links=[]

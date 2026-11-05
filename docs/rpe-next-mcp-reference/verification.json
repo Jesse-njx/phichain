@@ -1,0 +1,19 @@
+{
+  "source_commit": "274bc55866dc5893e68c95bb4107f79711f1aa1d",
+  "native_commands": 53,
+  "chart_workflow_tools": 30,
+  "supporting_tools": 20,
+  "host_responsibilities": [
+    "web_search",
+    "web_fetch",
+    "ask_user"
+  ],
+  "mapped_mcp_tools": 50,
+  "example_count": 30,
+  "examples_schema_checked": true,
+  "semantic_execution_tested": false,
+  "internal_links_valid": true,
+  "charts_modified": false,
+  "implementation_created": false,
+  "snapshot_sha256": "04b466f65529cca327225f6dd3897917ef2ab26b01e383e0bda31bc1fb421746"
+}

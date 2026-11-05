@@ -1,0 +1,2857 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>rpe-next · Proposed live MCP reference</title><style>
+:root{--ink:#203547;--muted:#526b7a;--bg:#edf3f6;--paper:#fff;--blue:#156e9c;--gold:#bd7313;--line:#c8d8e1;--code:#142d40}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}h1,h2,h3{line-height:1.2}h1{font-family:"Avenir Next","Trebuchet MS",sans-serif;font-size:clamp(34px,5vw,64px);letter-spacing:-2px;max-width:860px}h2{font-size:30px;margin-top:60px}h3{font-size:22px;overflow-wrap:anywhere}h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:20px 0 10px}a{color:var(--blue)}header{padding:52px max(5vw,24px) 38px;background:#dcecf5;border-bottom:6px solid var(--blue)}header p{max-width:850px}.eyebrow,.badge{font:12px ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em}.eyebrow{color:var(--blue)}.rail{display:flex;flex-wrap:wrap;gap:0;margin-top:28px}.rail span{padding:10px 20px;border-left:3px solid var(--gold);background:#ffffff80;margin-right:8px}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1560px;margin:auto}aside{padding:28px 16px;position:sticky;top:0;height:100vh;overflow:auto;border-right:1px solid var(--line)}aside a{display:block;font:12px/1.6 ui-monospace,Menlo,monospace;padding:5px 8px;text-decoration:none;border-radius:5px}aside a:hover{background:#d6e8f2}aside .major{font:600 14px/1.5 -apple-system,sans-serif;margin:10px 0}main{padding:28px 42px 100px;min-width:0}.controls{position:sticky;top:0;z-index:2;background:var(--bg);padding:10px 0;display:flex;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line)}input,select{font:inherit;padding:12px;border:1px solid #8fa9b8;border-radius:6px;background:white}input{flex:1;min-width:180px}button{cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.tool,.step,.operation{background:white;border:1px solid var(--line);border-radius:10px;padding:26px;margin:22px 0}.toolhead{display:flex;align-items:center;gap:15px}.badge{padding:6px 8px;background:#deedf5;color:#125e83}.tool[data-server=live] .badge{background:#fff0d5;color:#87520b}.toolhead h3{margin:0}.muted{color:var(--muted)}.codebox{position:relative;margin:14px 0}pre{margin:0;background:var(--code);color:#e2f2fc;border-radius:6px;padding:24px 18px;overflow:auto;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;tab-size:2}.copy{position:absolute;right:8px;top:8px;border:1px solid #6e8b9e;background:#25475f;color:white;border-radius:4px;padding:4px 9px}p code,td code{background:#eaf1f5;padding:2px 4px;border-radius:3px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted)}.tablewrap{overflow:auto}.behavior{border-left:3px solid var(--gold);padding:0 16px;margin:24px 0}details{margin:20px 0}summary{cursor:pointer;color:var(--blue);font-weight:600}.notice{padding:18px 22px;background:#fff5df;border-left:4px solid var(--gold)}.stepnum{float:right;font:32px ui-monospace,monospace;color:var(--blue)}.hidden{display:none!important}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.grid>div{background:white;padding:20px;border-radius:8px}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;font-size:13px}@media(max-width:950px){.layout{grid-template-columns:1fr}aside{position:static;height:auto;max-height:210px;border-bottom:1px solid var(--line)}aside .toolsnav{display:none}main{padding:20px}.grid{grid-template-columns:1fr}.toolhead{display:block}.toolhead h3{margin-top:10px}.tool{padding:18px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{aside,.controls,.copy{display:none}.layout{display:block}pre{white-space:pre-wrap}.tool{break-inside:avoid}body{background:white}}
+</style></head><body>
+<header><div class="eyebrow">rpe-next / native Agent commands → live MCP</div><h1>Read. Transform. Commit.</h1><p>A faithful MCP mapping of the existing chart-authoring command layer. The external agent makes charting decisions; rpe-next executes native operations in the open editor.</p><div class="rail"><span>30 chart workflow tools</span><span>20 supporting commands</span><span>3 host responsibilities</span></div></header>
+<div class="layout"><aside>
+<a class="major" href="#start">Status & setup</a>
+<a class="major" href="#workflow">Writing workflow</a>
+<a class="major" href="#catalog">Tool inventory</a>
+<a class="major" href="#core">Read & write</a>
+<a class="major" href="#review">Review results</a>
+<a class="major" href="#native">Native authoring helpers</a>
+<a class="major" href="#comparison">What differs from PhiChain</a>
+<a class="major" href="#limits">Units & recovery</a>
+<a class="major" href="#support">Supporting command appendix</a>
+<a class="major" href="#sources">Sources & verification</a>
+<a href="#tool-editor_context">editor_context</a>
+<a href="#tool-editor_entities">editor_entities</a>
+<a href="#tool-chart_templates">chart_templates</a>
+<a href="#tool-chart_read">chart_read</a>
+<a href="#tool-chart_query">chart_query</a>
+<a href="#tool-chart_patch">chart_patch</a>
+<a href="#tool-chart_transform">chart_transform</a>
+<a href="#tool-chart_generate">chart_generate</a>
+<a href="#tool-chart_script">chart_script</a>
+<a href="#tool-line_manage">line_manage</a>
+<a href="#tool-bpm_set">bpm_set</a>
+<a href="#tool-diagnose">diagnose</a>
+<a href="#tool-history">history</a>
+<a href="#tool-project_save">project_save</a>
+<a href="#tool-editor_navigate">editor_navigate</a>
+<a href="#tool-editor_view">editor_view</a>
+<a href="#tool-preview_capture">preview_capture</a>
+<a href="#tool-editor_capture">editor_capture</a>
+<a href="#tool-chart_tools">chart_tools</a>
+<a href="#tool-trajectory_presets">trajectory_presets</a>
+<a href="#tool-trajectory_generate">trajectory_generate</a>
+<a href="#tool-trajectory_split">trajectory_split</a>
+<a href="#tool-curve_notes">curve_notes</a>
+<a href="#tool-event_shake">event_shake</a>
+<a href="#tool-noise_circle">noise_circle</a>
+<a href="#tool-noise_track">noise_track</a>
+<a href="#tool-noise_fit">noise_fit</a>
+<a href="#tool-text_fit">text_fit</a>
+<a href="#tool-multi_line">multi_line</a>
+<a href="#tool-global_events">global_events</a>
+</aside><main><h2 id="start">A conversion proposal, not an installed server</h2>
+<div class="notice">Documentation only. No rpe-next MCP server has been implemented, no editor connection is made, and no chart is modified. The inventory is a faithful mapping, not a recommendation to add 50 tools to PhiChain.</div>
+<p>Based on rpe-next v0.13.0, commit <code>274bc55</code>, inspected on 2026-10-27. All 53 native Agent command definitions were collected by registering their definitions without executing their handlers. Descriptions and native schemas are preserved in <a href="native-tools.json">native-tools.json</a>.</p>
+<p>Proposed connection: external Agent → MCP stdio adapter → authenticated local editor bridge → existing command registry → live editor session. The editor remains the source of truth. Its built-in chat/model loop would not be needed to author via MCP. Native manual tools remain available.</p>
+<p>Setup would require implementing the stdio adapter, an editor-side transport, and result/approval/cancellation adapters. There is no working launch command or existing endpoint to configure yet. Browser connections would also need a local relay or another explicit transport; desktop bridging is a separate implementation choice.</p>
+<h3>Existing behavior versus adapter work</h3><table><thead><tr><th>Already native</th><th>Requires MCP adaptation</th></tr></thead><tbody>
+<tr><td>JSON schemas, prepare/apply separation, revision checks for chart writes, native validation and shared undo</td><td>tools/list and tools/call, transport authentication, connection lifecycle and error mapping</td></tr>
+<tr><td>ask / dangerous / full permission modes; prepared plans rechecked after approval</td><td>Expose concrete plans to a user approval UI or explicitly configured policy. MCP annotations alone do not approve a plan.</td></tr>
+<tr><td>Image capture, local model work, cancellation signals</td><td>MCP image content, signal propagation, disconnected-client handling and result limits</td></tr>
+<tr><td>Chart revision based on immutable chart identity</td><td>Proposed session token on all calls except editor_context, checked and stripped before native dispatch. editor_context returns that token. This does not add native revision checks to commands that lack them.</td></tr>
+</tbody></table>
+<h2 id="workflow">How the agent actually writes a chart</h2><ol>
+<li><code>editor_context</code>: identify session, revision, selected line/notes and timing bases.</li>
+<li><code>chart_read</code> / <code>chart_query</code>: resolve exact source indices, read affected notes, native event tracks, parents and other dependencies. Retrieve <code>chart_templates</code> when creating objects.</li>
+<li>Choose the smallest complete representation: <code>chart_patch</code> for fields, <code>chart_transform</code> for repeated numeric changes, <code>chart_generate</code> for template sequences, or <code>chart_script</code> for arbitrary algorithms and multi-array edits. Native generators are available when they match the task.</li>
+<li>The native handler prepares a candidate chart. Host validation and permission checks run; session/chart validity is checked again before one native commit. A successful chart batch is one undo entry.</li>
+<li>Read the changed data, run <code>diagnose</code>, navigate to relevant times and inspect actual <code>preview_capture</code> images. Correct through another fresh guarded operation.</li>
+<li>Use <code>project_save</code> when requested. Ordinary chart edits remain in memory until normal save/autosave.</li></ol>
+<p>Scripts can express moving notes between line arrays, editing several tracks together, or computing a whole motion sequence in one request. They do not automatically solve parent transforms, maintain judgment positions, or know what looks good. Those decisions still belong to the agent.</p>
+<h3>Example: mirror exactly three existing notes</h3><p>Read line 0’s notes and relevant context; use original source indices [0,1,2] with <code>chart_transform</code> and <code>{"/positionX":"-positionX"}</code>. Only those fields change, with one undo entry. This mirrors local x; world-space symmetry under transformed parents requires additional math.</p>
+<h3>Example: move existing notes to another line</h3><p>Use <code>chart_script</code> to remove chosen items from one array and append them to another within the same candidate chart. No intermediate live deletion is exposed. Review a dry run, then execute with fresh guards. The example below preserves JSON fields, not screen-space trajectory or a guaranteed stable note identity.</p>
+<h2 id="catalog">What tools would exist?</h2><p>A literal conversion maps 50 commands to MCP tools and leaves 3 commands with the external Agent host. The 30 tools below directly describe chart reading, writing and review. The remaining 20 are documented in a collapsed appendix so their existence is explicit without turning this into a broader product comparison.</p>
+<table><thead><tr><th>Purpose</th><th>Native tools mapped one-to-one</th></tr></thead><tbody>
+<tr><td>Read / write / history</td><td><a href="#tool-editor_context"><code>editor_context</code></a>, <a href="#tool-editor_entities"><code>editor_entities</code></a>, <a href="#tool-chart_templates"><code>chart_templates</code></a>, <a href="#tool-chart_read"><code>chart_read</code></a>, <a href="#tool-chart_query"><code>chart_query</code></a>, <a href="#tool-chart_patch"><code>chart_patch</code></a>, <a href="#tool-chart_transform"><code>chart_transform</code></a>, <a href="#tool-chart_generate"><code>chart_generate</code></a>, <a href="#tool-chart_script"><code>chart_script</code></a>, <a href="#tool-line_manage"><code>line_manage</code></a>, <a href="#tool-bpm_set"><code>bpm_set</code></a>, <a href="#tool-diagnose"><code>diagnose</code></a>, <a href="#tool-history"><code>history</code></a>, <a href="#tool-project_save"><code>project_save</code></a></td></tr>
+<tr><td>Navigate / inspect result</td><td><a href="#tool-editor_navigate"><code>editor_navigate</code></a>, <a href="#tool-editor_view"><code>editor_view</code></a>, <a href="#tool-preview_capture"><code>preview_capture</code></a>, <a href="#tool-editor_capture"><code>editor_capture</code></a></td></tr>
+<tr><td>Native authoring helpers</td><td><a href="#tool-chart_tools"><code>chart_tools</code></a>, <a href="#tool-trajectory_presets"><code>trajectory_presets</code></a>, <a href="#tool-trajectory_generate"><code>trajectory_generate</code></a>, <a href="#tool-trajectory_split"><code>trajectory_split</code></a>, <a href="#tool-curve_notes"><code>curve_notes</code></a>, <a href="#tool-event_shake"><code>event_shake</code></a>, <a href="#tool-noise_circle"><code>noise_circle</code></a>, <a href="#tool-noise_track"><code>noise_track</code></a>, <a href="#tool-noise_fit"><code>noise_fit</code></a>, <a href="#tool-text_fit"><code>text_fit</code></a>, <a href="#tool-multi_line"><code>multi_line</code></a>, <a href="#tool-global_events"><code>global_events</code></a></td></tr>
+</tbody></table><p>Names are retained for comparison. They are not aliases for PhiChain tools. Exact native schemas do not prove semantic completeness; descriptions and runtime checks still matter.</p>
+<h2 id="core">Read and write the live chart</h2>
+<article class="tool" id="tool-editor_context"><div class="toolhead"><span class="badge">native access: read</span><h3>editor_context</h3></div><p>Read the current chart, selection, beats, playback, available features, registered global event types, and revision. Call this first for every task.</p>
+<div class="behavior">Native context returns the current revision, selection and time bases. Proposed wrapper additionally returns a session token. Selection indices and JSON paths are revision-scoped, not stable object IDs.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;editor_context&quot;,
+    &quot;arguments&quot;: {}
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {},
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-editor_entities"><div class="toolhead"><span class="badge">native access: read</span><h3>editor_entities</h3></div><p>Search named entities in the editor: time markers, judge lines, groups, noise fields, layers, and assets. Names can be numeric strings; distinguish object types before locating/modifying, and do not treat names as beats.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;editor_entities&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;kind&quot;: &quot;line&quot;,
+      &quot;query&quot;: &quot;Chorus&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;kind&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;marker&quot;,
+        &quot;line&quot;,
+        &quot;line_group&quot;,
+        &quot;noise&quot;,
+        &quot;noise_layer&quot;,
+        &quot;asset&quot;
+      ]
+    },
+    &quot;query&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 200
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-chart_templates"><div class="toolhead"><span class="badge">native access: read</span><h3>chart_templates</h3></div><p>Get valid base templates for chart format, notes/events/judge lines/noise fields, plus parameter descriptions for all commands; freely combine these templates to generate complex effects.</p>
+<div class="behavior">Read a complete native object template before generation. With command set, this returns a command definition. Retain native defaults and fields rather than inventing an incomplete note.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;chart_templates&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;command&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-chart_read"><div class="toolhead"><span class="badge">native access: read</span><h3>chart_read</h3></div><p>View any chart field via JSON Pointer; arrays are paginated, and root returns a summary and field names. fields can narrow the fields of array items. Includes revision.</p>
+<div class="behavior">Reads raw JSON via JSON Pointer. Array results retain original indices. It does not automatically include parent motion, preceding speed events, or all dependencies. Read those explicitly.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;chart_read&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;path&quot;: &quot;/judgeLineList/0/notes&quot;,
+      &quot;offset&quot;: 0,
+      &quot;limit&quot;: 41
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 200
+    },
+    &quot;fields&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;string&quot;
+      },
+      &quot;maxItems&quot;: 30
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-chart_query"><div class="toolhead"><span class="badge">native access: read</span><h3>chart_query</h3></div><p>Query, time-range/field-condition/sort/projection filter any object collection by path, returning original indices. A general interface for reading notes, events, noise fields, and mod data.</p>
+<div class="behavior">Queries one array at a time. Time filtering uses the configured start/end fields; it is not a visible-lifetime query. Sorting changes result order, not source indices. This example is a beat range, not a note ordinal range.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;chart_query&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;path&quot;: &quot;/judgeLineList/0/notes&quot;,
+      &quot;start&quot;: 8,
+      &quot;end&quot;: 16,
+      &quot;sort&quot;: &quot;startTime&quot;,
+      &quot;fields&quot;: [
+        &quot;type&quot;,
+        &quot;startTime&quot;,
+        &quot;endTime&quot;,
+        &quot;positionX&quot;
+      ]
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;start&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;end&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;startField&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;endField&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;where&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+          &quot;field&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          },
+          &quot;op&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;enum&quot;: [
+              &quot;eq&quot;,
+              &quot;ne&quot;,
+              &quot;lt&quot;,
+              &quot;lte&quot;,
+              &quot;gt&quot;,
+              &quot;gte&quot;,
+              &quot;contains&quot;
+            ]
+          },
+          &quot;value&quot;: {}
+        },
+        &quot;required&quot;: [
+          &quot;field&quot;,
+          &quot;op&quot;,
+          &quot;value&quot;
+        ],
+        &quot;additionalProperties&quot;: false
+      },
+      &quot;maxItems&quot;: 20
+    },
+    &quot;sort&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 200
+    },
+    &quot;fields&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;string&quot;
+      },
+      &quot;maxItems&quot;: 30
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;path&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-chart_patch"><div class="toolhead"><span class="badge">native access: edit</span><h3>chart_patch</h3></div><p>Atomically edit any chart field, including notes, all events, noise fields, layers/skins, META, BPM, and mod structures. op=set/remove/insert/append with JSON Pointer paths; the value of append is the array to add. Other fields are preserved. One undo. Prefer line_manage for deleting judge lines.</p>
+<div class="behavior">Changes individual fields without resending whole notes. All operations validate on a copy and commit together. Raw JSON paths do not automatically repair line references; prefer line_manage for line structure.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;chart_patch&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;label&quot;: &quot;Move one note horizontally&quot;,
+      &quot;operations&quot;: [
+        {
+          &quot;op&quot;: &quot;set&quot;,
+          &quot;path&quot;: &quot;/judgeLineList/0/notes/0/positionX&quot;,
+          &quot;value&quot;: 120
+        }
+      ]
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;label&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;operations&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;minItems&quot;: 1,
+      &quot;maxItems&quot;: 2000,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+          &quot;op&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;enum&quot;: [
+              &quot;set&quot;,
+              &quot;remove&quot;,
+              &quot;insert&quot;,
+              &quot;append&quot;
+            ]
+          },
+          &quot;path&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          },
+          &quot;value&quot;: {}
+        },
+        &quot;required&quot;: [
+          &quot;op&quot;,
+          &quot;path&quot;
+        ],
+        &quot;additionalProperties&quot;: false
+      }
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;operations&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-chart_transform"><div class="toolhead"><span class="badge">native access: edit</span><h3>chart_transform</h3></div><p>Batch-transform any object collection with safe expressions; select by indices or where, delete, or change values. Suitable for time shifts, mirroring, speed/size adjustments, arbitrary event/noise field/mod fields, and more. One group of changes, one undo.</p>
+<div class="behavior">Safe numeric expressions run in the host. i is the selected sequence index during transformation; N is selected count; u spans 0–1; beat and numeric object fields are available. indices and where intersect when both supplied. Time fields are converted back to native beat fractions.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;chart_transform&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;path&quot;: &quot;/judgeLineList/0/notes&quot;,
+      &quot;indices&quot;: [
+        0,
+        1,
+        2
+      ],
+      &quot;expressions&quot;: {
+        &quot;/positionX&quot;: &quot;-positionX&quot;
+      },
+      &quot;label&quot;: &quot;Mirror three notes&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;indices&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;minimum&quot;: 0
+      },
+      &quot;maxItems&quot;: 10000
+    },
+    &quot;where&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;expressions&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;additionalProperties&quot;: true,
+      &quot;description&quot;: &quot;Keys are JSON Pointers relative to the object; values are safe arithmetic expressions. i starts at 0, N is the count, u is 0–1, and beat is the original start beat; original top-level numeric properties can be referenced directly. Supports sin/cos/ease/lerp/clamp/pi/arithmetic/conditionals; time fields automatically convert to beat arrays.&quot;
+    },
+    &quot;remove&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;label&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;path&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-chart_generate"><div class="toolhead"><span class="badge">native access: edit</span><h3>chart_generate</h3></div><p>Generate arbitrary JSON objects generically via templates and safe expressions, and append them to any array; not limited to built-in examples. Can generate notes/events/noise fields/activation segments/mod data; templates need a complete structure. i/N/u control the sequence, count max 10000.</p>
+<div class="behavior">Appends complete template copies with expression overrides. Obtain the actual template first; this example uses the pinned native note shape. count is 1–10,000. Creating objects is not a guarantee of playable or visually good charting.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;chart_generate&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;path&quot;: &quot;/judgeLineList/0/notes&quot;,
+      &quot;count&quot;: 8,
+      &quot;template&quot;: {
+        &quot;type&quot;: 1,
+        &quot;above&quot;: 1,
+        &quot;startTime&quot;: [
+          8,
+          0,
+          1
+        ],
+        &quot;endTime&quot;: [
+          8,
+          0,
+          1
+        ],
+        &quot;positionX&quot;: 0,
+        &quot;alpha&quot;: 255,
+        &quot;size&quot;: 1,
+        &quot;speed&quot;: 1,
+        &quot;yOffset&quot;: 0,
+        &quot;visibleTime&quot;: 999999,
+        &quot;isFake&quot;: 0
+      },
+      &quot;expressions&quot;: {
+        &quot;/startTime&quot;: &quot;8+i/2&quot;,
+        &quot;/endTime&quot;: &quot;8+i/2&quot;,
+        &quot;/positionX&quot;: &quot;-210+60*i&quot;
+      },
+      &quot;label&quot;: &quot;Eight evenly spaced taps&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;count&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 10000
+    },
+    &quot;template&quot;: {
+      &quot;type&quot;: &quot;object&quot;
+    },
+    &quot;expressions&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;additionalProperties&quot;: true,
+      &quot;description&quot;: &quot;Keys are JSON Pointers relative to the object; values are safe arithmetic expressions. i starts at 0, N is the count, u is 0–1, and beat is the original start beat; original top-level numeric properties can be referenced directly. Supports sin/cos/ease/lerp/clamp/pi/arithmetic/conditionals; time fields automatically convert to beat arrays.&quot;
+    },
+    &quot;label&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;path&quot;,
+    &quot;count&quot;,
+    &quot;template&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-chart_script"><div class="toolhead"><span class="badge">native access: edit</span><h3>chart_script</h3></div><p>Run JavaScript in a dedicated Worker with direct read/write access to a full chart copy, supporting arbitrary algorithms, loops, filtering, and note/event/judge line/noise area/mod data operations. chart is a mutable copy and input is custom data. api.createNote(type,beat,positionX,endBeat=beat+1); only Hold (type=2) uses endBeat, others have identical start and end; api.createEvent(start,end,startBeat,endBeat); api.createLine(name?); api.createNoiseArea(startBeat,endBeat); api.createNoiseEvent(start,end,startBeat,endBeat,anchor?). These constructors take beat parameters as decimal numbers; to write the time field directly, use api.fromNumber(number) to generate a beat array. Also available: api.beatValue(array), parseBeat(text), easing(progress,id), clone(value), report(value). By default the modified chart is used; return {chart,result} to return a different chart and brief statistics. No DOM, network, credentials, or local file access; the host validates and commits once, and the change can be undone. Whole-line deletion/reordering and bulk deletion are approved as risky operations; dryRun only previews the plan.</p>
+<div class="behavior">This is the most general write path: a Worker edits a copy of the complete chart; the host validates and commits once. No DOM, network, Node, credentials or workspace APIs. Default 10 s; allowed 100–30,000 ms. dryRun computes without committing. The move example assumes two existing lines and preserves note JSON fields; moving across differently transformed lines does not preserve screen-space motion automatically. Re-run with fresh guards and dryRun=false only after reviewing the plan. This is not a reusable prepared-plan token.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;chart_script&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;dryRun&quot;: true,
+      &quot;label&quot;: &quot;Move two existing notes to another line&quot;,
+      &quot;source&quot;: &quot;const source = chart.judgeLineList[0];\nconst target = chart.judgeLineList[1];\nconst picked = new Set(input.indices);\nconst moving = source.notes.filter((note, i) =&gt; picked.has(i));\nsource.notes = source.notes.filter((note, i) =&gt; !picked.has(i));\ntarget.notes.push(...moving);\napi.report({ moved: moving.length });&quot;,
+      &quot;input&quot;: {
+        &quot;indices&quot;: [
+          0,
+          1
+        ]
+      }
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;source&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 200000
+    },
+    &quot;input&quot;: {},
+    &quot;label&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;dryRun&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;timeoutMs&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 100,
+      &quot;maximum&quot;: 30000
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;source&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-line_manage"><div class="toolhead"><span class="badge">native access: edit</span><h3>line_manage</h3></div><p>Add up to a specified count, duplicate, delete, reorder, or set parent lines, maintaining references. Deleting an entire line is a dangerous operation.</p>
+<div class="behavior">ensure / duplicate / delete / reorder / parent maintain native references. Native line indices are zero-based. This is structural management, not automatic note choreography or screen-space compensation.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;line_manage&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;action&quot;: &quot;parent&quot;,
+      &quot;line&quot;: 1,
+      &quot;parent&quot;: 0
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;action&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;ensure&quot;,
+        &quot;duplicate&quot;,
+        &quot;delete&quot;,
+        &quot;reorder&quot;,
+        &quot;parent&quot;
+      ]
+    },
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;target&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;count&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 10000
+    },
+    &quot;parent&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: -1,
+      &quot;maximum&quot;: 10000
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;action&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-bpm_set"><div class="toolhead"><span class="badge">native access: edit</span><h3>bpm_set</h3></div><p>Apply a complete BPM list; start beats can be decimal or fractional. Do not present guesses as search results. The real source can be recorded for approval review.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;bpm_set&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;entries&quot;: [
+        {
+          &quot;beat&quot;: 0,
+          &quot;bpm&quot;: 120
+        },
+        {
+          &quot;beat&quot;: 32,
+          &quot;bpm&quot;: 150
+        }
+      ]
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;entries&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;minItems&quot;: 1,
+      &quot;maxItems&quot;: 1000,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+          &quot;beat&quot;: {
+            &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+          },
+          &quot;bpm&quot;: {
+            &quot;type&quot;: &quot;number&quot;,
+            &quot;minimum&quot;: 0.001,
+            &quot;maximum&quot;: 100000
+          }
+        },
+        &quot;required&quot;: [
+          &quot;beat&quot;,
+          &quot;bpm&quot;
+        ],
+        &quot;additionalProperties&quot;: false
+      }
+    },
+    &quot;source&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;entries&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-diagnose"><div class="toolhead"><span class="badge">native access: read</span><h3>diagnose</h3></div><p>Run the editor&#x27;s real chart checks, including errors, overlaps, and out-of-bounds warnings; paginated.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;diagnose&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;offset&quot;: 0,
+      &quot;limit&quot;: 50
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 200
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-history"><div class="toolhead"><span class="badge">native access: read</span><h3>history</h3></div><p>View edit history or undo/redo; undo/redo goes through the same history flow as normal edits.</p>
+<div class="behavior">Native undo/redo acts on shared editor history. There is no required human/agent author match in this native schema. Session checking is proposed in the adapter; author-aware history would be a separate behavior change.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;history&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;action&quot;: &quot;list&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;action&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;list&quot;,
+        &quot;undo&quot;,
+        &quot;redo&quot;
+      ]
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;action&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-project_save"><div class="toolhead"><span class="badge">native access: dangerous</span><h3>project_save</h3></div><p>Save the current chart and assets to the chart library. Do not call this proactively unless the user asks to save.</p>
+<div class="behavior">Native save has no revision argument. The adapter can check the proposed session before invoking it, but do not claim revision-guarded saving without implementing that additional guard.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;project_save&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<h2 id="review">Review actual results</h2>
+<article class="tool" id="tool-editor_navigate"><div class="toolhead"><span class="badge">native access: edit</span><h3>editor_navigate</h3></div><p>Only moves the playhead/workspace position; does not modify any object timing. target distinguishes named markers, named judge lines/noise fields, global chart seconds, music seconds, global beats, and local line beats; use name for names and value for numbers.</p>
+<div class="behavior">Changes the shared playhead/workspace. Specify chart_seconds, music_seconds, global_beat or line_beat explicitly; named objects use name. Navigation never retimes the chart.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;editor_navigate&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;target&quot;: &quot;line_beat&quot;,
+      &quot;line&quot;: 0,
+      &quot;value&quot;: 8
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;target&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;marker&quot;,
+        &quot;line&quot;,
+        &quot;noise&quot;,
+        &quot;chart_seconds&quot;,
+        &quot;music_seconds&quot;,
+        &quot;global_beat&quot;,
+        &quot;line_beat&quot;
+      ]
+    },
+    &quot;name&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;index&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;value&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;target&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-editor_view"><div class="toolhead"><span class="badge">native access: edit</span><h3>editor_view</h3></div><p>Switch judge line/event layer/panel, preview, play/pause, select objects; switching lines keeps the playhead position. This command does not accept time; use editor_navigate with explicit units for time seeking. No persistent chart changes.</p>
+<div class="behavior">Changes the human-visible editor state. Time seeking belongs to editor_navigate. It does not write note timings.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;editor_view&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;line&quot;: 0,
+      &quot;layer&quot;: 0,
+      &quot;playback&quot;: &quot;pause&quot;,
+      &quot;preview&quot;: true
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;layer&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 3
+    },
+    &quot;pane&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;playback&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;play&quot;,
+        &quot;pause&quot;
+      ]
+    },
+    &quot;preview&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;notes&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;minimum&quot;: 0
+      },
+      &quot;maxItems&quot;: 2000
+    },
+    &quot;events&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;string&quot;
+      },
+      &quot;maxItems&quot;: 2000
+    },
+    &quot;noise&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-preview_capture"><div class="toolhead"><span class="badge">native access: read</span><h3>preview_capture</h3></div><p>Capture the current chart preview for vision-capable models to inspect; does not include the Agent panel or keys.</p>
+<div class="behavior">Returns a captured preview image, not a trajectory report, passage video, or continuous correctness proof. An MCP adapter must translate native image results into MCP image content.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;preview_capture&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-editor_capture"><div class="toolhead"><span class="badge">native access: read</span><h3>editor_capture</h3></div><p>Capture the visible editor UI: editor for the whole window, timeline for the left editing area, panel for the right panel, dialog for the current non-AI dialog, and control to capture a control by the handle from the last ui_inspect. Excludes AI chat/settings/approvals and passwords, and does not capture other programs or hidden/off-screen content. Desktop uses native pixel capture; web uses DOM capture. Not a substitute for chart data verification.</p>
+<div class="behavior">Captures the editor or specified area while excluding private regions. Unlike preview_capture, this can help an agent inspect selection and controls.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;editor_capture&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;target&quot;: &quot;timeline&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;target&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;editor&quot;,
+        &quot;timeline&quot;,
+        &quot;panel&quot;,
+        &quot;dialog&quot;,
+        &quot;control&quot;
+      ]
+    },
+    &quot;handle&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<h2 id="native">Native authoring helpers</h2>
+<article class="tool" id="tool-chart_tools"><div class="toolhead"><span class="badge">native access: read</span><h3>chart_tools</h3></div><p>List all chart tools and the directly callable commands they map to. For curve trajectories, curve notes, text assembly, and noise field patterns/tracking, prefer the native computation commands; do not merely open a panel or claim they cannot be generated. Use chart_templates(command) to inspect specific parameters.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;chart_tools&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-trajectory_presets"><div class="toolhead"><span class="badge">native access: read</span><h3>trajectory_presets</h3></div><p>List all built-in and user-defined presets, expressions, and parameters of the native curve trajectory generator, filterable by name or id; fully custom parametric equations/polar coordinates are also supported.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;trajectory_presets&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;query&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-trajectory_generate"><div class="toolhead"><span class="badge">native access: edit</span><h3>trajectory_generate</h3></div><p>Call the native curve trajectory generator directly: preset/parametric equation/polar coordinates, parameter dictionary, clipping, rotation, scaling, start alignment, independent XY easing, tangent rotation. output=trajectory saves a whole trajectory, events generates normal events; eventIndex can update an existing whole trajectory, and replace requires key approval on conflicts. Time is in local beats of the target line, one undo.</p>
+<div class="behavior">Uses the same native computation as manual authoring. output=trajectory retains a native aggregate trajectory; output=events splits into ordinary events. Existing conflicts reject unless replacement is explicitly enabled.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;trajectory_generate&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;line&quot;: 0,
+      &quot;start&quot;: 8,
+      &quot;end&quot;: 12,
+      &quot;options&quot;: {
+        &quot;xExpression&quot;: &quot;200*cos(2*pi*t)&quot;,
+        &quot;yExpression&quot;: &quot;80*sin(2*pi*t)&quot;
+      },
+      &quot;output&quot;: &quot;trajectory&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;layer&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 3,
+      &quot;description&quot;: &quot;Base layer number 0/1/2/3 as shown in the UI; use the number as-is without subtracting 1. Defaults to 0 only when unspecified.&quot;
+    },
+    &quot;start&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;end&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;preset&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;options&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;mode&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;xExpression&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;yExpression&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;radiusExpression&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;rotationExpression&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;tangentRotation&quot;: {
+          &quot;type&quot;: &quot;boolean&quot;
+        },
+        &quot;parameterStart&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;parameterEnd&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;angleStart&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;angleEnd&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;trimStart&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;trimEnd&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;rotation&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;scaleX&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;scaleY&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;alignStart&quot;: {
+          &quot;type&quot;: &quot;boolean&quot;
+        },
+        &quot;startX&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;startY&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;easingX&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;easingY&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;seed&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;randomness&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;parameters&quot;: {
+          &quot;type&quot;: &quot;object&quot;
+        }
+      },
+      &quot;required&quot;: [],
+      &quot;additionalProperties&quot;: false
+    },
+    &quot;segments&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 4,
+      &quot;maximum&quot;: 8192
+    },
+    &quot;split&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;segments&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;minimum&quot;: 4,
+          &quot;maximum&quot;: 8192
+        },
+        &quot;simplify&quot;: {
+          &quot;type&quot;: &quot;boolean&quot;
+        },
+        &quot;tolerance&quot;: {
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;minimum&quot;: 0.001,
+          &quot;maximum&quot;: 10000
+        }
+      },
+      &quot;required&quot;: [],
+      &quot;additionalProperties&quot;: false
+    },
+    &quot;output&quot;: {
+      &quot;enum&quot;: [
+        &quot;trajectory&quot;,
+        &quot;events&quot;
+      ]
+    },
+    &quot;eventIndex&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;replace&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;line&quot;,
+    &quot;start&quot;,
+    &quot;end&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-trajectory_split"><div class="toolhead"><span class="badge">native access: edit</span><h3>trajectory_split</h3></div><p>Split the specified whole curve trajectory into normal X/Y movement and optional rotation events, reusing native segment count, simplification, and tolerance, one undo.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;trajectory_split&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;line&quot;: 0,
+      &quot;eventIndex&quot;: 0
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;layer&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 3,
+      &quot;description&quot;: &quot;Base layer number 0/1/2/3 as shown in the UI; use the number as-is without subtracting 1. Defaults to 0 only when unspecified.&quot;
+    },
+    &quot;eventIndex&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;settings&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;segments&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;minimum&quot;: 4,
+          &quot;maximum&quot;: 8192
+        },
+        &quot;simplify&quot;: {
+          &quot;type&quot;: &quot;boolean&quot;
+        },
+        &quot;tolerance&quot;: {
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;minimum&quot;: 0.001,
+          &quot;maximum&quot;: 10000
+        }
+      },
+      &quot;required&quot;: [],
+      &quot;additionalProperties&quot;: false
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;line&quot;,
+    &quot;eventIndex&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-curve_notes"><div class="toolhead"><span class="badge">native access: edit</span><h3>curve_notes</h3></div><p>Call the native curve note filler: generates Tap/Drag/Flick from start/end beat and X coordinates, horizontal-line subdivision × density, and easing; intermediate notes do not duplicate the start/end endpoints. Notes on the same beat can be generated horizontally. Time is in local beats of that line, one undo.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;curve_notes&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;line&quot;: 0,
+      &quot;start&quot;: 8,
+      &quot;end&quot;: 12,
+      &quot;startX&quot;: -200,
+      &quot;endX&quot;: 200,
+      &quot;type&quot;: 3,
+      &quot;division&quot;: 4,
+      &quot;density&quot;: 1,
+      &quot;easingType&quot;: 1
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;start&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;end&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;startX&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;endX&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;type&quot;: {
+      &quot;enum&quot;: [
+        1,
+        3,
+        4
+      ]
+    },
+    &quot;division&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 100
+    },
+    &quot;density&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.001,
+      &quot;maximum&quot;: 1000
+    },
+    &quot;easingType&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 29
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;line&quot;,
+    &quot;start&quot;,
+    &quot;end&quot;,
+    &quot;startX&quot;,
+    &quot;endX&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-event_shake"><div class="toolhead"><span class="badge">native access: edit</span><h3>event_shake</h3></div><p>Generate vibration with a sine × decay envelope, returning exactly to the baseline at the end. Ask for the necessary parameters first and check the target range. replace allows replacing existing events within the range but does not swallow events crossing the boundaries.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;event_shake&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;line&quot;: 0,
+      &quot;track&quot;: &quot;moveXEvents&quot;,
+      &quot;start&quot;: 8,
+      &quot;duration&quot;: 4,
+      &quot;amplitude&quot;: 30,
+      &quot;cycles&quot;: 4,
+      &quot;decayEasing&quot;: 1
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;track&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;moveXEvents&quot;,
+        &quot;moveYEvents&quot;,
+        &quot;rotateEvents&quot;
+      ]
+    },
+    &quot;layer&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 3
+    },
+    &quot;start&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;duration&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;amplitude&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 100000
+    },
+    &quot;cycles&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.01,
+      &quot;maximum&quot;: 1000
+    },
+    &quot;segmentsPerCycle&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 4,
+      &quot;maximum&quot;: 128
+    },
+    &quot;decayEasing&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 29
+    },
+    &quot;baseline&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;replace&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;line&quot;,
+    &quot;track&quot;,
+    &quot;start&quot;,
+    &quot;duration&quot;,
+    &quot;amplitude&quot;,
+    &quot;cycles&quot;,
+    &quot;decayEasing&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-noise_circle"><div class="toolhead"><span class="badge">native access: edit</span><h3>noise_circle</h3></div><p>Generate a rectangular noise field whose center moves along a circle, creating only X/Y movement events without changing noise field transform semantics. Other visual patterns can be freely generated with the general chart_patch.</p>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;noise_circle&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;start&quot;: 8,
+      &quot;duration&quot;: 4,
+      &quot;centerX&quot;: 0,
+      &quot;centerY&quot;: 0,
+      &quot;radius&quot;: 200,
+      &quot;width&quot;: 100,
+      &quot;height&quot;: 100
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;start&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;duration&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;centerX&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;centerY&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;radius&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.01,
+      &quot;maximum&quot;: 100000
+    },
+    &quot;width&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.01,
+      &quot;maximum&quot;: 100000
+    },
+    &quot;height&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.01,
+      &quot;maximum&quot;: 100000
+    },
+    &quot;turns&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.01,
+      &quot;maximum&quot;: 100
+    },
+    &quot;phase&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;clockwise&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;samples&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 8,
+      &quot;maximum&quot;: 512
+    },
+    &quot;active&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;invert&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;layerId&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;name&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;start&quot;,
+    &quot;duration&quot;,
+    &quot;centerX&quot;,
+    &quot;centerY&quot;,
+    &quot;radius&quot;,
+    &quot;width&quot;,
+    &quot;height&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-noise_track"><div class="toolhead"><span class="badge">native access: edit</span><h3>noise_track</h3></div><p>Call native noise field tracking: target is a judge line or its notes. Accounts for parent lines, layering, multipliers, fall, and jumps to generate noise fields that follow the target&#x27;s position and angle within the global start/end beats. If the source object is modified later, re-run tracking. One undo.</p>
+<div class="behavior">Bakes sampled target motion into noise-area events. Later edits to the original note/line do not automatically update the result.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;noise_track&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;start&quot;: 8,
+      &quot;end&quot;: 12,
+      &quot;target&quot;: {
+        &quot;mode&quot;: &quot;note&quot;,
+        &quot;lineIndex&quot;: 0,
+        &quot;noteIndex&quot;: 0
+      },
+      &quot;width&quot;: 100,
+      &quot;height&quot;: 100
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;start&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;end&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;target&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;mode&quot;: {
+          &quot;enum&quot;: [
+            &quot;line&quot;,
+            &quot;note&quot;
+          ]
+        },
+        &quot;lineIndex&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;minimum&quot;: 0
+        },
+        &quot;noteIndex&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;minimum&quot;: 0
+        }
+      },
+      &quot;required&quot;: [
+        &quot;mode&quot;,
+        &quot;lineIndex&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    },
+    &quot;width&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.001,
+      &quot;maximum&quot;: 100000
+    },
+    &quot;height&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.001,
+      &quot;maximum&quot;: 100000
+    },
+    &quot;layerId&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;invert&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;active&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;sampleRate&quot;: {
+      &quot;enum&quot;: [
+        60,
+        120,
+        240
+      ]
+    },
+    &quot;name&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;start&quot;,
+    &quot;end&quot;,
+    &quot;target&quot;,
+    &quot;width&quot;,
+    &quot;height&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-noise_fit"><div class="toolhead"><span class="badge">native access: edit</span><h3>noise_fit</h3></div><p>Native noise field pattern: text plus font, or chart image assets; supports binarization, precision, rectangle merging, layout, reveal order, appear easing, and activation. For images use an image asset path, or a local image already selected in the pattern panel. analyzeOnly=true returns only the count without generating; generating is one undo.</p>
+<div class="behavior">analyzeOnly reports fitting results without chart edits. Actual generation reuses the native fitting and validation path. Font/image prerequisites still apply.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;noise_fit&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;mode&quot;: &quot;text&quot;,
+      &quot;text&quot;: &quot;A&quot;,
+      &quot;first&quot;: 8,
+      &quot;duration&quot;: 4,
+      &quot;width&quot;: 400,
+      &quot;analyzeOnly&quot;: true
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;mode&quot;: {
+      &quot;enum&quot;: [
+        &quot;text&quot;,
+        &quot;image&quot;
+      ]
+    },
+    &quot;text&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 1000
+    },
+    &quot;font&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 200
+    },
+    &quot;image&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;precision&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 16,
+      &quot;maximum&quot;: 512
+    },
+    &quot;spacing&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.5,
+      &quot;maximum&quot;: 4
+    },
+    &quot;threshold&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 254
+    },
+    &quot;polarity&quot;: {
+      &quot;enum&quot;: [
+        &quot;dark&quot;,
+        &quot;light&quot;,
+        &quot;alpha&quot;
+      ]
+    },
+    &quot;invertImage&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;merge&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;maxSpan&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 512
+    },
+    &quot;trim&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;first&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;last&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;duration&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;width&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 20000
+    },
+    &quot;x&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;y&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;rotation&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;layerId&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;invert&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;name&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;active&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;activeStart&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;activeEnd&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;readyFlash&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 600
+    },
+    &quot;reveal&quot;: {
+      &quot;enum&quot;: [
+        &quot;left&quot;,
+        &quot;right&quot;,
+        &quot;top&quot;,
+        &quot;bottom&quot;,
+        &quot;diagonal&quot;,
+        &quot;reverse-diagonal&quot;,
+        &quot;rows&quot;,
+        &quot;snake&quot;,
+        &quot;columns&quot;,
+        &quot;center&quot;,
+        &quot;outside&quot;,
+        &quot;horizontal&quot;,
+        &quot;vertical&quot;,
+        &quot;clockwise&quot;,
+        &quot;counterclockwise&quot;,
+        &quot;spiral&quot;,
+        &quot;reverse-spiral&quot;,
+        &quot;random&quot;
+      ]
+    },
+    &quot;easingType&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 29
+    },
+    &quot;seed&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 4294967295
+    },
+    &quot;analyzeOnly&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;mode&quot;,
+    &quot;first&quot;,
+    &quot;duration&quot;,
+    &quot;width&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-text_fit"><div class="toolhead"><span class="badge">native access: edit</span><h3>text_fit</h3></div><p>Native text assembly: spell text from a specified font skeleton plus existing judge lines and zero-speed Tap/Drag/Flick notes, preferring horizontal/vertical/45 degrees and compensating for parent lines/layering. If tolerance or minimum coverage is not met, nothing is generated and the reason is returned. analyzeOnly only analyzes; replace requires key approval on conflicts, one undo.</p>
+<div class="behavior">Uses existing target lines and native fitting checks. analyzeOnly is read-only; unmet coverage/tolerance returns generated=false. Success must be checked before reporting that a chart edit happened.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;text_fit&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;text&quot;: &quot;A&quot;,
+      &quot;lines&quot;: [
+        0,
+        1,
+        2,
+        3
+      ],
+      &quot;beat&quot;: 8,
+      &quot;analyzeOnly&quot;: true
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;text&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 1000
+    },
+    &quot;font&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 200
+    },
+    &quot;lines&quot;: {
+      &quot;anyOf&quot;: [
+        {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;minimum&quot;: 0
+          },
+          &quot;maxItems&quot;: 5000
+        }
+      ]
+    },
+    &quot;beat&quot;: {
+      &quot;description&quot;: &quot;A decimal beat, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;width&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 10,
+      &quot;maximum&quot;: 10000
+    },
+    &quot;x&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;y&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;spacing&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.5,
+      &quot;maximum&quot;: 4
+    },
+    &quot;size&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.05,
+      &quot;maximum&quot;: 4
+    },
+    &quot;noteType&quot;: {
+      &quot;enum&quot;: [
+        1,
+        3,
+        4
+      ]
+    },
+    &quot;tolerance&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 90
+    },
+    &quot;coverage&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 100
+    },
+    &quot;replace&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;addNotes&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;analyzeOnly&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;text&quot;,
+    &quot;lines&quot;,
+    &quot;beat&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-multi_line"><div class="toolhead"><span class="badge">native access: read</span><h3>multi_line</h3></div><p>Read/set multi-line editing line numbers or groups, enabled state, note/event mode, note merging, and single-line width; only changes the workspace, not the chart or playhead. lines is an array of line numbers or a &quot;0 2:8 group name&quot; expression.</p>
+<div class="behavior">Workspace selection/editing mode only; does not modify chart content.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;multi_line&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;lines&quot;: {
+      &quot;anyOf&quot;: [
+        {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;,
+            &quot;minimum&quot;: 0
+          },
+          &quot;maxItems&quot;: 10000
+        }
+      ]
+    },
+    &quot;enabled&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;mode&quot;: {
+      &quot;enum&quot;: [
+        &quot;notes&quot;,
+        &quot;events&quot;
+      ]
+    },
+    &quot;merge&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;width&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 30,
+      &quot;maximum&quot;: 2400
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-global_events"><div class="toolhead"><span class="badge">native access: read</span><h3>global_events</h3></div><p>List loaded global event types/columns/sources/default values, and page through or replace column events; reuses native validation, mod sources, and undo, supports temporary placeholder types, and unknown types are read-only.</p>
+<div class="behavior">Access depends on action: list/read are read-only, replace writes via native validation and undo. Unknown registered types may be read-only.</div>
+<h4>Illustrative MCP call</h4><pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;global_events&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from editor_context&gt;&quot;,
+      &quot;action&quot;: &quot;list&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Proposed MCP input schema</summary><p>Native schema plus proposed session envelope. No native revision parameter is invented.</p><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;action&quot;: {
+      &quot;enum&quot;: [
+        &quot;list&quot;,
+        &quot;read&quot;,
+        &quot;replace&quot;
+      ]
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;type&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;column&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 200
+    },
+    &quot;events&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;maxItems&quot;: 10000,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;object&quot;
+      }
+    },
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;PROPOSED MCP wrapper session token; checked and removed before native dispatch.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;action&quot;,
+    &quot;session&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<h2 id="comparison">The writing interface compared with PhiChain</h2><table><thead><tr><th>Task</th><th>Current PhiChain MCP</th><th>rpe-next native command mapping</th></tr></thead><tbody>
+<tr><td>Change one property</td><td>update_note/update_event replaces the full object</td><td>chart_patch sets a JSON Pointer field and preserves other fields</td></tr>
+<tr><td>Apply repeated changes</td><td>Explicit per-object operations</td><td>chart_transform evaluates one expression across a selected collection</td></tr>
+<tr><td>Generate a sequence</td><td>Explicit create operations or native curve-track editing</td><td>chart_generate repeats a complete template with expressions; native generators also exist</td></tr>
+<tr><td>Multi-array algorithm</td><td>Explicit supported operations; no arbitrary script path</td><td>chart_script edits a complete validated candidate chart in a Worker</td></tr>
+<tr><td>Target identity</td><td>Opaque session-scoped editable IDs</td><td>Raw JSON paths and source array indices; reread after mutation/reordering</td></tr>
+<tr><td>Motion review</td><td>inspect_motion and preview_passage supply bounded actual render evidence</td><td>Preview/editor images and shared navigation; no equivalent continuous passage inspection in this command inventory</td></tr>
+<tr><td>Undo ownership</td><td>Explicit author match required</td><td>Native shared undo/redo without required author matching</td></tr>
+</tbody></table><p>The material difference is the vocabulary of writes: field patches, host-evaluated expressions and validated scripts reduce repetitive model-generated data. MCP is the transport in both designs. This page does not claim that the wider write vocabulary guarantees better chart quality.</p>
+<h2 id="limits">Units, targeting and recovery</h2><ul>
+<li>Native indices are zero-based. A user's “notes 1–41” means exactly 41 playable objects under an explicitly chosen ordering. Notes on one line in source array order can be read with offset=0, limit=41; chart-wide ordinal order requires explicitly gathering and ordering playable notes across lines. Do not substitute beats 1–41.</li>
+<li>Raw RPE JSON stores beats as [whole,numerator,denominator]. Several command parameters also accept numeric/string beats; inspect the native parameter description. Native schemas leave some beat values untyped. This proposal preserves that weakness rather than silently tightening accepted syntax.</li>
+<li>Line-local beats include the line bpmfactor; noise-area timing uses global beats. Music seconds and chart seconds differ by META.offset / 1000. Navigation and context distinguish these bases.</li>
+<li>chart_query time overlap is not full visual lifetime. Early visibility, preceding speed events, parent motion and hold tails require further reads and render inspection.</li>
+<li>Native revision identity changes with immutable chart objects; it is not a persistent chart ID. JSON paths/indices must be re-resolved after structural edits. Do not reuse indices merely because a tool succeeded.</li>
+<li>General chart writes validate before a single native commit. editor_api and file/material operations do not promise equivalent transaction rollback or ordinary undo.</li>
+<li>Native permissions can escalate based on the prepared plan: line deletion/reordering, large deletions and asset changes may be dangerous. The exported access label is the registration default, not a complete per-call classification. history, global_events and other mixed-action commands must not be blindly marked readOnlyHint=true.</li>
+<li>chart_patch supports up to 2,000 operations; chart_transform up to 10,000 explicit indices; chart_generate count up to 10,000. Read/query pages cap at 200. Transport byte limits would still need to be chosen for the new bridge.</li>
+<li>dryRun is supported by chart_script; analyzeOnly by fitting tools. There is no uniform native dry-run switch across every chart write. Approval prepares a candidate internally, but is not itself a public dry-run MCP call.</li>
+<li>On stale state, reread and recompute. After transport loss, inspect current chart/history before retrying: execution may have completed. Stop/cancel does not roll back earlier successful operations. A new MCP adapter must implement these transport semantics explicitly.</li>
+<li>diagnose checks native chart structure and known issues; it is not an aesthetic, human-playability, or full render-correctness proof.</li></ul>
+<h2 id="support">Supporting command appendix</h2><p>These 20 existing commands are outside the central chart-write comparison. A full fidelity conversion could expose them; a chart-only deployment can omit them. No extra authoring presets are invented here.</p><details><summary>Show supporting commands and exact native schemas</summary>
+<article class="tool" id="support-editor_source"><h3>editor_source</h3><p>Read-only browsing of the current editor version&#x27;s source, protocol, controls, and built-in mod implementations. Verify first when unsure about semantics, formats, coordinates, or tool behavior. action=list lists directories by path prefix/query file name; search searches literal keywords from query and returns line numbers; read reads by path/startLine/startColumn/lineCount, continuing with next. Does not access arbitrary local files, execute, or modify source code.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;action&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;list&quot;,
+        &quot;search&quot;,
+        &quot;read&quot;
+      ]
+    },
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;query&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 200
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 100
+    },
+    &quot;startLine&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 9007199254740991
+    },
+    &quot;startColumn&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 9007199254740991
+    },
+    &quot;lineCount&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 200
+    },
+    &quot;caseSensitive&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-audio_sources"><h3>audio_sources</h3><p>List the ids, names, colors, and checked state of the original music, separated, and imported stems. selection gives the audio source ids currently playing/analyzed together; at least one must be checked, all start at the original music&#x27;s zero point, and they share the chart delay. status also detects the Demucs environment.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;status&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-audio_separate"><h3>audio_separate</h3><p>Use local Demucs on the desktop to separate the current music first, then specify stems with source in audio_analyze/audio_taps. htdemucs gives vocals/drums/bass/other; htdemucs_6s also includes guitar/piano (experimental, may bleed). The model is downloaded on first use, audio is not uploaded, and results are cached separately without modifying the chart or replacing the original music; a separation environment must be configured, and installation can only be confirmed by the user in Stem Separation settings.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;model&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;htdemucs&quot;,
+        &quot;htdemucs_6s&quot;
+      ]
+    },
+    &quot;device&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;auto&quot;,
+        &quot;cpu&quot;,
+        &quot;cuda&quot;
+      ]
+    },
+    &quot;shifts&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 4
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-audio_source"><h3>audio_source</h3><p>Temporarily switch the editor&#x27;s playback and analysis audio sources. For select, use source to choose one, or the sources array to select several at once (at least one); for remove, use source to remove a stem. Pause/resume, speed, and pitch preservation apply to the mix of checked sources; closing the chart restores the original music. Assets, chart offset, and files are unchanged, and per-stem offset is not supported.</p><p>Native registration access: <code>edit</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;action&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;select&quot;,
+        &quot;remove&quot;
+      ]
+    },
+    &quot;source&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;sources&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;string&quot;
+      },
+      &quot;maxItems&quot;: 2000
+    }
+  },
+  &quot;required&quot;: [
+    &quot;action&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-audio_detector"><h3>audio_detector</h3><p>Query onset detection methods, models, difficulty, random seed, and thresholds. status checks the environment for the currently selected local model; detector can specify the mapper/ddc/flux to check. Installation must be confirmed by the user in the waveform/spectrum view, and failures do not silently switch algorithms.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;status&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;detector&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;mapper&quot;,
+        &quot;ddc&quot;,
+        &quot;flux&quot;
+      ]
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-audio_analyze"><h3>audio_analyze</h3><p>Analyze a specified beat range on the line locally and return candidate note times. mapper uses Mapperatorinator to generate a rhythm draft from the music and difficulty; usually start with the original mix, and it cannot be filtered by confidence threshold; ddc/flux are used for onset comparison. Stems can be separated beforehand. Chart BPM, phase, stem alignment, and line multiplier are taken into account; maximum 180 seconds; PCM is not uploaded.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;start&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;end&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;source&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;Audio source id; if omitted, uses the panel selection, and original is the original music. Mapperatorinator usually uses the original mix first; select a stem only when specifying instrumentation.&quot;
+    },
+    &quot;detector&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;mapper&quot;,
+        &quot;ddc&quot;,
+        &quot;flux&quot;
+      ],
+      &quot;description&quot;: &quot;mapper is the Mapperatorinator rhythm draft, ddc is learned onset detection, flux is a spectral algorithm; if omitted, uses the panel selection. mapper selects notes by difficulty and does not output onset probabilities.&quot;
+    },
+    &quot;mapperModel&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;v32&quot;,
+        &quot;v32-mini&quot;
+      ]
+    },
+    &quot;mapperMode&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;enum&quot;: [
+        0,
+        3
+      ],
+      &quot;description&quot;: &quot;mapper only: 0 is click rhythm, 3 is four-key rhythm; only press timings are extracted, osu positions and key counts are not copied.&quot;
+    },
+    &quot;difficulty&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.1,
+      &quot;maximum&quot;: 15,
+      &quot;description&quot;: &quot;mapper only: controls rhythm density using the osu star rating, not the Phigros difficulty; default 5.&quot;
+    },
+    &quot;seed&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 4294967295
+    },
+    &quot;useChartTiming&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;,
+      &quot;description&quot;: &quot;Whether mapper references the current chart&#x27;s BPM/phase; default true. If the BPM is unconfirmed, false lets the model infer it, but the chart BPM is not modified.&quot;
+    },
+    &quot;sensitivity&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.1,
+      &quot;maximum&quot;: 10,
+      &quot;description&quot;: &quot;Local threshold multiplier for flux only.&quot;
+    },
+    &quot;minGap&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.02,
+      &quot;maximum&quot;: 2
+    },
+    &quot;focus&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;all&quot;,
+        &quot;percussion&quot;,
+        &quot;low&quot;,
+        &quot;melody&quot;
+      ],
+      &quot;description&quot;: &quot;Band weights for flux only; learned models should omit this or set all.&quot;
+    },
+    &quot;minConfidence&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 1,
+      &quot;description&quot;: &quot;Onset threshold for ddc/flux only, not used by mapper; DDC defaults to 0.15, flux to 0.35.&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;start&quot;,
+    &quot;end&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-audio_taps"><h3>audio_taps</h3><p>Generate Taps from a Mapperatorinator rhythm draft or DDC/flux onset candidates. mapper is controlled by difficulty/mode/seed and does not use minConfidence; prefer analyzing the original mix. Adaptive quantization is the default, none keeps model times, and nearest uses a strict grid. Stems share the original music&#x27;s start and offset, the line multiplier is applied once, duplicates and Hold-occupied spots are skipped, and all changes are undone in one step.</p><p>Native registration access: <code>edit</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;line&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;start&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;end&quot;: {
+      &quot;description&quot;: &quot;Beat: a decimal number, a \&quot;3:1/2\&quot; string, or [integer, numerator, denominator]&quot;
+    },
+    &quot;source&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;description&quot;: &quot;Audio source id; if omitted, uses the panel selection, and original is the original music. Mapperatorinator usually uses the original mix first; select a stem only when specifying instrumentation.&quot;
+    },
+    &quot;detector&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;mapper&quot;,
+        &quot;ddc&quot;,
+        &quot;flux&quot;
+      ],
+      &quot;description&quot;: &quot;mapper is the Mapperatorinator rhythm draft, ddc is learned onset detection, flux is a spectral algorithm; if omitted, uses the panel selection. mapper selects notes by difficulty and does not output onset probabilities.&quot;
+    },
+    &quot;mapperModel&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;v32&quot;,
+        &quot;v32-mini&quot;
+      ]
+    },
+    &quot;mapperMode&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;enum&quot;: [
+        0,
+        3
+      ],
+      &quot;description&quot;: &quot;mapper only: 0 is click rhythm, 3 is four-key rhythm; only press timings are extracted, osu positions and key counts are not copied.&quot;
+    },
+    &quot;difficulty&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.1,
+      &quot;maximum&quot;: 15,
+      &quot;description&quot;: &quot;mapper only: controls rhythm density using the osu star rating, not the Phigros difficulty; default 5.&quot;
+    },
+    &quot;seed&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 4294967295
+    },
+    &quot;useChartTiming&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;,
+      &quot;description&quot;: &quot;Whether mapper references the current chart&#x27;s BPM/phase; default true. If the BPM is unconfirmed, false lets the model infer it, but the chart BPM is not modified.&quot;
+    },
+    &quot;sensitivity&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.1,
+      &quot;maximum&quot;: 10,
+      &quot;description&quot;: &quot;Local threshold multiplier for flux only.&quot;
+    },
+    &quot;minGap&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.02,
+      &quot;maximum&quot;: 2
+    },
+    &quot;focus&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;all&quot;,
+        &quot;percussion&quot;,
+        &quot;low&quot;,
+        &quot;melody&quot;
+      ],
+      &quot;description&quot;: &quot;Band weights for flux only; learned models should omit this or set all.&quot;
+    },
+    &quot;minConfidence&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 1,
+      &quot;description&quot;: &quot;Onset threshold for ddc/flux only, not used by mapper; DDC defaults to 0.15, flux to 0.35.&quot;
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;division&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 192
+    },
+    &quot;positionX&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;quantization&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;adaptive&quot;,
+        &quot;nearest&quot;,
+        &quot;none&quot;
+      ]
+    },
+    &quot;quantizeTolerance&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 0.5
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;,
+    &quot;line&quot;,
+    &quot;start&quot;,
+    &quot;end&quot;,
+    &quot;division&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-assets_list"><h3>assets_list</h3><p>List all asset files in the chart with their sizes, filterable by path. Does not read arbitrary disks.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;query&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 200
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-asset_read"><h3>asset_read</h3><p>Read assets in the project: text for JSON/GLSL/SVG and other text; image for models that support vision; info returns only the size. Binary files can be read as base64 for small files.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;format&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;text&quot;,
+        &quot;image&quot;,
+        &quot;base64&quot;,
+        &quot;info&quot;
+      ]
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 40000
+    }
+  },
+  &quot;required&quot;: [
+    &quot;path&quot;,
+    &quot;format&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-asset_write"><h3>asset_write</h3><p>Write/replace or delete chart assets; binding can bind music or cover. Raw audio is not uploaded. Asset changes require saving and cannot be restored via normal undo, so this is a risky operation.</p><p>Native registration access: <code>dangerous</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;action&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;write&quot;,
+        &quot;delete&quot;
+      ]
+    },
+    &quot;text&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;base64&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 1500000
+    },
+    &quot;binding&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;song&quot;,
+        &quot;background&quot;
+      ]
+    }
+  },
+  &quot;required&quot;: [
+    &quot;path&quot;,
+    &quot;action&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-ui_inspect"><h3>ui_inspect</h3><p>View visible editor controls, current values, options, positions, and temporary handles; supports query filtering. Credentials and the AI itself are excluded.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;query&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-ui_action"><h3>ui_action</h3><p>Use handles from the last ui_inspect to click controls, enter/select values, click the canvas, or send editor shortcut keys key (with optional ctrl/shift/alt/meta), covering all visible functions; ordinary fields/navigation count as edits, while unknown controls and critical operations are approved separately.</p><p>Native registration access: <code>edit</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;handle&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;action&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;click&quot;,
+        &quot;set&quot;,
+        &quot;pointer&quot;,
+        &quot;key&quot;
+      ]
+    },
+    &quot;value&quot;: {},
+    &quot;x&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;y&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;button&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 2
+    },
+    &quot;key&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;ctrl&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;shift&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;alt&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;meta&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;handle&quot;,
+    &quot;action&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-audio_view"><h3>audio_view</h3><p>Read/set the native waveform/spectrum view&#x27;s enabled state, mode, opacity, and width; only changes the editor display, without generating or modifying charts/audio. For onset detection, use audio_analyze/audio_taps.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;enabled&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;mode&quot;: {
+      &quot;enum&quot;: [
+        &quot;waveform&quot;,
+        &quot;spectrum&quot;
+      ]
+    },
+    &quot;alpha&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.02,
+      &quot;maximum&quot;: 1
+    },
+    &quot;width&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0.2,
+      &quot;maximum&quot;: 1
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-audio_prepend_silence"><h3>audio_prepend_silence</h3><p>Add 4 beats of silence at the start of the audio based on the initially applied BPM, replacing it with a WAV while keeping the chart offset unchanged. Uses the native feature, does not enter normal undo history, and requires saving. Call only when the user requests it; this is a critical operation.</p><p>Native registration access: <code>dangerous</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;revision&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-version_control"><h3>version_control</h3><p>Directly query the native chart repository&#x27;s status/refs/commit log/diff, or initialize, stage, unstage, commit, create/rename/delete branches, and create/delete tags. status returns only uninitialized when the repo is not initialized and does not write to it. Switching/merging/conflict resolution, stashing, and import/export are still available through the native version control panel and ui_inspect/ui_action; do not bypass conflict confirmation in the panel.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;action&quot;: {
+      &quot;enum&quot;: [
+        &quot;status&quot;,
+        &quot;refs&quot;,
+        &quot;log&quot;,
+        &quot;diff&quot;,
+        &quot;read_commit&quot;,
+        &quot;initialize&quot;,
+        &quot;stage&quot;,
+        &quot;unstage&quot;,
+        &quot;commit&quot;,
+        &quot;branch_create&quot;,
+        &quot;branch_rename&quot;,
+        &quot;branch_delete&quot;,
+        &quot;tag_create&quot;,
+        &quot;tag_delete&quot;
+      ]
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;name&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;target&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;commit&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;message&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 20000
+    }
+  },
+  &quot;required&quot;: [
+    &quot;action&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-agent_tools"><h3>agent_tools</h3><p>Discover all editor, chart, audio, asset, file, and mod commands. Search by purpose or command name with query, or select exactly with names; returned commands get full parameter definitions in the next model request. An empty query returns categories. Do not guess parameters or assume unlisted commands do not exist.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;query&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;names&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;string&quot;
+      },
+      &quot;maxItems&quot;: 30
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 30
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-workspace_files"><h3>workspace_files</h3><p>Manage a per-chart file workspace: info/list/read/write/mkdir/move/delete. On desktop it is a real local directory; on the web it is browser persistent storage. Supports text, base64, and paging; files do not automatically enter the chart package. path/to is a workspace-relative path. Creating ordinary files counts as an edit; overwriting, deleting, and executable scripts are risky operations. Use with workspace_download / workspace_import_asset / chart_script for arbitrary file and chart workflows.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;action&quot;: {
+      &quot;enum&quot;: [
+        &quot;info&quot;,
+        &quot;list&quot;,
+        &quot;read&quot;,
+        &quot;write&quot;,
+        &quot;mkdir&quot;,
+        &quot;move&quot;,
+        &quot;delete&quot;
+      ]
+    },
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;to&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;text&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 2000000
+    },
+    &quot;base64&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 3000000
+    },
+    &quot;format&quot;: {
+      &quot;enum&quot;: [
+        &quot;info&quot;,
+        &quot;text&quot;,
+        &quot;base64&quot;
+      ]
+    },
+    &quot;overwrite&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;recursive&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0
+    },
+    &quot;limit&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 1000000
+    }
+  },
+  &quot;required&quot;: [
+    &quot;action&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-workspace_download"><h3>workspace_download</h3><p>Download public HTTP/HTTPS files into this chart&#x27;s workspace; binary files are not transferred through the model search interface, and no API Key is attached. Desktop supports redirects; web is subject to CORS restrictions. Downloads and overwrites require risky-operation approval, and files are not executed automatically or added to the chart.</p><p>Native registration access: <code>dangerous</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;url&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;overwrite&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;maxBytes&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 134217728
+    }
+  },
+  &quot;required&quot;: [
+    &quot;url&quot;,
+    &quot;path&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-workspace_import_asset"><h3>workspace_import_asset</h3><p>Add or replace chart assets with files from the workspace; binding=song/background can bind music or background. Requires saving, cannot be restored with normal undo, and is approved as a risky operation. Binary reading happens locally; file contents are not sent to the model.</p><p>Native registration access: <code>dangerous</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;assetPath&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;overwrite&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;binding&quot;: {
+      &quot;enum&quot;: [
+        &quot;song&quot;,
+        &quot;background&quot;
+      ]
+    }
+  },
+  &quot;required&quot;: [
+    &quot;path&quot;,
+    &quot;assetPath&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="support-editor_api"><h3>editor_api</h3><p>Generic low-level entry point for editor components, for functionality not covered by dedicated commands. describe lists available targets and existing methods/properties, get reads data properties; call invokes existing methods, set modifies existing writable properties. Modifications/calls are approved as dangerous operations and behave like the corresponding native methods, with no guarantee of undo; verify parameters and semantics with editor_source first and prefer structured commands. In arguments/value, {$workspaceFile:&quot;relative path&quot;,name:&quot;file name&quot;} is resolved by the host to a local File, supports native import methods, and does not send binary data to the model. Credentials, the Agent itself, prototype constructors, and arbitrary global objects are not accessible.</p><p>Native registration access: <code>read</code>. Proposed session envelope applies if exposed.</p><details><summary>Exact native input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;action&quot;: {
+      &quot;enum&quot;: [
+        &quot;describe&quot;,
+        &quot;get&quot;,
+        &quot;set&quot;,
+        &quot;call&quot;
+      ]
+    },
+    &quot;target&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;member&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;arguments&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;maxItems&quot;: 40
+    },
+    &quot;value&quot;: {}
+  },
+  &quot;required&quot;: [
+    &quot;action&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+</details><h3>Commands left with the external Agent host</h3><table><thead><tr><th>Native command</th><th>Disposition</th></tr></thead><tbody><tr><td>web_search / web_fetch</td><td>Use the external Agent's browsing capabilities; the editor does not need to relay model-provider web search.</td></tr><tr><td>ask_user</td><td>Use the external Agent's conversation/user-input UI. Do not create a second chat loop inside the editor bridge.</td></tr></tbody></table><p><code>agent_tools</code> is retained in the supporting inventory for traceability. Its native “activate definitions in the next model request” behavior belongs to the built-in model loop and would not carry over automatically. MCP discovery uses tools/list; merely returning a command name does not make it callable by an MCP client.</p>
+<h2 id="sources">Sources and verification</h2><p>The snapshot contains command names, descriptions, registration access and native JSON schemas collected from the pinned public source. Runtime chart handlers were not called. The proposed session envelope is authored for this document, not extracted from an existing rpe-next MCP implementation.</p><ul>
+<li><a href="https://github.com/kclg-YSJ/rpe-next/blob/274bc55866dc5893e68c95bb4107f79711f1aa1d/src/application/agent-editor.mjs">Core read/write and review registrations</a></li>
+<li><a href="https://github.com/kclg-YSJ/rpe-next/blob/274bc55866dc5893e68c95bb4107f79711f1aa1d/src/application/agent-chart-tools.mjs">Native authoring helper registrations</a></li>
+<li><a href="https://github.com/kclg-YSJ/rpe-next/blob/274bc55866dc5893e68c95bb4107f79711f1aa1d/src/application/agent-scripting-tools.mjs">Script and discovery registrations</a></li>
+<li><a href="https://github.com/kclg-YSJ/rpe-next/blob/274bc55866dc5893e68c95bb4107f79711f1aa1d/src/core/agent-commands.mjs">Prepare / approval / validity / apply</a></li>
+<li><a href="https://github.com/kclg-YSJ/rpe-next/blob/274bc55866dc5893e68c95bb4107f79711f1aa1d/protocols/AI-AGENT-PROTOCOL.zh-CN.md">Native Agent protocol</a></li>
+<li><a href="https://github.com/kclg-YSJ/rpe-next/blob/274bc55866dc5893e68c95bb4107f79711f1aa1d/LICENSE">Source license: PolyForm Noncommercial 1.0.0</a></li>
+</ul><p>Rebuild with <code>python3 docs/rpe-next-mcp-reference/build.py</code>. The saved snapshot makes rebuilding independent of /tmp or network access. To refresh it, re-extract native registrations from a new pinned source revision and review all behavior notes.</p><p><a href="verification.json">Verification report</a> · <a href="../mcp-reference/index.html">Current PhiChain MCP reference</a></p><footer>Documentation proposal. Schema-shaped examples and internal navigation checked; examples have not been executed against a live editor. No implementation, chart edits, or model-quality benchmark is included.</footer></main></div></body></html>

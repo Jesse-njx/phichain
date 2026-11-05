@@ -19,7 +19,7 @@ def executable(name, override=None):
             raise ValueError(f'{name} override must be an existing absolute executable path')
         return str(path)
     candidates = [ROOT / 'target' / build / name for build in ('debug', 'release')]
-    candidates += [ROOT / 'local/PhiChain.app/Contents/MacOS' / name]
+    candidates += [ROOT.parent / 'apps/PhiChain.app/Contents/MacOS' / name]
     for path in candidates:
         if path.is_file() and os.access(path, os.X_OK):
             return str(path)
@@ -81,7 +81,7 @@ def inspect(call_editor, arguments, renderer=None, output_root=None):
     env = dict(os.environ)
     env['PATH'] = str(Path(ffmpeg).parent) + os.pathsep + env.get('PATH', '')
     env['CARGO_MANIFEST_DIR'] = str(ROOT / 'phichain-renderer')
-    root = Path(output_root) if output_root else ROOT / 'local/motion-inspections'
+    root = Path(output_root) if output_root else ROOT.parent / 'artifacts/motion-inspections'
     root.mkdir(parents=True, exist_ok=True)
     folder = Path(tempfile.mkdtemp(prefix='inspection-', dir=root))
     try:
@@ -156,7 +156,7 @@ def preview_passage(call_editor, arguments, renderer=None, output_root=None):
     env = dict(os.environ)
     env['PATH'] = str(Path(ffmpeg).parent) + os.pathsep + env.get('PATH', '')
     env['CARGO_MANIFEST_DIR'] = str(ROOT / 'phichain-renderer')
-    root = Path(output_root) if output_root else ROOT / 'local/passage-previews'
+    root = Path(output_root) if output_root else ROOT.parent / 'artifacts/passage-previews'
     root.mkdir(parents=True, exist_ok=True)
     folder = Path(tempfile.mkdtemp(prefix='passage-', dir=root))
     try:

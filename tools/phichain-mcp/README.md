@@ -40,8 +40,8 @@ The endpoint file is removed on a clean shutdown. After a crash, check that the 
 Run from the repository root in a separate process and use a unique endpoint:
 
 ```sh
-cargo run -p phichain -- --headless --mcp-endpoint "$PWD/local/headless-endpoint.json"
-python3 tools/phichain-mcp/agent_server.py --endpoint "$PWD/local/headless-endpoint.json"
+cargo run -p phichain -- --headless --mcp-endpoint "$PWD/../runtime/headless-endpoint.json"
+python3 tools/phichain-mcp/agent_server.py --endpoint "$PWD/../runtime/headless-endpoint.json"
 ```
 
 The second command is an MCP stdio entrypoint for your client, not an interactive
@@ -113,6 +113,16 @@ args = ["/absolute/path/to/PhiChain/tools/phichain-mcp/server.py", "--endpoint",
 For local music listening/question answering, see [Music MCP](#music-mcp).
 It is a separate read-only entrypoint; the chart-editing catalogs below are unchanged.
 
+For the user-requested **MP3 → timestamped note decisions, musical intensity and
+climax candidates**, see the [local audio-analysis CLI](../music-analysis/README.md).
+It exports an offline audio review report and JSON/CSV, with source-bound manual
+corrections. It is an acoustic heuristic draft, not verified transcription or a
+playable chart, and neither edits the live project nor adds MCP tools.
+The optional [PhiChain visualization importer](../music-analysis/README.md#visualize-in-phichain)
+uses the existing experimental `chart_script` API to put selected decisions on
+fixed layer/reason tracks in a new empty live project. It dry-runs, checks the
+source/project/revision and commits one undoable batch. This adds no MCP command.
+
 | Tool | Behavior |
 | --- | --- |
 | `editor_status` | Runtime mode, project, pending lifecycle operation, last error and created path; works without a project. |
@@ -150,14 +160,14 @@ The base and experimental authoring servers remain independent.
 From the repository root (Apple Silicon macOS, Python 3.11+ and ffmpeg on PATH):
 
 ```sh
-python3 -m venv local/music-runtime
-local/music-runtime/bin/python -m pip install -r tools/phichain-mcp/requirements-music.txt
-local/music-runtime/bin/hf download rtikw/MOSS-Music-8B-Instruct-4bit --revision 6b3e335a0e6ee62ea102d8d11521a7b435012618 --local-dir local/music-model/MOSS-Music-8B-Instruct-4bit
+python3 -m venv ../runtime/music-runtime
+../runtime/music-runtime/bin/python -m pip install -r tools/phichain-mcp/requirements-music.txt
+../runtime/music-runtime/bin/hf download rtikw/MOSS-Music-8B-Instruct-4bit --revision 6b3e335a0e6ee62ea102d8d11521a7b435012618 --local-dir ../runtime/music-model/MOSS-Music-8B-Instruct-4bit
 ```
 
 The community 4-bit Instruct conversion retains a BF16 audio encoder; weights
 are approximately 6 GB. Peak memory is input-dependent, not a 10 GB guarantee.
-Weights/runtime stay under ignored `local/`. The backend dependency and setup model download are pinned to source revisions.
+Weights/runtime stay under the workspace outside this repository. The backend dependency and setup model download are pinned to source revisions.
 To choose another model checkpoint, change the explicit download revision and
 use a separate local directory with `--model`.
 The model uses Apache-2.0. Sources:
@@ -172,7 +182,7 @@ Launch using stdio, with absolute paths in your MCP client's configuration:
 {
   "mcpServers": {
     "phichain-music": {
-      "command": "/absolute/path/to/PhiChain/local/music-runtime/bin/python",
+      "command": "/absolute/path/to/PhiChain/runtime/music-runtime/bin/python",
       "args": [
         "/absolute/path/to/PhiChain/tools/phichain-mcp/music_server.py",
         "--endpoint", "/absolute/path/to/PhiChain/.phichain-mcp.json"
@@ -338,7 +348,7 @@ then PATH. Use `--renderer /absolute/path/to/phichain-renderer` to select a buil
 Rendering has a 90-second timeout; each frame extraction has a 20-second timeout.
 Failures report the missing prerequisite or diagnostic and never change the live
 project. There is no background job/polling API or silent schematic fallback.
-Artifacts remain under ignored `local/motion-inspections/`; source chart/audio
+Artifacts remain under `../artifacts/motion-inspections/`; source chart/audio
 snapshots are temporary. Provide links without opening reports in Codex.
 
 Rebuild/restart the editor and refresh the MCP client to load `inspect_motion`.
@@ -381,7 +391,7 @@ has native play/pause, scrub and loop controls; it does not open automatically.
 This first version renders a bounded passage, rather than controlling a live
 editor playback loop. It uses 960×540 at 30 fps with default styling and hidden
 hit effects. It requires the same renderer, ffmpeg and GPU as inspection.
-Artifacts stay under ignored `local/passage-previews/`; temporary source snapshots
+Artifacts stay under `../artifacts/passage-previews/`; temporary source snapshots
 are removed, and failed renders remove partial output. No offline authoring fallback.
 
 `animate_selection` requires fresh guards, explicit `dry_run`, and 1–24 `groups`.
@@ -613,7 +623,7 @@ covered by this repository's root license. The only source change to the copied
 expression parser is replacing its editor translation import with standalone
 error messages. No foreign assets or charts are included.
 
-The HTML reference is generated as `local/mcp-reference/agent.html`, linked from
-the existing reference. Rebuild with `python3 local/mcp-reference/build.py`.
+The HTML reference is generated as `docs/mcp-reference/agent.html`, linked from
+the existing reference. Rebuild with `python3 docs/mcp-reference/build.py`.
 Verification adds candidate atomicity/identity/undo tests, script timeout/isolation,
 expression/generation tests, and real stdio-to-Bevy authoring integration.

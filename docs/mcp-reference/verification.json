@@ -1,0 +1,11 @@
+{
+  "scope": "Schema examples and internal navigation; no live chart execution",
+  "tools": 13,
+  "music_tools": 2,
+  "native_operations": 16,
+  "resources": 0,
+  "prompts": 0,
+  "tool_schema_sha256": "be9e8d9ba6d070487c8ba0ba24c0bdb7647c58228eee9bf092a0635c5a0b093d",
+  "all_internal_links_valid": true,
+  "charts_modified": false
+}

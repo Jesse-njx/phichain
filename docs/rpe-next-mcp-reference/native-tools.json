@@ -1,0 +1,2358 @@
+[
+  {
+    "name": "editor_source",
+    "description": "Read-only browsing of the current editor version's source, protocol, controls, and built-in mod implementations. Verify first when unsure about semantics, formats, coordinates, or tool behavior. action=list lists directories by path prefix/query file name; search searches literal keywords from query and returns line numbers; read reads by path/startLine/startColumn/lineCount, continuing with next. Does not access arbitrary local files, execute, or modify source code.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "list",
+            "search",
+            "read"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "startLine": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "startColumn": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "lineCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "caseSensitive": {
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chart_templates",
+    "description": "Get valid base templates for chart format, notes/events/judge lines/noise fields, plus parameter descriptions for all commands; freely combine these templates to generate complex effects.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "editor_context",
+    "description": "Read the current chart, selection, beats, playback, available features, registered global event types, and revision. Call this first for every task.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "editor_entities",
+    "description": "Search named entities in the editor: time markers, judge lines, groups, noise fields, layers, and assets. Names can be numeric strings; distinguish object types before locating/modifying, and do not treat names as beats.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "marker",
+            "line",
+            "line_group",
+            "noise",
+            "noise_layer",
+            "asset"
+          ]
+        },
+        "query": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "editor_navigate",
+    "description": "Only moves the playhead/workspace position; does not modify any object timing. target distinguishes named markers, named judge lines/noise fields, global chart seconds, music seconds, global beats, and local line beats; use name for names and value for numbers.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "enum": [
+            "marker",
+            "line",
+            "noise",
+            "chart_seconds",
+            "music_seconds",
+            "global_beat",
+            "line_beat"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "value": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chart_read",
+    "description": "View any chart field via JSON Pointer; arrays are paginated, and root returns a summary and field names. fields can narrow the fields of array items. Includes revision.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 30
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chart_query",
+    "description": "Query, time-range/field-condition/sort/projection filter any object collection by path, returning original indices. A general interface for reading notes, events, noise fields, and mod data.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "start": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "end": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "startField": {
+          "type": "string"
+        },
+        "endField": {
+          "type": "string"
+        },
+        "where": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string"
+              },
+              "op": {
+                "type": "string",
+                "enum": [
+                  "eq",
+                  "ne",
+                  "lt",
+                  "lte",
+                  "gt",
+                  "gte",
+                  "contains"
+                ]
+              },
+              "value": {}
+            },
+            "required": [
+              "field",
+              "op",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "sort": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 30
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chart_patch",
+    "description": "Atomically edit any chart field, including notes, all events, noise fields, layers/skins, META, BPM, and mod structures. op=set/remove/insert/append with JSON Pointer paths; the value of append is the array to add. Other fields are preserved. One undo. Prefer line_manage for deleting judge lines.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2000,
+          "items": {
+            "type": "object",
+            "properties": {
+              "op": {
+                "type": "string",
+                "enum": [
+                  "set",
+                  "remove",
+                  "insert",
+                  "append"
+                ]
+              },
+              "path": {
+                "type": "string"
+              },
+              "value": {}
+            },
+            "required": [
+              "op",
+              "path"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "revision",
+        "operations"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "bpm_set",
+    "description": "Apply a complete BPM list; start beats can be decimal or fractional. Do not present guesses as search results. The real source can be recorded for approval review.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1000,
+          "items": {
+            "type": "object",
+            "properties": {
+              "beat": {
+                "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+              },
+              "bpm": {
+                "type": "number",
+                "minimum": 0.001,
+                "maximum": 100000
+              }
+            },
+            "required": [
+              "beat",
+              "bpm"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision",
+        "entries"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chart_transform",
+    "description": "Batch-transform any object collection with safe expressions; select by indices or where, delete, or change values. Suitable for time shifts, mirroring, speed/size adjustments, arbitrary event/noise field/mod fields, and more. One group of changes, one undo.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "indices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "maxItems": 10000
+        },
+        "where": {
+          "type": "string"
+        },
+        "expressions": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Keys are JSON Pointers relative to the object; values are safe arithmetic expressions. i starts at 0, N is the count, u is 0–1, and beat is the original start beat; original top-level numeric properties can be referenced directly. Supports sin/cos/ease/lerp/clamp/pi/arithmetic/conditionals; time fields automatically convert to beat arrays."
+        },
+        "remove": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision",
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chart_generate",
+    "description": "Generate arbitrary JSON objects generically via templates and safe expressions, and append them to any array; not limited to built-in examples. Can generate notes/events/noise fields/activation segments/mod data; templates need a complete structure. i/N/u control the sequence, count max 10000.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "template": {
+          "type": "object"
+        },
+        "expressions": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Keys are JSON Pointers relative to the object; values are safe arithmetic expressions. i starts at 0, N is the count, u is 0–1, and beat is the original start beat; original top-level numeric properties can be referenced directly. Supports sin/cos/ease/lerp/clamp/pi/arithmetic/conditionals; time fields automatically convert to beat arrays."
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision",
+        "path",
+        "count",
+        "template"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "line_manage",
+    "description": "Add up to a specified count, duplicate, delete, reorder, or set parent lines, maintaining references. Deleting an entire line is a dangerous operation.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "ensure",
+            "duplicate",
+            "delete",
+            "reorder",
+            "parent"
+          ]
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "target": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "parent": {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "revision",
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "event_shake",
+    "description": "Generate vibration with a sine × decay envelope, returning exactly to the baseline at the end. Ask for the necessary parameters first and check the target range. replace allows replacing existing events within the range but does not swallow events crossing the boundaries.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "track": {
+          "type": "string",
+          "enum": [
+            "moveXEvents",
+            "moveYEvents",
+            "rotateEvents"
+          ]
+        },
+        "layer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "start": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "duration": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "amplitude": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100000
+        },
+        "cycles": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 1000
+        },
+        "segmentsPerCycle": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 128
+        },
+        "decayEasing": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 29
+        },
+        "baseline": {
+          "type": "number"
+        },
+        "replace": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "revision",
+        "line",
+        "track",
+        "start",
+        "duration",
+        "amplitude",
+        "cycles",
+        "decayEasing"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "noise_circle",
+    "description": "Generate a rectangular noise field whose center moves along a circle, creating only X/Y movement events without changing noise field transform semantics. Other visual patterns can be freely generated with the general chart_patch.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "start": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "duration": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "centerX": {
+          "type": "number"
+        },
+        "centerY": {
+          "type": "number"
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100000
+        },
+        "width": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100000
+        },
+        "height": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100000
+        },
+        "turns": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100
+        },
+        "phase": {
+          "type": "number"
+        },
+        "clockwise": {
+          "type": "boolean"
+        },
+        "samples": {
+          "type": "integer",
+          "minimum": 8,
+          "maximum": 512
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "invert": {
+          "type": "boolean"
+        },
+        "layerId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision",
+        "start",
+        "duration",
+        "centerX",
+        "centerY",
+        "radius",
+        "width",
+        "height"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "audio_sources",
+    "description": "List the ids, names, colors, and checked state of the original music, separated, and imported stems. selection gives the audio source ids currently playing/analyzed together; at least one must be checked, all start at the original music's zero point, and they share the chart delay. status also detects the Demucs environment.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "audio_separate",
+    "description": "Use local Demucs on the desktop to separate the current music first, then specify stems with source in audio_analyze/audio_taps. htdemucs gives vocals/drums/bass/other; htdemucs_6s also includes guitar/piano (experimental, may bleed). The model is downloaded on first use, audio is not uploaded, and results are cached separately without modifying the chart or replacing the original music; a separation environment must be configured, and installation can only be confirmed by the user in Stem Separation settings.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "enum": [
+            "htdemucs",
+            "htdemucs_6s"
+          ]
+        },
+        "device": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "cpu",
+            "cuda"
+          ]
+        },
+        "shifts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "audio_source",
+    "description": "Temporarily switch the editor's playback and analysis audio sources. For select, use source to choose one, or the sources array to select several at once (at least one); for remove, use source to remove a stem. Pause/resume, speed, and pitch preservation apply to the mix of checked sources; closing the chart restores the original music. Assets, chart offset, and files are unchanged, and per-stem offset is not supported.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "select",
+            "remove"
+          ]
+        },
+        "source": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 2000
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "audio_detector",
+    "description": "Query onset detection methods, models, difficulty, random seed, and thresholds. status checks the environment for the currently selected local model; detector can specify the mapper/ddc/flux to check. Installation must be confirmed by the user in the waveform/spectrum view, and failures do not silently switch algorithms.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "detector": {
+          "type": "string",
+          "enum": [
+            "mapper",
+            "ddc",
+            "flux"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "audio_analyze",
+    "description": "Analyze a specified beat range on the line locally and return candidate note times. mapper uses Mapperatorinator to generate a rhythm draft from the music and difficulty; usually start with the original mix, and it cannot be filtered by confidence threshold; ddc/flux are used for onset comparison. Stems can be separated beforehand. Chart BPM, phase, stem alignment, and line multiplier are taken into account; maximum 180 seconds; PCM is not uploaded.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "start": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "end": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "source": {
+          "type": "string",
+          "description": "Audio source id; if omitted, uses the panel selection, and original is the original music. Mapperatorinator usually uses the original mix first; select a stem only when specifying instrumentation."
+        },
+        "detector": {
+          "type": "string",
+          "enum": [
+            "mapper",
+            "ddc",
+            "flux"
+          ],
+          "description": "mapper is the Mapperatorinator rhythm draft, ddc is learned onset detection, flux is a spectral algorithm; if omitted, uses the panel selection. mapper selects notes by difficulty and does not output onset probabilities."
+        },
+        "mapperModel": {
+          "type": "string",
+          "enum": [
+            "v32",
+            "v32-mini"
+          ]
+        },
+        "mapperMode": {
+          "type": "integer",
+          "enum": [
+            0,
+            3
+          ],
+          "description": "mapper only: 0 is click rhythm, 3 is four-key rhythm; only press timings are extracted, osu positions and key counts are not copied."
+        },
+        "difficulty": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 15,
+          "description": "mapper only: controls rhythm density using the osu star rating, not the Phigros difficulty; default 5."
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "useChartTiming": {
+          "type": "boolean",
+          "description": "Whether mapper references the current chart's BPM/phase; default true. If the BPM is unconfirmed, false lets the model infer it, but the chart BPM is not modified."
+        },
+        "sensitivity": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 10,
+          "description": "Local threshold multiplier for flux only."
+        },
+        "minGap": {
+          "type": "number",
+          "minimum": 0.02,
+          "maximum": 2
+        },
+        "focus": {
+          "type": "string",
+          "enum": [
+            "all",
+            "percussion",
+            "low",
+            "melody"
+          ],
+          "description": "Band weights for flux only; learned models should omit this or set all."
+        },
+        "minConfidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Onset threshold for ddc/flux only, not used by mapper; DDC defaults to 0.15, flux to 0.35."
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "audio_taps",
+    "description": "Generate Taps from a Mapperatorinator rhythm draft or DDC/flux onset candidates. mapper is controlled by difficulty/mode/seed and does not use minConfidence; prefer analyzing the original mix. Adaptive quantization is the default, none keeps model times, and nearest uses a strict grid. Stems share the original music's start and offset, the line multiplier is applied once, duplicates and Hold-occupied spots are skipped, and all changes are undone in one step.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "start": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "end": {
+          "description": "Beat: a decimal number, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "source": {
+          "type": "string",
+          "description": "Audio source id; if omitted, uses the panel selection, and original is the original music. Mapperatorinator usually uses the original mix first; select a stem only when specifying instrumentation."
+        },
+        "detector": {
+          "type": "string",
+          "enum": [
+            "mapper",
+            "ddc",
+            "flux"
+          ],
+          "description": "mapper is the Mapperatorinator rhythm draft, ddc is learned onset detection, flux is a spectral algorithm; if omitted, uses the panel selection. mapper selects notes by difficulty and does not output onset probabilities."
+        },
+        "mapperModel": {
+          "type": "string",
+          "enum": [
+            "v32",
+            "v32-mini"
+          ]
+        },
+        "mapperMode": {
+          "type": "integer",
+          "enum": [
+            0,
+            3
+          ],
+          "description": "mapper only: 0 is click rhythm, 3 is four-key rhythm; only press timings are extracted, osu positions and key counts are not copied."
+        },
+        "difficulty": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 15,
+          "description": "mapper only: controls rhythm density using the osu star rating, not the Phigros difficulty; default 5."
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "useChartTiming": {
+          "type": "boolean",
+          "description": "Whether mapper references the current chart's BPM/phase; default true. If the BPM is unconfirmed, false lets the model infer it, but the chart BPM is not modified."
+        },
+        "sensitivity": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 10,
+          "description": "Local threshold multiplier for flux only."
+        },
+        "minGap": {
+          "type": "number",
+          "minimum": 0.02,
+          "maximum": 2
+        },
+        "focus": {
+          "type": "string",
+          "enum": [
+            "all",
+            "percussion",
+            "low",
+            "melody"
+          ],
+          "description": "Band weights for flux only; learned models should omit this or set all."
+        },
+        "minConfidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Onset threshold for ddc/flux only, not used by mapper; DDC defaults to 0.15, flux to 0.35."
+        },
+        "revision": {
+          "type": "string"
+        },
+        "division": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 192
+        },
+        "positionX": {
+          "type": "number"
+        },
+        "quantization": {
+          "type": "string",
+          "enum": [
+            "adaptive",
+            "nearest",
+            "none"
+          ]
+        },
+        "quantizeTolerance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.5
+        }
+      },
+      "required": [
+        "revision",
+        "line",
+        "start",
+        "end",
+        "division"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "diagnose",
+    "description": "Run the editor's real chart checks, including errors, overlaps, and out-of-bounds warnings; paginated.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "editor_view",
+    "description": "Switch judge line/event layer/panel, preview, play/pause, select objects; switching lines keeps the playhead position. This command does not accept time; use editor_navigate with explicit units for time seeking. No persistent chart changes.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "layer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "pane": {
+          "type": "string"
+        },
+        "playback": {
+          "type": "string",
+          "enum": [
+            "play",
+            "pause"
+          ]
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "maxItems": 2000
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 2000
+        },
+        "noise": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "history",
+    "description": "View edit history or undo/redo; undo/redo goes through the same history flow as normal edits.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "list",
+            "undo",
+            "redo"
+          ]
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "assets_list",
+    "description": "List all asset files in the chart with their sizes, filterable by path. Does not read arbitrary disks.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "asset_read",
+    "description": "Read assets in the project: text for JSON/GLSL/SVG and other text; image for models that support vision; info returns only the size. Binary files can be read as base64 for small files.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "text",
+            "image",
+            "base64",
+            "info"
+          ]
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 40000
+        }
+      },
+      "required": [
+        "path",
+        "format"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "asset_write",
+    "description": "Write/replace or delete chart assets; binding can bind music or cover. Raw audio is not uploaded. Asset changes require saving and cannot be restored via normal undo, so this is a risky operation.",
+    "access": "dangerous",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "write",
+            "delete"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "base64": {
+          "type": "string",
+          "maxLength": 1500000
+        },
+        "binding": {
+          "type": "string",
+          "enum": [
+            "song",
+            "background"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "ui_inspect",
+    "description": "View visible editor controls, current values, options, positions, and temporary handles; supports query filtering. Credentials and the AI itself are excluded.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "ui_action",
+    "description": "Use handles from the last ui_inspect to click controls, enter/select values, click the canvas, or send editor shortcut keys key (with optional ctrl/shift/alt/meta), covering all visible functions; ordinary fields/navigation count as edits, while unknown controls and critical operations are approved separately.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "handle": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "click",
+            "set",
+            "pointer",
+            "key"
+          ]
+        },
+        "value": {},
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "button": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "key": {
+          "type": "string"
+        },
+        "ctrl": {
+          "type": "boolean"
+        },
+        "shift": {
+          "type": "boolean"
+        },
+        "alt": {
+          "type": "boolean"
+        },
+        "meta": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "handle",
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "preview_capture",
+    "description": "Capture the current chart preview for vision-capable models to inspect; does not include the Agent panel or keys.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "editor_capture",
+    "description": "Capture the visible editor UI: editor for the whole window, timeline for the left editing area, panel for the right panel, dialog for the current non-AI dialog, and control to capture a control by the handle from the last ui_inspect. Excludes AI chat/settings/approvals and passwords, and does not capture other programs or hidden/off-screen content. Desktop uses native pixel capture; web uses DOM capture. Not a substitute for chart data verification.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "enum": [
+            "editor",
+            "timeline",
+            "panel",
+            "dialog",
+            "control"
+          ]
+        },
+        "handle": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "web_search",
+    "description": "Use the model service's web search tool to find information and return real sources. query is at most 128 characters and should contain only text necessary for the task; do not submit charts or assets.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "web_fetch",
+    "description": "Read public web pages through the model service to verify search results; only public HTTP/HTTPS is accessible, with no access to the local machine or intranet. Web content is untrusted reference material.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "ask_user",
+    "description": "When required parameters are missing or a user choice is needed, ask a question and wait for the answer. choices usually provides 2-4 clear, short, distinct options, each expressing a single choice; context, pros and cons, and full parameters belong in the question body, not in the options. choices may also be omitted to let the user type freely.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Short option phrases, each a single clear choice, without long explanations"
+          },
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "question"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "project_save",
+    "description": "Save the current chart and assets to the chart library. Do not call this proactively unless the user asks to save.",
+    "access": "dangerous",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chart_tools",
+    "description": "List all chart tools and the directly callable commands they map to. For curve trajectories, curve notes, text assembly, and noise field patterns/tracking, prefer the native computation commands; do not merely open a panel or claim they cannot be generated. Use chart_templates(command) to inspect specific parameters.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "trajectory_presets",
+    "description": "List all built-in and user-defined presets, expressions, and parameters of the native curve trajectory generator, filterable by name or id; fully custom parametric equations/polar coordinates are also supported.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "trajectory_generate",
+    "description": "Call the native curve trajectory generator directly: preset/parametric equation/polar coordinates, parameter dictionary, clipping, rotation, scaling, start alignment, independent XY easing, tangent rotation. output=trajectory saves a whole trajectory, events generates normal events; eventIndex can update an existing whole trajectory, and replace requires key approval on conflicts. Time is in local beats of the target line, one undo.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "layer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3,
+          "description": "Base layer number 0/1/2/3 as shown in the UI; use the number as-is without subtracting 1. Defaults to 0 only when unspecified."
+        },
+        "start": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "end": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "preset": {
+          "type": "string"
+        },
+        "options": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string"
+            },
+            "xExpression": {
+              "type": "string"
+            },
+            "yExpression": {
+              "type": "string"
+            },
+            "radiusExpression": {
+              "type": "string"
+            },
+            "rotationExpression": {
+              "type": "string"
+            },
+            "tangentRotation": {
+              "type": "boolean"
+            },
+            "parameterStart": {
+              "type": "string"
+            },
+            "parameterEnd": {
+              "type": "string"
+            },
+            "angleStart": {
+              "type": "string"
+            },
+            "angleEnd": {
+              "type": "string"
+            },
+            "trimStart": {
+              "type": "number"
+            },
+            "trimEnd": {
+              "type": "number"
+            },
+            "rotation": {
+              "type": "number"
+            },
+            "scaleX": {
+              "type": "number"
+            },
+            "scaleY": {
+              "type": "number"
+            },
+            "alignStart": {
+              "type": "boolean"
+            },
+            "startX": {
+              "type": "number"
+            },
+            "startY": {
+              "type": "number"
+            },
+            "easingX": {
+              "type": "number"
+            },
+            "easingY": {
+              "type": "number"
+            },
+            "seed": {
+              "type": "number"
+            },
+            "randomness": {
+              "type": "number"
+            },
+            "parameters": {
+              "type": "object"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "segments": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 8192
+        },
+        "split": {
+          "type": "object",
+          "properties": {
+            "segments": {
+              "type": "integer",
+              "minimum": 4,
+              "maximum": 8192
+            },
+            "simplify": {
+              "type": "boolean"
+            },
+            "tolerance": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 10000
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "output": {
+          "enum": [
+            "trajectory",
+            "events"
+          ]
+        },
+        "eventIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "replace": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "revision",
+        "line",
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "trajectory_split",
+    "description": "Split the specified whole curve trajectory into normal X/Y movement and optional rotation events, reusing native segment count, simplification, and tolerance, one undo.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "layer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3,
+          "description": "Base layer number 0/1/2/3 as shown in the UI; use the number as-is without subtracting 1. Defaults to 0 only when unspecified."
+        },
+        "eventIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "segments": {
+              "type": "integer",
+              "minimum": 4,
+              "maximum": 8192
+            },
+            "simplify": {
+              "type": "boolean"
+            },
+            "tolerance": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 10000
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "revision",
+        "line",
+        "eventIndex"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "curve_notes",
+    "description": "Call the native curve note filler: generates Tap/Drag/Flick from start/end beat and X coordinates, horizontal-line subdivision × density, and easing; intermediate notes do not duplicate the start/end endpoints. Notes on the same beat can be generated horizontally. Time is in local beats of that line, one undo.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "start": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "end": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "startX": {
+          "type": "number"
+        },
+        "endX": {
+          "type": "number"
+        },
+        "type": {
+          "enum": [
+            1,
+            3,
+            4
+          ]
+        },
+        "division": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "density": {
+          "type": "number",
+          "minimum": 0.001,
+          "maximum": 1000
+        },
+        "easingType": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 29
+        }
+      },
+      "required": [
+        "revision",
+        "line",
+        "start",
+        "end",
+        "startX",
+        "endX"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "noise_track",
+    "description": "Call native noise field tracking: target is a judge line or its notes. Accounts for parent lines, layering, multipliers, fall, and jumps to generate noise fields that follow the target's position and angle within the global start/end beats. If the source object is modified later, re-run tracking. One undo.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "start": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "end": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "target": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "enum": [
+                "line",
+                "note"
+              ]
+            },
+            "lineIndex": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "noteIndex": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "mode",
+            "lineIndex"
+          ],
+          "additionalProperties": false
+        },
+        "width": {
+          "type": "number",
+          "minimum": 0.001,
+          "maximum": 100000
+        },
+        "height": {
+          "type": "number",
+          "minimum": 0.001,
+          "maximum": 100000
+        },
+        "layerId": {
+          "type": "string"
+        },
+        "invert": {
+          "type": "boolean"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "sampleRate": {
+          "enum": [
+            60,
+            120,
+            240
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision",
+        "start",
+        "end",
+        "target",
+        "width",
+        "height"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "noise_fit",
+    "description": "Native noise field pattern: text plus font, or chart image assets; supports binarization, precision, rectangle merging, layout, reveal order, appear easing, and activation. For images use an image asset path, or a local image already selected in the pattern panel. analyzeOnly=true returns only the count without generating; generating is one undo.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "text",
+            "image"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "font": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "image": {
+          "type": "string"
+        },
+        "precision": {
+          "type": "integer",
+          "minimum": 16,
+          "maximum": 512
+        },
+        "spacing": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 4
+        },
+        "threshold": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 254
+        },
+        "polarity": {
+          "enum": [
+            "dark",
+            "light",
+            "alpha"
+          ]
+        },
+        "invertImage": {
+          "type": "boolean"
+        },
+        "merge": {
+          "type": "boolean"
+        },
+        "maxSpan": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 512
+        },
+        "trim": {
+          "type": "boolean"
+        },
+        "first": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "last": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "duration": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "width": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 20000
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "rotation": {
+          "type": "number"
+        },
+        "layerId": {
+          "type": "string"
+        },
+        "invert": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "activeStart": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "activeEnd": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "readyFlash": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 600
+        },
+        "reveal": {
+          "enum": [
+            "left",
+            "right",
+            "top",
+            "bottom",
+            "diagonal",
+            "reverse-diagonal",
+            "rows",
+            "snake",
+            "columns",
+            "center",
+            "outside",
+            "horizontal",
+            "vertical",
+            "clockwise",
+            "counterclockwise",
+            "spiral",
+            "reverse-spiral",
+            "random"
+          ]
+        },
+        "easingType": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 29
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "analyzeOnly": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "revision",
+        "mode",
+        "first",
+        "duration",
+        "width"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "text_fit",
+    "description": "Native text assembly: spell text from a specified font skeleton plus existing judge lines and zero-speed Tap/Drag/Flick notes, preferring horizontal/vertical/45 degrees and compensating for parent lines/layering. If tolerance or minimum coverage is not met, nothing is generated and the reason is returned. analyzeOnly only analyzes; replace requires key approval on conflicts, one undo.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "font": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "lines": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "maxItems": 5000
+            }
+          ]
+        },
+        "beat": {
+          "description": "A decimal beat, a \"3:1/2\" string, or [integer, numerator, denominator]"
+        },
+        "width": {
+          "type": "number",
+          "minimum": 10,
+          "maximum": 10000
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "spacing": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 4
+        },
+        "size": {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 4
+        },
+        "noteType": {
+          "enum": [
+            1,
+            3,
+            4
+          ]
+        },
+        "tolerance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 90
+        },
+        "coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "replace": {
+          "type": "boolean"
+        },
+        "addNotes": {
+          "type": "boolean"
+        },
+        "analyzeOnly": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "revision",
+        "text",
+        "lines",
+        "beat"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "multi_line",
+    "description": "Read/set multi-line editing line numbers or groups, enabled state, note/event mode, note merging, and single-line width; only changes the workspace, not the chart or playhead. lines is an array of line numbers or a \"0 2:8 group name\" expression.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "lines": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "maxItems": 10000
+            }
+          ]
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "mode": {
+          "enum": [
+            "notes",
+            "events"
+          ]
+        },
+        "merge": {
+          "type": "boolean"
+        },
+        "width": {
+          "type": "number",
+          "minimum": 30,
+          "maximum": 2400
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "global_events",
+    "description": "List loaded global event types/columns/sources/default values, and page through or replace column events; reuses native validation, mod sources, and undo, supports temporary placeholder types, and unknown types are read-only.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "list",
+            "read",
+            "replace"
+          ]
+        },
+        "revision": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "column": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "events": {
+          "type": "array",
+          "maxItems": 10000,
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "audio_view",
+    "description": "Read/set the native waveform/spectrum view's enabled state, mode, opacity, and width; only changes the editor display, without generating or modifying charts/audio. For onset detection, use audio_analyze/audio_taps.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "mode": {
+          "enum": [
+            "waveform",
+            "spectrum"
+          ]
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.02,
+          "maximum": 1
+        },
+        "width": {
+          "type": "number",
+          "minimum": 0.2,
+          "maximum": 1
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "audio_prepend_silence",
+    "description": "Add 4 beats of silence at the start of the audio based on the initially applied BPM, replacing it with a WAV while keeping the chart offset unchanged. Uses the native feature, does not enter normal undo history, and requires saving. Call only when the user requests it; this is a critical operation.",
+    "access": "dangerous",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "version_control",
+    "description": "Directly query the native chart repository's status/refs/commit log/diff, or initialize, stage, unstage, commit, create/rename/delete branches, and create/delete tags. status returns only uninitialized when the repo is not initialized and does not write to it. Switching/merging/conflict resolution, stashing, and import/export are still available through the native version control panel and ui_inspect/ui_action; do not bypass conflict confirmation in the panel.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "status",
+            "refs",
+            "log",
+            "diff",
+            "read_commit",
+            "initialize",
+            "stage",
+            "unstage",
+            "commit",
+            "branch_create",
+            "branch_rename",
+            "branch_delete",
+            "tag_create",
+            "tag_delete"
+          ]
+        },
+        "revision": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20000
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "agent_tools",
+    "description": "Discover all editor, chart, audio, asset, file, and mod commands. Search by purpose or command name with query, or select exactly with names; returned commands get full parameter definitions in the next model request. An empty query returns categories. Do not guess parameters or assume unlisted commands do not exist.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 30
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chart_script",
+    "description": "Run JavaScript in a dedicated Worker with direct read/write access to a full chart copy, supporting arbitrary algorithms, loops, filtering, and note/event/judge line/noise area/mod data operations. chart is a mutable copy and input is custom data. api.createNote(type,beat,positionX,endBeat=beat+1); only Hold (type=2) uses endBeat, others have identical start and end; api.createEvent(start,end,startBeat,endBeat); api.createLine(name?); api.createNoiseArea(startBeat,endBeat); api.createNoiseEvent(start,end,startBeat,endBeat,anchor?). These constructors take beat parameters as decimal numbers; to write the time field directly, use api.fromNumber(number) to generate a beat array. Also available: api.beatValue(array), parseBeat(text), easing(progress,id), clone(value), report(value). By default the modified chart is used; return {chart,result} to return a different chart and brief statistics. No DOM, network, credentials, or local file access; the host validates and commits once, and the change can be undone. Whole-line deletion/reordering and bulk deletion are approved as risky operations; dryRun only previews the plan.",
+    "access": "edit",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 200000
+        },
+        "input": {},
+        "label": {
+          "type": "string"
+        },
+        "dryRun": {
+          "type": "boolean"
+        },
+        "timeoutMs": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 30000
+        }
+      },
+      "required": [
+        "revision",
+        "source"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "workspace_files",
+    "description": "Manage a per-chart file workspace: info/list/read/write/mkdir/move/delete. On desktop it is a real local directory; on the web it is browser persistent storage. Supports text, base64, and paging; files do not automatically enter the chart package. path/to is a workspace-relative path. Creating ordinary files counts as an edit; overwriting, deleting, and executable scripts are risky operations. Use with workspace_download / workspace_import_asset / chart_script for arbitrary file and chart workflows.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "info",
+            "list",
+            "read",
+            "write",
+            "mkdir",
+            "move",
+            "delete"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 2000000
+        },
+        "base64": {
+          "type": "string",
+          "maxLength": 3000000
+        },
+        "format": {
+          "enum": [
+            "info",
+            "text",
+            "base64"
+          ]
+        },
+        "overwrite": {
+          "type": "boolean"
+        },
+        "recursive": {
+          "type": "boolean"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "workspace_download",
+    "description": "Download public HTTP/HTTPS files into this chart's workspace; binary files are not transferred through the model search interface, and no API Key is attached. Desktop supports redirects; web is subject to CORS restrictions. Downloads and overwrites require risky-operation approval, and files are not executed automatically or added to the chart.",
+    "access": "dangerous",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "overwrite": {
+          "type": "boolean"
+        },
+        "maxBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 134217728
+        }
+      },
+      "required": [
+        "url",
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "workspace_import_asset",
+    "description": "Add or replace chart assets with files from the workspace; binding=song/background can bind music or background. Requires saving, cannot be restored with normal undo, and is approved as a risky operation. Binary reading happens locally; file contents are not sent to the model.",
+    "access": "dangerous",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "assetPath": {
+          "type": "string"
+        },
+        "overwrite": {
+          "type": "boolean"
+        },
+        "binding": {
+          "enum": [
+            "song",
+            "background"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "assetPath"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "editor_api",
+    "description": "Generic low-level entry point for editor components, for functionality not covered by dedicated commands. describe lists available targets and existing methods/properties, get reads data properties; call invokes existing methods, set modifies existing writable properties. Modifications/calls are approved as dangerous operations and behave like the corresponding native methods, with no guarantee of undo; verify parameters and semantics with editor_source first and prefer structured commands. In arguments/value, {$workspaceFile:\"relative path\",name:\"file name\"} is resolved by the host to a local File, supports native import methods, and does not send binary data to the model. Credentials, the Agent itself, prototype constructors, and arbitrary global objects are not accessible.",
+    "access": "read",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "describe",
+            "get",
+            "set",
+            "call"
+          ]
+        },
+        "target": {
+          "type": "string"
+        },
+        "member": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "maxItems": 40
+        },
+        "value": {}
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

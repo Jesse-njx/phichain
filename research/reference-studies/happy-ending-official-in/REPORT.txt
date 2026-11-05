@@ -1,0 +1,157 @@
+Official Happy ending IN versus the five rejected independent drafts
+Read-only study, 2026-11-02
+
+The user rejected all five drafts and explicitly authorized inspecting the target
+official IN. This overrides the earlier no-official-IN restriction for this study.
+No generated chart has been revised. The original source is unchanged.
+
+Main finding
+The drafts often change coordinates while preserving almost the same player task.
+The official changes contact grammar, simultaneous relationships, reading direction,
+receiving geometry and visual staging. These differences are present even when
+the overall note count is similar. Adding more decorative events would not repair
+the missing action structure.
+
+Source and verification
+Original local IN:1217 notes,24 lines,219 BPM,offset0; source snapshot metadata
+reports IN16.1. Source SHA256:
+971f1189ed24a6d0d0b87009ad17809375c59efc821746a33990257831edce59.
+The native reference conversion disables easing fitting. All1217 original note
+times, types, sides, durations and positions were checked against conversion.
+Full960x540/60fps video with the original song decoded without errors. Native
+frame review covers the overview and timed sequences, not direct audio listening
+or a human playtest. No instrument labels or verified emotional mapping claimed.
+
+1. Simultaneous relationships were mostly removed
+Official:301 simultaneous onset groups. Drafts A/B/C/D/E:53/71/37/20/18.
+These are raw onset groups, not finger-count or difficulty estimates. They show
+that similar total note counts conceal a radically different action distribution.
+
+128..132beats,35.07..36.16s: official pairs at128(+/-420),129(+/-210),
+129.5(+/-420),130.5(+/-210),131(+/-420), with modest line rotation.
+The player repeatedly opens/closes a two-contact formation. E uses mostly
+alternating single targets through this same passage. All five have far fewer
+simultaneous groups overall. Avoiding sustained sixteenth doubles was reasonable;
+flattening slower purposeful double patterns into single streams was not required.
+
+2. Short Holds articulate repeated press/hold/release, rather than long anchors
+Official:190 Holds, of which168 last at most1beat; median duration0.65625beat.
+Drafts contain21..46 Holds, generally much longer. Official summed Hold duration
+is164.1875beats; E's37 Holds total159.25beats. Similar summed contact time is split
+into completely different physical tasks.
+
+72..104beats,19.73..28.49s: official has16 Holds and72 Taps, no Drags. Its initial
+Holds at72,73.5,75,76.5 last1beat, alongside intervening half-beat Tap answers.
+E has4 Holds,27 Taps and75 Drags in the same region: one6beat companion and many
+short tap-to-drag packets. That is a different representation of the passage,
+not just a slightly easier version of the official task. The return at520 uses
+related short-Hold/Tap relationships rather than one unchanged long lock.
+
+144..152beats,39.45..41.64s: paired half-beat Holds alternate with paired Taps;
+the chord shifts among left/center/right formations. At480..487beats,
+131.51..133.42s, paired half-beat Holds alternate with fresh paired hits while
+the pair translates across the field;487 then changes into a short single burst.
+These within-phrase task changes are absent from E's all-Tap version of480..512.
+This is not a request to impose a Hold quota: the missing behavior is what matters.
+
+3. A short phrase has a changing action sentence
+225..228beats,61.64..62.47s: official begins a right-side Tap followed by three
+leftward Drag checkpoints, then a left-side Tap with three rightward checkpoints,
+then a four-Tap group. Approximate judgment x:
+225:469,225.25:360,225.5:255,225.75:150;
+226:-440,226.25:-332,226.5:-227,226.75:-122;
+227:210,227.25:-210,227.5:0,227.75:-420.
+E's224..248 consists of81 Taps and no other type. A fixed alternating-coordinate
+cycle cannot reproduce swipe, release, opposite-side answer and fresh-hit close.
+
+49..51beats,13.42..13.97s: the official three-note groups have clear spatial
+sentences: right outer -> center -> right inner; left outer -> center -> left inner.
+A plausible alternating fingering follows these landmarks. This is a candidate
+reading, not observed or enforced hand use. The drafts' independently incremented
+per-hand coordinate cycles often preserve alternation without expressing such
+short group-level relationships.
+
+4. Receiving motion changes the task, not only the backdrop
+All five drafts have one receiving line with x=0,rotation=0 and repeated y pulses.
+The remaining three lines carry no notes. Their variations therefore leave the
+entire song on the same receiving surface and approach direction.
+
+184..188beats,50.41..51.51s: official introduces an upper receiving surface around
+y+247..270,rotated near180degrees, while the lower receiver stays aroundy-270.
+Pairs of short Holds approach/land above, followed by paired Taps below. The two
+receiving lines tilt together. The repeated section near384 develops the same
+upper/lower relationship. E keeps the comparable contact-response material at
+the bottom and adds unrelated diagonal scenery. The screenshots show the actual
+opposing approaches, not merely a higher line with no gameplay purpose.
+
+The main official line also tilts and changes pulse character within ordinary
+lower-line passages: at72/73.5/75 its y returns to-288 and recovers between them,
+while its angle develops from0 toward+6degrees. At128 the smaller rhythmic tilt
+has a different contour; at184 both receiving planes move together. The drafts
+largely reuse the same vertical impact envelope with changed depth/frequency.
+The official source approximates curves using many short linear segments; raw
+linear-event count is not a useful measure of visible stiffness.
+
+5. Internal carriers and the visible receiving surface are different concepts
+All24 official lines contain notes at some time. Many are intentionally invisible
+while transporting visible notes. For example,225..227 uses successive hidden
+carriers while judgment heads settle along the familiar lower receiving region.
+The final roll at553..558.5 uses many carriers for distinct staged trajectories.
+It does not display24 full-opacity judgment targets simultaneously.
+
+Native renderer source confirms that line sprite alpha does not hide child notes.
+The first analysis draft incorrectly used carrier alpha to classify note visibility;
+this was corrected before reporting findings. evidence.json now distinguishes
+on-screen judgment geometry, while judgment-heads.json separately records alpha.
+Zero carrier opacity must not be confused with an invisible or unplayable note.
+
+6. No judgments does not necessarily mean an empty visual scene
+288..320beats,78.90..87.67s contains no official judgment onsets. At beat300,
+the native render nevertheless shows four future Taps already participating in
+the visual scene. They belong to carriers14..17 and will be judged at352..355,
+about96.44..97.26s. The carriers have opacity0 and speed0 from286.25 until their
+respective judgment times; their positions/rotations animate the visible notes.
+They are future playable notes, not fake decorative objects. The scene develops
+into the later fixed-side repeated-hit entry at352..359.
+
+E's comparable section has eight isolated Drags and no ensemble. All five simplify
+this middle into very sparse generic pauses. That discards the official's staged
+transition. Quiet acoustic features do not require a motionless screen.
+
+7. More lines are not the conclusion
+The official also contains busy crossings. Their density alone is not a quality
+certificate. In native sequences, families appear, close into narrow formations,
+withdraw or exchange roles with short playable gestures. Compare224..227's change
+from sparse flanking lines to a gathered crossing formation, versus the drafts'
+repeated long sweeps over unchanged Tap streams. The connection between a specific
+gesture and its staging is the useful distinction; arbitrary extra lines are not.
+
+Where the orchestration failed
+I treated the AT as an allowed deletion/revoicing template, rather than a timing
+reference supporting independent phrase composition. The construction brief
+prohibited new onset times, the validator prohibited a Hold longer than the
+corresponding AT object's original duration, and the geometry checker demanded a
+fully opaque carrier at every contact. Those constraints were stricter than the
+user's actual goal. They ruled out many of the mechanisms the official uses.
+
+129 of the official's915 distinct onset times are absent from the provided AT
+skeleton. At72 the AT supplies a6beat Hold and rapid Drag packets, while the IN
+uses repeated1beat Holds with intervening half-beat Taps. Copying/reducing AT
+objects cannot discover this different task structure under the imposed rules.
+The five agents independently chose variations of the same limited architecture:
+single fixed receiver, long-anchor/alternating-stream grammar and looping decor.
+I then accepted structural checks and sparse frame observations as sufficient to
+build the entire batch. They were not sufficient evidence of quality.
+
+The comparison does not establish a new automatic quality score or prove that
+copying the official would meet every user preference. It identifies concrete
+missing behaviors and mistaken constraints. This turn ends with analysis only;
+no new chart, automatic loop, or edits to the five native projects.
+
+Artifacts
+official-IN.mp4: full native source reference with audio.
+index.html: synchronized comparison against any of A-E, with timestamp shortcuts.
+frames/official-vs-E.jpg: representative same-time native stills.
+passage-comparisons.json: eight concrete original/draft action passages.
+evidence.json and judgment-heads.json: reproducible source measurements.
+provenance.json and conversion-check.json: input identity and preservation checks.

@@ -1,0 +1,1224 @@
+time_ms,time_seconds,beat,kind,end_ms,source_line,detail
+1176,1.176,3.9984,floor_tap,,4,lane 1
+1470,1.47,4.998,floor_tap,,5,lane 2
+1764,1.764,5.9976,floor_tap,,6,lane 3
+2058,2.058,6.9972,floor_tap,,7,lane 4
+2352,2.352,7.9968,floor_tap,,8,lane 1
+2500,2.5,8.5,floor_tap,,9,lane 2
+2647,2.647,8.9998,floor_tap,,10,lane 4
+2794,2.794,9.4996,floor_tap,,11,lane 3
+2941,2.941,9.9994,floor_tap,,12,lane 2
+3088,3.088,10.4992,floor_tap,,13,lane 3
+3235,3.235,10.999,floor_tap,,14,lane 2
+3235,3.235,10.999,floor_tap,,15,lane 3
+3529,3.529,11.9986,arc_start,3824,16,color 0
+3529,3.529,11.9986,hold_start,3677,17,lane 3
+3823,3.823,12.9982,floor_tap,,18,lane 4
+3970,3.97,13.498,floor_tap,,19,lane 2
+4044,4.044,13.7496,floor_tap,,20,lane 3
+4117,4.117,13.9978,arc_start,4412,21,color 0
+4411,4.411,14.9974,trace_segment,4705,22,"visual path, not a playable onset"
+4411,4.411,14.9974,floor_tap,,23,lane 4
+4558,4.558,15.4972,floor_tap,,24,lane 2
+4632,4.632,15.7488,floor_tap,,25,lane 3
+4705,4.705,15.997,arc_start,4852,26,color 0
+4705,4.705,15.997,trace_segment,5147,27,"visual path, not a playable onset"
+4852,4.852,16.4968,sky_tap,,27,parent arc at 4705
+4852,4.852,16.4968,arc_continuation,5000,28,color 0
+5000,5.0,17.0,hold_start,5295,29,lane 4
+5147,5.147,17.4998,sky_tap,,27,parent arc at 4705
+5294,5.294,17.9996,hold_start,5442,30,lane 2
+5441,5.441,18.4994,floor_tap,,31,lane 4
+5588,5.588,18.9992,floor_tap,,32,lane 3
+5735,5.735,19.499,floor_tap,,33,lane 1
+5882,5.882,19.9988,arc_start,6177,34,color 1
+5882,5.882,19.9988,hold_start,6030,35,lane 2
+6176,6.176,20.9984,floor_tap,,36,lane 1
+6323,6.323,21.4982,floor_tap,,37,lane 3
+6397,6.397,21.7498,floor_tap,,38,lane 2
+6470,6.47,21.998,arc_start,6765,39,color 1
+6764,6.764,22.9976,trace_segment,7058,40,"visual path, not a playable onset"
+6764,6.764,22.9976,floor_tap,,41,lane 1
+6911,6.911,23.4974,floor_tap,,42,lane 3
+6985,6.985,23.749,floor_tap,,43,lane 2
+7058,7.058,23.9972,trace_segment,7500,44,"visual path, not a playable onset"
+7058,7.058,23.9972,arc_start,7205,45,color 1
+7205,7.205,24.497,sky_tap,,44,parent arc at 7058
+7205,7.205,24.497,arc_continuation,7353,46,color 1
+7352,7.352,24.9968,hold_start,7647,47,lane 1
+7500,7.5,25.5,sky_tap,,44,parent arc at 7058
+7647,7.647,25.9998,hold_start,7795,48,lane 3
+7794,7.794,26.4996,floor_tap,,49,lane 1
+7941,7.941,26.9994,floor_tap,,50,lane 2
+8088,8.088,27.4992,floor_tap,,51,lane 4
+8235,8.235,27.999,arc_start,8530,52,color 0
+8235,8.235,27.999,hold_start,8383,53,lane 3
+8529,8.529,28.9986,floor_tap,,54,lane 4
+8676,8.676,29.4984,floor_tap,,55,lane 2
+8750,8.75,29.75,floor_tap,,56,lane 3
+8823,8.823,29.9982,arc_start,9118,57,color 0
+9117,9.117,30.9978,trace_segment,9411,58,"visual path, not a playable onset"
+9117,9.117,30.9978,floor_tap,,59,lane 4
+9264,9.264,31.4976,floor_tap,,60,lane 2
+9338,9.338,31.7492,floor_tap,,61,lane 3
+9411,9.411,31.9974,arc_start,9558,62,color 0
+9411,9.411,31.9974,trace_segment,9853,63,"visual path, not a playable onset"
+9558,9.558,32.4972,sky_tap,,63,parent arc at 9411
+9558,9.558,32.4972,arc_continuation,9706,64,color 0
+9705,9.705,32.997,hold_start,10000,65,lane 4
+9852,9.852,33.4968,trace_segment,9926,66,"visual path, not a playable onset"
+9853,9.853,33.5002,sky_tap,,63,parent arc at 9411
+9926,9.926,33.7484,trace_segment,10147,67,"visual path, not a playable onset"
+10000,10.0,34.0,hold_start,10148,68,lane 2
+10147,10.147,34.4998,sky_tap,,69,parent arc at 10147
+10147,10.147,34.4998,trace_segment,10441,69,"visual path, not a playable onset"
+10294,10.294,34.9996,sky_tap,,69,parent arc at 10147
+10441,10.441,35.4994,sky_tap,,69,parent arc at 10147
+10588,10.588,35.9992,arc_start,10883,70,color 1
+10588,10.588,35.9992,hold_start,10736,71,lane 2
+10882,10.882,36.9988,floor_tap,,72,lane 1
+11029,11.029,37.4986,floor_tap,,73,lane 3
+11103,11.103,37.7502,floor_tap,,74,lane 2
+11176,11.176,37.9984,arc_start,11471,75,color 1
+11470,11.47,38.998,trace_segment,11764,76,"visual path, not a playable onset"
+11470,11.47,38.998,floor_tap,,77,lane 1
+11617,11.617,39.4978,floor_tap,,78,lane 3
+11691,11.691,39.7494,floor_tap,,79,lane 2
+11764,11.764,39.9976,trace_segment,12206,80,"visual path, not a playable onset"
+11764,11.764,39.9976,arc_start,11911,81,color 1
+11911,11.911,40.4974,sky_tap,,80,parent arc at 11764
+11911,11.911,40.4974,arc_continuation,12059,82,color 1
+12058,12.058,40.9972,hold_start,12353,83,lane 1
+12205,12.205,41.497,trace_segment,12279,84,"visual path, not a playable onset"
+12206,12.206,41.5004,sky_tap,,80,parent arc at 11764
+12279,12.279,41.7486,trace_segment,12500,85,"visual path, not a playable onset"
+12353,12.353,42.0002,hold_start,12501,86,lane 3
+12500,12.5,42.5,sky_tap,,87,parent arc at 12500
+12500,12.5,42.5,trace_segment,12794,87,"visual path, not a playable onset"
+12647,12.647,42.9998,sky_tap,,87,parent arc at 12500
+12794,12.794,43.4996,sky_tap,,87,parent arc at 12500
+12941,12.941,43.9994,hold_start,13236,88,lane 1
+13235,13.235,44.999,floor_tap,,89,lane 2
+13382,13.382,45.4988,hold_start,13677,90,lane 1
+13676,13.676,46.4984,floor_tap,,91,lane 2
+13823,13.823,46.9982,floor_tap,,92,lane 3
+13970,13.97,47.498,floor_tap,,93,lane 1
+14117,14.117,47.9978,floor_tap,,94,lane 4
+14264,14.264,48.4976,floor_tap,,95,lane 3
+14411,14.411,48.9974,hold_start,14706,96,lane 2
+14852,14.852,50.4968,floor_tap,,97,lane 2
+15000,15.0,51.0,floor_tap,,98,lane 3
+15147,15.147,51.4998,floor_tap,,99,lane 4
+15294,15.294,51.9996,hold_start,15589,100,lane 1
+15588,15.588,52.9992,floor_tap,,101,lane 2
+15735,15.735,53.499,hold_start,16030,102,lane 1
+16029,16.029,54.4986,floor_tap,,103,lane 2
+16176,16.176,54.9984,floor_tap,,104,lane 3
+16323,16.323,55.4982,floor_tap,,105,lane 1
+16470,16.47,55.998,floor_tap,,106,lane 2
+16617,16.617,56.4978,floor_tap,,107,lane 3
+16764,16.764,56.9976,hold_start,17059,108,lane 4
+17205,17.205,58.497,floor_tap,,109,lane 4
+17352,17.352,58.9968,floor_tap,,110,lane 2
+17500,17.5,59.5,floor_tap,,111,lane 3
+17647,17.647,59.9998,hold_start,17942,112,lane 1
+17941,17.941,60.9994,floor_tap,,113,lane 2
+18088,18.088,61.4992,hold_start,18383,114,lane 1
+18382,18.382,62.4988,floor_tap,,115,lane 2
+18529,18.529,62.9986,floor_tap,,116,lane 3
+18676,18.676,63.4984,floor_tap,,117,lane 1
+18823,18.823,63.9982,floor_tap,,118,lane 4
+18970,18.97,64.498,floor_tap,,119,lane 3
+19117,19.117,64.9978,floor_tap,,120,lane 1
+19264,19.264,65.4976,floor_tap,,121,lane 2
+19411,19.411,65.9974,hold_start,19706,122,lane 3
+19705,19.705,66.997,floor_tap,,123,lane 2
+20000,20.0,68.0,hold_start,20295,124,lane 3
+20000,20.0,68.0,hold_start,20295,125,lane 4
+20441,20.441,69.4994,floor_tap,,126,lane 2
+20588,20.588,69.9992,hold_start,20736,127,lane 3
+20588,20.588,69.9992,hold_start,20736,128,lane 4
+20882,20.882,70.9988,floor_tap,,129,lane 2
+21176,21.176,71.9984,hold_start,21324,130,lane 1
+21176,21.176,71.9984,hold_start,21324,131,lane 2
+21470,21.47,72.998,hold_start,21618,132,lane 2
+21470,21.47,72.998,hold_start,21618,133,lane 3
+21764,21.764,73.9976,hold_start,21912,134,lane 3
+21764,21.764,73.9976,hold_start,21912,135,lane 4
+22352,22.352,75.9968,arc_start,22647,136,color 0
+22352,22.352,75.9968,hold_start,22500,137,lane 4
+22647,22.647,76.9998,trace_segment,22794,138,"visual path, not a playable onset"
+22647,22.647,76.9998,floor_tap,,139,lane 3
+22794,22.794,77.4996,arc_start,23089,140,color 1
+22794,22.794,77.4996,hold_start,22942,141,lane 1
+23088,23.088,78.4992,floor_tap,,142,lane 2
+23235,23.235,78.999,floor_tap,,143,lane 4
+23382,23.382,79.4988,floor_tap,,144,lane 3
+23529,23.529,79.9986,arc_start,23677,145,color 0
+23676,23.676,80.4984,trace_segment,23823,146,"visual path, not a playable onset"
+23676,23.676,80.4984,hold_start,23824,147,lane 2
+23823,23.823,80.9982,arc_start,24118,148,color 0
+24117,24.117,81.9978,trace_segment,24264,149,"visual path, not a playable onset"
+24117,24.117,81.9978,floor_tap,,150,lane 4
+24264,24.264,82.4976,sky_tap,,149,parent arc at 24117
+24411,24.411,82.9974,floor_tap,,151,lane 3
+24558,24.558,83.4972,floor_tap,,152,lane 2
+24705,24.705,83.997,arc_start,24853,153,color 1
+24852,24.852,84.4968,trace_segment,24999,154,"visual path, not a playable onset"
+24852,24.852,84.4968,hold_start,25000,155,lane 3
+24999,24.999,84.9966,arc_start,25294,156,color 1
+25293,25.293,85.9962,trace_segment,25440,157,"visual path, not a playable onset"
+25293,25.293,85.9962,floor_tap,,158,lane 1
+25440,25.44,86.496,sky_tap,,157,parent arc at 25293
+25587,25.587,86.9958,floor_tap,,159,lane 2
+25734,25.734,87.4956,floor_tap,,160,lane 3
+25882,25.882,87.9988,arc_start,26030,161,color 0
+26029,26.029,88.4986,trace_segment,26176,162,"visual path, not a playable onset"
+26029,26.029,88.4986,hold_start,26177,163,lane 2
+26176,26.176,88.9984,arc_start,26324,164,color 0
+26323,26.323,89.4982,arc_start,26471,165,color 1
+26470,26.47,89.998,trace_segment,26764,166,"visual path, not a playable onset"
+26470,26.47,89.998,hold_start,26765,167,lane 3
+26764,26.764,90.9976,arc_start,26912,168,color 1
+27058,27.058,91.9972,floor_tap,,169,lane 2
+27058,27.058,91.9972,floor_tap,,170,lane 3
+27352,27.352,92.9968,arc_start,27500,171,color 0
+27352,27.352,92.9968,floor_tap,,172,lane 3
+27500,27.5,93.5,trace_segment,27794,173,"visual path, not a playable onset"
+27500,27.5,93.5,hold_start,27648,174,lane 2
+27647,27.647,93.9998,hold_start,27795,175,lane 1
+27794,27.794,94.4996,arc_start,27942,176,color 1
+27941,27.941,94.9994,trace_segment,28235,177,"visual path, not a playable onset"
+27941,27.941,94.9994,hold_start,28089,178,lane 2
+28088,28.088,95.4992,hold_start,28236,179,lane 3
+28235,28.235,95.999,arc_start,28383,180,color 0
+28382,28.382,96.4988,trace_segment,28676,181,"visual path, not a playable onset"
+28382,28.382,96.4988,hold_start,28530,182,lane 4
+28529,28.529,96.9986,hold_start,28677,183,lane 3
+28676,28.676,97.4984,arc_start,28823,184,color 1
+28823,28.823,97.9982,arc_start,28971,185,color 0
+28823,28.823,97.9982,arc_continuation,28971,186,color 1
+28970,28.97,98.498,trace_segment,29117,187,"visual path, not a playable onset"
+28970,28.97,98.498,trace_segment,29117,188,"visual path, not a playable onset"
+29117,29.117,98.9978,sky_tap,,187,parent arc at 28970
+29117,29.117,98.9978,sky_tap,,188,parent arc at 28970
+29117,29.117,98.9978,trace_segment,30588,189,"visual path, not a playable onset"
+29117,29.117,98.9978,trace_segment,30588,190,"visual path, not a playable onset"
+29411,29.411,99.9974,floor_tap,,191,lane 1
+29411,29.411,99.9974,floor_tap,,192,lane 3
+29705,29.705,100.997,sky_tap,,190,parent arc at 29117
+29705,29.705,100.997,floor_tap,,193,lane 4
+30000,30.0,102.0,floor_tap,,194,lane 2
+30000,30.0,102.0,floor_tap,,195,lane 4
+30294,30.294,102.9996,sky_tap,,189,parent arc at 29117
+30294,30.294,102.9996,floor_tap,,196,lane 1
+30588,30.588,103.9992,trace_segment,31764,197,"visual path, not a playable onset"
+30588,30.588,103.9992,trace_segment,31764,198,"visual path, not a playable onset"
+30588,30.588,103.9992,floor_tap,,199,lane 4
+30735,30.735,104.499,sky_tap,,198,parent arc at 30588
+30882,30.882,104.9988,floor_tap,,200,lane 4
+31029,31.029,105.4986,sky_tap,,197,parent arc at 30588
+31176,31.176,105.9984,sky_tap,,198,parent arc at 30588
+31323,31.323,106.4982,floor_tap,,201,lane 1
+31470,31.47,106.998,sky_tap,,197,parent arc at 30588
+31617,31.617,107.4978,floor_tap,,202,lane 1
+31764,31.764,107.9976,trace_segment,34117,203,"visual path, not a playable onset"
+31764,31.764,107.9976,trace_segment,34117,204,"visual path, not a playable onset"
+31764,31.764,107.9976,arc_start,32059,205,color 1
+31764,31.764,107.9976,hold_start,31912,206,lane 2
+32058,32.058,108.9972,sky_tap,,204,parent arc at 31764
+32205,32.205,109.497,arc_start,32352,207,color 0
+32352,32.352,109.9968,sky_tap,,204,parent arc at 31764
+32352,32.352,109.9968,arc_continuation,32647,208,color 0
+32647,32.647,110.9998,sky_tap,,203,parent arc at 31764
+32794,32.794,111.4996,arc_start,32941,209,color 1
+32941,32.941,111.9994,arc_continuation,33236,210,color 1
+32941,32.941,111.9994,hold_start,33089,211,lane 2
+33235,33.235,112.999,sky_tap,,204,parent arc at 31764
+33382,33.382,113.4988,arc_start,33529,212,color 0
+33529,33.529,113.9986,sky_tap,,204,parent arc at 31764
+33529,33.529,113.9986,arc_continuation,33824,213,color 0
+33823,33.823,114.9982,arc_start,33971,214,color 1
+34117,34.117,115.9978,arc_start,34412,215,color 0
+34117,34.117,115.9978,trace_segment,36470,216,"visual path, not a playable onset"
+34117,34.117,115.9978,trace_segment,36470,217,"visual path, not a playable onset"
+34117,34.117,115.9978,hold_start,34265,218,lane 3
+34411,34.411,116.9974,sky_tap,,216,parent arc at 34117
+34558,34.558,117.4972,arc_start,34705,219,color 1
+34705,34.705,117.997,sky_tap,,216,parent arc at 34117
+34705,34.705,117.997,arc_continuation,35000,220,color 1
+35000,35.0,119.0,sky_tap,,217,parent arc at 34117
+35147,35.147,119.4998,arc_start,35294,221,color 0
+35294,35.294,119.9996,arc_continuation,35589,222,color 0
+35294,35.294,119.9996,hold_start,35442,223,lane 3
+35588,35.588,120.9992,sky_tap,,216,parent arc at 34117
+35735,35.735,121.499,arc_start,35882,224,color 1
+35882,35.882,121.9988,sky_tap,,216,parent arc at 34117
+35882,35.882,121.9988,arc_continuation,36177,225,color 1
+36176,36.176,122.9984,arc_start,36324,226,color 0
+36470,36.47,123.998,trace_segment,38823,227,"visual path, not a playable onset"
+36470,36.47,123.998,trace_segment,38823,228,"visual path, not a playable onset"
+36470,36.47,123.998,hold_start,36618,229,lane 2
+36470,36.47,123.998,hold_start,36618,230,lane 3
+36764,36.764,124.9976,sky_tap,,227,parent arc at 36470
+36764,36.764,124.9976,sky_tap,,228,parent arc at 36470
+37058,37.058,125.9972,floor_tap,,231,lane 1
+37058,37.058,125.9972,floor_tap,,232,lane 4
+37352,37.352,126.9968,sky_tap,,227,parent arc at 36470
+37352,37.352,126.9968,sky_tap,,228,parent arc at 36470
+37647,37.647,127.9998,floor_tap,,233,lane 4
+37794,37.794,128.4996,floor_tap,,234,lane 1
+37941,37.941,128.9994,sky_tap,,228,parent arc at 36470
+38088,38.088,129.4992,sky_tap,,227,parent arc at 36470
+38235,38.235,129.999,floor_tap,,235,lane 3
+38382,38.382,130.4988,floor_tap,,236,lane 2
+38529,38.529,130.9986,sky_tap,,228,parent arc at 36470
+38676,38.676,131.4984,sky_tap,,227,parent arc at 36470
+38823,38.823,131.9982,sky_tap,,237,parent arc at 38823
+38823,38.823,131.9982,trace_segment,40588,237,"visual path, not a playable onset"
+38823,38.823,131.9982,sky_tap,,238,parent arc at 38823
+38823,38.823,131.9982,trace_segment,40294,238,"visual path, not a playable onset"
+39264,39.264,133.4976,floor_tap,,239,lane 4
+39411,39.411,133.9974,sky_tap,,237,parent arc at 38823
+39411,39.411,133.9974,sky_tap,,238,parent arc at 38823
+39852,39.852,135.4968,floor_tap,,240,lane 1
+40000,40.0,136.0,sky_tap,,237,parent arc at 38823
+40000,40.0,136.0,sky_tap,,238,parent arc at 38823
+40294,40.294,136.9996,sky_tap,,238,parent arc at 38823
+40294,40.294,136.9996,trace_segment,40367,241,"visual path, not a playable onset"
+40294,40.294,136.9996,floor_tap,,242,lane 3
+40367,40.367,137.2478,trace_segment,41176,243,"visual path, not a playable onset"
+40588,40.588,137.9992,sky_tap,,237,parent arc at 38823
+40588,40.588,137.9992,trace_segment,40661,244,"visual path, not a playable onset"
+40588,40.588,137.9992,floor_tap,,245,lane 2
+40882,40.882,138.9988,arc_start,41176,246,color 1
+41176,41.176,139.9984,sky_tap,,243,parent arc at 40367
+41176,41.176,139.9984,trace_segment,41764,247,"visual path, not a playable onset"
+41176,41.176,139.9984,arc_continuation,41471,248,color 1
+41470,41.47,140.998,arc_start,41618,249,color 0
+41617,41.617,141.4978,hold_start,41765,250,lane 3
+41764,41.764,141.9976,trace_segment,42058,251,"visual path, not a playable onset"
+41764,41.764,141.9976,hold_start,41912,252,lane 1
+41911,41.911,142.4974,arc_start,42059,253,color 1
+42058,42.058,142.9972,arc_start,42206,254,color 0
+42058,42.058,142.9972,trace_segment,42352,255,"visual path, not a playable onset"
+42205,42.205,143.497,trace_segment,42352,256,"visual path, not a playable onset"
+42205,42.205,143.497,hold_start,42353,257,lane 2
+42352,42.352,143.9968,arc_start,42647,258,color 0
+42352,42.352,143.9968,trace_segment,42941,259,"visual path, not a playable onset"
+42647,42.647,144.9998,arc_start,42942,260,color 1
+42941,42.941,145.9994,arc_start,43236,261,color 0
+42941,42.941,145.9994,trace_segment,43529,262,"visual path, not a playable onset"
+43235,43.235,146.999,arc_start,43529,263,color 1
+43529,43.529,147.9986,sky_tap,,262,parent arc at 42941
+43529,43.529,147.9986,trace_segment,43823,264,"visual path, not a playable onset"
+43529,43.529,147.9986,arc_continuation,43824,265,color 1
+43823,43.823,148.9982,arc_start,43971,266,color 0
+43823,43.823,148.9982,trace_segment,44117,267,"visual path, not a playable onset"
+43970,43.97,149.498,hold_start,44118,268,lane 2
+44117,44.117,149.9978,trace_segment,44411,269,"visual path, not a playable onset"
+44117,44.117,149.9978,hold_start,44265,270,lane 1
+44264,44.264,150.4976,arc_start,44412,271,color 1
+44411,44.411,150.9974,trace_segment,45000,272,"visual path, not a playable onset"
+44411,44.411,150.9974,arc_start,44706,273,color 0
+44705,44.705,151.997,arc_start,44999,274,color 1
+45000,45.0,153.0,arc_start,45147,275,color 0
+45000,45.0,153.0,arc_continuation,45294,276,color 1
+45147,45.147,153.4998,arc_continuation,45294,277,color 0
+45294,45.294,153.9996,arc_continuation,45588,278,color 0
+45294,45.294,153.9996,trace_segment,45882,279,"visual path, not a playable onset"
+45294,45.294,153.9996,arc_continuation,45589,280,color 1
+45588,45.588,154.9992,arc_continuation,45882,281,color 0
+45882,45.882,155.9988,arc_continuation,46177,282,color 0
+45882,45.882,155.9988,sky_tap,,283,parent arc at 45882
+45882,45.882,155.9988,trace_segment,46470,283,"visual path, not a playable onset"
+46176,46.176,156.9984,arc_start,46324,284,color 1
+46323,46.323,157.4982,hold_start,46471,285,lane 1
+46470,46.47,157.998,trace_segment,46764,286,"visual path, not a playable onset"
+46470,46.47,157.998,hold_start,46618,287,lane 4
+46617,46.617,158.4978,arc_start,46765,288,color 0
+46764,46.764,158.9976,trace_segment,47058,289,"visual path, not a playable onset"
+46764,46.764,158.9976,arc_start,46912,290,color 1
+46911,46.911,159.4974,trace_segment,47058,291,"visual path, not a playable onset"
+46911,46.911,159.4974,hold_start,47059,292,lane 3
+47058,47.058,159.9972,trace_segment,47647,293,"visual path, not a playable onset"
+47058,47.058,159.9972,arc_start,47353,294,color 1
+47353,47.353,161.0002,arc_start,47648,295,color 0
+47647,47.647,161.9998,trace_segment,48235,296,"visual path, not a playable onset"
+47647,47.647,161.9998,arc_start,47942,297,color 1
+47941,47.941,162.9994,arc_start,48235,298,color 0
+48235,48.235,163.999,sky_tap,,296,parent arc at 47647
+48235,48.235,163.999,arc_continuation,48530,299,color 0
+48235,48.235,163.999,trace_segment,48529,300,"visual path, not a playable onset"
+48529,48.529,164.9986,trace_segment,48823,301,"visual path, not a playable onset"
+48529,48.529,164.9986,arc_start,48677,302,color 1
+48676,48.676,165.4984,hold_start,48824,303,lane 3
+48823,48.823,165.9982,trace_segment,49117,304,"visual path, not a playable onset"
+48823,48.823,165.9982,hold_start,48971,305,lane 4
+48970,48.97,166.498,arc_start,49118,306,color 0
+49117,49.117,166.9978,arc_start,49412,307,color 1
+49117,49.117,166.9978,trace_segment,49706,308,"visual path, not a playable onset"
+49411,49.411,167.9974,arc_start,49705,309,color 0
+49706,49.706,169.0004,arc_continuation,50000,310,color 0
+49706,49.706,169.0004,arc_start,49853,311,color 1
+49853,49.853,169.5002,arc_continuation,50000,312,color 1
+50000,50.0,170.0,arc_continuation,50295,313,color 0
+50000,50.0,170.0,arc_continuation,50294,314,color 1
+50000,50.0,170.0,trace_segment,50588,315,"visual path, not a playable onset"
+50294,50.294,170.9996,arc_continuation,50588,316,color 1
+50588,50.588,171.9992,sky_tap,,317,parent arc at 50588
+50588,50.588,171.9992,trace_segment,50882,317,"visual path, not a playable onset"
+50588,50.588,171.9992,arc_continuation,50883,318,color 1
+50882,50.882,172.9988,arc_start,51030,319,color 0
+51029,51.029,173.4986,trace_segment,51323,320,"visual path, not a playable onset"
+51029,51.029,173.4986,hold_start,51177,321,lane 4
+51176,51.176,173.9984,hold_start,51324,322,lane 2
+51323,51.323,174.4982,arc_start,51471,323,color 1
+51470,51.47,174.998,arc_start,51618,324,color 0
+51470,51.47,174.998,trace_segment,51764,325,"visual path, not a playable onset"
+51617,51.617,175.4978,trace_segment,51764,326,"visual path, not a playable onset"
+51617,51.617,175.4978,hold_start,51765,327,lane 2
+51764,51.764,175.9976,arc_start,52059,328,color 0
+51764,51.764,175.9976,trace_segment,52353,329,"visual path, not a playable onset"
+52059,52.059,177.0006,arc_start,52354,330,color 1
+52352,52.352,177.9968,arc_start,52647,331,color 0
+52353,52.353,178.0002,trace_segment,52941,332,"visual path, not a playable onset"
+52647,52.647,178.9998,arc_start,52941,333,color 1
+52941,52.941,179.9994,sky_tap,,332,parent arc at 52353
+52941,52.941,179.9994,trace_segment,53235,334,"visual path, not a playable onset"
+52941,52.941,179.9994,arc_continuation,53236,335,color 1
+53235,53.235,180.999,arc_start,53383,336,color 0
+53235,53.235,180.999,trace_segment,53529,337,"visual path, not a playable onset"
+53382,53.382,181.4988,hold_start,53530,338,lane 4
+53529,53.529,181.9986,trace_segment,53823,339,"visual path, not a playable onset"
+53529,53.529,181.9986,hold_start,53677,340,lane 1
+53676,53.676,182.4984,arc_start,53824,341,color 1
+53823,53.823,182.9982,trace_segment,54412,342,"visual path, not a playable onset"
+53823,53.823,182.9982,arc_start,54118,343,color 0
+54117,54.117,183.9978,arc_start,54411,344,color 1
+54411,54.411,184.9974,arc_start,54558,345,color 0
+54411,54.411,184.9974,trace_segment,55000,346,"visual path, not a playable onset"
+54411,54.411,184.9974,arc_continuation,54705,347,color 1
+54558,54.558,185.4972,arc_continuation,54705,348,color 0
+54705,54.705,185.997,arc_continuation,54999,349,color 0
+54705,54.705,185.997,arc_continuation,55000,350,color 1
+55000,55.0,187.0,trace_segment,55294,351,"visual path, not a playable onset"
+55000,55.0,187.0,arc_continuation,55294,352,color 0
+55294,55.294,187.9996,sky_tap,,353,parent arc at 55294
+55294,55.294,187.9996,trace_segment,55588,353,"visual path, not a playable onset"
+55294,55.294,187.9996,arc_continuation,55589,354,color 0
+55588,55.588,188.9992,arc_start,55736,355,color 1
+55735,55.735,189.499,trace_segment,56029,356,"visual path, not a playable onset"
+55735,55.735,189.499,hold_start,55883,357,lane 1
+55882,55.882,189.9988,hold_start,56030,358,lane 3
+56029,56.029,190.4986,arc_start,56177,359,color 0
+56176,56.176,190.9984,trace_segment,56470,360,"visual path, not a playable onset"
+56176,56.176,190.9984,arc_start,56324,361,color 1
+56323,56.323,191.4982,trace_segment,56470,362,"visual path, not a playable onset"
+56323,56.323,191.4982,hold_start,56471,363,lane 3
+56470,56.47,191.998,trace_segment,57059,364,"visual path, not a playable onset"
+56470,56.47,191.998,arc_start,56765,365,color 1
+56765,56.765,193.001,arc_start,57060,366,color 0
+57058,57.058,193.9972,arc_start,57353,367,color 1
+57059,57.059,194.0006,trace_segment,57647,368,"visual path, not a playable onset"
+57353,57.353,195.0002,arc_start,57647,369,color 0
+57647,57.647,195.9998,sky_tap,,368,parent arc at 57059
+57647,57.647,195.9998,arc_continuation,57942,370,color 0
+57647,57.647,195.9998,trace_segment,57941,371,"visual path, not a playable onset"
+57941,57.941,196.9994,trace_segment,58235,372,"visual path, not a playable onset"
+57941,57.941,196.9994,arc_start,58089,373,color 1
+58088,58.088,197.4992,hold_start,58236,374,lane 1
+58235,58.235,197.999,trace_segment,58529,375,"visual path, not a playable onset"
+58235,58.235,197.999,hold_start,58383,376,lane 4
+58382,58.382,198.4988,arc_start,58530,377,color 0
+58529,58.529,198.9986,arc_start,58824,378,color 1
+58529,58.529,198.9986,trace_segment,59118,379,"visual path, not a playable onset"
+58823,58.823,199.9982,arc_start,59118,380,color 0
+59117,59.117,200.9978,trace_segment,59852,381,"visual path, not a playable onset"
+59117,59.117,200.9978,trace_segment,59852,382,"visual path, not a playable onset"
+59264,59.264,201.4976,sky_tap,,382,parent arc at 59117
+59411,59.411,201.9974,sky_tap,,381,parent arc at 59117
+59558,59.558,202.4972,sky_tap,,382,parent arc at 59117
+59705,59.705,202.997,sky_tap,,381,parent arc at 59117
+59852,59.852,203.4968,sky_tap,,382,parent arc at 59117
+60000,60.0,204.0,arc_start,60295,383,color 1
+60000,60.0,204.0,hold_start,60148,384,lane 2
+60294,60.294,204.9996,floor_tap,,385,lane 1
+60441,60.441,205.4994,floor_tap,,386,lane 3
+60515,60.515,205.751,floor_tap,,387,lane 2
+60588,60.588,205.9992,arc_start,60883,388,color 1
+60882,60.882,206.9988,trace_segment,61176,389,"visual path, not a playable onset"
+60882,60.882,206.9988,floor_tap,,390,lane 1
+61029,61.029,207.4986,floor_tap,,391,lane 3
+61103,61.103,207.7502,floor_tap,,392,lane 2
+61176,61.176,207.9984,trace_segment,61618,393,"visual path, not a playable onset"
+61176,61.176,207.9984,arc_start,61323,394,color 1
+61323,61.323,208.4982,sky_tap,,393,parent arc at 61176
+61323,61.323,208.4982,arc_continuation,61471,395,color 1
+61470,61.47,208.998,trace_segment,61764,396,"visual path, not a playable onset"
+61471,61.471,209.0014,hold_start,61766,397,lane 1
+61618,61.618,209.5012,sky_tap,,393,parent arc at 61176
+61764,61.764,209.9976,arc_start,61911,398,color 1
+61911,61.911,210.4974,arc_continuation,62059,399,color 1
+61912,61.912,210.5008,floor_tap,,400,lane 1
+62059,62.059,211.0006,floor_tap,,401,lane 2
+62206,62.206,211.5004,floor_tap,,402,lane 4
+62353,62.353,212.0002,arc_start,62648,403,color 0
+62353,62.353,212.0002,hold_start,62501,404,lane 3
+62647,62.647,212.9998,floor_tap,,405,lane 4
+62794,62.794,213.4996,floor_tap,,406,lane 2
+62868,62.868,213.7512,floor_tap,,407,lane 3
+62941,62.941,213.9994,arc_start,63236,408,color 0
+63235,63.235,214.999,trace_segment,63529,409,"visual path, not a playable onset"
+63235,63.235,214.999,floor_tap,,410,lane 4
+63382,63.382,215.4988,floor_tap,,411,lane 2
+63456,63.456,215.7504,floor_tap,,412,lane 3
+63529,63.529,215.9986,arc_start,63676,413,color 0
+63529,63.529,215.9986,trace_segment,63971,414,"visual path, not a playable onset"
+63676,63.676,216.4984,sky_tap,,414,parent arc at 63529
+63676,63.676,216.4984,arc_continuation,63824,415,color 0
+63823,63.823,216.9982,trace_segment,64117,416,"visual path, not a playable onset"
+63823,63.823,216.9982,hold_start,64118,417,lane 4
+63971,63.971,217.5014,sky_tap,,414,parent arc at 63529
+64117,64.117,217.9978,arc_start,64264,418,color 0
+64264,64.264,218.4976,arc_continuation,64412,419,color 0
+64265,64.265,218.501,floor_tap,,420,lane 4
+64412,64.412,219.0008,floor_tap,,421,lane 3
+64559,64.559,219.5006,floor_tap,,422,lane 1
+64706,64.706,220.0004,arc_start,65001,423,color 1
+64706,64.706,220.0004,hold_start,64854,424,lane 2
+65000,65.0,221.0,floor_tap,,425,lane 1
+65147,65.147,221.4998,floor_tap,,426,lane 3
+65221,65.221,221.7514,floor_tap,,427,lane 2
+65294,65.294,221.9996,arc_start,65589,428,color 1
+65588,65.588,222.9992,trace_segment,65882,429,"visual path, not a playable onset"
+65588,65.588,222.9992,floor_tap,,430,lane 1
+65735,65.735,223.499,floor_tap,,431,lane 3
+65809,65.809,223.7506,floor_tap,,432,lane 2
+65882,65.882,223.9988,trace_segment,66324,433,"visual path, not a playable onset"
+65882,65.882,223.9988,arc_start,66029,434,color 1
+66029,66.029,224.4986,sky_tap,,433,parent arc at 65882
+66029,66.029,224.4986,arc_continuation,66177,435,color 1
+66176,66.176,224.9984,trace_segment,66470,436,"visual path, not a playable onset"
+66176,66.176,224.9984,hold_start,66471,437,lane 1
+66323,66.323,225.4982,trace_segment,66397,438,"visual path, not a playable onset"
+66324,66.324,225.5016,sky_tap,,433,parent arc at 65882
+66397,66.397,225.7498,trace_segment,66618,439,"visual path, not a playable onset"
+66470,66.47,225.998,arc_start,66617,440,color 1
+66617,66.617,226.4978,arc_continuation,66765,441,color 1
+66618,66.618,226.5012,sky_tap,,442,parent arc at 66618
+66618,66.618,226.5012,trace_segment,66912,442,"visual path, not a playable onset"
+66765,66.765,227.001,sky_tap,,442,parent arc at 66618
+66912,66.912,227.5008,sky_tap,,442,parent arc at 66618
+67059,67.059,228.0006,arc_start,67354,443,color 0
+67059,67.059,228.0006,hold_start,67207,444,lane 3
+67353,67.353,229.0002,floor_tap,,445,lane 4
+67500,67.5,229.5,floor_tap,,446,lane 2
+67574,67.574,229.7516,floor_tap,,447,lane 3
+67647,67.647,229.9998,arc_start,67942,448,color 0
+67941,67.941,230.9994,trace_segment,68235,449,"visual path, not a playable onset"
+67941,67.941,230.9994,floor_tap,,450,lane 4
+68088,68.088,231.4992,floor_tap,,451,lane 2
+68162,68.162,231.7508,floor_tap,,452,lane 3
+68235,68.235,231.999,arc_start,68382,453,color 0
+68235,68.235,231.999,trace_segment,68677,454,"visual path, not a playable onset"
+68382,68.382,232.4988,sky_tap,,454,parent arc at 68235
+68382,68.382,232.4988,arc_continuation,68530,455,color 0
+68529,68.529,232.9986,trace_segment,68823,456,"visual path, not a playable onset"
+68529,68.529,232.9986,hold_start,68824,457,lane 4
+68676,68.676,233.4984,trace_segment,68750,458,"visual path, not a playable onset"
+68677,68.677,233.5018,sky_tap,,454,parent arc at 68235
+68750,68.75,233.75,trace_segment,68971,459,"visual path, not a playable onset"
+68823,68.823,233.9982,arc_start,68970,460,color 0
+68970,68.97,234.498,arc_continuation,69118,461,color 0
+68971,68.971,234.5014,sky_tap,,462,parent arc at 68971
+68971,68.971,234.5014,trace_segment,69265,462,"visual path, not a playable onset"
+69117,69.117,234.9978,trace_segment,69411,463,"visual path, not a playable onset"
+69118,69.118,235.0012,sky_tap,,462,parent arc at 68971
+69265,69.265,235.501,sky_tap,,462,parent arc at 68971
+69411,69.411,235.9974,arc_start,69559,464,color 1
+69411,69.411,235.9974,hold_start,69559,465,lane 1
+69558,69.558,236.4972,trace_segment,69926,466,"visual path, not a playable onset"
+69705,69.705,236.997,hold_start,69853,467,lane 4
+69852,69.852,237.4968,sky_tap,,466,parent arc at 69558
+69926,69.926,237.7484,trace_segment,70073,468,"visual path, not a playable onset"
+70000,70.0,238.0,hold_start,70148,469,lane 3
+70073,70.073,238.2482,trace_segment,70220,470,"visual path, not a playable onset"
+70147,70.147,238.4998,sky_tap,,470,parent arc at 70073
+70220,70.22,238.748,trace_segment,70367,471,"visual path, not a playable onset"
+70294,70.294,238.9996,hold_start,70442,472,lane 4
+70367,70.367,239.2478,trace_segment,70514,473,"visual path, not a playable onset"
+70441,70.441,239.4994,sky_tap,,473,parent arc at 70367
+70514,70.514,239.7476,trace_segment,70661,474,"visual path, not a playable onset"
+70588,70.588,239.9992,hold_start,70736,475,lane 3
+70661,70.661,240.2474,trace_segment,70808,476,"visual path, not a playable onset"
+70735,70.735,240.499,sky_tap,,476,parent arc at 70661
+70808,70.808,240.7472,trace_segment,70955,477,"visual path, not a playable onset"
+70882,70.882,240.9988,hold_start,71030,478,lane 4
+70955,70.955,241.247,trace_segment,71102,479,"visual path, not a playable onset"
+71029,71.029,241.4986,sky_tap,,479,parent arc at 70955
+71102,71.102,241.7468,trace_segment,71250,480,"visual path, not a playable onset"
+71176,71.176,241.9984,hold_start,71324,481,lane 3
+71250,71.25,242.25,trace_segment,71397,482,"visual path, not a playable onset"
+71323,71.323,242.4982,sky_tap,,482,parent arc at 71250
+71397,71.397,242.7498,trace_segment,71544,483,"visual path, not a playable onset"
+71470,71.47,242.998,hold_start,71618,484,lane 4
+71544,71.544,243.2496,trace_segment,71764,485,"visual path, not a playable onset"
+71617,71.617,243.4978,sky_tap,,485,parent arc at 71544
+71764,71.764,243.9976,arc_start,71912,486,color 0
+71764,71.764,243.9976,hold_start,71912,487,lane 3
+71911,71.911,244.4974,trace_segment,72058,488,"visual path, not a playable onset"
+72058,72.058,244.9972,trace_segment,72279,489,"visual path, not a playable onset"
+72058,72.058,244.9972,hold_start,72206,490,lane 1
+72205,72.205,245.497,sky_tap,,489,parent arc at 72058
+72279,72.279,245.7486,trace_segment,72426,491,"visual path, not a playable onset"
+72353,72.353,246.0002,hold_start,72501,492,lane 2
+72426,72.426,246.2484,trace_segment,72573,493,"visual path, not a playable onset"
+72500,72.5,246.5,sky_tap,,493,parent arc at 72426
+72573,72.573,246.7482,trace_segment,72720,494,"visual path, not a playable onset"
+72647,72.647,246.9998,hold_start,72795,495,lane 1
+72720,72.72,247.248,trace_segment,72867,496,"visual path, not a playable onset"
+72794,72.794,247.4996,sky_tap,,496,parent arc at 72720
+72867,72.867,247.7478,trace_segment,73014,497,"visual path, not a playable onset"
+72941,72.941,247.9994,hold_start,73089,498,lane 2
+73014,73.014,248.2476,trace_segment,73161,499,"visual path, not a playable onset"
+73088,73.088,248.4992,sky_tap,,499,parent arc at 73014
+73161,73.161,248.7474,trace_segment,73308,500,"visual path, not a playable onset"
+73235,73.235,248.999,hold_start,73383,501,lane 1
+73308,73.308,249.2472,trace_segment,73455,502,"visual path, not a playable onset"
+73382,73.382,249.4988,sky_tap,,502,parent arc at 73308
+73455,73.455,249.747,trace_segment,73603,503,"visual path, not a playable onset"
+73529,73.529,249.9986,hold_start,73677,504,lane 2
+73603,73.603,250.2502,trace_segment,73750,505,"visual path, not a playable onset"
+73676,73.676,250.4984,sky_tap,,505,parent arc at 73603
+73750,73.75,250.75,trace_segment,73897,506,"visual path, not a playable onset"
+73823,73.823,250.9982,hold_start,73971,507,lane 1
+73897,73.897,251.2498,trace_segment,74117,508,"visual path, not a playable onset"
+73970,73.97,251.498,sky_tap,,508,parent arc at 73897
+74117,74.117,251.9978,arc_start,74265,509,color 1
+74117,74.117,251.9978,hold_start,74265,510,lane 2
+74264,74.264,252.4976,trace_segment,74411,511,"visual path, not a playable onset"
+74411,74.411,252.9974,trace_segment,74632,512,"visual path, not a playable onset"
+74411,74.411,252.9974,hold_start,74559,513,lane 4
+74558,74.558,253.4972,sky_tap,,512,parent arc at 74411
+74632,74.632,253.7488,trace_segment,74779,514,"visual path, not a playable onset"
+74706,74.706,254.0004,hold_start,74854,515,lane 3
+74779,74.779,254.2486,trace_segment,74926,516,"visual path, not a playable onset"
+74853,74.853,254.5002,sky_tap,,516,parent arc at 74779
+74926,74.926,254.7484,trace_segment,75073,517,"visual path, not a playable onset"
+75000,75.0,255.0,hold_start,75148,518,lane 2
+75073,75.073,255.2482,trace_segment,75220,519,"visual path, not a playable onset"
+75147,75.147,255.4998,sky_tap,,519,parent arc at 75073
+75220,75.22,255.748,trace_segment,75367,520,"visual path, not a playable onset"
+75294,75.294,255.9996,hold_start,75442,521,lane 3
+75367,75.367,256.2478,trace_segment,75514,522,"visual path, not a playable onset"
+75441,75.441,256.4994,sky_tap,,522,parent arc at 75367
+75514,75.514,256.7476,trace_segment,75661,523,"visual path, not a playable onset"
+75588,75.588,256.9992,hold_start,75736,524,lane 4
+75661,75.661,257.2474,trace_segment,75808,525,"visual path, not a playable onset"
+75735,75.735,257.499,sky_tap,,525,parent arc at 75661
+75808,75.808,257.7472,trace_segment,75956,526,"visual path, not a playable onset"
+75882,75.882,257.9988,hold_start,76030,527,lane 3
+75956,75.956,258.2504,trace_segment,76103,528,"visual path, not a playable onset"
+76029,76.029,258.4986,sky_tap,,528,parent arc at 75956
+76103,76.103,258.7502,trace_segment,76250,529,"visual path, not a playable onset"
+76176,76.176,258.9984,hold_start,76324,530,lane 2
+76250,76.25,259.25,trace_segment,76470,531,"visual path, not a playable onset"
+76323,76.323,259.4982,sky_tap,,531,parent arc at 76250
+76470,76.47,259.998,arc_start,76618,532,color 0
+76470,76.47,259.998,hold_start,76618,533,lane 3
+76617,76.617,260.4978,trace_segment,76764,534,"visual path, not a playable onset"
+76764,76.764,260.9976,trace_segment,76985,535,"visual path, not a playable onset"
+76764,76.764,260.9976,hold_start,76912,536,lane 1
+76911,76.911,261.4974,sky_tap,,535,parent arc at 76764
+76985,76.985,261.749,trace_segment,77132,537,"visual path, not a playable onset"
+77059,77.059,262.0006,hold_start,77207,538,lane 2
+77132,77.132,262.2488,trace_segment,77279,539,"visual path, not a playable onset"
+77206,77.206,262.5004,sky_tap,,539,parent arc at 77132
+77279,77.279,262.7486,trace_segment,77426,540,"visual path, not a playable onset"
+77352,77.352,262.9968,hold_start,77500,541,lane 3
+77426,77.426,263.2484,trace_segment,77573,542,"visual path, not a playable onset"
+77500,77.5,263.5,sky_tap,,542,parent arc at 77426
+77573,77.573,263.7482,trace_segment,77720,543,"visual path, not a playable onset"
+77647,77.647,263.9998,hold_start,77795,544,lane 2
+77720,77.72,264.248,trace_segment,77867,545,"visual path, not a playable onset"
+77794,77.794,264.4996,sky_tap,,545,parent arc at 77720
+77867,77.867,264.7478,trace_segment,78014,546,"visual path, not a playable onset"
+77941,77.941,264.9994,hold_start,78089,547,lane 1
+78014,78.014,265.2476,trace_segment,78161,548,"visual path, not a playable onset"
+78088,78.088,265.4992,sky_tap,,548,parent arc at 78014
+78161,78.161,265.7474,trace_segment,78823,549,"visual path, not a playable onset"
+78235,78.235,265.999,arc_start,78383,550,color 0
+78235,78.235,265.999,arc_start,78383,551,color 1
+78382,78.382,266.4988,trace_segment,78823,552,"visual path, not a playable onset"
+78529,78.529,266.9986,sky_tap,,549,parent arc at 78161
+78823,78.823,267.9982,arc_start,78971,553,color 0
+78823,78.823,267.9982,arc_start,78971,554,color 1
+78970,78.97,268.498,trace_segment,79117,555,"visual path, not a playable onset"
+78970,78.97,268.498,trace_segment,79117,556,"visual path, not a playable onset"
+79117,79.117,268.9978,trace_segment,79264,557,"visual path, not a playable onset"
+79117,79.117,268.9978,arc_start,79265,558,color 1
+79264,79.264,269.4976,sky_tap,,559,parent arc at 79264
+79264,79.264,269.4976,trace_segment,79411,559,"visual path, not a playable onset"
+79264,79.264,269.4976,trace_segment,79411,560,"visual path, not a playable onset"
+79411,79.411,269.9974,trace_segment,79558,561,"visual path, not a playable onset"
+79411,79.411,269.9974,arc_start,79559,562,color 1
+79558,79.558,270.4972,trace_segment,79705,563,"visual path, not a playable onset"
+79558,79.558,270.4972,trace_segment,79705,564,"visual path, not a playable onset"
+79558,79.558,270.4972,floor_tap,,565,lane 2
+79705,79.705,270.997,trace_segment,79852,566,"visual path, not a playable onset"
+79705,79.705,270.997,arc_start,79853,567,color 1
+79852,79.852,271.4968,sky_tap,,568,parent arc at 79852
+79852,79.852,271.4968,trace_segment,80000,568,"visual path, not a playable onset"
+79852,79.852,271.4968,trace_segment,80000,569,"visual path, not a playable onset"
+80000,80.0,272.0,trace_segment,80147,570,"visual path, not a playable onset"
+80000,80.0,272.0,arc_start,80148,571,color 1
+80147,80.147,272.4998,trace_segment,80294,572,"visual path, not a playable onset"
+80147,80.147,272.4998,trace_segment,80294,573,"visual path, not a playable onset"
+80147,80.147,272.4998,floor_tap,,574,lane 2
+80294,80.294,272.9996,trace_segment,80441,575,"visual path, not a playable onset"
+80294,80.294,272.9996,arc_start,80442,576,color 1
+80441,80.441,273.4994,sky_tap,,577,parent arc at 80441
+80441,80.441,273.4994,trace_segment,81029,577,"visual path, not a playable onset"
+80441,80.441,273.4994,trace_segment,80588,578,"visual path, not a playable onset"
+80588,80.588,273.9992,arc_start,80736,579,color 1
+80735,80.735,274.499,trace_segment,80882,580,"visual path, not a playable onset"
+80735,80.735,274.499,floor_tap,,581,lane 1
+80882,80.882,274.9988,arc_start,81030,582,color 1
+81029,81.029,275.4986,sky_tap,,577,parent arc at 80441
+81029,81.029,275.4986,trace_segment,81176,583,"visual path, not a playable onset"
+81176,81.176,275.9984,arc_start,81324,584,color 0
+81176,81.176,275.9984,arc_start,81324,585,color 1
+81323,81.323,276.4982,trace_segment,81470,586,"visual path, not a playable onset"
+81323,81.323,276.4982,trace_segment,81470,587,"visual path, not a playable onset"
+81470,81.47,276.998,arc_start,81618,588,color 0
+81470,81.47,276.998,trace_segment,81617,589,"visual path, not a playable onset"
+81617,81.617,277.4978,trace_segment,81764,590,"visual path, not a playable onset"
+81617,81.617,277.4978,sky_tap,,591,parent arc at 81617
+81617,81.617,277.4978,trace_segment,81764,591,"visual path, not a playable onset"
+81764,81.764,277.9976,arc_start,81912,592,color 0
+81764,81.764,277.9976,trace_segment,81911,593,"visual path, not a playable onset"
+81911,81.911,278.4974,trace_segment,82058,594,"visual path, not a playable onset"
+81911,81.911,278.4974,trace_segment,82058,595,"visual path, not a playable onset"
+81911,81.911,278.4974,floor_tap,,596,lane 3
+82058,82.058,278.9972,arc_start,82206,597,color 0
+82058,82.058,278.9972,trace_segment,82205,598,"visual path, not a playable onset"
+82205,82.205,279.497,trace_segment,82353,599,"visual path, not a playable onset"
+82205,82.205,279.497,sky_tap,,600,parent arc at 82205
+82205,82.205,279.497,trace_segment,82353,600,"visual path, not a playable onset"
+82353,82.353,280.0002,arc_start,82501,601,color 0
+82353,82.353,280.0002,trace_segment,82500,602,"visual path, not a playable onset"
+82500,82.5,280.5,trace_segment,82647,603,"visual path, not a playable onset"
+82500,82.5,280.5,trace_segment,82647,604,"visual path, not a playable onset"
+82500,82.5,280.5,floor_tap,,605,lane 3
+82647,82.647,280.9998,arc_start,82795,606,color 0
+82647,82.647,280.9998,trace_segment,82794,607,"visual path, not a playable onset"
+82794,82.794,281.4996,trace_segment,82941,608,"visual path, not a playable onset"
+82794,82.794,281.4996,sky_tap,,609,parent arc at 82794
+82794,82.794,281.4996,trace_segment,83382,609,"visual path, not a playable onset"
+82941,82.941,281.9994,arc_start,83089,610,color 0
+83088,83.088,282.4992,trace_segment,83235,611,"visual path, not a playable onset"
+83088,83.088,282.4992,floor_tap,,612,lane 4
+83235,83.235,282.999,arc_start,83383,613,color 0
+83382,83.382,283.4988,sky_tap,,609,parent arc at 82794
+83382,83.382,283.4988,trace_segment,83529,614,"visual path, not a playable onset"
+83529,83.529,283.9986,arc_start,83677,615,color 0
+83529,83.529,283.9986,arc_start,83677,616,color 1
+83676,83.676,284.4984,trace_segment,83823,617,"visual path, not a playable onset"
+83676,83.676,284.4984,trace_segment,83823,618,"visual path, not a playable onset"
+83823,83.823,284.9982,trace_segment,83970,619,"visual path, not a playable onset"
+83823,83.823,284.9982,arc_start,83971,620,color 1
+83970,83.97,285.498,sky_tap,,621,parent arc at 83970
+83970,83.97,285.498,trace_segment,84117,621,"visual path, not a playable onset"
+83970,83.97,285.498,trace_segment,84117,622,"visual path, not a playable onset"
+84117,84.117,285.9978,trace_segment,84264,623,"visual path, not a playable onset"
+84117,84.117,285.9978,arc_start,84265,624,color 1
+84264,84.264,286.4976,trace_segment,84411,625,"visual path, not a playable onset"
+84264,84.264,286.4976,trace_segment,84411,626,"visual path, not a playable onset"
+84264,84.264,286.4976,floor_tap,,627,lane 2
+84411,84.411,286.9974,trace_segment,84558,628,"visual path, not a playable onset"
+84411,84.411,286.9974,arc_start,84559,629,color 1
+84558,84.558,287.4972,trace_segment,84705,630,"visual path, not a playable onset"
+84558,84.558,287.4972,sky_tap,,631,parent arc at 84558
+84558,84.558,287.4972,trace_segment,84706,631,"visual path, not a playable onset"
+84705,84.705,287.997,arc_start,84853,632,color 1
+84706,84.706,288.0004,trace_segment,84853,633,"visual path, not a playable onset"
+84852,84.852,288.4968,trace_segment,85000,634,"visual path, not a playable onset"
+84852,84.852,288.4968,floor_tap,,635,lane 1
+84853,84.853,288.5002,trace_segment,85000,636,"visual path, not a playable onset"
+85000,85.0,289.0,arc_start,85148,637,color 1
+85000,85.0,289.0,trace_segment,85147,638,"visual path, not a playable onset"
+85147,85.147,289.4998,sky_tap,,639,parent arc at 85147
+85147,85.147,289.4998,trace_segment,85735,639,"visual path, not a playable onset"
+85147,85.147,289.4998,trace_segment,85294,640,"visual path, not a playable onset"
+85294,85.294,289.9996,arc_start,85442,641,color 1
+85441,85.441,290.4994,trace_segment,85588,642,"visual path, not a playable onset"
+85441,85.441,290.4994,floor_tap,,643,lane 2
+85588,85.588,290.9992,arc_start,85736,644,color 1
+85735,85.735,291.499,sky_tap,,639,parent arc at 85147
+85735,85.735,291.499,trace_segment,85882,645,"visual path, not a playable onset"
+85882,85.882,291.9988,arc_start,86030,646,color 0
+85882,85.882,291.9988,arc_start,86030,647,color 1
+86029,86.029,292.4986,trace_segment,86176,648,"visual path, not a playable onset"
+86029,86.029,292.4986,trace_segment,86176,649,"visual path, not a playable onset"
+86176,86.176,292.9984,arc_start,86324,650,color 0
+86176,86.176,292.9984,trace_segment,86323,651,"visual path, not a playable onset"
+86323,86.323,293.4982,trace_segment,86470,652,"visual path, not a playable onset"
+86323,86.323,293.4982,sky_tap,,653,parent arc at 86323
+86323,86.323,293.4982,trace_segment,86470,653,"visual path, not a playable onset"
+86470,86.47,293.998,arc_start,86618,654,color 0
+86470,86.47,293.998,trace_segment,86617,655,"visual path, not a playable onset"
+86617,86.617,294.4978,trace_segment,86764,656,"visual path, not a playable onset"
+86617,86.617,294.4978,trace_segment,86764,657,"visual path, not a playable onset"
+86617,86.617,294.4978,floor_tap,,658,lane 3
+86764,86.764,294.9976,arc_start,86912,659,color 0
+86764,86.764,294.9976,trace_segment,86911,660,"visual path, not a playable onset"
+86911,86.911,295.4974,sky_tap,,661,parent arc at 86911
+86911,86.911,295.4974,trace_segment,87059,661,"visual path, not a playable onset"
+86911,86.911,295.4974,trace_segment,87058,662,"visual path, not a playable onset"
+87058,87.058,295.9972,arc_start,87206,663,color 0
+87059,87.059,296.0006,trace_segment,87206,664,"visual path, not a playable onset"
+87205,87.205,296.497,trace_segment,87353,665,"visual path, not a playable onset"
+87205,87.205,296.497,floor_tap,,666,lane 4
+87206,87.206,296.5004,trace_segment,87353,667,"visual path, not a playable onset"
+87353,87.353,297.0002,trace_segment,87500,668,"visual path, not a playable onset"
+87353,87.353,297.0002,arc_start,87501,669,color 0
+87500,87.5,297.5,trace_segment,87647,670,"visual path, not a playable onset"
+87500,87.5,297.5,sky_tap,,671,parent arc at 87500
+87500,87.5,297.5,trace_segment,88088,671,"visual path, not a playable onset"
+87647,87.647,297.9998,arc_start,87795,672,color 0
+87794,87.794,298.4996,trace_segment,87941,673,"visual path, not a playable onset"
+87794,87.794,298.4996,floor_tap,,674,lane 3
+87941,87.941,298.9994,arc_start,88089,675,color 0
+88088,88.088,299.4992,sky_tap,,671,parent arc at 87500
+88088,88.088,299.4992,trace_segment,88235,676,"visual path, not a playable onset"
+88235,88.235,299.999,arc_start,88382,677,color 0
+88235,88.235,299.999,arc_start,88382,678,color 1
+88382,88.382,300.4988,arc_continuation,88530,679,color 0
+88382,88.382,300.4988,arc_continuation,88530,680,color 1
+88529,88.529,300.9986,trace_segment,89411,681,"visual path, not a playable onset"
+88529,88.529,300.9986,trace_segment,89411,682,"visual path, not a playable onset"
+89264,89.264,303.4976,floor_tap,,683,lane 2
+89411,89.411,303.9974,sky_tap,,684,parent arc at 89411
+89411,89.411,303.9974,trace_segment,89705,684,"visual path, not a playable onset"
+89411,89.411,303.9974,sky_tap,,685,parent arc at 89411
+89411,89.411,303.9974,trace_segment,89705,685,"visual path, not a playable onset"
+89558,89.558,304.4972,floor_tap,,686,lane 3
+89705,89.705,304.997,sky_tap,,687,parent arc at 89705
+89705,89.705,304.997,trace_segment,90000,687,"visual path, not a playable onset"
+89705,89.705,304.997,sky_tap,,688,parent arc at 89705
+89705,89.705,304.997,trace_segment,90000,688,"visual path, not a playable onset"
+89852,89.852,305.4968,sky_tap,,687,parent arc at 89705
+90000,90.0,306.0,sky_tap,,687,parent arc at 89705
+90000,90.0,306.0,sky_tap,,688,parent arc at 89705
+90000,90.0,306.0,trace_segment,90147,689,"visual path, not a playable onset"
+90000,90.0,306.0,trace_segment,90147,690,"visual path, not a playable onset"
+90147,90.147,306.4998,trace_segment,90588,691,"visual path, not a playable onset"
+90294,90.294,306.9996,arc_start,90588,692,color 0
+90588,90.588,307.9992,sky_tap,,691,parent arc at 90147
+90588,90.588,307.9992,trace_segment,91029,693,"visual path, not a playable onset"
+90588,90.588,307.9992,arc_continuation,90883,694,color 0
+90882,90.882,308.9988,arc_start,91030,695,color 1
+91029,91.029,309.4986,arc_start,91177,696,color 0
+91176,91.176,309.9984,trace_segment,91323,697,"visual path, not a playable onset"
+91176,91.176,309.9984,hold_start,91324,698,lane 2
+91323,91.323,310.4982,arc_start,91471,699,color 0
+91470,91.47,310.998,trace_segment,91764,700,"visual path, not a playable onset"
+91470,91.47,310.998,arc_start,91618,701,color 1
+91617,91.617,311.4978,trace_segment,91764,702,"visual path, not a playable onset"
+91617,91.617,311.4978,hold_start,91765,703,lane 3
+91764,91.764,311.9976,trace_segment,92353,704,"visual path, not a playable onset"
+91764,91.764,311.9976,arc_start,92059,705,color 1
+92059,92.059,313.0006,arc_start,92354,706,color 0
+92353,92.353,314.0002,trace_segment,92941,707,"visual path, not a playable onset"
+92353,92.353,314.0002,arc_start,92648,708,color 1
+92647,92.647,314.9998,arc_start,92941,709,color 0
+92941,92.941,315.9994,sky_tap,,707,parent arc at 92353
+92941,92.941,315.9994,arc_continuation,93236,710,color 0
+92941,92.941,315.9994,trace_segment,93235,711,"visual path, not a playable onset"
+93235,93.235,316.999,trace_segment,93529,712,"visual path, not a playable onset"
+93235,93.235,316.999,arc_start,93383,713,color 1
+93382,93.382,317.4988,arc_start,93530,714,color 0
+93529,93.529,317.9986,trace_segment,93676,715,"visual path, not a playable onset"
+93529,93.529,317.9986,trace_segment,93823,716,"visual path, not a playable onset"
+93529,93.529,317.9986,hold_start,93677,717,lane 2
+93676,93.676,318.4984,arc_start,93824,718,color 0
+93823,93.823,318.9982,arc_start,94118,719,color 1
+93823,93.823,318.9982,trace_segment,94412,720,"visual path, not a playable onset"
+94117,94.117,319.9978,arc_start,94411,721,color 0
+94412,94.412,321.0008,arc_continuation,94706,722,color 0
+94412,94.412,321.0008,arc_start,94559,723,color 1
+94559,94.559,321.5006,arc_continuation,94706,724,color 1
+94706,94.706,322.0004,arc_continuation,95001,725,color 0
+94706,94.706,322.0004,arc_continuation,95000,726,color 1
+94706,94.706,322.0004,trace_segment,95294,727,"visual path, not a playable onset"
+95000,95.0,323.0,arc_continuation,95294,728,color 1
+95294,95.294,323.9996,arc_continuation,95589,729,color 1
+95294,95.294,323.9996,sky_tap,,730,parent arc at 95294
+95294,95.294,323.9996,trace_segment,95735,730,"visual path, not a playable onset"
+95588,95.588,324.9992,arc_start,95736,731,color 0
+95735,95.735,325.499,arc_start,95883,732,color 1
+95882,95.882,325.9988,trace_segment,96029,733,"visual path, not a playable onset"
+95882,95.882,325.9988,hold_start,96030,734,lane 3
+96029,96.029,326.4986,arc_start,96177,735,color 1
+96176,96.176,326.9984,arc_start,96324,736,color 0
+96176,96.176,326.9984,trace_segment,96470,737,"visual path, not a playable onset"
+96323,96.323,327.4982,trace_segment,96470,738,"visual path, not a playable onset"
+96323,96.323,327.4982,hold_start,96471,739,lane 2
+96470,96.47,327.998,arc_start,96765,740,color 0
+96470,96.47,327.998,trace_segment,97059,741,"visual path, not a playable onset"
+96765,96.765,329.001,arc_start,97060,742,color 1
+97059,97.059,330.0006,arc_start,97354,743,color 0
+97059,97.059,330.0006,trace_segment,97647,744,"visual path, not a playable onset"
+97353,97.353,331.0002,arc_start,97647,745,color 1
+97647,97.647,331.9998,sky_tap,,744,parent arc at 97059
+97647,97.647,331.9998,trace_segment,97941,746,"visual path, not a playable onset"
+97647,97.647,331.9998,arc_continuation,97942,747,color 1
+97941,97.941,332.9994,arc_start,98089,748,color 0
+97941,97.941,332.9994,trace_segment,98235,749,"visual path, not a playable onset"
+98088,98.088,333.4992,arc_start,98236,750,color 1
+98235,98.235,333.999,trace_segment,98529,751,"visual path, not a playable onset"
+98235,98.235,333.999,trace_segment,98382,752,"visual path, not a playable onset"
+98235,98.235,333.999,hold_start,98383,753,lane 3
+98382,98.382,334.4988,arc_start,98530,754,color 1
+98529,98.529,334.9986,trace_segment,99118,755,"visual path, not a playable onset"
+98529,98.529,334.9986,arc_start,98824,756,color 0
+98823,98.823,335.9982,arc_start,99117,757,color 1
+99118,99.118,337.0012,arc_start,99265,758,color 0
+99118,99.118,337.0012,arc_continuation,99412,759,color 1
+99265,99.265,337.501,arc_continuation,99412,760,color 0
+99412,99.412,338.0008,arc_continuation,99706,761,color 0
+99412,99.412,338.0008,trace_segment,100000,762,"visual path, not a playable onset"
+99412,99.412,338.0008,arc_continuation,99707,763,color 1
+99706,99.706,339.0004,arc_continuation,100000,764,color 0
+100000,100.0,340.0,sky_tap,,765,parent arc at 100000
+100000,100.0,340.0,trace_segment,100441,765,"visual path, not a playable onset"
+100000,100.0,340.0,arc_continuation,100295,766,color 0
+100294,100.294,340.9996,arc_start,100442,767,color 1
+100441,100.441,341.4994,arc_start,100589,768,color 0
+100588,100.588,341.9992,trace_segment,100735,769,"visual path, not a playable onset"
+100588,100.588,341.9992,hold_start,100736,770,lane 3
+100735,100.735,342.499,arc_start,100883,771,color 0
+100882,100.882,342.9988,trace_segment,101176,772,"visual path, not a playable onset"
+100882,100.882,342.9988,arc_start,101030,773,color 1
+101029,101.029,343.4986,trace_segment,101176,774,"visual path, not a playable onset"
+101029,101.029,343.4986,hold_start,101177,775,lane 3
+101176,101.176,343.9984,trace_segment,101765,776,"visual path, not a playable onset"
+101176,101.176,343.9984,arc_start,101471,777,color 1
+101471,101.471,345.0014,arc_start,101766,778,color 0
+101764,101.764,345.9976,arc_start,102059,779,color 1
+101765,101.765,346.001,trace_segment,102353,780,"visual path, not a playable onset"
+102059,102.059,347.0006,arc_start,102353,781,color 0
+102353,102.353,348.0002,sky_tap,,780,parent arc at 101765
+102353,102.353,348.0002,arc_continuation,102648,782,color 0
+102353,102.353,348.0002,trace_segment,102647,783,"visual path, not a playable onset"
+102647,102.647,348.9998,trace_segment,103235,784,"visual path, not a playable onset"
+102647,102.647,348.9998,arc_start,102795,785,color 1
+102794,102.794,349.4996,arc_start,102942,786,color 0
+102941,102.941,349.9994,trace_segment,103088,787,"visual path, not a playable onset"
+102941,102.941,349.9994,hold_start,103089,788,lane 2
+103088,103.088,350.4992,arc_start,103236,789,color 0
+103235,103.235,350.999,arc_start,103530,790,color 1
+103235,103.235,350.999,trace_segment,103824,791,"visual path, not a playable onset"
+103529,103.529,351.9986,arc_start,103823,792,color 0
+103823,103.823,352.9982,arc_continuation,104117,793,color 0
+103823,103.823,352.9982,trace_segment,104412,794,"visual path, not a playable onset"
+103823,103.823,352.9982,arc_start,103970,795,color 1
+103970,103.97,353.498,arc_continuation,104117,796,color 1
+104117,104.117,353.9978,arc_continuation,104412,797,color 0
+104117,104.117,353.9978,arc_continuation,104411,798,color 1
+104412,104.412,355.0008,arc_continuation,104706,799,color 1
+104412,104.412,355.0008,trace_segment,104706,800,"visual path, not a playable onset"
+104705,104.705,355.997,arc_continuation,105000,801,color 1
+104705,104.705,355.997,sky_tap,,802,parent arc at 104705
+104705,104.705,355.997,trace_segment,105146,802,"visual path, not a playable onset"
+104999,104.999,356.9966,arc_start,105147,803,color 0
+105146,105.146,357.4964,arc_start,105294,804,color 1
+105293,105.293,357.9962,trace_segment,105440,805,"visual path, not a playable onset"
+105293,105.293,357.9962,hold_start,105441,806,lane 2
+105440,105.44,358.496,arc_start,105588,807,color 1
+105587,105.587,358.9958,arc_start,105735,808,color 0
+105587,105.587,358.9958,trace_segment,105881,809,"visual path, not a playable onset"
+105734,105.734,359.4956,trace_segment,105881,810,"visual path, not a playable onset"
+105734,105.734,359.4956,hold_start,105882,811,lane 2
+105881,105.881,359.9954,arc_start,106176,812,color 0
+105881,105.881,359.9954,trace_segment,106470,813,"visual path, not a playable onset"
+106176,106.176,360.9984,arc_start,106471,814,color 1
+106469,106.469,361.9946,arc_start,106764,815,color 0
+106470,106.47,361.998,trace_segment,107058,816,"visual path, not a playable onset"
+106764,106.764,362.9976,arc_start,107058,817,color 1
+107058,107.058,363.9972,sky_tap,,816,parent arc at 106470
+107058,107.058,363.9972,trace_segment,107352,818,"visual path, not a playable onset"
+107058,107.058,363.9972,arc_continuation,107353,819,color 1
+107352,107.352,364.9968,arc_start,107500,820,color 0
+107352,107.352,364.9968,trace_segment,107940,821,"visual path, not a playable onset"
+107499,107.499,365.4966,arc_start,107647,822,color 1
+107646,107.646,365.9964,trace_segment,107793,823,"visual path, not a playable onset"
+107646,107.646,365.9964,hold_start,107794,824,lane 3
+107793,107.793,366.4962,arc_start,107941,825,color 1
+107941,107.941,366.9994,trace_segment,108530,826,"visual path, not a playable onset"
+107941,107.941,366.9994,arc_start,108236,827,color 0
+108235,108.235,367.999,arc_start,108529,828,color 1
+108529,108.529,368.9986,arc_start,108676,829,color 0
+108529,108.529,368.9986,arc_continuation,108676,830,color 1
+108676,108.676,369.4984,arc_continuation,108823,831,color 0
+108676,108.676,369.4984,arc_continuation,108823,832,color 1
+108823,108.823,369.9982,arc_continuation,109118,833,color 0
+108823,108.823,369.9982,arc_continuation,109118,834,color 1
+109411,109.411,371.9974,arc_start,109999,835,color 0
+109411,109.411,371.9974,floor_tap,,836,lane 4
+109705,109.705,372.997,floor_tap,,837,lane 2
+110000,110.0,374.0,arc_continuation,110589,838,color 0
+110000,110.0,374.0,floor_tap,,839,lane 4
+110294,110.294,374.9996,floor_tap,,840,lane 2
+110588,110.588,375.9992,arc_start,111176,841,color 1
+110882,110.882,376.9988,floor_tap,,842,lane 3
+111176,111.176,377.9984,arc_continuation,111765,843,color 1
+111176,111.176,377.9984,floor_tap,,844,lane 1
+111470,111.47,378.998,floor_tap,,845,lane 3
+111764,111.764,379.9976,arc_start,112352,846,color 0
+111764,111.764,379.9976,trace_segment,112352,847,"visual path, not a playable onset"
+111960,111.96,380.664,trace_segment,112352,848,"visual path, not a playable onset"
+112058,112.058,380.9972,sky_tap,,847,parent arc at 111764
+112352,112.352,381.9968,sky_tap,,848,parent arc at 111960
+112352,112.352,381.9968,arc_continuation,112941,849,color 0
+112352,112.352,381.9968,trace_segment,112941,850,"visual path, not a playable onset"
+112352,112.352,381.9968,trace_segment,112745,851,"visual path, not a playable onset"
+112647,112.647,382.9998,sky_tap,,850,parent arc at 112352
+112941,112.941,383.9994,trace_segment,113529,852,"visual path, not a playable onset"
+112941,112.941,383.9994,arc_start,113529,853,color 1
+113137,113.137,384.6658,trace_segment,113529,854,"visual path, not a playable onset"
+113235,113.235,384.999,sky_tap,,852,parent arc at 112941
+113529,113.529,385.9986,sky_tap,,854,parent arc at 113137
+113529,113.529,385.9986,trace_segment,113922,855,"visual path, not a playable onset"
+113529,113.529,385.9986,trace_segment,114118,856,"visual path, not a playable onset"
+113529,113.529,385.9986,arc_continuation,114118,857,color 1
+113824,113.824,387.0016,sky_tap,,856,parent arc at 113529
+114117,114.117,387.9978,sky_tap,,858,parent arc at 114117
+114117,114.117,387.9978,trace_segment,116470,858,"visual path, not a playable onset"
+114117,114.117,387.9978,trace_segment,116470,859,"visual path, not a playable onset"
+114264,114.264,388.4976,floor_tap,,860,lane 2
+114411,114.411,388.9974,floor_tap,,861,lane 1
+114558,114.558,389.4972,sky_tap,,859,parent arc at 114117
+114632,114.632,389.7488,floor_tap,,862,lane 3
+114705,114.705,389.997,sky_tap,,859,parent arc at 114117
+114852,114.852,390.4968,floor_tap,,863,lane 1
+115000,115.0,391.0,floor_tap,,864,lane 2
+115147,115.147,391.4998,sky_tap,,858,parent arc at 114117
+115294,115.294,391.9996,sky_tap,,859,parent arc at 114117
+115441,115.441,392.4994,floor_tap,,865,lane 3
+115588,115.588,392.9992,floor_tap,,866,lane 4
+115735,115.735,393.499,sky_tap,,858,parent arc at 114117
+115808,115.808,393.7472,floor_tap,,867,lane 2
+115882,115.882,393.9988,sky_tap,,858,parent arc at 114117
+116029,116.029,394.4986,floor_tap,,868,lane 4
+116176,116.176,394.9984,floor_tap,,869,lane 3
+116323,116.323,395.4982,sky_tap,,859,parent arc at 114117
+116470,116.47,395.998,sky_tap,,870,parent arc at 116470
+116470,116.47,395.998,trace_segment,117500,870,"visual path, not a playable onset"
+116470,116.47,395.998,trace_segment,117647,871,"visual path, not a playable onset"
+116544,116.544,396.2496,floor_tap,,872,lane 2
+116617,116.617,396.4978,sky_tap,,870,parent arc at 116470
+116764,116.764,396.9976,floor_tap,,873,lane 4
+116911,116.911,397.4974,sky_tap,,870,parent arc at 116470
+116985,116.985,397.749,floor_tap,,874,lane 3
+117058,117.058,397.9972,sky_tap,,870,parent arc at 116470
+117205,117.205,398.497,floor_tap,,875,lane 4
+117352,117.352,398.9968,floor_tap,,876,lane 3
+117500,117.5,399.5,floor_tap,,877,lane 2
+117647,117.647,399.9998,sky_tap,,878,parent arc at 117647
+117647,117.647,399.9998,trace_segment,118235,878,"visual path, not a playable onset"
+117721,117.721,400.2514,floor_tap,,879,lane 3
+117794,117.794,400.4996,sky_tap,,878,parent arc at 117647
+117941,117.941,400.9994,floor_tap,,880,lane 1
+118088,118.088,401.4992,sky_tap,,878,parent arc at 117647
+118162,118.162,401.7508,floor_tap,,881,lane 2
+118235,118.235,401.999,sky_tap,,878,parent arc at 117647
+118235,118.235,401.999,trace_segment,118823,882,"visual path, not a playable onset"
+118382,118.382,402.4988,floor_tap,,883,lane 1
+118529,118.529,402.9986,floor_tap,,884,lane 2
+118677,118.677,403.5018,floor_tap,,885,lane 3
+118823,118.823,403.9982,sky_tap,,886,parent arc at 118823
+118823,118.823,403.9982,trace_segment,119117,886,"visual path, not a playable onset"
+118823,118.823,403.9982,arc_start,119118,887,color 1
+119117,119.117,404.9978,arc_start,119265,888,color 0
+119264,119.264,405.4976,trace_segment,119411,889,"visual path, not a playable onset"
+119264,119.264,405.4976,hold_start,119412,890,lane 2
+119411,119.411,405.9974,arc_start,119559,891,color 0
+119558,119.558,406.4972,trace_segment,120000,892,"visual path, not a playable onset"
+119558,119.558,406.4972,arc_start,119706,893,color 1
+119705,119.705,406.997,trace_segment,119852,894,"visual path, not a playable onset"
+119705,119.705,406.997,hold_start,119853,895,lane 3
+119852,119.852,407.4968,arc_start,120000,896,color 1
+119999,119.999,407.9966,arc_start,120294,897,color 0
+119999,119.999,407.9966,trace_segment,120588,898,"visual path, not a playable onset"
+120294,120.294,408.9996,arc_start,120441,899,color 1
+120441,120.441,409.4994,arc_continuation,120589,900,color 1
+120588,120.588,409.9992,arc_start,120883,901,color 0
+120588,120.588,409.9992,trace_segment,121176,902,"visual path, not a playable onset"
+120882,120.882,410.9988,arc_start,121176,903,color 1
+121176,121.176,411.9984,sky_tap,,902,parent arc at 120588
+121176,121.176,411.9984,trace_segment,121470,904,"visual path, not a playable onset"
+121176,121.176,411.9984,arc_continuation,121471,905,color 1
+121470,121.47,412.998,arc_start,121618,906,color 0
+121617,121.617,413.4978,trace_segment,121764,907,"visual path, not a playable onset"
+121617,121.617,413.4978,hold_start,121765,908,lane 3
+121764,121.764,413.9976,arc_start,121912,909,color 0
+121911,121.911,414.4974,arc_start,122059,910,color 1
+122058,122.058,414.9972,trace_segment,122205,911,"visual path, not a playable onset"
+122058,122.058,414.9972,hold_start,122206,912,lane 3
+122205,122.205,415.497,trace_segment,122647,913,"visual path, not a playable onset"
+122205,122.205,415.497,arc_start,122353,914,color 1
+122352,122.352,415.9968,arc_start,122646,915,color 0
+122646,122.646,416.9964,arc_continuation,122940,916,color 0
+122646,122.646,416.9964,arc_start,122793,917,color 1
+122646,122.646,416.9964,trace_segment,123235,918,"visual path, not a playable onset"
+122793,122.793,417.4962,arc_continuation,122940,919,color 1
+122940,122.94,417.996,arc_continuation,123235,920,color 0
+122940,122.94,417.996,arc_continuation,123234,921,color 1
+123235,123.235,418.999,trace_segment,123529,922,"visual path, not a playable onset"
+123235,123.235,418.999,arc_continuation,123383,923,color 1
+123529,123.529,419.9986,arc_start,123824,924,color 0
+123529,123.529,419.9986,sky_tap,,925,parent arc at 123529
+123529,123.529,419.9986,trace_segment,123823,925,"visual path, not a playable onset"
+123823,123.823,420.9982,arc_start,123971,926,color 1
+123970,123.97,421.498,trace_segment,124117,927,"visual path, not a playable onset"
+123970,123.97,421.498,hold_start,124118,928,lane 3
+124117,124.117,421.9978,arc_start,124265,929,color 1
+124264,124.264,422.4976,arc_start,124412,930,color 0
+124264,124.264,422.4976,trace_segment,124706,931,"visual path, not a playable onset"
+124411,124.411,422.9974,trace_segment,124558,932,"visual path, not a playable onset"
+124411,124.411,422.9974,hold_start,124559,933,lane 2
+124558,124.558,423.4972,arc_start,124706,934,color 0
+124705,124.705,423.997,trace_segment,125294,935,"visual path, not a playable onset"
+124705,124.705,423.997,arc_start,125000,936,color 1
+125000,125.0,425.0,arc_start,125147,937,color 0
+125147,125.147,425.4998,arc_continuation,125295,938,color 0
+125294,125.294,425.9996,trace_segment,125882,939,"visual path, not a playable onset"
+125294,125.294,425.9996,arc_start,125589,940,color 1
+125588,125.588,426.9992,arc_start,125882,941,color 0
+125882,125.882,427.9988,sky_tap,,939,parent arc at 125294
+125882,125.882,427.9988,arc_continuation,126177,942,color 0
+125882,125.882,427.9988,trace_segment,126176,943,"visual path, not a playable onset"
+126176,126.176,428.9984,arc_start,126324,944,color 1
+126323,126.323,429.4982,trace_segment,126470,945,"visual path, not a playable onset"
+126323,126.323,429.4982,hold_start,126471,946,lane 2
+126470,126.47,429.998,arc_start,126618,947,color 1
+126617,126.617,430.4978,arc_start,126765,948,color 0
+126764,126.764,430.9976,trace_segment,126911,949,"visual path, not a playable onset"
+126764,126.764,430.9976,hold_start,126912,950,lane 2
+126911,126.911,431.4974,arc_start,127059,951,color 0
+126911,126.911,431.4974,trace_segment,127353,952,"visual path, not a playable onset"
+127058,127.058,431.9972,arc_start,127353,953,color 1
+127058,127.058,431.9972,trace_segment,127352,954,"visual path, not a playable onset"
+127352,127.352,432.9968,trace_segment,128087,955,"visual path, not a playable onset"
+127352,127.352,432.9968,trace_segment,128087,956,"visual path, not a playable onset"
+127499,127.499,433.4966,sky_tap,,955,parent arc at 127352
+127646,127.646,433.9964,sky_tap,,956,parent arc at 127352
+127793,127.793,434.4962,sky_tap,,955,parent arc at 127352
+127940,127.94,434.996,sky_tap,,956,parent arc at 127352
+128087,128.087,435.4958,sky_tap,,955,parent arc at 127352
+128235,128.235,435.999,arc_start,128530,957,color 0
+128235,128.235,435.999,hold_start,128383,958,lane 3
+128529,128.529,436.9986,trace_segment,128823,959,"visual path, not a playable onset"
+128529,128.529,436.9986,floor_tap,,960,lane 4
+128676,128.676,437.4984,sky_tap,,959,parent arc at 128529
+128750,128.75,437.75,floor_tap,,961,lane 3
+128823,128.823,437.9982,arc_start,129118,962,color 0
+129117,129.117,438.9978,trace_segment,129411,963,"visual path, not a playable onset"
+129117,129.117,438.9978,trace_segment,129411,964,"visual path, not a playable onset"
+129117,129.117,438.9978,floor_tap,,965,lane 4
+129264,129.264,439.4976,sky_tap,,963,parent arc at 129117
+129338,129.338,439.7492,floor_tap,,966,lane 3
+129411,129.411,439.9974,arc_start,129558,967,color 0
+129411,129.411,439.9974,trace_segment,129853,968,"visual path, not a playable onset"
+129558,129.558,440.4972,sky_tap,,968,parent arc at 129411
+129558,129.558,440.4972,arc_continuation,129706,969,color 0
+129705,129.705,440.997,trace_segment,129999,970,"visual path, not a playable onset"
+129705,129.705,440.997,hold_start,130000,971,lane 3
+129853,129.853,441.5002,sky_tap,,968,parent arc at 129411
+129999,129.999,441.9966,arc_start,130146,972,color 0
+130146,130.146,442.4964,arc_continuation,130294,973,color 0
+130147,130.147,442.4998,floor_tap,,974,lane 4
+130294,130.294,442.9996,floor_tap,,975,lane 3
+130441,130.441,443.4994,floor_tap,,976,lane 1
+130588,130.588,443.9992,arc_start,130883,977,color 1
+130588,130.588,443.9992,hold_start,130736,978,lane 2
+130882,130.882,444.9988,trace_segment,131176,979,"visual path, not a playable onset"
+130882,130.882,444.9988,floor_tap,,980,lane 1
+131029,131.029,445.4986,sky_tap,,979,parent arc at 130882
+131102,131.102,445.7468,floor_tap,,981,lane 2
+131176,131.176,445.9984,arc_start,131471,982,color 1
+131470,131.47,446.998,trace_segment,131764,983,"visual path, not a playable onset"
+131470,131.47,446.998,trace_segment,131764,984,"visual path, not a playable onset"
+131470,131.47,446.998,floor_tap,,985,lane 1
+131617,131.617,447.4978,sky_tap,,984,parent arc at 131470
+131691,131.691,447.7494,floor_tap,,986,lane 2
+131764,131.764,447.9976,trace_segment,132206,987,"visual path, not a playable onset"
+131764,131.764,447.9976,arc_start,131911,988,color 1
+131911,131.911,448.4974,sky_tap,,987,parent arc at 131764
+131911,131.911,448.4974,arc_continuation,132059,989,color 1
+132058,132.058,448.9972,trace_segment,132352,990,"visual path, not a playable onset"
+132058,132.058,448.9972,hold_start,132353,991,lane 2
+132206,132.206,449.5004,sky_tap,,987,parent arc at 131764
+132352,132.352,449.9968,arc_start,132499,992,color 1
+132499,132.499,450.4966,arc_continuation,132647,993,color 1
+132500,132.5,450.5,floor_tap,,994,lane 1
+132647,132.647,450.9998,floor_tap,,995,lane 2
+132794,132.794,451.4996,floor_tap,,996,lane 4
+132941,132.941,451.9994,arc_start,133236,997,color 0
+132941,132.941,451.9994,hold_start,133089,998,lane 3
+133235,133.235,452.999,trace_segment,133529,999,"visual path, not a playable onset"
+133235,133.235,452.999,floor_tap,,1000,lane 4
+133382,133.382,453.4988,sky_tap,,999,parent arc at 133235
+133455,133.455,453.747,floor_tap,,1001,lane 3
+133529,133.529,453.9986,arc_start,133824,1002,color 0
+133823,133.823,454.9982,trace_segment,134117,1003,"visual path, not a playable onset"
+133823,133.823,454.9982,trace_segment,134117,1004,"visual path, not a playable onset"
+133823,133.823,454.9982,floor_tap,,1005,lane 4
+133970,133.97,455.498,sky_tap,,1003,parent arc at 133823
+134044,134.044,455.7496,floor_tap,,1006,lane 3
+134117,134.117,455.9978,arc_start,134264,1007,color 0
+134117,134.117,455.9978,trace_segment,134559,1008,"visual path, not a playable onset"
+134264,134.264,456.4976,sky_tap,,1008,parent arc at 134117
+134264,134.264,456.4976,arc_continuation,134412,1009,color 0
+134411,134.411,456.9974,trace_segment,134705,1010,"visual path, not a playable onset"
+134411,134.411,456.9974,hold_start,134706,1011,lane 3
+134558,134.558,457.4972,trace_segment,134632,1012,"visual path, not a playable onset"
+134559,134.559,457.5006,sky_tap,,1008,parent arc at 134117
+134632,134.632,457.7488,trace_segment,134853,1013,"visual path, not a playable onset"
+134705,134.705,457.997,arc_start,134852,1014,color 0
+134852,134.852,458.4968,arc_continuation,135000,1015,color 0
+134853,134.853,458.5002,sky_tap,,1016,parent arc at 134853
+134853,134.853,458.5002,trace_segment,135147,1016,"visual path, not a playable onset"
+135000,135.0,459.0,sky_tap,,1016,parent arc at 134853
+135147,135.147,459.4998,sky_tap,,1016,parent arc at 134853
+135294,135.294,459.9996,arc_start,135589,1017,color 1
+135294,135.294,459.9996,hold_start,135442,1018,lane 2
+135588,135.588,460.9992,trace_segment,135882,1019,"visual path, not a playable onset"
+135588,135.588,460.9992,floor_tap,,1020,lane 1
+135735,135.735,461.499,sky_tap,,1019,parent arc at 135588
+135808,135.808,461.7472,floor_tap,,1021,lane 2
+135882,135.882,461.9988,arc_start,136177,1022,color 1
+136176,136.176,462.9984,trace_segment,136470,1023,"visual path, not a playable onset"
+136176,136.176,462.9984,trace_segment,136470,1024,"visual path, not a playable onset"
+136176,136.176,462.9984,floor_tap,,1025,lane 1
+136323,136.323,463.4982,sky_tap,,1024,parent arc at 136176
+136397,136.397,463.7498,floor_tap,,1026,lane 2
+136470,136.47,463.998,trace_segment,136912,1027,"visual path, not a playable onset"
+136470,136.47,463.998,arc_start,136617,1028,color 1
+136617,136.617,464.4978,sky_tap,,1027,parent arc at 136470
+136617,136.617,464.4978,arc_continuation,136765,1029,color 1
+136764,136.764,464.9976,trace_segment,137058,1030,"visual path, not a playable onset"
+136764,136.764,464.9976,hold_start,137059,1031,lane 2
+136911,136.911,465.4974,trace_segment,136985,1032,"visual path, not a playable onset"
+136912,136.912,465.5008,sky_tap,,1027,parent arc at 136470
+136985,136.985,465.749,trace_segment,137206,1033,"visual path, not a playable onset"
+137058,137.058,465.9972,arc_start,137205,1034,color 1
+137205,137.205,466.497,arc_continuation,137353,1035,color 1
+137206,137.206,466.5004,sky_tap,,1036,parent arc at 137206
+137206,137.206,466.5004,trace_segment,137500,1036,"visual path, not a playable onset"
+137353,137.353,467.0002,sky_tap,,1036,parent arc at 137206
+137500,137.5,467.5,sky_tap,,1036,parent arc at 137206
+137647,137.647,467.9998,hold_start,137795,1037,lane 2
+137647,137.647,467.9998,hold_start,137795,1038,lane 3

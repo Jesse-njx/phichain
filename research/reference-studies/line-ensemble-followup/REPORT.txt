@@ -1,0 +1,35 @@
+BACKGROUND ENSEMBLE FOLLOW-UP — 2026-11-02
+User: C orientation correction is okay, but its background remains absolutely terrible, described as one line dancing left/right. Requested references are Verrückt IN and Der Schneid IN. This is a read-only reference study, not a new generation run.
+
+Evidence used
+Original local IN sources, existing native PhiChain reference renders, four newly extracted audio/video passages, 1/16beat source pose samples, and all four native filmstrips. No web download or reference-chart alteration. No direct listening/instrument transcription is claimed. Clip audio is present for user review. Source alpha/pose is not an aesthetic score and reference source full-opacity background moments are not permission to override the user's current receiving-line hierarchy.
+
+C's concrete failure
+The current C has one dedicated no-note witness. At local16..22 its x is fixed0, its y repeats210..270 on half-beat strokes, opacity stays45/255, and rotation now alternates-42..-32. The orientation correction deliberately separated receiving directions, but left the background's actor count, repeated motion lifecycle and scene organization unchanged. It has no echoing arrivals, transfer to a following group, expanding trail, or withdrawal of one family to introduce another. Named easing and continued movement do not repair this missing organization.
+
+1. Verrückt: overlapping directional relay, not permanent reversal
+Clip source77..89beats,19.412..22.437s. Source lines10/13/14/15 participate in a staggered vertical family in this passage; they carry no judgment heads in this selected passage even though some are used for notes elsewhere in the song.
+Example line14 launches at78 (and again82) from normalizedx-.05 with alpha.8; one beat laterx~.225,alpha~.48; two beats laterx~.326,alpha~.15. Other lines enter one beat apart. At82.5 x~.1165,83 x~.2247,84 x~.3258: its advance decelerates instead of moving at constant speed. It fades before its hidden reset. At238BPM the one-beat launch offset is about252ms.
+The viewer sees a traveling cluster whose leading stroke and fading trails have distinct temporal roles. The repeated rhythm is purposeful; the line object is recycled after withdrawal, instead of showing the same stroke continuously reversing forever.
+
+2. Der Schneid: paired expanding waves with an alternating slope
+Clip126..142beats,34.054..38.378s; core128..136. Pair6/7 appears at128 with both centered, then separates toward opposite sides. Pair8/9 follows at130,10/11 at132,12/13 at134. Their initial orientation alternates-105/+105/-105/+105 degrees (geometric line slopes repeat modulo180). The first pair moves normalizedx.5/.5 ->.21/.79 by129 ->.06/.94 by130, while alpha1 ->.86 ->.57. Subsequent pairs overlap the previous fading pair. By136 the scene hands over to a vertical family.
+This is a two-sided opening, delayed response, diminishing trail and geometric handoff. More objects are present, but their relation is explicit: they are not independent random oscillators. The main receiving surface remains distinguishable from these near-vertical strokes.
+
+3. Der Schneid: several constructions within one short passage
+Clip286..306beats,77.297..82.703s. Lines4..7 rotate/translate through a successive fan at286..294 and depart. A vertical pair appears around296. New parallel diagonal groups14..16 and17..19 form a layered fan/chevron scene around298..304. At300,14/15/16 are parallel at-45degrees with alpha1/.8/.4 and spaced origins. Their brightness hierarchy and group spacing are designed together. Nearby playable receiving geometry also changes, so the scene has a changed focus rather than a backdrop running independently forever.
+The exact instrument/beat-to-emotion interpretation remains unverified. These are measured temporal and spatial relationships visible in native frames.
+
+4. Der Schneid: withdrawing scenery exposes a different task
+Clip238..258beats,64.324..69.730s; core240..256. Crossing decorative groups withdraw; the visible lines in the core are the actual0/2/3 receiving carriers supporting long side Holds and sparse central strikes. This is a distinct composition with a sustained-contact focus, not an instruction to keep all high-energy passages nearly empty. Earlier/later active scenes gain contrast because groups enter and leave deliberately.
+
+Implication for C
+Keep the accepted opposing-orientation association between notes and receiving surfaces. Replace the one-witness loop with a few reusable groups whose roles are explicit:
+- local8..16: use the paired short-press/chord accents to launch a two-sided opening and a delayed answer; earlier strokes decay as the next pair arrives.
+- local16..22: during the raised-plane task, relocate the support to the sides; a staggered vertical relay can sustain activity while its orientation stays clearly distinct from both receiving planes.
+- local24..32: let successive chord formations expand/contract a related group, with hand-side responses leading the appropriate visual side.
+- local32..40: develop the family into directional chains tied to the travel cells, with one primary movement direction at a time and fading trails, then gather/withdraw on the closing phrase40..48.
+These are proposed roles to compose against the target rhythm, not fixed coordinate arrays, a new preset tool, a line-count quota or a musical-emotion mapping. No future motion should be built by repeating the source coordinates or simply staggering the existing bad oscillation.
+
+Review obligations for a future authorized edit
+Record which group leads, which answers, the exact launch/arrival/release anchors and why the group changes at that phrase boundary. Check visible early/late overlap, spatial ordering, brightness ordering, and invisible reset. Preserve current readable receiving orientations and all note obligations unless separately changing arrangement. Evaluate both individual gestures and the whole short scene; don't reduce quality to event totals, activity percentage, maximum displacement or a binary nonlinear-easing label. Original segmented linear events can represent highly nonlinear motion. No automatic improvement loop is started here.

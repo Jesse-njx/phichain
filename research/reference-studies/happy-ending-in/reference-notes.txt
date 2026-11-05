@@ -1,0 +1,100 @@
+REFERENCE STUDY — What do you want more than a Happy ending? / IN
+Recorded 2026-10-29. Scope: download, numeric speed and frequency analysis only.
+USER DIRECTION: Use this IN chart as the future charting-style reference. Do not edit Override yet.
+
+SOURCE AND IDENTITY
+Community extraction mirror: https://github.com/7aGiven/Phigros_Resource
+Exact downloaded file: https://raw.githubusercontent.com/7aGiven/Phigros_Resource/5d40bfdf05bee53f5107a6ea5620ca0e953de815/WhatdoyouwantmorethanaHappyending.Apo11oHALOprogramft%E5%AE%89%E6%9C%88%E5%90%8D%E8%8E%89%E5%AD%90%E5%A4%A7%E7%80%AC%E8%89%AF%E3%81%82%E3%81%84.0/IN.json
+Chart tree SHA: 5d40bfdf05bee53f5107a6ea5620ca0e953de815
+IN Git blob SHA: da4d868c6f79b06a21f174648290eb88710fe71a
+SHA256: 971f1189ed24a6d0d0b87009ad17809375c59efc821746a33990257831edce59
+Original preserved unmodified as IN.original.json. Format v3, 24 lines, BPM 219.
+Metadata difficulty: IN 16 / 16.1, not IN15. Note count 1217 independently agrees with the song wiki.
+Wiki: https://wikiwiki.jp/phigros/What%20do%20you%20want%20more%20than%20a%20Happy%20ending%3F
+Metadata attribution strings may be shared across difficulties; do not infer IN illustration author from the shared info.tsv row.
+
+SCROLL SPEED — THE MAIN CORRECTION
+The reference's ordinary official speed 2.3 converts to PhiChain native speed 10.35.
+Formula is native_speed = official_speed / 2 * 9, from phichain-format/src/official/into_phichain.rs.
+PhiChain scroll distance uses viewport_height * 120/900 * integrated native speed,
+from phichain-game/src/core.rs. Therefore 10.35 = 1.38 screen-heights/second.
+Override currently uses native speed 4.6 = 0.613333 screen-heights/second.
+Reference ordinary scroll is 2.25 times faster. Override is only 44.44% of this baseline.
+At the same travel distance, reference approach time is 44.44% of Override's.
+For a fixed horizontal line and a half-screen approach only: 0.362s vs 0.815s.
+These normalized times are NOT measured visibility durations: line origin, rotation,
+opacity, side, note extent and speed transitions affect actual reading time.
+1175 / 1217 notes (96.55%) have effective speed 2.3 at judgment.
+Other effective speeds at judgment: 2.1 (31 notes), 2.0 (3), 1.0 (6), 0.0 (2).
+Holds: official note.speed is absolute; do not multiply it by line speed again.
+999/0/negative line speeds also exist; they are special events, not baseline speed targets.
+Prior Override speed was not calibrated against this reference; structural validity did not establish good reading feel.
+
+NOTE FREQUENCY
+Count each tap/hold/drag/flick object once at the head. Do not count hold ticks.
+Simultaneous notes are separate objects for NPS; deduplicate their timestamps for IOI.
+All sliding windows are half-open [start,end). Average below uses first onset through last judgment/hold end,
+including any internal rests, not total audio duration.
+                            Reference IN       Current Override IN15
+Playable notes              1217               729
+Tap / hold / drag / flick   932/190/64/31       622/24/67/16
+Active span                 154.658s           135.294s
+Mean NPS over active span   7.869              5.388
+Maximum 1s NPS              19.0               9.0
+Maximum 4s NPS              14.0               8.75
+Maximum 8s NPS              12.75              8.625
+Peak 1s excluding drags     16.0               9.0
+Unique judgment instants    915                630
+Two-note onset groups       300                99
+Three-note onset groups     1                  0
+Median unique-onset IOI     136.986ms          147.059ms
+10th percentile IOI         68.493ms           147.058ms
+
+Reference has 313 adjacent unique-onset gaps of 8/32 beat (68.493ms, sixteenth notes at 219 BPM),
+356 of 16/32 beat (136.986ms, eighths), and 74 gaps of 10 or 11 ticks (85.62–94.18ms,
+integer-tick approximations near a third-beat interval). Override's minimum unique-onset interval is
+147.059ms; its present generation has no comparable sixteenth-note onset layer.
+IOI is a GLOBAL judgment interval, not a same-hand tapping interval. Alternating hands can produce
+fast global streams while preserving slower per-hand intervals. Do not forbid all fast global timing
+using a minimum same-hand interval, or assume an onset detector is a complete transcription.
+
+CONTRAST, NOT CONSTANT DENSITY
+Reference 60–70s: 114 notes / 11.4 NPS. 80–90s: 4 hold heads / 0.4 NPS.
+100–140s contains 94,106,109,107 notes per successive 10s window.
+Sparse hold heads do not imply hands are idle. Short peak windows and long-section averages differ.
+Reference peak 1s: 28.767–29.767s (19 notes).
+Peak 4s: 26.712–30.712s (56 notes).
+Peak 8s: 61.370–69.370s (102 notes).
+Do not copy these time locations or rhythmic density indiscriminately onto another song.
+
+FUTURE AUTHORING NOTES (NO CHANGES APPLIED)
+1. Use native 10.35 as the measured ordinary-scroll comparison baseline for this reference.
+2. Assess actual reading lead time with renders; speed is independent of judgment density.
+3. Study sixteenth/triplet-like interleaving, accent chords, holds and density relief in the reference.
+4. Fit rhythm to Override's audio; retain reference style rather than mechanically transplanting patterns.
+5. Difficulty IN15 remains unverified. This reference is IN16.1; structural checks cannot certify rating or fun.
+6. This pass does not claim a complete movement/pattern/style analysis or human playtest.
+
+PRESERVATION
+Override was read only. Its chart SHA256 before and after this study is
+bc3e2722820e91db8d3a314509a2f70f5fc8e60e9492645ec0b842981e2a8df4.
+No live editor writes, chart imports, chart conversion, or Override changes were performed.
+
+TEN-SECOND HEAD COUNTS (fixed 10s bins, not section annotations)
+  0– 10s:   6 notes,  0.6 NPS; {'drag': 2, 'flick': 2, 'tap': 2}
+ 10– 20s:  55 notes,  5.5 NPS; {'flick': 2, 'tap': 41, 'hold': 11, 'drag': 1}
+ 20– 30s: 109 notes, 10.9 NPS; {'hold': 15, 'tap': 84, 'drag': 10}
+ 30– 40s:  76 notes,  7.6 NPS; {'tap': 62, 'flick': 4, 'hold': 10}
+ 40– 50s:  86 notes,  8.6 NPS; {'hold': 26, 'tap': 56, 'flick': 4}
+ 50– 60s:  91 notes,  9.1 NPS; {'tap': 68, 'hold': 23}
+ 60– 70s: 114 notes, 11.4 NPS; {'tap': 73, 'flick': 11, 'hold': 6, 'drag': 24}
+ 70– 80s:  89 notes,  8.9 NPS; {'hold': 16, 'tap': 73}
+ 80– 90s:   4 notes,  0.4 NPS; {'hold': 4}
+ 90–100s:  40 notes,  4.0 NPS; {'hold': 5, 'drag': 15, 'tap': 18, 'flick': 2}
+100–110s:  94 notes,  9.4 NPS; {'tap': 73, 'flick': 2, 'hold': 19}
+110–120s: 106 notes, 10.6 NPS; {'tap': 93, 'hold': 11, 'flick': 2}
+120–130s: 109 notes, 10.9 NPS; {'tap': 94, 'hold': 15}
+130–140s: 107 notes, 10.7 NPS; {'hold': 8, 'tap': 99}
+140–150s:  83 notes,  8.3 NPS; {'tap': 65, 'hold': 18}
+150–160s:  48 notes,  4.8 NPS; {'hold': 3, 'flick': 2, 'tap': 31, 'drag': 12}
+160–170s:   0 notes,  0.0 NPS; {}

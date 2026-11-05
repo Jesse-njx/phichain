@@ -1,0 +1,2013 @@
+time_ms,time_seconds,kind,end_ms,noinput,source_line,detail
+468,0.468,hold_start,703,False,4,lane 2
+468,0.468,hold_start,703,False,5,lane 3
+937,0.937,arc_start,1171,False,6,color 1
+937,0.937,floor_tap,,False,7,lane 1
+1171,1.171,arc_start,1406,False,8,color 1
+1171,1.171,arc_continuation,1171,False,9,color 1
+1171,1.171,floor_tap,,False,10,lane 4
+1406,1.406,hold_start,1641,False,11,lane 2
+1757,1.757,floor_tap,,False,12,lane 2
+1757,1.757,floor_tap,,False,13,lane 3
+1875,1.875,arc_start,2109,False,14,color 0
+1875,1.875,floor_tap,,False,15,lane 4
+2109,2.109,arc_continuation,2109,False,16,color 0
+2109,2.109,arc_start,2344,False,17,color 0
+2109,2.109,floor_tap,,False,18,lane 1
+2343,2.343,hold_start,2460,False,19,lane 3
+2460,2.46,floor_tap,,False,20,lane 2
+2519,2.519,floor_tap,,False,21,lane 3
+2578,2.578,hold_start,2695,False,22,lane 2
+2812,2.812,arc_start,3047,False,23,color 0
+2812,2.812,arc_start,3047,False,24,color 1
+3046,3.046,trace_segment,3750,False,25,visual carrier
+3046,3.046,trace_segment,3750,False,26,visual carrier
+3281,3.281,hold_start,3516,False,27,lane 1
+3281,3.281,hold_start,3516,False,28,lane 4
+3750,3.75,sky_tap,,False,26,parent arc 3046
+3750,3.75,trace_segment,4453,False,29,visual carrier
+3750,3.75,trace_segment,4453,False,30,visual carrier
+4453,4.453,trace_segment,4687,False,31,visual carrier
+4453,4.453,trace_segment,4687,False,32,visual carrier
+4687,4.687,sky_tap,,False,34,parent arc 4687
+4687,4.687,trace_segment,5625,False,34,visual carrier
+4687,4.687,arc_start,5624,False,35,color 1
+5625,5.625,sky_tap,,False,36,parent arc 5625
+5625,5.625,trace_segment,6562,False,36,visual carrier
+5625,5.625,arc_continuation,6562,False,37,color 1
+5858,5.858,sky_tap,,False,36,parent arc 5625
+6093,6.093,sky_tap,,False,36,parent arc 5625
+6562,6.562,sky_tap,,False,38,parent arc 6562
+6562,6.562,trace_segment,7500,False,38,visual carrier
+6562,6.562,arc_continuation,7030,False,39,color 1
+7031,7.031,arc_continuation,7500,False,40,color 1
+7500,7.5,trace_segment,8437,False,41,visual carrier
+7500,7.5,sky_tap,,False,42,parent arc 7500
+7500,7.5,trace_segment,7968,False,42,visual carrier
+7733,7.733,sky_tap,,False,41,parent arc 7500
+7734,7.734,sky_tap,,False,42,parent arc 7500
+7968,7.968,sky_tap,,False,41,parent arc 7500
+7968,7.968,sky_tap,,False,43,parent arc 7968
+7968,7.968,trace_segment,8437,False,43,visual carrier
+8202,8.202,sky_tap,,False,41,parent arc 7500
+8203,8.203,sky_tap,,False,43,parent arc 7968
+8437,8.437,arc_start,9374,False,44,color 0
+8437,8.437,sky_tap,,False,45,parent arc 8437
+8437,8.437,trace_segment,9375,False,45,visual carrier
+9375,9.375,sky_tap,,False,46,parent arc 9375
+9375,9.375,trace_segment,10312,False,46,visual carrier
+9375,9.375,arc_continuation,10312,False,47,color 0
+9608,9.608,sky_tap,,False,46,parent arc 9375
+9843,9.843,sky_tap,,False,46,parent arc 9375
+10312,10.312,arc_continuation,10780,False,48,color 0
+10312,10.312,sky_tap,,False,49,parent arc 10312
+10312,10.312,trace_segment,11250,False,49,visual carrier
+10781,10.781,arc_continuation,11250,False,50,color 0
+11250,11.25,sky_tap,,False,51,parent arc 11250
+11250,11.25,trace_segment,11718,False,51,visual carrier
+11250,11.25,trace_segment,12187,False,52,visual carrier
+11483,11.483,sky_tap,,False,52,parent arc 11250
+11484,11.484,sky_tap,,False,51,parent arc 11250
+11718,11.718,sky_tap,,False,52,parent arc 11250
+11718,11.718,sky_tap,,False,53,parent arc 11718
+11718,11.718,trace_segment,12187,False,53,visual carrier
+11952,11.952,sky_tap,,False,52,parent arc 11250
+11953,11.953,sky_tap,,False,53,parent arc 11718
+12187,12.187,arc_start,13124,False,54,color 0
+12187,12.187,arc_start,12655,False,55,color 1
+12656,12.656,arc_continuation,12890,False,56,color 1
+12890,12.89,arc_continuation,13124,False,57,color 1
+13125,13.125,arc_continuation,14062,False,58,color 0
+13125,13.125,arc_continuation,13359,False,59,color 1
+13359,13.359,arc_continuation,13593,False,60,color 1
+13593,13.593,arc_continuation,13827,False,61,color 1
+13828,13.828,arc_continuation,14062,False,62,color 1
+14062,14.062,arc_continuation,14530,False,63,color 0
+14062,14.062,arc_continuation,14999,False,64,color 1
+14531,14.531,arc_continuation,14765,False,65,color 0
+14765,14.765,arc_continuation,14999,False,66,color 0
+15000,15.0,arc_continuation,15234,False,67,color 0
+15000,15.0,arc_continuation,15937,False,68,color 1
+15234,15.234,arc_continuation,15468,False,69,color 0
+15468,15.468,arc_continuation,15702,False,70,color 0
+15703,15.703,arc_continuation,15937,False,71,color 0
+15937,15.937,arc_continuation,17344,False,73,color 0
+15937,15.937,arc_continuation,17344,False,74,color 1
+17343,17.343,trace_segment,19687,False,75,visual carrier
+17343,17.343,trace_segment,19687,False,76,visual carrier
+17577,17.577,sky_tap,,False,76,parent arc 17343
+17636,17.636,sky_tap,,False,75,parent arc 17343
+17694,17.694,sky_tap,,False,76,parent arc 17343
+17753,17.753,sky_tap,,False,75,parent arc 17343
+17812,17.812,sky_tap,,False,76,parent arc 17343
+17929,17.929,sky_tap,,False,75,parent arc 17343
+18046,18.046,sky_tap,,False,76,parent arc 17343
+18164,18.164,sky_tap,,False,76,parent arc 17343
+18281,18.281,sky_tap,,False,75,parent arc 17343
+18398,18.398,sky_tap,,False,76,parent arc 17343
+18515,18.515,sky_tap,,False,75,parent arc 17343
+18632,18.632,sky_tap,,False,75,parent arc 17343
+18750,18.75,sky_tap,,False,76,parent arc 17343
+18867,18.867,sky_tap,,False,75,parent arc 17343
+18925,18.925,sky_tap,,False,76,parent arc 17343
+18984,18.984,sky_tap,,False,75,parent arc 17343
+19101,19.101,sky_tap,,False,76,parent arc 17343
+19160,19.16,sky_tap,,False,75,parent arc 17343
+19218,19.218,sky_tap,,False,76,parent arc 17343
+19335,19.335,sky_tap,,False,75,parent arc 17343
+19453,19.453,sky_tap,,False,75,parent arc 17343
+19453,19.453,sky_tap,,False,76,parent arc 17343
+19687,19.687,trace_segment,26250,False,77,visual carrier
+19687,19.687,trace_segment,19687,False,78,visual carrier
+19687,19.687,arc_start,19687,False,79,color 0
+19687,19.687,arc_start,21561,False,80,color 0
+19687,19.687,trace_segment,19687,False,81,visual carrier
+19687,19.687,trace_segment,26250,False,82,visual carrier
+19687,19.687,arc_start,19922,False,83,color 1
+19687,19.687,arc_start,19687,False,84,color 1
+20155,20.155,arc_start,20390,False,85,color 1
+20156,20.156,arc_start,20156,False,86,color 1
+20507,20.507,arc_start,20507,False,87,color 1
+20507,20.507,arc_start,20742,False,88,color 1
+20858,20.858,arc_start,20976,False,89,color 1
+20859,20.859,arc_start,20859,False,90,color 1
+21093,21.093,arc_start,21093,False,91,color 1
+21093,21.093,arc_start,21210,False,92,color 1
+21327,21.327,arc_start,21561,False,93,color 1
+21328,21.328,arc_start,21328,False,94,color 1
+21562,21.562,arc_continuation,21797,False,95,color 0
+21562,21.562,arc_continuation,23436,False,96,color 1
+22030,22.03,arc_start,22265,False,97,color 0
+22031,22.031,arc_start,22031,False,98,color 0
+22382,22.382,arc_start,22617,False,99,color 0
+22382,22.382,arc_start,22382,False,100,color 0
+22733,22.733,arc_start,22851,False,101,color 0
+22734,22.734,arc_start,22734,False,102,color 0
+22968,22.968,arc_start,23085,False,103,color 0
+22968,22.968,arc_start,22968,False,104,color 0
+23202,23.202,arc_start,23436,False,105,color 0
+23203,23.203,arc_start,23203,False,106,color 0
+23437,23.437,arc_continuation,23525,False,107,color 0
+23437,23.437,arc_continuation,23672,False,108,color 1
+23525,23.525,trace_segment,23554,False,109,visual carrier
+23554,23.554,arc_start,23642,False,110,color 0
+23642,23.642,trace_segment,23671,False,111,visual carrier
+23671,23.671,arc_start,23759,False,112,color 0
+23759,23.759,trace_segment,23789,False,113,visual carrier
+23789,23.789,arc_start,23876,False,114,color 0
+23876,23.876,trace_segment,23906,False,115,visual carrier
+23905,23.905,arc_start,24140,False,116,color 1
+23906,23.906,arc_start,23994,False,117,color 0
+23906,23.906,arc_start,23906,False,118,color 1
+23994,23.994,trace_segment,24023,False,119,visual carrier
+24023,24.023,arc_start,24111,False,120,color 0
+24111,24.111,trace_segment,24140,False,121,visual carrier
+24140,24.14,arc_start,24228,False,122,color 0
+24228,24.228,trace_segment,24257,False,123,visual carrier
+24257,24.257,arc_start,24345,False,124,color 0
+24257,24.257,arc_start,24492,False,125,color 1
+24257,24.257,arc_start,24257,False,126,color 1
+24345,24.345,trace_segment,24375,False,127,visual carrier
+24375,24.375,arc_start,24462,False,128,color 0
+24462,24.462,trace_segment,24492,False,129,visual carrier
+24492,24.492,arc_start,24580,False,130,color 0
+24580,24.58,trace_segment,24609,False,131,visual carrier
+24608,24.608,arc_start,24726,False,132,color 1
+24609,24.609,arc_start,24697,False,133,color 0
+24609,24.609,arc_start,24609,False,134,color 1
+24697,24.697,trace_segment,24726,False,135,visual carrier
+24726,24.726,arc_start,24814,False,136,color 0
+24814,24.814,trace_segment,24843,False,137,visual carrier
+24843,24.843,arc_start,24931,False,138,color 0
+24843,24.843,arc_start,24960,False,139,color 1
+24843,24.843,arc_start,24843,False,140,color 1
+24931,24.931,trace_segment,24960,False,141,visual carrier
+24960,24.96,arc_start,25048,False,142,color 0
+25048,25.048,trace_segment,25078,False,143,visual carrier
+25077,25.077,arc_start,25194,False,144,color 1
+25078,25.078,arc_start,25166,False,145,color 0
+25078,25.078,arc_start,25078,False,146,color 1
+25166,25.166,trace_segment,25195,False,147,visual carrier
+25195,25.195,trace_segment,25283,False,148,visual carrier
+25283,25.283,trace_segment,25312,False,149,visual carrier
+25312,25.312,arc_start,25429,False,150,color 0
+25312,25.312,arc_start,25312,False,151,color 0
+25312,25.312,trace_segment,26250,False,152,visual carrier
+25429,25.429,arc_start,25429,False,153,color 1
+25429,25.429,arc_start,25546,False,154,color 1
+25546,25.546,arc_start,25663,False,155,color 0
+25546,25.546,arc_start,25546,False,156,color 0
+25663,25.663,arc_start,25780,False,157,color 1
+25664,25.664,arc_start,25664,False,158,color 1
+25780,25.78,arc_start,25897,False,159,color 0
+25781,25.781,arc_start,25781,False,160,color 0
+25897,25.897,arc_start,26015,False,161,color 1
+25898,25.898,arc_start,25898,False,162,color 1
+26015,26.015,arc_start,26132,False,163,color 0
+26015,26.015,arc_start,26015,False,164,color 0
+26132,26.132,arc_start,26132,False,165,color 1
+26132,26.132,arc_start,26249,False,166,color 1
+26250,26.25,trace_segment,26953,False,167,visual carrier
+26250,26.25,hold_start,26367,False,168,lane 3
+26484,26.484,hold_start,26601,False,169,lane 2
+26484,26.484,floor_tap,,False,170,lane 3
+26718,26.718,hold_start,26835,False,171,lane 1
+26718,26.718,floor_tap,,False,172,lane 2
+26953,26.953,sky_tap,,False,167,parent arc 26250
+26953,26.953,trace_segment,27187,False,173,visual carrier
+26953,26.953,trace_segment,27187,False,174,visual carrier
+26953,26.953,floor_tap,,False,175,lane 1
+27187,27.187,arc_start,27304,False,176,color 0
+27187,27.187,arc_start,27304,False,177,color 1
+27304,27.304,arc_continuation,27421,False,178,color 0
+27421,27.421,arc_continuation,27539,False,179,color 0
+27421,27.421,arc_start,27539,False,180,color 1
+27539,27.539,arc_continuation,27656,False,181,color 0
+27656,27.656,arc_continuation,27773,False,182,color 0
+27656,27.656,hold_start,27773,False,183,lane 4
+27773,27.773,arc_continuation,27890,False,184,color 0
+27890,27.89,arc_continuation,28007,False,185,color 0
+27890,27.89,hold_start,28007,False,186,lane 2
+28007,28.007,arc_continuation,28125,False,187,color 0
+28125,28.125,arc_continuation,28242,False,188,color 0
+28125,28.125,arc_start,28242,False,189,color 1
+28242,28.242,arc_continuation,28359,False,190,color 0
+28359,28.359,arc_continuation,28476,False,191,color 0
+28359,28.359,arc_start,28476,False,192,color 1
+28476,28.476,arc_continuation,28593,False,193,color 0
+28593,28.593,arc_continuation,28710,False,194,color 0
+28593,28.593,hold_start,28710,False,195,lane 3
+28710,28.71,arc_continuation,28828,False,196,color 0
+28828,28.828,arc_continuation,28945,False,197,color 0
+28828,28.828,hold_start,28945,False,198,lane 1
+29062,29.062,floor_tap,,False,199,lane 2
+29062,29.062,floor_tap,,False,200,lane 3
+29179,29.179,floor_tap,,False,201,lane 2
+29179,29.179,floor_tap,,False,202,lane 3
+29296,29.296,arc_start,29414,False,203,color 1
+29296,29.296,hold_start,29414,False,204,lane 1
+29414,29.414,arc_continuation,29531,False,205,color 1
+29531,29.531,arc_start,29648,False,206,color 0
+29531,29.531,arc_continuation,29648,False,207,color 1
+29648,29.648,arc_continuation,29765,False,208,color 0
+29765,29.765,arc_continuation,29882,False,209,color 0
+29765,29.765,arc_start,29882,False,210,color 1
+29882,29.882,arc_continuation,30000,False,211,color 1
+30000,30.0,arc_continuation,30117,False,212,color 1
+30000,30.0,hold_start,30117,False,213,lane 2
+30175,30.175,floor_tap,,False,214,lane 1
+30234,30.234,floor_tap,,False,215,lane 3
+30351,30.351,floor_tap,,False,216,lane 2
+30351,30.351,floor_tap,,False,217,lane 3
+30468,30.468,arc_start,30585,False,218,color 0
+30468,30.468,hold_start,30585,False,219,lane 4
+30702,30.702,floor_tap,,False,220,lane 2
+30703,30.703,floor_tap,,False,221,lane 3
+30819,30.819,floor_tap,,False,222,lane 2
+30819,30.819,floor_tap,,False,223,lane 3
+30937,30.937,arc_start,31054,False,224,color 0
+30937,30.937,arc_start,31054,False,225,color 1
+31054,31.054,arc_continuation,31171,False,226,color 0
+31171,31.171,arc_continuation,31289,False,227,color 0
+31171,31.171,arc_start,31289,False,228,color 1
+31289,31.289,arc_continuation,31406,False,229,color 0
+31406,31.406,arc_continuation,31523,False,230,color 0
+31406,31.406,arc_start,31523,False,231,color 1
+31523,31.523,arc_continuation,31640,False,232,color 0
+31640,31.64,arc_continuation,31757,False,233,color 0
+31640,31.64,arc_start,31757,False,234,color 1
+31874,31.874,floor_tap,,False,235,lane 2
+31875,31.875,floor_tap,,False,236,lane 3
+31991,31.991,floor_tap,,False,237,lane 3
+31992,31.992,floor_tap,,False,238,lane 2
+32108,32.108,hold_start,32226,False,239,lane 2
+32108,32.108,hold_start,32226,False,240,lane 3
+32343,32.343,floor_tap,,False,241,lane 1
+32402,32.402,floor_tap,,False,242,lane 3
+32460,32.46,floor_tap,,False,243,lane 1
+32578,32.578,floor_tap,,False,244,lane 4
+32636,32.636,floor_tap,,False,245,lane 2
+32695,32.695,floor_tap,,False,246,lane 4
+32812,32.812,arc_start,33280,False,247,color 0
+32812,32.812,arc_start,33280,False,248,color 1
+33281,33.281,arc_continuation,33516,False,249,color 0
+33281,33.281,arc_continuation,33516,False,250,color 1
+33515,33.515,trace_segment,33750,False,251,visual carrier
+33632,33.632,floor_tap,,False,252,lane 2
+33690,33.69,floor_tap,,False,253,lane 3
+33750,33.75,sky_tap,,False,254,parent arc 33750
+33750,33.75,trace_segment,33984,False,254,visual carrier
+33866,33.866,floor_tap,,False,255,lane 3
+33984,33.984,sky_tap,,False,256,parent arc 33984
+33984,33.984,trace_segment,34218,False,256,visual carrier
+33984,33.984,floor_tap,,False,257,lane 1
+34101,34.101,floor_tap,,False,258,lane 2
+34218,34.218,sky_tap,,False,256,parent arc 33984
+34218,34.218,floor_tap,,False,259,lane 4
+34453,34.453,floor_tap,,False,260,lane 3
+34570,34.57,floor_tap,,False,261,lane 2
+34687,34.687,arc_start,34804,False,262,color 0
+34687,34.687,arc_start,34804,False,263,color 1
+34804,34.804,arc_continuation,34921,False,264,color 1
+34921,34.921,arc_start,35039,False,265,color 0
+34921,34.921,arc_continuation,35039,False,266,color 1
+35039,35.039,arc_continuation,35156,False,267,color 1
+35156,35.156,arc_continuation,35273,False,268,color 1
+35156,35.156,hold_start,35273,False,269,lane 1
+35273,35.273,arc_continuation,35390,False,270,color 1
+35390,35.39,arc_continuation,35507,False,271,color 1
+35390,35.39,hold_start,35507,False,272,lane 3
+35507,35.507,arc_continuation,35625,False,273,color 1
+35625,35.625,arc_start,35742,False,274,color 0
+35625,35.625,arc_continuation,35742,False,275,color 1
+35742,35.742,arc_continuation,35859,False,276,color 1
+35859,35.859,arc_start,35976,False,277,color 0
+35859,35.859,arc_continuation,35976,False,278,color 1
+35976,35.976,arc_continuation,36093,False,279,color 1
+36093,36.093,arc_continuation,36210,False,280,color 1
+36093,36.093,hold_start,36210,False,281,lane 2
+36210,36.21,arc_continuation,36328,False,282,color 1
+36328,36.328,arc_continuation,36445,False,283,color 1
+36328,36.328,hold_start,36445,False,284,lane 4
+36562,36.562,floor_tap,,False,285,lane 2
+36562,36.562,floor_tap,,False,286,lane 3
+36679,36.679,floor_tap,,False,287,lane 2
+36679,36.679,floor_tap,,False,288,lane 3
+36796,36.796,arc_start,36914,False,289,color 0
+36796,36.796,hold_start,36914,False,290,lane 4
+36914,36.914,arc_continuation,37031,False,291,color 0
+37031,37.031,arc_continuation,37148,False,292,color 0
+37031,37.031,arc_start,37148,False,293,color 1
+37148,37.148,arc_continuation,37265,False,294,color 1
+37265,37.265,arc_start,37382,False,295,color 0
+37265,37.265,arc_continuation,37382,False,296,color 1
+37382,37.382,arc_continuation,37500,False,297,color 0
+37500,37.5,arc_continuation,37617,False,298,color 0
+37500,37.5,hold_start,37617,False,299,lane 3
+37675,37.675,floor_tap,,False,300,lane 4
+37734,37.734,floor_tap,,False,301,lane 2
+37851,37.851,floor_tap,,False,302,lane 2
+37851,37.851,floor_tap,,False,303,lane 3
+37968,37.968,arc_start,38085,False,304,color 1
+37968,37.968,hold_start,38085,False,305,lane 1
+38202,38.202,floor_tap,,False,306,lane 3
+38203,38.203,floor_tap,,False,307,lane 2
+38319,38.319,hold_start,38437,False,308,lane 3
+38437,38.437,floor_tap,,False,309,lane 1
+38496,38.496,floor_tap,,False,310,lane 2
+38554,38.554,floor_tap,,False,311,lane 1
+38671,38.671,floor_tap,,False,312,lane 3
+38730,38.73,floor_tap,,False,313,lane 2
+38789,38.789,floor_tap,,False,314,lane 3
+38906,38.906,arc_start,39023,False,315,color 0
+38906,38.906,arc_start,39023,False,316,color 1
+39023,39.023,arc_continuation,39140,False,317,color 1
+39140,39.14,arc_start,39257,False,318,color 0
+39140,39.14,arc_continuation,39257,False,319,color 1
+39375,39.375,floor_tap,,False,320,lane 4
+39433,39.433,floor_tap,,False,321,lane 3
+39492,39.492,floor_tap,,False,322,lane 4
+39609,39.609,floor_tap,,False,323,lane 2
+39667,39.667,floor_tap,,False,324,lane 3
+39726,39.726,floor_tap,,False,325,lane 2
+39843,39.843,arc_start,39960,False,326,color 0
+39843,39.843,arc_start,39960,False,327,color 1
+39960,39.96,arc_continuation,40078,False,328,color 0
+40078,40.078,arc_continuation,40195,False,329,color 0
+40078,40.078,arc_start,40195,False,330,color 1
+40195,40.195,trace_segment,40312,False,331,visual carrier
+40312,40.312,sky_tap,,False,332,parent arc 40312
+40312,40.312,trace_segment,40371,False,332,visual carrier
+40312,40.312,floor_tap,,False,333,lane 2
+40371,40.371,trace_segment,40546,False,334,visual carrier
+40429,40.429,floor_tap,,False,335,lane 1
+40546,40.546,sky_tap,,False,336,parent arc 40546
+40546,40.546,trace_segment,40605,False,336,visual carrier
+40605,40.605,trace_segment,41250,False,337,visual carrier
+40664,40.664,arc_start,40899,False,338,color 0
+40898,40.898,floor_tap,,False,339,lane 4
+41015,41.015,floor_tap,,False,340,lane 1
+41132,41.132,floor_tap,,False,341,lane 3
+41249,41.249,floor_tap,,False,342,lane 3
+41250,41.25,sky_tap,,False,343,parent arc 41250
+41250,41.25,trace_segment,41309,False,343,visual carrier
+41309,41.309,trace_segment,41484,False,344,visual carrier
+41367,41.367,floor_tap,,False,345,lane 4
+41484,41.484,sky_tap,,False,346,parent arc 41484
+41484,41.484,trace_segment,41543,False,346,visual carrier
+41543,41.543,trace_segment,42188,False,347,visual carrier
+41601,41.601,arc_start,41836,False,348,color 1
+41835,41.835,floor_tap,,False,349,lane 1
+41953,41.953,floor_tap,,False,350,lane 2
+41953,41.953,floor_tap,,False,351,lane 3
+42187,42.187,arc_start,43124,False,352,color 0
+42187,42.187,arc_start,43124,False,353,color 1
+43125,43.125,arc_continuation,43359,False,354,color 0
+43125,43.125,arc_continuation,43359,False,355,color 1
+43359,43.359,arc_continuation,43593,False,356,color 0
+43359,43.359,arc_continuation,43593,False,357,color 1
+43593,43.593,arc_continuation,43828,False,358,color 0
+43593,43.593,arc_continuation,43828,False,359,color 1
+43828,43.828,trace_segment,43945,False,360,visual carrier
+43828,43.828,trace_segment,43945,False,361,visual carrier
+43945,43.945,trace_segment,44062,False,362,visual carrier
+43945,43.945,trace_segment,44062,False,363,visual carrier
+44062,44.062,trace_segment,45000,False,364,visual carrier
+44062,44.062,arc_start,44296,False,365,color 1
+44062,44.062,floor_tap,,False,366,lane 2
+44296,44.296,arc_continuation,44530,False,367,color 1
+44296,44.296,floor_tap,,False,368,lane 3
+44531,44.531,arc_continuation,44765,False,369,color 1
+44531,44.531,floor_tap,,False,370,lane 4
+44765,44.765,arc_continuation,45000,False,371,color 1
+45000,45.0,arc_start,45234,False,372,color 0
+45000,45.0,trace_segment,45937,False,373,visual carrier
+45233,45.233,floor_tap,,False,374,lane 2
+45234,45.234,arc_continuation,45468,False,375,color 0
+45468,45.468,arc_continuation,45702,False,376,color 0
+45468,45.468,floor_tap,,False,377,lane 1
+45703,45.703,arc_continuation,45938,False,378,color 0
+45937,45.937,trace_segment,46406,False,379,visual carrier
+45937,45.937,arc_start,46171,False,380,color 1
+46171,46.171,arc_continuation,46406,False,381,color 1
+46171,46.171,floor_tap,,False,382,lane 3
+46406,46.406,arc_start,46640,False,383,color 0
+46406,46.406,trace_segment,46875,False,384,visual carrier
+46640,46.64,arc_continuation,46875,False,385,color 0
+46640,46.64,floor_tap,,False,386,lane 2
+46875,46.875,trace_segment,47343,False,387,visual carrier
+46875,46.875,arc_start,47109,False,388,color 1
+47109,47.109,arc_continuation,47344,False,389,color 1
+47109,47.109,floor_tap,,False,390,lane 3
+47343,47.343,arc_start,47577,False,391,color 0
+47343,47.343,trace_segment,47812,False,392,visual carrier
+47578,47.578,arc_continuation,47813,False,393,color 0
+47578,47.578,floor_tap,,False,394,lane 2
+47812,47.812,trace_segment,48750,False,395,visual carrier
+47812,47.812,arc_start,48046,False,396,color 1
+48046,48.046,arc_continuation,48280,False,397,color 1
+48046,48.046,floor_tap,,False,398,lane 3
+48281,48.281,arc_continuation,48515,False,399,color 1
+48281,48.281,floor_tap,,False,400,lane 4
+48515,48.515,arc_continuation,48749,False,401,color 1
+48750,48.75,sky_tap,,False,402,parent arc 48750
+48750,48.75,trace_segment,49218,False,402,visual carrier
+48750,48.75,arc_continuation,48984,False,403,color 1
+48984,48.984,arc_continuation,49219,False,404,color 1
+48984,48.984,floor_tap,,False,405,lane 3
+49218,49.218,trace_segment,49687,False,406,visual carrier
+49219,49.219,arc_start,49453,False,407,color 0
+49453,49.453,arc_continuation,49687,False,408,color 0
+49453,49.453,floor_tap,,False,409,lane 2
+49687,49.687,sky_tap,,False,406,parent arc 49218
+49687,49.687,arc_continuation,49921,False,410,color 0
+49687,49.687,trace_segment,50156,False,411,visual carrier
+49921,49.921,arc_continuation,50155,False,412,color 0
+50156,50.156,arc_continuation,50390,False,413,color 0
+50156,50.156,arc_start,50624,False,414,color 1
+50390,50.39,arc_continuation,50624,False,415,color 0
+50625,50.625,arc_continuation,51329,False,416,color 0
+50625,50.625,arc_continuation,51329,False,417,color 1
+51328,51.328,trace_segment,51562,False,418,visual carrier
+51562,51.562,arc_start,51797,False,419,color 1
+51562,51.562,floor_tap,,False,420,lane 1
+51796,51.796,trace_segment,52031,False,421,visual carrier
+51796,51.796,floor_tap,,False,422,lane 3
+52030,52.03,floor_tap,,False,423,lane 2
+52031,52.031,arc_start,52266,False,424,color 1
+52265,52.265,trace_segment,52500,False,425,visual carrier
+52265,52.265,floor_tap,,False,426,lane 4
+52500,52.5,arc_start,52735,False,427,color 0
+52500,52.5,floor_tap,,False,428,lane 4
+52733,52.733,floor_tap,,False,429,lane 2
+52734,52.734,trace_segment,52968,False,430,visual carrier
+52968,52.968,arc_start,53203,False,431,color 0
+52968,52.968,floor_tap,,False,432,lane 3
+53202,53.202,floor_tap,,False,433,lane 1
+53203,53.203,trace_segment,53437,False,434,visual carrier
+53437,53.437,trace_segment,53671,False,435,visual carrier
+53437,53.437,floor_tap,,False,436,lane 1
+53437,53.437,hold_start,53554,False,437,lane 2
+53671,53.671,arc_start,53789,False,438,color 1
+53671,53.671,floor_tap,,False,439,lane 2
+53789,53.789,trace_segment,54140,False,440,visual carrier
+53905,53.905,floor_tap,,False,441,lane 1
+53906,53.906,hold_start,54023,False,442,lane 4
+54140,54.14,arc_start,54257,False,443,color 1
+54140,54.14,floor_tap,,False,444,lane 3
+54257,54.257,trace_segment,54609,False,445,visual carrier
+54374,54.374,hold_start,54491,False,446,lane 3
+54375,54.375,floor_tap,,False,447,lane 4
+54609,54.609,arc_start,54727,False,448,color 0
+54609,54.609,floor_tap,,False,449,lane 3
+54726,54.726,trace_segment,55078,False,450,visual carrier
+54843,54.843,floor_tap,,False,451,lane 4
+54844,54.844,hold_start,54961,False,452,lane 1
+55077,55.077,floor_tap,,False,453,lane 2
+55078,55.078,arc_start,55195,False,454,color 0
+55195,55.195,trace_segment,55312,False,455,visual carrier
+55312,55.312,arc_start,55547,False,456,color 1
+55312,55.312,floor_tap,,False,457,lane 1
+55546,55.546,trace_segment,55781,False,458,visual carrier
+55546,55.546,floor_tap,,False,459,lane 3
+55781,55.781,arc_start,56016,False,460,color 0
+55781,55.781,floor_tap,,False,461,lane 4
+56015,56.015,trace_segment,56250,False,462,visual carrier
+56015,56.015,floor_tap,,False,463,lane 2
+56249,56.249,hold_start,56366,False,464,lane 4
+56250,56.25,trace_segment,56484,False,465,visual carrier
+56250,56.25,floor_tap,,False,466,lane 1
+56484,56.484,arc_start,56601,False,467,color 1
+56484,56.484,floor_tap,,False,468,lane 2
+56601,56.601,trace_segment,56718,False,469,visual carrier
+56718,56.718,trace_segment,56953,False,470,visual carrier
+56718,56.718,hold_start,56835,False,471,lane 1
+56718,56.718,floor_tap,,False,472,lane 4
+56953,56.953,arc_start,57070,False,473,color 0
+56953,56.953,floor_tap,,False,474,lane 3
+57070,57.07,trace_segment,57187,False,475,visual carrier
+57187,57.187,sky_tap,,False,476,parent arc 57187
+57187,57.187,trace_segment,58593,False,476,visual carrier
+57187,57.187,floor_tap,,False,477,lane 1
+57421,57.421,sky_tap,,False,476,parent arc 57187
+57421,57.421,floor_tap,,False,478,lane 3
+57656,57.656,sky_tap,,False,476,parent arc 57187
+57656,57.656,floor_tap,,False,479,lane 2
+57890,57.89,sky_tap,,False,476,parent arc 57187
+57890,57.89,floor_tap,,False,480,lane 4
+58125,58.125,sky_tap,,False,476,parent arc 57187
+58242,58.242,sky_tap,,False,476,parent arc 57187
+58359,58.359,sky_tap,,False,476,parent arc 57187
+58476,58.476,sky_tap,,False,476,parent arc 57187
+58593,58.593,sky_tap,,False,476,parent arc 57187
+58593,58.593,trace_segment,59062,False,481,visual carrier
+58828,58.828,floor_tap,,False,482,lane 2
+58828,58.828,floor_tap,,False,483,lane 3
+59062,59.062,arc_start,59120,False,485,color 0
+59062,59.062,trace_segment,66562,False,486,visual carrier
+59062,59.062,hold_start,59414,False,487,lane 4
+59120,59.12,trace_segment,59179,False,488,visual carrier
+59179,59.179,arc_start,59237,False,489,color 0
+59237,59.237,trace_segment,59296,False,490,visual carrier
+59296,59.296,arc_start,59354,False,491,color 0
+59354,59.354,trace_segment,59413,False,492,visual carrier
+59413,59.413,arc_start,59472,False,493,color 0
+59530,59.53,hold_start,59647,False,494,lane 3
+59647,59.647,hold_start,59765,False,495,lane 2
+59882,59.882,hold_start,60234,False,496,lane 1
+59999,59.999,arc_start,60058,False,497,color 1
+60058,60.058,trace_segment,60116,False,498,visual carrier
+60116,60.116,arc_start,60175,False,499,color 1
+60175,60.175,trace_segment,60233,False,500,visual carrier
+60233,60.233,arc_start,60292,False,501,color 1
+60292,60.292,trace_segment,60351,False,502,visual carrier
+60351,60.351,arc_start,60409,False,503,color 1
+60468,60.468,hold_start,60585,False,504,lane 2
+60702,60.702,hold_start,60819,False,505,lane 3
+60937,60.937,arc_start,60996,False,506,color 0
+60937,60.937,hold_start,61054,False,507,lane 4
+60996,60.996,trace_segment,61054,False,508,visual carrier
+61054,61.054,arc_start,61113,False,509,color 0
+61113,61.113,trace_segment,61171,False,510,visual carrier
+61171,61.171,arc_start,61230,False,511,color 0
+61171,61.171,hold_start,61288,False,512,lane 3
+61230,61.23,trace_segment,61289,False,513,visual carrier
+61289,61.289,arc_start,61347,False,514,color 0
+61405,61.405,hold_start,61522,False,515,lane 4
+61522,61.522,hold_start,61640,False,516,lane 2
+61757,61.757,hold_start,62109,False,517,lane 1
+61875,61.875,arc_start,61933,False,518,color 1
+61933,61.933,trace_segment,61992,False,519,visual carrier
+61992,61.992,arc_start,62050,False,520,color 1
+62050,62.05,trace_segment,62109,False,521,visual carrier
+62109,62.109,arc_start,62167,False,522,color 1
+62167,62.167,trace_segment,62226,False,523,visual carrier
+62226,62.226,arc_start,62285,False,524,color 1
+62578,62.578,floor_tap,,False,525,lane 2
+62695,62.695,floor_tap,,False,526,lane 3
+62812,62.812,arc_start,62870,False,527,color 0
+62812,62.812,hold_start,62929,False,528,lane 4
+62870,62.87,trace_segment,62929,False,529,visual carrier
+62929,62.929,arc_start,62987,False,530,color 0
+62987,62.987,trace_segment,63046,False,531,visual carrier
+63046,63.046,arc_start,63104,False,532,color 0
+63046,63.046,hold_start,63281,False,533,lane 3
+63104,63.104,trace_segment,63163,False,534,visual carrier
+63163,63.163,arc_start,63339,False,535,color 0
+63339,63.339,trace_segment,63397,False,536,visual carrier
+63397,63.397,arc_start,63456,False,537,color 0
+63456,63.456,trace_segment,63515,False,538,visual carrier
+63515,63.515,trace_segment,63573,False,539,visual carrier
+63515,63.515,floor_tap,,False,540,lane 3
+63573,63.573,trace_segment,63632,False,541,visual carrier
+63632,63.632,trace_segment,63690,False,542,visual carrier
+63632,63.632,floor_tap,,False,543,lane 2
+63690,63.69,trace_segment,63749,False,544,visual carrier
+63749,63.749,arc_start,63808,False,545,color 1
+63750,63.75,hold_start,63867,False,546,lane 1
+63808,63.808,trace_segment,63866,False,547,visual carrier
+63866,63.866,arc_start,63925,False,548,color 1
+63925,63.925,trace_segment,63983,False,549,visual carrier
+63983,63.983,arc_start,64042,False,550,color 1
+63984,63.984,hold_start,64219,False,551,lane 2
+64042,64.042,trace_segment,64101,False,552,visual carrier
+64101,64.101,arc_start,64276,False,553,color 1
+64276,64.276,trace_segment,64335,False,554,visual carrier
+64335,64.335,arc_start,64394,False,555,color 1
+64394,64.394,trace_segment,64452,False,556,visual carrier
+64452,64.452,arc_start,64511,False,557,color 1
+64453,64.453,floor_tap,,False,558,lane 2
+64511,64.511,trace_segment,64569,False,559,visual carrier
+64569,64.569,trace_segment,64628,False,560,visual carrier
+64628,64.628,trace_segment,64687,False,561,visual carrier
+64687,64.687,arc_start,64745,False,562,color 0
+64687,64.687,floor_tap,,False,563,lane 4
+64745,64.745,trace_segment,64804,False,564,visual carrier
+64804,64.804,arc_start,64862,False,565,color 0
+64862,64.862,trace_segment,64921,False,566,visual carrier
+64921,64.921,arc_start,64979,False,567,color 0
+64921,64.921,floor_tap,,False,568,lane 3
+64979,64.979,trace_segment,65038,False,569,visual carrier
+65038,65.038,arc_start,65214,False,570,color 0
+65156,65.156,floor_tap,,False,571,lane 2
+65214,65.214,trace_segment,65272,False,572,visual carrier
+65272,65.272,arc_start,65331,False,573,color 0
+65273,65.273,floor_tap,,False,574,lane 3
+65331,65.331,trace_segment,65390,False,575,visual carrier
+65390,65.39,trace_segment,65448,False,576,visual carrier
+65448,65.448,trace_segment,65507,False,577,visual carrier
+65507,65.507,trace_segment,65565,False,578,visual carrier
+65507,65.507,hold_start,65976,False,579,lane 1
+65565,65.565,trace_segment,65624,False,580,visual carrier
+65625,65.625,arc_start,65684,False,581,color 1
+65684,65.684,trace_segment,65742,False,582,visual carrier
+65742,65.742,arc_start,65801,False,583,color 1
+65801,65.801,trace_segment,65859,False,584,visual carrier
+65859,65.859,arc_start,65918,False,585,color 1
+65918,65.918,trace_segment,65977,False,586,visual carrier
+65977,65.977,arc_start,66094,False,587,color 1
+66094,66.094,trace_segment,66152,False,588,visual carrier
+66094,66.094,floor_tap,,False,589,lane 3
+66152,66.152,trace_segment,66211,False,590,visual carrier
+66211,66.211,trace_segment,66270,False,591,visual carrier
+66270,66.27,trace_segment,66328,False,592,visual carrier
+66327,66.327,floor_tap,,False,593,lane 3
+66328,66.328,trace_segment,66387,False,594,visual carrier
+66328,66.328,floor_tap,,False,595,lane 2
+66387,66.387,trace_segment,66445,False,596,visual carrier
+66445,66.445,trace_segment,66504,False,597,visual carrier
+66504,66.504,trace_segment,66563,False,598,visual carrier
+66562,66.562,arc_start,67031,False,599,color 0
+66562,66.562,trace_segment,75937,False,600,visual carrier
+66562,66.562,trace_segment,67499,False,601,visual carrier
+66562,66.562,hold_start,66914,False,602,lane 4
+67030,67.03,trace_segment,68437,False,603,visual carrier
+67031,67.031,floor_tap,,False,604,lane 4
+67148,67.148,floor_tap,,False,605,lane 3
+67382,67.382,hold_start,67734,False,606,lane 1
+67499,67.499,arc_start,67968,False,607,color 1
+67968,67.968,trace_segment,69374,False,608,visual carrier
+67968,67.968,floor_tap,,False,609,lane 1
+68203,68.203,floor_tap,,False,610,lane 2
+68437,68.437,arc_start,68906,False,611,color 0
+68437,68.437,floor_tap,,False,612,lane 4
+68671,68.671,floor_tap,,False,613,lane 4
+68789,68.789,floor_tap,,False,614,lane 4
+68905,68.905,trace_segment,75937,False,615,visual carrier
+69023,69.023,floor_tap,,False,616,lane 3
+69257,69.257,hold_start,69609,False,617,lane 1
+69374,69.374,arc_start,69843,False,618,color 1
+69843,69.843,trace_segment,75937,False,619,visual carrier
+70078,70.078,floor_tap,,False,620,lane 2
+70078,70.078,floor_tap,,False,621,lane 3
+70312,70.312,sky_tap,,False,615,parent arc 68905
+70312,70.312,floor_tap,,False,622,lane 4
+70546,70.546,sky_tap,,False,615,parent arc 68905
+70546,70.546,floor_tap,,False,623,lane 4
+70663,70.663,hold_start,70897,False,624,lane 3
+70780,70.78,sky_tap,,False,615,parent arc 68905
+71015,71.015,sky_tap,,False,615,parent arc 68905
+71015,71.015,floor_tap,,False,625,lane 3
+71249,71.249,sky_tap,,False,619,parent arc 69843
+71250,71.25,floor_tap,,False,626,lane 1
+71483,71.483,sky_tap,,False,619,parent arc 69843
+71483,71.483,floor_tap,,False,627,lane 1
+71601,71.601,hold_start,71835,False,628,lane 2
+71718,71.718,sky_tap,,False,619,parent arc 69843
+71952,71.952,sky_tap,,False,619,parent arc 69843
+71952,71.952,floor_tap,,False,629,lane 2
+72187,72.187,sky_tap,,False,615,parent arc 68905
+72304,72.304,floor_tap,,False,630,lane 3
+72421,72.421,sky_tap,,False,615,parent arc 68905
+72538,72.538,floor_tap,,False,631,lane 4
+72655,72.655,sky_tap,,False,619,parent arc 69843
+72772,72.772,floor_tap,,False,632,lane 2
+72890,72.89,sky_tap,,False,619,parent arc 69843
+73007,73.007,floor_tap,,False,633,lane 1
+73124,73.124,sky_tap,,False,615,parent arc 68905
+73124,73.124,sky_tap,,False,619,parent arc 69843
+73359,73.359,floor_tap,,False,634,lane 3
+73476,73.476,floor_tap,,False,635,lane 2
+73593,73.593,sky_tap,,False,600,parent arc 66562
+73710,73.71,sky_tap,,False,600,parent arc 66562
+73827,73.827,sky_tap,,False,600,parent arc 66562
+73944,73.944,sky_tap,,False,600,parent arc 66562
+74062,74.062,sky_tap,,False,615,parent arc 68905
+74062,74.062,sky_tap,,False,619,parent arc 69843
+74296,74.296,floor_tap,,False,636,lane 1
+74414,74.414,floor_tap,,False,637,lane 4
+74530,74.53,sky_tap,,False,600,parent arc 66562
+74647,74.647,sky_tap,,False,600,parent arc 66562
+74765,74.765,sky_tap,,False,600,parent arc 66562
+74882,74.882,sky_tap,,False,600,parent arc 66562
+74999,74.999,sky_tap,,False,615,parent arc 68905
+74999,74.999,sky_tap,,False,619,parent arc 69843
+75233,75.233,hold_start,75351,False,638,lane 2
+75351,75.351,floor_tap,,False,639,lane 3
+75409,75.409,floor_tap,,False,640,lane 2
+75468,75.468,floor_tap,,False,641,lane 3
+75585,75.585,sky_tap,,False,615,parent arc 68905
+75644,75.644,sky_tap,,False,619,parent arc 69843
+75702,75.702,sky_tap,,False,615,parent arc 68905
+75937,75.937,trace_segment,77783,False,643,visual carrier
+75937,75.937,trace_segment,83322,False,644,visual carrier
+75937,75.937,trace_segment,77668,False,645,visual carrier
+75937,75.937,hold_start,76168,False,646,lane 3
+75937,75.937,hold_start,76168,False,647,lane 4
+76398,76.398,hold_start,76629,False,648,lane 3
+76398,76.398,hold_start,76629,False,649,lane 4
+76860,76.86,arc_start,76975,False,650,color 0
+76860,76.86,arc_start,76975,False,651,color 1
+77091,77.091,arc_start,77206,False,652,color 0
+77091,77.091,arc_start,77206,False,653,color 1
+77321,77.321,arc_start,77437,False,654,color 0
+77321,77.321,arc_start,77437,False,655,color 1
+77668,77.668,trace_segment,77783,False,656,visual carrier
+77783,77.783,trace_segment,79514,False,658,visual carrier
+77783,77.783,floor_tap,,False,659,lane 1
+77783,77.783,floor_tap,,False,660,lane 2
+78244,78.244,floor_tap,,False,661,lane 1
+78244,78.244,floor_tap,,False,662,lane 2
+78706,78.706,sky_tap,,False,663,parent arc 78706
+78706,78.706,trace_segment,78707,False,663,visual carrier
+78706,78.706,sky_tap,,False,664,parent arc 78706
+78706,78.706,trace_segment,78707,False,664,visual carrier
+78937,78.937,sky_tap,,False,665,parent arc 78937
+78937,78.937,trace_segment,78938,False,665,visual carrier
+78937,78.937,sky_tap,,False,666,parent arc 78937
+78937,78.937,trace_segment,78938,False,666,visual carrier
+79167,79.167,sky_tap,,False,667,parent arc 79167
+79167,79.167,trace_segment,79168,False,667,visual carrier
+79167,79.167,sky_tap,,False,668,parent arc 79167
+79167,79.167,trace_segment,79168,False,668,visual carrier
+79514,79.514,trace_segment,79629,False,669,visual carrier
+79629,79.629,trace_segment,81360,False,671,visual carrier
+79629,79.629,arc_start,79745,False,672,color 1
+79629,79.629,hold_start,79744,False,673,lane 4
+79860,79.86,arc_start,80091,False,674,color 1
+79860,79.86,hold_start,80091,False,675,lane 4
+80206,80.206,arc_start,80437,False,676,color 1
+80206,80.206,hold_start,80437,False,677,lane 4
+80552,80.552,arc_start,80667,False,678,color 1
+80552,80.552,hold_start,80668,False,679,lane 3
+80783,80.783,arc_start,80898,False,680,color 1
+80783,80.783,hold_start,80898,False,681,lane 3
+81013,81.013,arc_start,81129,False,682,color 1
+81014,81.014,hold_start,81129,False,683,lane 3
+81360,81.36,trace_segment,81475,False,684,visual carrier
+81475,81.475,sky_tap,,False,686,parent arc 81475
+81475,81.475,trace_segment,81476,False,686,visual carrier
+81475,81.475,trace_segment,83206,False,687,visual carrier
+81475,81.475,floor_tap,,False,688,lane 1
+81706,81.706,sky_tap,,False,689,parent arc 81706
+81706,81.706,trace_segment,81707,False,689,visual carrier
+81706,81.706,floor_tap,,False,690,lane 1
+82052,82.052,sky_tap,,False,691,parent arc 82052
+82052,82.052,trace_segment,82053,False,691,visual carrier
+82052,82.052,floor_tap,,False,692,lane 1
+82398,82.398,sky_tap,,False,693,parent arc 82398
+82398,82.398,trace_segment,82399,False,693,visual carrier
+82398,82.398,floor_tap,,False,694,lane 2
+82629,82.629,sky_tap,,False,695,parent arc 82629
+82629,82.629,trace_segment,82630,False,695,visual carrier
+82629,82.629,floor_tap,,False,696,lane 2
+82860,82.86,sky_tap,,False,697,parent arc 82860
+82860,82.86,trace_segment,82861,False,697,visual carrier
+82860,82.86,floor_tap,,False,698,lane 2
+83206,83.206,trace_segment,83322,False,699,visual carrier
+83322,83.322,trace_segment,86877,False,701,visual carrier
+83322,83.322,arc_start,83545,False,702,color 0
+83322,83.322,trace_segment,84988,False,703,visual carrier
+83322,83.322,hold_start,83545,False,704,lane 4
+83655,83.655,arc_start,83878,False,705,color 0
+83655,83.655,hold_start,83878,False,706,lane 4
+83988,83.988,arc_start,84099,False,707,color 0
+83988,83.988,hold_start,84099,False,708,lane 4
+84210,84.21,arc_start,84322,False,709,color 1
+84210,84.21,hold_start,84322,False,710,lane 3
+84359,84.359,arc_start,84470,False,711,color 1
+84359,84.359,hold_start,84470,False,712,lane 3
+84507,84.507,arc_start,84618,False,713,color 1
+84507,84.507,hold_start,84618,False,714,lane 3
+84655,84.655,arc_start,84766,False,715,color 1
+84655,84.655,hold_start,84766,False,716,lane 3
+84988,84.988,trace_segment,85099,False,717,visual carrier
+85099,85.099,trace_segment,86766,False,719,visual carrier
+85099,85.099,sky_tap,,False,720,parent arc 85099
+85099,85.099,trace_segment,85100,False,720,visual carrier
+85099,85.099,floor_tap,,False,721,lane 1
+85433,85.433,sky_tap,,False,722,parent arc 85433
+85433,85.433,trace_segment,85434,False,722,visual carrier
+85433,85.433,floor_tap,,False,723,lane 1
+85766,85.766,sky_tap,,False,724,parent arc 85766
+85766,85.766,trace_segment,85767,False,724,visual carrier
+85766,85.766,floor_tap,,False,725,lane 1
+85988,85.988,sky_tap,,False,726,parent arc 85988
+85988,85.988,trace_segment,85989,False,726,visual carrier
+85988,85.988,floor_tap,,False,727,lane 2
+86136,86.136,sky_tap,,False,728,parent arc 86136
+86136,86.136,trace_segment,86137,False,728,visual carrier
+86136,86.136,floor_tap,,False,729,lane 2
+86284,86.284,trace_segment,86285,False,730,visual carrier
+86284,86.284,floor_tap,,False,731,lane 2
+86285,86.285,sky_tap,,False,730,parent arc 86284
+86433,86.433,sky_tap,,False,732,parent arc 86433
+86433,86.433,trace_segment,86434,False,732,visual carrier
+86433,86.433,floor_tap,,False,733,lane 2
+86766,86.766,trace_segment,86877,False,734,visual carrier
+86877,86.877,trace_segment,88591,False,736,visual carrier
+86877,86.877,trace_segment,88484,False,737,visual carrier
+86877,86.877,hold_start,86984,False,738,lane 4
+86984,86.984,hold_start,87091,False,739,lane 3
+87198,87.198,arc_start,87305,False,740,color 1
+87305,87.305,arc_start,87412,False,741,color 0
+87519,87.519,hold_start,87627,False,742,lane 4
+87627,87.627,hold_start,87734,False,743,lane 3
+87734,87.734,hold_start,87841,False,744,lane 4
+87948,87.948,arc_start,88055,False,745,color 0
+87948,87.948,arc_start,88055,False,746,color 1
+88162,88.162,hold_start,88269,False,747,lane 3
+88163,88.163,hold_start,88270,False,748,lane 4
+88484,88.484,trace_segment,88591,False,749,visual carrier
+88591,88.591,trace_segment,90143,False,751,visual carrier
+88591,88.591,trace_segment,90247,False,752,visual carrier
+88591,88.591,floor_tap,,False,753,lane 1
+88694,88.694,floor_tap,,False,754,lane 2
+88901,88.901,sky_tap,,False,755,parent arc 88901
+88901,88.901,trace_segment,88902,False,755,visual carrier
+89005,89.005,sky_tap,,False,756,parent arc 89005
+89005,89.005,trace_segment,89006,False,756,visual carrier
+89212,89.212,floor_tap,,False,757,lane 1
+89316,89.316,floor_tap,,False,758,lane 2
+89419,89.419,floor_tap,,False,759,lane 1
+89625,89.625,sky_tap,,False,760,parent arc 89625
+89625,89.625,trace_segment,89626,False,760,visual carrier
+89625,89.625,sky_tap,,False,761,parent arc 89625
+89625,89.625,trace_segment,89626,False,761,visual carrier
+89832,89.832,floor_tap,,False,762,lane 1
+89832,89.832,floor_tap,,False,763,lane 2
+90143,90.143,trace_segment,90247,False,764,visual carrier
+90247,90.247,trace_segment,93447,False,766,visual carrier
+90247,90.247,trace_segment,90947,False,767,visual carrier
+90247,90.247,arc_start,90347,False,768,color 1
+90247,90.247,hold_start,90347,False,769,lane 4
+90447,90.447,arc_start,90547,False,770,color 1
+90447,90.447,hold_start,90547,False,771,lane 3
+90647,90.647,arc_start,90747,False,772,color 1
+90647,90.647,hold_start,90747,False,773,lane 4
+90947,90.947,trace_segment,91047,False,774,visual carrier
+91047,91.047,sky_tap,,False,775,parent arc 91047
+91047,91.047,trace_segment,91048,False,775,visual carrier
+91047,91.047,trace_segment,91747,False,776,visual carrier
+91047,91.047,floor_tap,,False,777,lane 1
+91247,91.247,sky_tap,,False,778,parent arc 91247
+91247,91.247,trace_segment,91248,False,778,visual carrier
+91247,91.247,floor_tap,,False,779,lane 2
+91447,91.447,sky_tap,,False,780,parent arc 91447
+91447,91.447,trace_segment,91448,False,780,visual carrier
+91447,91.447,floor_tap,,False,781,lane 1
+91747,91.747,trace_segment,91847,False,782,visual carrier
+91847,91.847,trace_segment,92547,False,784,visual carrier
+91847,91.847,hold_start,91947,False,785,lane 4
+91947,91.947,hold_start,92047,False,786,lane 3
+92047,92.047,arc_start,92147,False,787,color 1
+92247,92.247,arc_start,92347,False,788,color 0
+92247,92.247,arc_start,92347,False,789,color 1
+92547,92.547,trace_segment,92647,False,790,visual carrier
+92647,92.647,trace_segment,93347,False,791,visual carrier
+92647,92.647,floor_tap,,False,792,lane 1
+92747,92.747,floor_tap,,False,793,lane 2
+92847,92.847,sky_tap,,False,794,parent arc 92847
+92847,92.847,trace_segment,92848,False,794,visual carrier
+93047,93.047,sky_tap,,False,795,parent arc 93047
+93047,93.047,trace_segment,93048,False,795,visual carrier
+93047,93.047,sky_tap,,False,796,parent arc 93047
+93047,93.047,trace_segment,93048,False,796,visual carrier
+93347,93.347,trace_segment,93447,False,797,visual carrier
+93447,93.447,trace_segment,96447,False,799,visual carrier
+93447,93.447,trace_segment,94103,False,800,visual carrier
+93447,93.447,arc_start,93540,False,801,color 1
+93540,93.54,arc_start,93634,False,802,color 0
+93634,93.634,arc_start,93728,False,803,color 1
+93822,93.822,hold_start,93915,False,804,lane 3
+93915,93.915,hold_start,94009,False,805,lane 4
+94009,94.009,hold_start,94103,False,806,lane 3
+94103,94.103,trace_segment,94197,False,807,visual carrier
+94197,94.197,sky_tap,,False,808,parent arc 94197
+94197,94.197,trace_segment,94198,False,808,visual carrier
+94197,94.197,trace_segment,94853,False,809,visual carrier
+94290,94.29,sky_tap,,False,810,parent arc 94290
+94290,94.29,trace_segment,94291,False,810,visual carrier
+94384,94.384,sky_tap,,False,811,parent arc 94384
+94384,94.384,trace_segment,94385,False,811,visual carrier
+94572,94.572,floor_tap,,False,812,lane 2
+94665,94.665,floor_tap,,False,813,lane 1
+94759,94.759,floor_tap,,False,814,lane 2
+94853,94.853,trace_segment,94947,False,815,visual carrier
+94947,94.947,trace_segment,95603,False,817,visual carrier
+94947,94.947,hold_start,95040,False,818,lane 3
+94947,94.947,hold_start,95040,False,819,lane 4
+95072,95.072,arc_start,95165,False,820,color 0
+95197,95.197,arc_start,95290,False,821,color 1
+95322,95.322,hold_start,95415,False,822,lane 3
+95447,95.447,hold_start,95540,False,823,lane 4
+95603,95.603,trace_segment,95697,False,824,visual carrier
+95697,95.697,trace_segment,96353,False,825,visual carrier
+95697,95.697,floor_tap,,False,826,lane 1
+95697,95.697,floor_tap,,False,827,lane 2
+95822,95.822,sky_tap,,False,828,parent arc 95822
+95822,95.822,trace_segment,95823,False,828,visual carrier
+95947,95.947,sky_tap,,False,829,parent arc 95947
+95947,95.947,trace_segment,95948,False,829,visual carrier
+96072,96.072,floor_tap,,False,830,lane 2
+96197,96.197,floor_tap,,False,831,lane 1
+96353,96.353,trace_segment,96447,False,832,visual carrier
+96447,96.447,trace_segment,99270,False,834,visual carrier
+96447,96.447,trace_segment,97064,False,835,visual carrier
+96447,96.447,arc_start,96535,False,836,color 1
+96535,96.535,arc_start,96623,False,837,color 0
+96623,96.623,hold_start,96711,False,838,lane 4
+96711,96.711,hold_start,96800,False,839,lane 3
+96800,96.8,arc_start,96888,False,840,color 1
+96888,96.888,arc_start,96976,False,841,color 0
+96976,96.976,arc_start,97064,False,842,color 1
+97064,97.064,trace_segment,97153,False,843,visual carrier
+97153,97.153,sky_tap,,False,844,parent arc 97153
+97153,97.153,trace_segment,97154,False,844,visual carrier
+97153,97.153,trace_segment,97770,False,845,visual carrier
+97241,97.241,sky_tap,,False,846,parent arc 97241
+97241,97.241,trace_segment,97242,False,846,visual carrier
+97329,97.329,floor_tap,,False,847,lane 1
+97417,97.417,floor_tap,,False,848,lane 2
+97505,97.505,sky_tap,,False,849,parent arc 97505
+97505,97.505,trace_segment,97506,False,849,visual carrier
+97594,97.594,sky_tap,,False,850,parent arc 97594
+97594,97.594,trace_segment,97595,False,850,visual carrier
+97682,97.682,sky_tap,,False,851,parent arc 97682
+97682,97.682,trace_segment,97683,False,851,visual carrier
+97770,97.77,trace_segment,97858,False,852,visual carrier
+97858,97.858,trace_segment,98476,False,854,visual carrier
+97858,97.858,arc_start,97903,False,855,color 1
+97902,97.902,arc_start,97991,False,856,color 0
+97947,97.947,arc_start,98035,False,857,color 1
+98035,98.035,arc_start,98123,False,858,color 0
+98211,98.211,hold_start,98299,False,859,lane 4
+98388,98.388,hold_start,98476,False,860,lane 3
+98388,98.388,hold_start,98476,False,861,lane 4
+98476,98.476,trace_segment,98564,False,862,visual carrier
+98564,98.564,trace_segment,99182,False,863,visual carrier
+98564,98.564,sky_tap,,False,864,parent arc 98564
+98564,98.564,trace_segment,98565,False,864,visual carrier
+98608,98.608,sky_tap,,False,865,parent arc 98608
+98608,98.608,trace_segment,98609,False,865,visual carrier
+98653,98.653,sky_tap,,False,866,parent arc 98653
+98653,98.653,trace_segment,98654,False,866,visual carrier
+98741,98.741,sky_tap,,False,867,parent arc 98741
+98741,98.741,trace_segment,98742,False,867,visual carrier
+98917,98.917,floor_tap,,False,868,lane 1
+99094,99.094,floor_tap,,False,869,lane 1
+99094,99.094,floor_tap,,False,870,lane 2
+99182,99.182,trace_segment,99270,False,871,visual carrier
+99270,99.27,trace_segment,100603,False,873,visual carrier
+99270,99.27,arc_start,99395,False,874,color 0
+99270,99.27,trace_segment,99520,False,875,visual carrier
+99270,99.27,arc_start,99395,False,876,color 1
+99436,99.436,hold_start,99561,False,877,lane 4
+99520,99.52,trace_segment,99603,False,878,visual carrier
+99603,99.603,sky_tap,,False,879,parent arc 99603
+99603,99.603,trace_segment,99604,False,879,visual carrier
+99603,99.603,trace_segment,99853,False,880,visual carrier
+99603,99.603,sky_tap,,False,881,parent arc 99603
+99603,99.603,trace_segment,99604,False,881,visual carrier
+99770,99.77,floor_tap,,False,882,lane 1
+99853,99.853,trace_segment,99937,False,883,visual carrier
+99936,99.936,hold_start,100061,False,884,lane 3
+99936,99.936,hold_start,100061,False,885,lane 4
+99937,99.937,trace_segment,100187,False,886,visual carrier
+100103,100.103,arc_start,100228,False,887,color 1
+100187,100.187,trace_segment,100270,False,888,visual carrier
+100270,100.27,trace_segment,100520,False,889,visual carrier
+100270,100.27,floor_tap,,False,890,lane 1
+100270,100.27,floor_tap,,False,891,lane 2
+100436,100.436,sky_tap,,False,892,parent arc 100436
+100436,100.436,trace_segment,100520,False,892,visual carrier
+100520,100.52,trace_segment,100603,False,893,visual carrier
+100603,100.603,trace_segment,101867,False,895,visual carrier
+100603,100.603,arc_start,100721,False,896,color 0
+100603,100.603,trace_segment,100840,False,897,visual carrier
+100603,100.603,hold_start,100721,False,898,lane 4
+100760,100.76,hold_start,100879,False,899,lane 3
+100840,100.84,trace_segment,100919,False,900,visual carrier
+100918,100.918,sky_tap,,False,901,parent arc 100918
+100918,100.918,trace_segment,100919,False,901,visual carrier
+100918,100.918,floor_tap,,False,902,lane 1
+100919,100.919,trace_segment,101156,False,903,visual carrier
+101076,101.076,floor_tap,,False,904,lane 2
+101156,101.156,trace_segment,101235,False,905,visual carrier
+101234,101.234,arc_start,101353,False,906,color 1
+101234,101.234,hold_start,101353,False,907,lane 3
+101235,101.235,trace_segment,101472,False,908,visual carrier
+101392,101.392,hold_start,101510,False,909,lane 4
+101472,101.472,trace_segment,101551,False,910,visual carrier
+101550,101.55,sky_tap,,False,911,parent arc 101550
+101550,101.55,trace_segment,101551,False,911,visual carrier
+101550,101.55,floor_tap,,False,912,lane 2
+101551,101.551,trace_segment,101788,False,913,visual carrier
+101708,101.708,floor_tap,,False,914,lane 1
+101788,101.788,trace_segment,101867,False,915,visual carrier
+101788,101.788,trace_segment,101867,False,916,visual carrier
+101867,101.867,trace_segment,103067,False,918,visual carrier
+101867,101.867,trace_segment,103067,False,919,visual carrier
+101867,101.867,trace_segment,103067,False,920,visual carrier
+101867,101.867,arc_start,101979,False,921,color 1
+101867,101.867,floor_tap,,False,922,lane 1
+102017,102.017,arc_start,102129,False,923,color 1
+102167,102.167,sky_tap,,False,924,parent arc 102167
+102167,102.167,trace_segment,102168,False,924,visual carrier
+102167,102.167,hold_start,102279,False,925,lane 4
+102317,102.317,sky_tap,,False,926,parent arc 102317
+102317,102.317,trace_segment,102318,False,926,visual carrier
+102467,102.467,arc_start,102579,False,927,color 1
+102467,102.467,floor_tap,,False,928,lane 1
+102617,102.617,arc_start,102729,False,929,color 1
+102767,102.767,sky_tap,,False,930,parent arc 102767
+102767,102.767,trace_segment,102768,False,930,visual carrier
+102767,102.767,hold_start,102879,False,931,lane 4
+102917,102.917,sky_tap,,False,932,parent arc 102917
+102917,102.917,trace_segment,102918,False,932,visual carrier
+103067,103.067,sky_tap,,False,934,parent arc 103067
+103067,103.067,trace_segment,103068,False,934,visual carrier
+103067,103.067,trace_segment,104210,False,935,visual carrier
+103067,103.067,trace_segment,104210,False,936,visual carrier
+103067,103.067,trace_segment,104210,False,937,visual carrier
+103067,103.067,hold_start,103174,False,938,lane 3
+103209,103.209,hold_start,103317,False,939,lane 4
+103352,103.352,arc_start,103459,False,940,color 1
+103352,103.352,floor_tap,,False,941,lane 2
+103495,103.495,floor_tap,,False,942,lane 1
+103638,103.638,sky_tap,,False,943,parent arc 103638
+103638,103.638,trace_segment,103639,False,943,visual carrier
+103638,103.638,hold_start,103745,False,944,lane 3
+103781,103.781,hold_start,103888,False,945,lane 4
+103923,103.923,floor_tap,,False,946,lane 2
+103924,103.924,arc_start,104031,False,947,color 1
+104066,104.066,floor_tap,,False,948,lane 1
+104210,104.21,trace_segment,105300,False,950,visual carrier
+104210,104.21,trace_segment,105300,False,951,visual carrier
+104210,104.21,trace_segment,105300,False,952,visual carrier
+104210,104.21,arc_start,104312,False,953,color 1
+104210,104.21,floor_tap,,False,954,lane 2
+104346,104.346,hold_start,104448,False,955,lane 4
+104482,104.482,sky_tap,,False,956,parent arc 104482
+104482,104.482,trace_segment,104483,False,956,visual carrier
+104482,104.482,hold_start,104585,False,957,lane 3
+104619,104.619,floor_tap,,False,958,lane 1
+104755,104.755,arc_start,104857,False,959,color 1
+104755,104.755,floor_tap,,False,960,lane 2
+104891,104.891,hold_start,104994,False,961,lane 4
+105027,105.027,sky_tap,,False,962,parent arc 105027
+105027,105.027,trace_segment,105028,False,962,visual carrier
+105028,105.028,hold_start,105130,False,963,lane 3
+105164,105.164,floor_tap,,False,964,lane 1
+105300,105.3,sky_tap,,False,966,parent arc 105300
+105300,105.3,trace_segment,105301,False,966,visual carrier
+105300,105.3,trace_segment,106344,False,967,visual carrier
+105300,105.3,trace_segment,106344,False,968,visual carrier
+105300,105.3,trace_segment,106344,False,969,visual carrier
+105300,105.3,arc_start,105397,False,970,color 1
+105430,105.43,hold_start,105528,False,971,lane 3
+105560,105.56,arc_start,105658,False,972,color 1
+105561,105.561,sky_tap,,False,973,parent arc 105561
+105561,105.561,trace_segment,105562,False,973,visual carrier
+105692,105.692,floor_tap,,False,974,lane 2
+105821,105.821,arc_start,105919,False,975,color 1
+105822,105.822,sky_tap,,False,976,parent arc 105822
+105822,105.822,trace_segment,105823,False,976,visual carrier
+105952,105.952,hold_start,106050,False,977,lane 3
+106082,106.082,arc_start,106180,False,978,color 1
+106083,106.083,sky_tap,,False,979,parent arc 106083
+106083,106.083,trace_segment,106084,False,979,visual carrier
+106214,106.214,floor_tap,,False,980,lane 2
+106344,106.344,trace_segment,108344,False,982,visual carrier
+106344,106.344,trace_segment,108344,False,983,visual carrier
+106344,106.344,trace_segment,108344,False,984,visual carrier
+106344,106.344,arc_start,106437,False,985,color 1
+106344,106.344,floor_tap,,False,986,lane 1
+106469,106.469,arc_start,106562,False,987,color 1
+106594,106.594,sky_tap,,False,988,parent arc 106594
+106594,106.594,trace_segment,106595,False,988,visual carrier
+106594,106.594,hold_start,106656,False,989,lane 4
+106719,106.719,sky_tap,,False,990,parent arc 106719
+106719,106.719,trace_segment,106720,False,990,visual carrier
+106844,106.844,arc_start,106937,False,991,color 1
+106844,106.844,floor_tap,,False,992,lane 1
+106969,106.969,arc_start,107062,False,993,color 1
+107094,107.094,sky_tap,,False,994,parent arc 107094
+107094,107.094,trace_segment,107095,False,994,visual carrier
+107094,107.094,hold_start,107156,False,995,lane 4
+107219,107.219,sky_tap,,False,996,parent arc 107219
+107219,107.219,trace_segment,107220,False,996,visual carrier
+107344,107.344,arc_start,107437,False,998,color 1
+107344,107.344,floor_tap,,False,999,lane 1
+107469,107.469,arc_start,107562,False,1000,color 1
+107594,107.594,sky_tap,,False,1001,parent arc 107594
+107594,107.594,trace_segment,107595,False,1001,visual carrier
+107594,107.594,hold_start,107656,False,1002,lane 4
+107719,107.719,sky_tap,,False,1003,parent arc 107719
+107719,107.719,trace_segment,107720,False,1003,visual carrier
+107844,107.844,arc_start,107937,False,1004,color 1
+107844,107.844,floor_tap,,False,1005,lane 1
+107969,107.969,arc_start,108062,False,1006,color 1
+108094,108.094,sky_tap,,False,1007,parent arc 108094
+108094,108.094,trace_segment,108095,False,1007,visual carrier
+108094,108.094,hold_start,108156,False,1008,lane 4
+108219,108.219,sky_tap,,False,1009,parent arc 108219
+108219,108.219,trace_segment,108220,False,1009,visual carrier
+108344,108.344,trace_segment,110264,False,1011,visual carrier
+108344,108.344,trace_segment,110264,False,1012,visual carrier
+108344,108.344,trace_segment,110264,False,1013,visual carrier
+108344,108.344,arc_start,108434,False,1014,color 1
+108404,108.404,hold_start,108494,False,1015,lane 3
+108464,108.464,hold_start,108554,False,1016,lane 4
+108584,108.584,sky_tap,,False,1017,parent arc 108584
+108584,108.584,trace_segment,108585,False,1017,visual carrier
+108644,108.644,floor_tap,,False,1018,lane 2
+108704,108.704,floor_tap,,False,1019,lane 1
+108824,108.824,arc_start,108914,False,1020,color 1
+108884,108.884,hold_start,108974,False,1021,lane 3
+108944,108.944,hold_start,109034,False,1022,lane 4
+109064,109.064,sky_tap,,False,1023,parent arc 109064
+109064,109.064,trace_segment,109065,False,1023,visual carrier
+109124,109.124,floor_tap,,False,1024,lane 2
+109184,109.184,floor_tap,,False,1025,lane 1
+109304,109.304,arc_start,109394,False,1027,color 1
+109364,109.364,floor_tap,,False,1028,lane 2
+109424,109.424,hold_start,109514,False,1029,lane 4
+109544,109.544,sky_tap,,False,1030,parent arc 109544
+109544,109.544,trace_segment,109545,False,1030,visual carrier
+109604,109.604,hold_start,109694,False,1031,lane 3
+109664,109.664,floor_tap,,False,1032,lane 1
+109784,109.784,arc_start,109874,False,1033,color 1
+109844,109.844,floor_tap,,False,1034,lane 2
+109904,109.904,hold_start,109994,False,1035,lane 4
+110024,110.024,sky_tap,,False,1036,parent arc 110024
+110024,110.024,trace_segment,110025,False,1036,visual carrier
+110084,110.084,hold_start,110174,False,1037,lane 3
+110144,110.144,floor_tap,,False,1038,lane 1
+110264,110.264,arc_start,110352,False,1040,color 0
+110264,110.264,arc_start,110410,False,1041,color 1
+110352,110.352,trace_segment,110381,False,1042,visual carrier
+110381,110.381,arc_start,110469,False,1043,color 0
+110410,110.41,trace_segment,110440,False,1044,visual carrier
+110440,110.44,arc_start,110528,False,1045,color 1
+110469,110.469,trace_segment,110498,False,1046,visual carrier
+110498,110.498,arc_start,110586,False,1047,color 0
+110528,110.528,trace_segment,110557,False,1048,visual carrier
+110557,110.557,arc_start,110645,False,1049,color 1
+110586,110.586,trace_segment,110615,False,1050,visual carrier
+110615,110.615,arc_start,110703,False,1051,color 0
+110645,110.645,trace_segment,110674,False,1052,visual carrier
+110674,110.674,arc_start,110762,False,1053,color 1
+110703,110.703,trace_segment,110733,False,1054,visual carrier
+110733,110.733,arc_start,110821,False,1055,color 0
+110762,110.762,trace_segment,110791,False,1056,visual carrier
+110791,110.791,arc_start,110879,False,1057,color 1
+110821,110.821,trace_segment,110850,False,1058,visual carrier
+110850,110.85,arc_start,110938,False,1059,color 0
+110879,110.879,trace_segment,110908,False,1060,visual carrier
+110908,110.908,arc_start,110996,False,1061,color 1
+110938,110.938,trace_segment,110967,False,1062,visual carrier
+110967,110.967,arc_start,111055,False,1063,color 0
+110996,110.996,trace_segment,111026,False,1064,visual carrier
+111026,111.026,arc_start,111114,False,1065,color 1
+111055,111.055,trace_segment,111084,False,1066,visual carrier
+111084,111.084,arc_start,111172,False,1067,color 0
+111114,111.114,trace_segment,111143,False,1068,visual carrier
+111143,111.143,arc_start,111201,False,1069,color 1
+111172,111.172,trace_segment,111201,False,1070,visual carrier
+111201,111.201,arc_start,111260,False,1071,color 0
+111201,111.201,arc_continuation,111260,False,1072,color 1
+111260,111.26,arc_continuation,111318,False,1073,color 0
+111260,111.26,arc_continuation,111318,False,1074,color 1
+111318,111.318,arc_continuation,111377,False,1075,color 0
+111318,111.318,arc_continuation,111377,False,1076,color 1
+111377,111.377,arc_continuation,111435,False,1077,color 0
+111377,111.377,arc_continuation,111435,False,1078,color 1
+111435,111.435,arc_continuation,111494,False,1079,color 0
+111435,111.435,arc_continuation,111494,False,1080,color 1
+111494,111.494,arc_continuation,111553,False,1081,color 0
+111494,111.494,arc_continuation,111553,False,1082,color 1
+111553,111.553,trace_segment,111670,False,1083,visual carrier
+111670,111.67,sky_tap,,False,1083,parent arc 111553
+111670,111.67,trace_segment,111905,False,1084,visual carrier
+111670,111.67,trace_segment,111905,False,1085,visual carrier
+111905,111.905,sky_tap,,False,1084,parent arc 111670
+111905,111.905,sky_tap,,False,1085,parent arc 111670
+111905,111.905,trace_segment,112139,False,1086,visual carrier
+111905,111.905,trace_segment,112139,False,1087,visual carrier
+112139,112.139,arc_start,112490,False,1088,color 0
+112139,112.139,trace_segment,112608,False,1089,visual carrier
+112139,112.139,floor_tap,,False,1090,lane 4
+112373,112.373,floor_tap,,False,1091,lane 2
+112608,112.608,sky_tap,,False,1092,parent arc 112608
+112608,112.608,trace_segment,112725,False,1092,visual carrier
+112608,112.608,floor_tap,,False,1093,lane 4
+112666,112.666,trace_segment,113780,False,1094,visual carrier
+112725,112.725,sky_tap,,False,1092,parent arc 112608
+112725,112.725,trace_segment,114014,False,1095,visual carrier
+112842,112.842,floor_tap,,False,1096,lane 2
+112959,112.959,arc_start,113428,False,1097,color 0
+113076,113.076,floor_tap,,False,1098,lane 4
+113311,113.311,sky_tap,,False,1094,parent arc 112666
+113545,113.545,floor_tap,,False,1099,lane 3
+113545,113.545,floor_tap,,False,1100,lane 4
+113662,113.662,floor_tap,,False,1101,lane 2
+113780,113.78,sky_tap,,False,1094,parent arc 112666
+113780,113.78,sky_tap,,False,1095,parent arc 112725
+114014,114.014,trace_segment,114717,False,1102,visual carrier
+114014,114.014,arc_start,114248,False,1103,color 1
+114014,114.014,floor_tap,,False,1104,lane 1
+114248,114.248,arc_continuation,114365,False,1105,color 1
+114248,114.248,floor_tap,,False,1106,lane 3
+114365,114.365,trace_segment,114483,False,1107,visual carrier
+114483,114.483,sky_tap,,False,1108,parent arc 114483
+114483,114.483,trace_segment,114717,False,1108,visual carrier
+114483,114.483,floor_tap,,False,1109,lane 1
+114600,114.6,sky_tap,,False,1108,parent arc 114483
+114717,114.717,trace_segment,114834,False,1110,visual carrier
+114717,114.717,floor_tap,,False,1111,lane 3
+114834,114.834,trace_segment,115889,False,1112,visual carrier
+114834,114.834,arc_start,115186,False,1113,color 1
+114951,114.951,floor_tap,,False,1114,lane 1
+115185,115.185,arc_continuation,115537,False,1115,color 1
+115186,115.186,sky_tap,,False,1112,parent arc 114834
+115420,115.42,floor_tap,,False,1116,lane 1
+115654,115.654,floor_tap,,False,1117,lane 3
+115655,115.655,sky_tap,,False,1112,parent arc 114834
+115771,115.771,floor_tap,,False,1118,lane 3
+115889,115.889,trace_segment,116123,False,1119,visual carrier
+115889,115.889,trace_segment,116123,False,1120,visual carrier
+115889,115.889,floor_tap,,False,1121,lane 1
+115889,115.889,floor_tap,,False,1122,lane 4
+116123,116.123,sky_tap,,False,1123,parent arc 116123
+116123,116.123,trace_segment,116240,False,1123,visual carrier
+116123,116.123,trace_segment,116240,False,1124,visual carrier
+116123,116.123,floor_tap,,False,1125,lane 2
+116240,116.24,arc_start,116475,False,1126,color 0
+116240,116.24,trace_segment,116475,False,1127,visual carrier
+116358,116.358,floor_tap,,False,1128,lane 4
+116475,116.475,trace_segment,116826,False,1129,visual carrier
+116592,116.592,sky_tap,,False,1129,parent arc 116475
+116592,116.592,floor_tap,,False,1130,lane 2
+116709,116.709,floor_tap,,False,1131,lane 3
+116826,116.826,trace_segment,117060,False,1132,visual carrier
+116826,116.826,trace_segment,117060,False,1133,visual carrier
+116826,116.826,floor_tap,,False,1134,lane 1
+116826,116.826,floor_tap,,False,1135,lane 4
+117060,117.06,trace_segment,117177,False,1136,visual carrier
+117060,117.06,sky_tap,,False,1137,parent arc 117060
+117060,117.06,trace_segment,117177,False,1137,visual carrier
+117060,117.06,floor_tap,,False,1138,lane 3
+117177,117.177,trace_segment,117412,False,1139,visual carrier
+117177,117.177,arc_start,117412,False,1140,color 1
+117295,117.295,floor_tap,,False,1141,lane 1
+117412,117.412,trace_segment,117530,False,1142,visual carrier
+117529,117.529,floor_tap,,False,1143,lane 3
+117530,117.53,sky_tap,,False,1142,parent arc 117412
+117764,117.764,arc_start,117998,False,1144,color 0
+117764,117.764,floor_tap,,False,1145,lane 4
+117998,117.998,arc_continuation,118115,False,1146,color 0
+117998,117.998,floor_tap,,False,1147,lane 2
+118115,118.115,trace_segment,118233,False,1148,visual carrier
+118115,118.115,trace_segment,118233,False,1149,visual carrier
+118233,118.233,trace_segment,118584,False,1150,visual carrier
+118233,118.233,trace_segment,118584,False,1151,visual carrier
+118233,118.233,floor_tap,,False,1152,lane 4
+118291,118.291,floor_tap,,False,1153,lane 1
+118350,118.35,floor_tap,,False,1154,lane 4
+118584,118.584,sky_tap,,False,1150,parent arc 118233
+118584,118.584,sky_tap,,False,1151,parent arc 118233
+118584,118.584,trace_segment,119639,False,1155,visual carrier
+118584,118.584,trace_segment,119639,False,1156,visual carrier
+118819,118.819,floor_tap,,False,1157,lane 2
+118819,118.819,floor_tap,,False,1158,lane 3
+118936,118.936,floor_tap,,False,1159,lane 2
+118936,118.936,floor_tap,,False,1160,lane 3
+119170,119.17,sky_tap,,False,1161,parent arc 119170
+119170,119.17,trace_segment,119405,False,1161,visual carrier
+119170,119.17,floor_tap,,False,1162,lane 3
+119405,119.405,sky_tap,,False,1161,parent arc 119170
+119405,119.405,trace_segment,119639,False,1163,visual carrier
+119405,119.405,floor_tap,,False,1164,lane 2
+119521,119.521,floor_tap,,False,1165,lane 3
+119639,119.639,trace_segment,120108,False,1166,visual carrier
+119639,119.639,arc_start,119990,False,1167,color 1
+119639,119.639,floor_tap,,False,1168,lane 1
+119873,119.873,floor_tap,,False,1169,lane 3
+120108,120.108,sky_tap,,False,1170,parent arc 120108
+120108,120.108,trace_segment,120225,False,1170,visual carrier
+120108,120.108,floor_tap,,False,1171,lane 1
+120166,120.166,trace_segment,121280,False,1172,visual carrier
+120225,120.225,sky_tap,,False,1170,parent arc 120108
+120225,120.225,trace_segment,121514,False,1173,visual carrier
+120342,120.342,floor_tap,,False,1174,lane 3
+120459,120.459,arc_start,120928,False,1175,color 1
+120576,120.576,floor_tap,,False,1176,lane 1
+120811,120.811,sky_tap,,False,1172,parent arc 120166
+121045,121.045,floor_tap,,False,1177,lane 1
+121045,121.045,floor_tap,,False,1178,lane 2
+121162,121.162,floor_tap,,False,1179,lane 3
+121280,121.28,sky_tap,,False,1172,parent arc 120166
+121280,121.28,sky_tap,,False,1173,parent arc 120225
+121514,121.514,arc_start,121631,False,1180,color 0
+121514,121.514,arc_start,121631,False,1181,color 1
+121631,121.631,trace_segment,122920,False,1182,visual carrier
+121631,121.631,trace_segment,122920,False,1183,visual carrier
+121748,121.748,floor_tap,,False,1184,lane 1
+121748,121.748,floor_tap,,False,1185,lane 4
+121865,121.865,sky_tap,,False,1182,parent arc 121631
+121865,121.865,sky_tap,,False,1183,parent arc 121631
+122100,122.1,sky_tap,,False,1182,parent arc 121631
+122100,122.1,trace_segment,122334,False,1186,visual carrier
+122100,122.1,floor_tap,,False,1187,lane 2
+122334,122.334,sky_tap,,False,1183,parent arc 121631
+122334,122.334,floor_tap,,False,1188,lane 3
+122569,122.569,sky_tap,,False,1182,parent arc 121631
+122569,122.569,sky_tap,,False,1183,parent arc 121631
+122686,122.686,floor_tap,,False,1189,lane 1
+122686,122.686,floor_tap,,False,1190,lane 4
+122920,122.92,sky_tap,,False,1191,parent arc 122920
+122920,122.92,trace_segment,123389,False,1191,visual carrier
+122920,122.92,sky_tap,,False,1192,parent arc 122920
+122920,122.92,trace_segment,123389,False,1192,visual carrier
+123155,123.155,floor_tap,,False,1193,lane 2
+123155,123.155,floor_tap,,False,1194,lane 3
+123271,123.271,floor_tap,,False,1195,lane 3
+123389,123.389,arc_start,123506,False,1196,color 0
+123389,123.389,trace_segment,124326,False,1197,visual carrier
+123389,123.389,floor_tap,,False,1198,lane 4
+123506,123.506,trace_segment,123740,False,1199,visual carrier
+123623,123.623,sky_tap,,False,1197,parent arc 123389
+123623,123.623,floor_tap,,False,1200,lane 1
+123740,123.74,arc_start,123916,False,1201,color 0
+123858,123.858,floor_tap,,False,1202,lane 4
+123975,123.975,floor_tap,,False,1203,lane 3
+124092,124.092,sky_tap,,False,1197,parent arc 123389
+124092,124.092,floor_tap,,False,1204,lane 2
+124326,124.326,trace_segment,125263,False,1205,visual carrier
+124326,124.326,arc_start,124443,False,1206,color 1
+124326,124.326,floor_tap,,False,1207,lane 1
+124443,124.443,trace_segment,124677,False,1208,visual carrier
+124560,124.56,sky_tap,,False,1205,parent arc 124326
+124560,124.56,floor_tap,,False,1209,lane 4
+124677,124.677,arc_start,124853,False,1210,color 1
+124795,124.795,floor_tap,,False,1211,lane 1
+124912,124.912,floor_tap,,False,1212,lane 2
+125029,125.029,sky_tap,,False,1205,parent arc 124326
+125029,125.029,floor_tap,,False,1213,lane 3
+125264,125.264,arc_start,125381,False,1214,color 0
+125264,125.264,trace_segment,125381,False,1215,visual carrier
+125264,125.264,floor_tap,,False,1216,lane 4
+125381,125.381,sky_tap,,False,1217,parent arc 125381
+125381,125.381,trace_segment,125615,False,1217,visual carrier
+125498,125.498,floor_tap,,False,1218,lane 3
+125615,125.615,trace_segment,125967,False,1219,visual carrier
+125615,125.615,arc_start,125850,False,1220,color 1
+125615,125.615,hold_start,125733,False,1221,lane 1
+125850,125.85,floor_tap,,False,1222,lane 1
+125967,125.967,sky_tap,,False,1219,parent arc 125615
+125967,125.967,trace_segment,126084,False,1223,visual carrier
+125967,125.967,floor_tap,,False,1224,lane 3
+126084,126.084,trace_segment,126201,False,1225,visual carrier
+126084,126.084,floor_tap,,False,1226,lane 4
+126201,126.201,trace_segment,127139,False,1227,visual carrier
+126201,126.201,trace_segment,127139,False,1228,visual carrier
+126201,126.201,floor_tap,,False,1229,lane 1
+126201,126.201,hold_start,126318,False,1230,lane 3
+126319,126.319,floor_tap,,False,1231,lane 1
+126435,126.435,hold_start,126553,False,1232,lane 2
+126436,126.436,floor_tap,,False,1233,lane 4
+126553,126.553,floor_tap,,False,1234,lane 4
+126670,126.67,floor_tap,,False,1235,lane 2
+126729,126.729,floor_tap,,False,1236,lane 3
+126787,126.787,hold_start,126904,False,1237,lane 2
+126905,126.905,floor_tap,,False,1238,lane 4
+126963,126.963,floor_tap,,False,1239,lane 1
+127022,127.022,floor_tap,,False,1240,lane 4
+127080,127.08,floor_tap,,False,1241,lane 1
+127139,127.139,trace_segment,128076,False,1242,visual carrier
+127139,127.139,arc_start,127607,False,1243,color 1
+127608,127.608,arc_continuation,128076,False,1244,color 1
+127608,127.608,hold_start,127843,False,1245,lane 3
+128076,128.076,arc_continuation,128544,False,1246,color 1
+128076,128.076,sky_tap,,False,1247,parent arc 128076
+128076,128.076,trace_segment,129014,False,1247,visual carrier
+128545,128.545,arc_continuation,129014,False,1248,color 1
+128545,128.545,hold_start,128780,False,1249,lane 2
+129014,129.014,arc_start,129248,False,1250,color 0
+129014,129.014,trace_segment,129951,False,1251,visual carrier
+129248,129.248,arc_continuation,129482,False,1252,color 0
+129248,129.248,floor_tap,,False,1253,lane 2
+129483,129.483,arc_continuation,129717,False,1254,color 0
+129483,129.483,floor_tap,,False,1255,lane 1
+129717,129.717,arc_continuation,129952,False,1256,color 0
+129717,129.717,floor_tap,,False,1257,lane 2
+129951,129.951,trace_segment,130888,False,1258,visual carrier
+129951,129.951,arc_start,130185,False,1259,color 1
+130185,130.185,arc_continuation,130419,False,1260,color 1
+130185,130.185,floor_tap,,False,1261,lane 3
+130420,130.42,arc_continuation,130654,False,1262,color 1
+130420,130.42,floor_tap,,False,1263,lane 4
+130654,130.654,arc_continuation,130889,False,1264,color 1
+130654,130.654,floor_tap,,False,1265,lane 3
+130889,130.889,arc_start,131357,False,1266,color 0
+130889,130.889,trace_segment,131826,False,1267,visual carrier
+131358,131.358,arc_continuation,131827,False,1268,color 0
+131358,131.358,hold_start,131593,False,1269,lane 2
+131826,131.826,trace_segment,131834,False,1271,visual carrier
+131826,131.826,trace_segment,131834,False,1272,visual carrier
+131826,131.826,hold_start,132061,False,1273,lane 1
+131856,131.856,trace_segment,131863,False,1276,visual carrier
+131856,131.856,trace_segment,131863,False,1277,visual carrier
+131885,131.885,trace_segment,131892,False,1280,visual carrier
+131885,131.885,trace_segment,131892,False,1281,visual carrier
+131914,131.914,trace_segment,131922,False,1284,visual carrier
+131914,131.914,trace_segment,131922,False,1285,visual carrier
+131944,131.944,trace_segment,131951,False,1288,visual carrier
+131944,131.944,trace_segment,131951,False,1289,visual carrier
+131973,131.973,trace_segment,131980,False,1292,visual carrier
+131973,131.973,trace_segment,131980,False,1293,visual carrier
+132002,132.002,trace_segment,132009,False,1296,visual carrier
+132002,132.002,trace_segment,132009,False,1297,visual carrier
+132031,132.031,trace_segment,132039,False,1300,visual carrier
+132031,132.031,trace_segment,132039,False,1301,visual carrier
+132061,132.061,trace_segment,132068,False,1304,visual carrier
+132061,132.061,trace_segment,132068,False,1305,visual carrier
+132061,132.061,hold_start,132296,False,1306,lane 3
+132090,132.09,trace_segment,132097,False,1309,visual carrier
+132090,132.09,trace_segment,132097,False,1310,visual carrier
+132119,132.119,trace_segment,132127,False,1313,visual carrier
+132119,132.119,trace_segment,132127,False,1314,visual carrier
+132149,132.149,trace_segment,132156,False,1317,visual carrier
+132149,132.149,trace_segment,132156,False,1318,visual carrier
+132178,132.178,trace_segment,132185,False,1321,visual carrier
+132178,132.178,trace_segment,132185,False,1322,visual carrier
+132207,132.207,trace_segment,132215,False,1325,visual carrier
+132207,132.207,trace_segment,132215,False,1326,visual carrier
+132237,132.237,trace_segment,132244,False,1329,visual carrier
+132237,132.237,trace_segment,132244,False,1330,visual carrier
+132266,132.266,trace_segment,132273,False,1333,visual carrier
+132266,132.266,trace_segment,132273,False,1334,visual carrier
+132295,132.295,trace_segment,132302,False,1337,visual carrier
+132295,132.295,trace_segment,132302,False,1338,visual carrier
+132295,132.295,hold_start,132530,False,1339,lane 4
+132295,132.295,hold_start,132530,True,1865,lane 4
+132324,132.324,trace_segment,132332,False,1342,visual carrier
+132324,132.324,trace_segment,132332,False,1343,visual carrier
+132354,132.354,trace_segment,132361,False,1346,visual carrier
+132354,132.354,trace_segment,132361,False,1347,visual carrier
+132383,132.383,trace_segment,132390,False,1350,visual carrier
+132383,132.383,trace_segment,132390,False,1351,visual carrier
+132412,132.412,trace_segment,132420,False,1354,visual carrier
+132412,132.412,trace_segment,132420,False,1355,visual carrier
+132442,132.442,trace_segment,132449,False,1358,visual carrier
+132442,132.442,trace_segment,132449,False,1359,visual carrier
+132471,132.471,trace_segment,132478,False,1362,visual carrier
+132471,132.471,trace_segment,132478,False,1363,visual carrier
+132500,132.5,trace_segment,132508,False,1366,visual carrier
+132500,132.5,trace_segment,132508,False,1367,visual carrier
+132530,132.53,trace_segment,132537,False,1370,visual carrier
+132530,132.53,trace_segment,132537,False,1371,visual carrier
+132530,132.53,hold_start,132767,False,1372,lane 2
+132530,132.53,hold_start,132767,True,1882,lane 2
+132559,132.559,trace_segment,132566,False,1375,visual carrier
+132559,132.559,trace_segment,132566,False,1376,visual carrier
+132588,132.588,trace_segment,132595,False,1379,visual carrier
+132588,132.588,trace_segment,132595,False,1380,visual carrier
+132617,132.617,trace_segment,132625,False,1383,visual carrier
+132617,132.617,trace_segment,132625,False,1384,visual carrier
+132647,132.647,trace_segment,132654,False,1387,visual carrier
+132647,132.647,trace_segment,132654,False,1388,visual carrier
+132676,132.676,trace_segment,132683,False,1391,visual carrier
+132676,132.676,trace_segment,132683,False,1392,visual carrier
+132705,132.705,trace_segment,132713,False,1395,visual carrier
+132705,132.705,trace_segment,132713,False,1396,visual carrier
+132735,132.735,trace_segment,132742,False,1399,visual carrier
+132735,132.735,trace_segment,132742,False,1400,visual carrier
+132764,132.764,hold_start,132767,True,1899,lane 3
+132767,132.767,arc_start,133001,False,1405,color 0
+132767,132.767,arc_start,133118,False,1406,color 1
+133001,133.001,arc_start,133040,False,1407,color 0
+133001,133.001,arc_continuation,133001,False,1408,color 0
+133040,133.04,arc_continuation,133079,False,1409,color 0
+133079,133.079,arc_continuation,133118,False,1410,color 0
+133118,133.118,arc_start,133352,False,1411,color 0
+133118,133.118,arc_continuation,133118,False,1412,color 0
+133118,133.118,arc_continuation,133118,False,1413,color 1
+133118,133.118,arc_start,133157,False,1414,color 1
+133157,133.157,arc_continuation,133196,False,1415,color 1
+133196,133.196,arc_continuation,133235,False,1416,color 1
+133235,133.235,arc_continuation,133235,False,1417,color 1
+133235,133.235,arc_start,133411,False,1418,color 1
+133352,133.352,arc_start,133411,False,1419,color 0
+133352,133.352,arc_continuation,133352,False,1420,color 0
+133411,133.411,arc_continuation,133411,False,1421,color 0
+133411,133.411,arc_start,133470,False,1422,color 0
+133411,133.411,arc_continuation,133411,False,1423,color 1
+133411,133.411,arc_start,133470,False,1424,color 1
+133470,133.47,arc_continuation,133701,False,1425,color 0
+133470,133.47,arc_start,133701,False,1426,color 1
+133470,133.47,arc_continuation,133470,False,1427,color 1
+133701,133.701,arc_continuation,133759,False,1429,color 0
+133701,133.701,arc_continuation,133759,False,1430,color 1
+133759,133.759,arc_continuation,133818,False,1431,color 0
+133759,133.759,arc_continuation,133818,False,1432,color 1
+133818,133.818,arc_continuation,133847,False,1433,color 0
+133818,133.818,arc_continuation,133935,False,1434,color 1
+133847,133.847,arc_continuation,133876,False,1435,color 0
+133876,133.876,arc_continuation,133906,False,1436,color 0
+133906,133.906,arc_continuation,133935,False,1437,color 0
+133935,133.935,arc_continuation,134052,False,1438,color 0
+133935,133.935,arc_continuation,133964,False,1439,color 1
+133964,133.964,arc_continuation,133993,False,1440,color 1
+133993,133.993,arc_continuation,134023,False,1441,color 1
+134023,134.023,arc_continuation,134052,False,1442,color 1
+134052,134.052,trace_segment,134169,False,1443,visual carrier
+134169,134.169,sky_tap,,False,1443,parent arc 134052
+134169,134.169,trace_segment,134404,False,1444,visual carrier
+134169,134.169,trace_segment,134404,False,1445,visual carrier
+134404,134.404,sky_tap,,False,1444,parent arc 134169
+134404,134.404,sky_tap,,False,1445,parent arc 134169
+134638,134.638,floor_tap,,False,1446,lane 2
+134638,134.638,hold_start,134755,False,1447,lane 4
+134872,134.872,hold_start,135107,False,1448,lane 4
+135107,135.107,floor_tap,,False,1449,lane 2
+135224,135.224,floor_tap,,False,1450,lane 3
+135224,135.224,hold_start,135341,False,1451,lane 4
+135458,135.458,arc_start,135634,False,1452,color 1
+135458,135.458,hold_start,135927,False,1453,lane 1
+135634,135.634,trace_segment,135693,False,1454,visual carrier
+135693,135.693,arc_start,135751,False,1455,color 1
+135751,135.751,trace_segment,135810,False,1456,visual carrier
+135810,135.81,arc_start,135868,False,1457,color 1
+135868,135.868,trace_segment,135927,False,1458,visual carrier
+135927,135.927,arc_start,135986,False,1459,color 1
+135986,135.986,trace_segment,136044,False,1460,visual carrier
+136044,136.044,arc_start,136103,False,1461,color 1
+136044,136.044,floor_tap,,False,1462,lane 1
+136103,136.103,trace_segment,136161,False,1463,visual carrier
+136161,136.161,arc_start,136220,False,1464,color 1
+136220,136.22,trace_segment,136279,False,1465,visual carrier
+136279,136.279,arc_start,136337,False,1466,color 1
+136279,136.279,floor_tap,,False,1467,lane 2
+136337,136.337,trace_segment,138388,False,1468,visual carrier
+136513,136.513,hold_start,136630,False,1469,lane 1
+136513,136.513,floor_tap,,False,1470,lane 3
+136747,136.747,hold_start,136982,False,1471,lane 1
+136747,136.747,floor_tap,,False,1472,lane 4
+136982,136.982,floor_tap,,False,1473,lane 3
+137099,137.099,hold_start,137216,False,1474,lane 1
+137099,137.099,floor_tap,,False,1475,lane 2
+137333,137.333,arc_start,137509,False,1476,color 0
+137333,137.333,hold_start,137802,False,1477,lane 4
+137509,137.509,trace_segment,137568,False,1478,visual carrier
+137568,137.568,arc_start,137626,False,1479,color 0
+137626,137.626,trace_segment,137685,False,1480,visual carrier
+137685,137.685,arc_start,137743,False,1481,color 0
+137743,137.743,trace_segment,137802,False,1482,visual carrier
+137802,137.802,arc_start,137861,False,1483,color 0
+137861,137.861,trace_segment,137919,False,1484,visual carrier
+137919,137.919,arc_start,137978,False,1485,color 0
+137978,137.978,trace_segment,138036,False,1486,visual carrier
+138036,138.036,arc_start,138095,False,1487,color 0
+138095,138.095,trace_segment,138154,False,1488,visual carrier
+138154,138.154,arc_start,138212,False,1489,color 0
+138212,138.212,trace_segment,138388,False,1490,visual carrier
+138388,138.388,trace_segment,141669,False,1491,visual carrier
+138388,138.388,sky_tap,,False,1492,parent arc 138388
+138388,138.388,trace_segment,142138,False,1492,visual carrier
+138388,138.388,sky_tap,,False,1493,parent arc 138388
+138388,138.388,trace_segment,142138,False,1493,visual carrier
+138388,138.388,trace_segment,141669,False,1494,visual carrier
+139326,139.326,sky_tap,,False,1495,parent arc 139326
+139326,139.326,trace_segment,142138,False,1495,visual carrier
+139326,139.326,sky_tap,,False,1496,parent arc 139326
+139326,139.326,trace_segment,142138,False,1496,visual carrier
+140263,140.263,sky_tap,,False,1497,parent arc 140263
+140263,140.263,trace_segment,142138,False,1497,visual carrier
+140263,140.263,sky_tap,,False,1498,parent arc 140263
+140263,140.263,trace_segment,142138,False,1498,visual carrier
+140732,140.732,sky_tap,,False,1499,parent arc 140732
+140732,140.732,trace_segment,142138,False,1499,visual carrier
+140732,140.732,sky_tap,,False,1500,parent arc 140732
+140732,140.732,trace_segment,142138,False,1500,visual carrier
+141201,141.201,sky_tap,,False,1501,parent arc 141201
+141201,141.201,trace_segment,142138,False,1501,visual carrier
+141201,141.201,sky_tap,,False,1502,parent arc 141201
+141201,141.201,trace_segment,142138,False,1502,visual carrier
+141669,141.669,sky_tap,,False,1503,parent arc 141669
+141669,141.669,trace_segment,142138,False,1503,visual carrier
+141669,141.669,sky_tap,,False,1504,parent arc 141669
+141669,141.669,trace_segment,142138,False,1504,visual carrier
+142138,142.138,trace_segment,142607,False,1505,visual carrier
+142138,142.138,hold_start,142490,False,1506,lane 2
+142138,142.138,hold_start,142490,False,1507,lane 3
+142607,142.607,sky_tap,,False,1505,parent arc 142138
+142607,142.607,trace_segment,143076,False,1508,visual carrier
+142607,142.607,trace_segment,143076,False,1509,visual carrier
+143076,143.076,arc_start,143076,False,1510,color 0
+143076,143.076,arc_start,143310,False,1511,color 0
+143076,143.076,sky_tap,,False,1512,parent arc 143076
+143076,143.076,trace_segment,143310,False,1512,visual carrier
+143193,143.193,floor_tap,,False,1513,lane 3
+143310,143.31,arc_start,143544,False,1514,color 0
+143310,143.31,trace_segment,143779,False,1515,visual carrier
+143310,143.31,arc_continuation,143310,False,1516,color 0
+143310,143.31,arc_start,143427,False,1517,color 1
+143427,143.427,trace_segment,143661,False,1518,visual carrier
+143544,143.544,arc_continuation,143544,False,1519,color 0
+143544,143.544,arc_start,143779,False,1520,color 0
+143544,143.544,hold_start,143661,False,1521,lane 4
+143661,143.661,trace_segment,144013,False,1522,visual carrier
+143779,143.779,sky_tap,,False,1522,parent arc 143661
+143779,143.779,trace_segment,144013,False,1523,visual carrier
+143896,143.896,floor_tap,,False,1524,lane 2
+143896,143.896,floor_tap,,False,1525,lane 4
+144013,144.013,sky_tap,,False,1526,parent arc 144013
+144013,144.013,trace_segment,144482,False,1526,visual carrier
+144013,144.013,sky_tap,,False,1527,parent arc 144013
+144013,144.013,trace_segment,144482,False,1527,visual carrier
+144130,144.13,floor_tap,,False,1528,lane 1
+144247,144.247,sky_tap,,False,1527,parent arc 144013
+144365,144.365,sky_tap,,False,1526,parent arc 144013
+144365,144.365,floor_tap,,False,1529,lane 3
+144482,144.482,trace_segment,144951,False,1530,visual carrier
+144482,144.482,arc_start,144717,False,1531,color 1
+144482,144.482,trace_segment,144951,False,1532,visual carrier
+144482,144.482,hold_start,144599,False,1533,lane 2
+144716,144.716,floor_tap,,False,1534,lane 3
+144951,144.951,sky_tap,,False,1535,parent arc 144951
+144951,144.951,trace_segment,145185,False,1535,visual carrier
+144951,144.951,arc_start,145185,False,1536,color 1
+144951,144.951,arc_start,144951,False,1537,color 1
+145068,145.068,floor_tap,,False,1538,lane 2
+145185,145.185,arc_start,145302,False,1539,color 0
+145185,145.185,trace_segment,145654,False,1540,visual carrier
+145185,145.185,arc_continuation,145185,False,1541,color 1
+145185,145.185,arc_start,145419,False,1542,color 1
+145302,145.302,trace_segment,145536,False,1543,visual carrier
+145419,145.419,arc_start,145654,False,1544,color 1
+145419,145.419,arc_continuation,145419,False,1545,color 1
+145419,145.419,hold_start,145536,False,1546,lane 1
+145536,145.536,trace_segment,145888,False,1547,visual carrier
+145654,145.654,sky_tap,,False,1547,parent arc 145536
+145654,145.654,trace_segment,145888,False,1548,visual carrier
+145771,145.771,floor_tap,,False,1549,lane 1
+145771,145.771,floor_tap,,False,1550,lane 3
+145888,145.888,sky_tap,,False,1551,parent arc 145888
+145888,145.888,trace_segment,146357,False,1551,visual carrier
+145888,145.888,sky_tap,,False,1552,parent arc 145888
+145888,145.888,trace_segment,146357,False,1552,visual carrier
+146005,146.005,floor_tap,,False,1553,lane 4
+146122,146.122,sky_tap,,False,1551,parent arc 145888
+146240,146.24,sky_tap,,False,1552,parent arc 145888
+146240,146.24,floor_tap,,False,1554,lane 2
+146357,146.357,trace_segment,146826,False,1555,visual carrier
+146357,146.357,arc_start,146592,False,1556,color 0
+146357,146.357,trace_segment,146826,False,1557,visual carrier
+146357,146.357,hold_start,146474,False,1558,lane 3
+146591,146.591,floor_tap,,False,1559,lane 2
+146826,146.826,arc_start,147060,False,1560,color 0
+146826,146.826,sky_tap,,False,1561,parent arc 146826
+146826,146.826,trace_segment,147060,False,1561,visual carrier
+147060,147.06,arc_continuation,147529,False,1562,color 0
+147060,147.06,sky_tap,,False,1563,parent arc 147060
+147060,147.06,trace_segment,147294,False,1563,visual carrier
+147294,147.294,sky_tap,,False,1563,parent arc 147060
+147294,147.294,trace_segment,147763,False,1564,visual carrier
+147529,147.529,trace_segment,147763,False,1565,visual carrier
+147529,147.529,floor_tap,,False,1566,lane 4
+147646,147.646,floor_tap,,False,1567,lane 2
+147763,147.763,sky_tap,,False,1568,parent arc 147763
+147763,147.763,trace_segment,147997,False,1568,visual carrier
+147763,147.763,arc_start,147997,False,1569,color 1
+147997,147.997,sky_tap,,False,1570,parent arc 147997
+147997,147.997,trace_segment,148231,False,1570,visual carrier
+147997,147.997,arc_continuation,148466,False,1571,color 1
+148231,148.231,sky_tap,,False,1570,parent arc 147997
+148231,148.231,trace_segment,148700,False,1572,visual carrier
+148466,148.466,floor_tap,,False,1573,lane 1
+148583,148.583,floor_tap,,False,1574,lane 3
+148701,148.701,sky_tap,,False,1575,parent arc 148701
+148701,148.701,trace_segment,148935,False,1575,visual carrier
+148701,148.701,floor_tap,,False,1576,lane 2
+148935,148.935,sky_tap,,False,1575,parent arc 148701
+148935,148.935,trace_segment,149286,False,1577,visual carrier
+148935,148.935,floor_tap,,False,1578,lane 3
+149169,149.169,floor_tap,,False,1579,lane 1
+149169,149.169,floor_tap,,False,1580,lane 4
+149286,149.286,sky_tap,,False,1581,parent arc 149286
+149286,149.286,trace_segment,149521,False,1581,visual carrier
+149286,149.286,trace_segment,149521,False,1582,visual carrier
+149404,149.404,floor_tap,,False,1583,lane 2
+149404,149.404,floor_tap,,False,1584,lane 3
+149521,149.521,sky_tap,,False,1581,parent arc 149286
+149521,149.521,trace_segment,150107,False,1585,visual carrier
+149521,149.521,trace_segment,150107,False,1586,visual carrier
+149638,149.638,floor_tap,,False,1587,lane 1
+149638,149.638,floor_tap,,False,1588,lane 4
+149872,149.872,floor_tap,,False,1589,lane 2
+149872,149.872,floor_tap,,False,1590,lane 3
+150107,150.107,arc_start,150341,False,1591,color 0
+150107,150.107,trace_segment,150341,False,1592,visual carrier
+150107,150.107,arc_start,150342,False,1593,color 1
+150341,150.341,arc_continuation,150575,False,1594,color 0
+150341,150.341,trace_segment,150576,False,1595,visual carrier
+150576,150.576,arc_continuation,150576,False,1596,color 0
+150576,150.576,arc_start,150810,False,1597,color 0
+150576,150.576,sky_tap,,False,1598,parent arc 150576
+150576,150.576,trace_segment,150810,False,1598,visual carrier
+150693,150.693,floor_tap,,False,1599,lane 2
+150810,150.81,arc_start,151044,False,1600,color 0
+150810,150.81,arc_continuation,150810,False,1601,color 0
+150810,150.81,arc_start,150927,False,1602,color 1
+150927,150.927,trace_segment,151161,False,1603,visual carrier
+151044,151.044,arc_continuation,151044,False,1604,color 0
+151044,151.044,arc_start,151279,False,1605,color 0
+151044,151.044,hold_start,151161,False,1606,lane 4
+151161,151.161,trace_segment,151279,False,1607,visual carrier
+151279,151.279,sky_tap,,False,1607,parent arc 151161
+151279,151.279,trace_segment,151513,False,1608,visual carrier
+151279,151.279,trace_segment,151513,False,1609,visual carrier
+151396,151.396,floor_tap,,False,1610,lane 2
+151396,151.396,floor_tap,,False,1611,lane 4
+151513,151.513,sky_tap,,False,1612,parent arc 151513
+151513,151.513,trace_segment,151865,False,1612,visual carrier
+151513,151.513,sky_tap,,False,1613,parent arc 151513
+151513,151.513,trace_segment,151747,False,1613,visual carrier
+151630,151.63,floor_tap,,False,1614,lane 1
+151747,151.747,sky_tap,,False,1613,parent arc 151513
+151865,151.865,sky_tap,,False,1612,parent arc 151513
+151865,151.865,floor_tap,,False,1615,lane 3
+151982,151.982,arc_start,152216,False,1616,color 1
+151982,151.982,hold_start,152099,False,1617,lane 1
+152216,152.216,arc_start,152333,False,1618,color 0
+152216,152.216,arc_continuation,152450,False,1619,color 1
+152333,152.333,trace_segment,152451,False,1620,visual carrier
+152451,152.451,sky_tap,,False,1621,parent arc 152451
+152451,152.451,trace_segment,152685,False,1621,visual carrier
+152451,152.451,arc_start,152685,False,1622,color 1
+152451,152.451,arc_continuation,152451,False,1623,color 1
+152568,152.568,floor_tap,,False,1624,lane 3
+152685,152.685,arc_start,152802,False,1625,color 0
+152685,152.685,arc_continuation,152685,False,1626,color 1
+152685,152.685,arc_start,152919,False,1627,color 1
+152802,152.802,trace_segment,153036,False,1628,visual carrier
+152919,152.919,arc_start,153154,False,1629,color 1
+152919,152.919,arc_continuation,152919,False,1630,color 1
+152919,152.919,hold_start,153036,False,1631,lane 1
+153036,153.036,trace_segment,153154,False,1632,visual carrier
+153154,153.154,sky_tap,,False,1632,parent arc 153036
+153154,153.154,trace_segment,153388,False,1633,visual carrier
+153154,153.154,trace_segment,153388,False,1634,visual carrier
+153271,153.271,floor_tap,,False,1635,lane 1
+153271,153.271,floor_tap,,False,1636,lane 3
+153388,153.388,sky_tap,,False,1637,parent arc 153388
+153388,153.388,trace_segment,153622,False,1637,visual carrier
+153388,153.388,sky_tap,,False,1638,parent arc 153388
+153388,153.388,trace_segment,153740,False,1638,visual carrier
+153505,153.505,floor_tap,,False,1639,lane 4
+153622,153.622,sky_tap,,False,1637,parent arc 153388
+153740,153.74,sky_tap,,False,1638,parent arc 153388
+153740,153.74,floor_tap,,False,1640,lane 2
+153857,153.857,arc_start,154091,False,1641,color 0
+153857,153.857,hold_start,153974,False,1642,lane 4
+154091,154.091,arc_continuation,154208,False,1643,color 0
+154091,154.091,arc_start,154208,False,1644,color 1
+154208,154.208,trace_segment,154326,False,1645,visual carrier
+154326,154.326,arc_start,154443,False,1646,color 0
+154326,154.326,sky_tap,,False,1647,parent arc 154326
+154326,154.326,trace_segment,154560,False,1647,visual carrier
+154443,154.443,arc_continuation,154560,False,1648,color 0
+154560,154.56,sky_tap,,False,1647,parent arc 154326
+154560,154.56,arc_continuation,154677,False,1649,color 0
+154560,154.56,trace_segment,154677,False,1650,visual carrier
+154677,154.677,trace_segment,154911,False,1651,visual carrier
+154677,154.677,arc_start,154912,False,1652,color 1
+154794,154.794,floor_tap,,False,1653,lane 2
+154911,154.911,trace_segment,155029,False,1654,visual carrier
+155029,155.029,sky_tap,,False,1654,parent arc 154911
+155029,155.029,trace_segment,155263,False,1655,visual carrier
+155029,155.029,floor_tap,,False,1656,lane 4
+155263,155.263,sky_tap,,False,1657,parent arc 155263
+155263,155.263,trace_segment,155497,False,1657,visual carrier
+155263,155.263,arc_start,155380,False,1658,color 1
+155380,155.38,arc_continuation,155497,False,1659,color 1
+155497,155.497,sky_tap,,False,1657,parent arc 155263
+155497,155.497,trace_segment,155614,False,1660,visual carrier
+155497,155.497,arc_continuation,155614,False,1661,color 1
+155614,155.614,arc_start,155849,False,1662,color 0
+155614,155.614,trace_segment,155848,False,1663,visual carrier
+155731,155.731,floor_tap,,False,1664,lane 3
+155848,155.848,trace_segment,155966,False,1665,visual carrier
+155966,155.966,sky_tap,,False,1665,parent arc 155848
+155966,155.966,trace_segment,156200,False,1666,visual carrier
+155966,155.966,floor_tap,,False,1667,lane 1
+156201,156.201,sky_tap,,False,1668,parent arc 156201
+156201,156.201,trace_segment,156435,False,1668,visual carrier
+156201,156.201,floor_tap,,False,1669,lane 3
+156318,156.318,floor_tap,,False,1670,lane 4
+156435,156.435,sky_tap,,False,1668,parent arc 156201
+156435,156.435,floor_tap,,False,1671,lane 2
+156552,156.552,hold_start,156787,False,1672,lane 1
+156786,156.786,floor_tap,,False,1673,lane 3
+156845,156.845,floor_tap,,False,1674,lane 2
+156904,156.904,floor_tap,,False,1675,lane 3
+157021,157.021,floor_tap,,False,1676,lane 2
+157138,157.138,arc_start,157373,False,1677,color 0
+157138,157.138,hold_start,157255,False,1678,lane 4
+157372,157.372,trace_segment,157490,False,1679,visual carrier
+157372,157.372,floor_tap,,False,1680,lane 3
+157490,157.49,arc_start,157725,False,1681,color 0
+157490,157.49,sky_tap,,False,1682,parent arc 157490
+157490,157.49,trace_segment,157724,False,1682,visual carrier
+157724,157.724,sky_tap,,False,1683,parent arc 157724
+157724,157.724,trace_segment,157841,False,1683,visual carrier
+157841,157.841,sky_tap,,False,1683,parent arc 157724
+157841,157.841,trace_segment,158076,False,1684,visual carrier
+157841,157.841,floor_tap,,False,1685,lane 3
+158076,158.076,arc_start,158311,False,1686,color 1
+158076,158.076,hold_start,158193,False,1687,lane 1
+158310,158.31,trace_segment,158427,False,1688,visual carrier
+158310,158.31,floor_tap,,False,1689,lane 2
+158428,158.428,sky_tap,,False,1690,parent arc 158428
+158428,158.428,trace_segment,158662,False,1690,visual carrier
+158428,158.428,arc_start,158663,False,1691,color 1
+158662,158.662,sky_tap,,False,1692,parent arc 158662
+158662,158.662,trace_segment,158779,False,1692,visual carrier
+158779,158.779,sky_tap,,False,1692,parent arc 158662
+158779,158.779,trace_segment,159013,False,1693,visual carrier
+158779,158.779,floor_tap,,False,1694,lane 2
+158896,158.896,hold_start,159013,False,1695,lane 3
+159013,159.013,sky_tap,,False,1696,parent arc 159013
+159013,159.013,trace_segment,159247,False,1696,visual carrier
+159130,159.13,floor_tap,,False,1697,lane 4
+159189,159.189,floor_tap,,False,1698,lane 2
+159247,159.247,trace_segment,159365,False,1699,visual carrier
+159247,159.247,floor_tap,,False,1700,lane 4
+159365,159.365,sky_tap,,False,1701,parent arc 159365
+159365,159.365,trace_segment,159599,False,1701,visual carrier
+159482,159.482,floor_tap,,False,1702,lane 1
+159540,159.54,floor_tap,,False,1703,lane 3
+159599,159.599,trace_segment,159716,False,1704,visual carrier
+159599,159.599,floor_tap,,False,1705,lane 1
+159716,159.716,sky_tap,,False,1706,parent arc 159716
+159716,159.716,trace_segment,159833,False,1706,visual carrier
+159833,159.833,trace_segment,159951,False,1707,visual carrier
+159951,159.951,trace_segment,160888,False,1708,visual carrier
+159951,159.951,trace_segment,160888,False,1709,visual carrier
+159951,159.951,floor_tap,,False,1710,lane 4
+160009,160.009,floor_tap,,False,1711,lane 2
+160068,160.068,hold_start,160185,False,1712,lane 4
+160185,160.185,floor_tap,,False,1713,lane 1
+160243,160.243,floor_tap,,False,1714,lane 3
+160302,160.302,hold_start,160419,False,1715,lane 1
+160419,160.419,floor_tap,,False,1716,lane 3
+160478,160.478,floor_tap,,False,1717,lane 2
+160536,160.536,floor_tap,,False,1718,lane 3
+160595,160.595,floor_tap,,False,1719,lane 2
+160654,160.654,sky_tap,,False,1709,parent arc 159951
+160712,160.712,sky_tap,,False,1708,parent arc 159951
+160771,160.771,sky_tap,,False,1709,parent arc 159951
+160829,160.829,sky_tap,,False,1708,parent arc 159951
+160888,160.888,trace_segment,161357,False,1720,visual carrier
+160888,160.888,trace_segment,161357,False,1721,visual carrier
+161357,161.357,arc_start,161825,False,1722,color 0
+161357,161.357,arc_start,161825,False,1723,color 1
+161826,161.826,arc_continuation,162275,False,1724,color 0
+161826,161.826,arc_continuation,162275,False,1725,color 1
+162275,162.275,trace_segment,162294,False,1726,visual carrier
+162275,162.275,trace_segment,162294,False,1727,visual carrier
+162294,162.294,arc_start,162509,False,1728,color 0
+162294,162.294,arc_start,162509,False,1729,color 1
+162509,162.509,trace_segment,162529,False,1730,visual carrier
+162509,162.509,trace_segment,162529,False,1731,visual carrier
+162529,162.529,arc_start,162743,False,1732,color 0
+162529,162.529,arc_start,162743,False,1733,color 1
+162743,162.743,trace_segment,162763,False,1734,visual carrier
+162743,162.743,trace_segment,162763,False,1735,visual carrier
+162763,162.763,arc_start,162900,False,1736,color 0
+162763,162.763,arc_start,162900,False,1737,color 1
+162900,162.9,trace_segment,162919,False,1738,visual carrier
+162900,162.9,trace_segment,162919,False,1739,visual carrier
+162919,162.919,arc_start,163056,False,1740,color 0
+162919,162.919,arc_start,163056,False,1741,color 1
+163056,163.056,trace_segment,163076,False,1742,visual carrier
+163056,163.056,trace_segment,163076,False,1743,visual carrier
+163076,163.076,arc_start,163212,False,1744,color 0
+163076,163.076,arc_start,163212,False,1745,color 1
+163212,163.212,trace_segment,163232,False,1746,visual carrier
+163212,163.212,trace_segment,163232,False,1747,visual carrier
+163232,163.232,arc_start,163329,False,1748,color 0
+163232,163.232,arc_start,163329,False,1749,color 1
+163329,163.329,trace_segment,163349,False,1750,visual carrier
+163329,163.329,trace_segment,163349,False,1751,visual carrier
+163349,163.349,arc_start,163447,False,1752,color 0
+163349,163.349,arc_start,163447,False,1753,color 1
+163447,163.447,trace_segment,163466,False,1754,visual carrier
+163447,163.447,trace_segment,163466,False,1755,visual carrier
+163466,163.466,arc_start,163564,False,1756,color 0
+163466,163.466,arc_start,163564,False,1757,color 1
+163564,163.564,trace_segment,163583,False,1758,visual carrier
+163564,163.564,trace_segment,163583,False,1759,visual carrier
+163583,163.583,arc_start,163681,False,1760,color 0
+163583,163.583,arc_start,163681,False,1761,color 1
+163681,163.681,trace_segment,163701,False,1762,visual carrier
+163681,163.681,trace_segment,163701,False,1763,visual carrier
+163701,163.701,arc_start,163759,False,1764,color 0
+163701,163.701,arc_start,163759,False,1765,color 1
+163759,163.759,trace_segment,163779,False,1766,visual carrier
+163759,163.759,trace_segment,163779,False,1767,visual carrier
+163779,163.779,arc_start,163837,False,1768,color 0
+163779,163.779,arc_start,163837,False,1769,color 1
+163837,163.837,trace_segment,163857,False,1770,visual carrier
+163837,163.837,trace_segment,163857,False,1771,visual carrier
+163857,163.857,arc_start,163915,False,1772,color 0
+163857,163.857,arc_start,163915,False,1773,color 1
+163915,163.915,trace_segment,163935,False,1774,visual carrier
+163915,163.915,trace_segment,163935,False,1775,visual carrier
+163935,163.935,arc_start,163993,False,1776,color 0
+163935,163.935,arc_start,163993,False,1777,color 1
+163993,163.993,trace_segment,164013,False,1778,visual carrier
+163993,163.993,trace_segment,164013,False,1779,visual carrier
+164013,164.013,arc_start,164072,False,1780,color 0
+164013,164.013,arc_start,164072,False,1781,color 1
+164072,164.072,trace_segment,164091,False,1782,visual carrier
+164072,164.072,trace_segment,164091,False,1783,visual carrier
+164091,164.091,arc_start,164150,False,1784,color 0
+164091,164.091,arc_start,164150,False,1785,color 1
+164150,164.15,trace_segment,164169,False,1786,visual carrier
+164150,164.15,trace_segment,164169,False,1787,visual carrier
+164169,164.169,arc_start,164208,False,1788,color 0
+164169,164.169,arc_start,164208,False,1789,color 1
+164208,164.208,trace_segment,164228,False,1790,visual carrier
+164208,164.208,trace_segment,164228,False,1791,visual carrier
+164228,164.228,arc_start,164267,False,1792,color 0
+164228,164.228,arc_start,164267,False,1793,color 1
+164267,164.267,trace_segment,164286,False,1794,visual carrier
+164267,164.267,trace_segment,164286,False,1795,visual carrier
+164286,164.286,arc_start,164326,False,1796,color 0
+164286,164.286,arc_start,164326,False,1797,color 1
+164326,164.326,trace_segment,164345,False,1798,visual carrier
+164326,164.326,trace_segment,164345,False,1799,visual carrier
+164345,164.345,arc_start,164384,False,1800,color 0
+164345,164.345,arc_start,164384,False,1801,color 1
+164384,164.384,trace_segment,164404,False,1802,visual carrier
+164384,164.384,trace_segment,164404,False,1803,visual carrier
+164404,164.404,arc_start,164443,False,1804,color 0
+164404,164.404,arc_start,164443,False,1805,color 1
+164443,164.443,trace_segment,164462,False,1806,visual carrier
+164443,164.443,trace_segment,164462,False,1807,visual carrier
+164462,164.462,arc_start,164501,False,1808,color 0
+164462,164.462,arc_start,164501,False,1809,color 1
+164501,164.501,trace_segment,164521,False,1810,visual carrier
+164501,164.501,trace_segment,164521,False,1811,visual carrier
+164521,164.521,arc_start,164560,False,1812,color 0
+164521,164.521,arc_start,164560,False,1813,color 1
+164560,164.56,trace_segment,164579,False,1814,visual carrier
+164560,164.56,trace_segment,164579,False,1815,visual carrier
+164579,164.579,arc_start,164638,False,1816,color 0
+164579,164.579,arc_start,164638,False,1817,color 1
+164638,164.638,trace_segment,164794,False,1818,visual carrier
+164638,164.638,arc_continuation,164794,False,1819,color 1
+164794,164.794,trace_segment,164951,False,1820,visual carrier
+164794,164.794,arc_continuation,164951,False,1821,color 1
+164951,164.951,arc_start,165107,False,1822,color 0
+164951,164.951,arc_continuation,165107,False,1823,color 1
+165107,165.107,arc_continuation,165263,False,1824,color 0
+165107,165.107,arc_continuation,165263,False,1825,color 1
+165263,165.263,arc_continuation,165419,False,1826,color 0
+165263,165.263,trace_segment,165419,False,1827,visual carrier
+165419,165.419,arc_continuation,165576,False,1828,color 0
+165419,165.419,trace_segment,165576,False,1829,visual carrier
+165576,165.576,sky_tap,,False,1829,parent arc 165419

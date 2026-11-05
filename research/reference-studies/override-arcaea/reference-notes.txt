@@ -1,0 +1,74 @@
+OVERRIDE — ARCAEA FUTURE AND ETERNAL TIMING REFERENCE
+Date: 2026-10-29
+User intent: inspect the human-authored timing choices for this same song. Do not edit the PhiChain Override chart.
+
+IDENTITY AND PROVENANCE
+The requested "Overdrive" is interpreted as Override / オーバーライド by 吉田夜世, the same 204 BPM song in our project.
+Metadata: Future9 (ratingClass2), Eternal10 (ratingClass4); both credited sudo M理論; release6.15.
+Source is a public community AFF mirror, not a direct publisher download; authenticity has not been independently byte-verified against an installed game.
+Repository: https://github.com/HarumiEna/Arcaea-AFF
+Pinned revision: 4c26fcc30b741feeef373f375a900db1d60d76ee
+Exact actual revision, file URLs and SHA256 are in source.json (authoritative).
+Files: future.aff and eternal.aff, preserved as downloaded. Song metadata in song-metadata.json.
+
+TIMING AND ALIGNMENT
+Both AFFs specify AudioOffset:0 and timing(0,204.00,4.00); no additional timing events or timinggroups.
+Quarter-note beat =294.117647ms; eighth=147.058824ms; sixteenth=73.529412ms.
+File timestamps are integer milliseconds with small rounding differences. Use tolerance when comparing.
+Both begin at1176ms and end at137795ms (including sustain tails).
+These are AFF times. The local MP3's exact waveform alignment with Arcaea audio has NOT been verified.
+Our PhiChain project currently uses348ms offset. Do not assume that adding348ms to AFF timestamps is correct,
+or change the project's offset based only on matching BPM or similar song length.
+
+WHAT IS COUNTED
+Discrete attacks = floor taps + sky taps + floor hold starts. No automatic hold/arc scoring ticks.
+Colored arcs are stored separately as starts/continuations, not counted as additional discrete taps.
+Trace arcs are visual paths; their arctaps ARE counted. A trace without arctaps is not a playable tap.
+Arc continuation is inferred by same color, matching endpoint coordinates and <=1ms time difference.
+Raw segment rows are retained, so a future reviewer can reassess chains without losing source data.
+Game combo totals (wiki917 /1083) include sustained judgments and are NOT these object/attack totals.
+
+                         FUTURE    ETERNAL
+Floor taps                 199        370
+Sky taps                   188        251
+Floor hold starts          137        102
+Discrete attack objects    524        723
+Unique discrete times      499        643 (contains one1ms rounding separation)
+Colored arc segments       344        310
+Derived arc chain starts   251        191
+
+The change is not simply more of every object: Eternal has more floor and sky taps but fewer floor holds.
+Comparison of unique discrete timestamps within1ms:431 Future times are shared;68 Future-only and211 Eternal-only.
+This does NOT mean all Future-only times are silent in Eternal: an ongoing arc or arc start can carry the phrase.
+
+CONCRETE TIMING DECISIONS
+1. Both charts:3.970→4.044s, then4.558→4.632s. The74ms second attack is an explicit sixteenth subdivision.
+   The lanes differ, but the rhythmic decision survives the difficulty change.
+2. Eternal adds floor taps at5.220,7.573,9.926,12.279s. These are about beats17.75,25.75,33.75,41.75:
+   a recurring eight-beat phrase decision, not arbitrary uniform densification.
+3. At22.058,22.132,22.205,22.279s, Eternal writes four sky taps at about beats75,75.25,75.5,75.75.
+   Future has no discrete attacks in this run: its preceding holds begin21.764s/end21.912s;
+   both rejoin a new colored arc plus a floor attack at22.352s (Future hold, Eternal tap).
+4. At4.852s Future uses a sky tap while Eternal uses a floor tap: same rhythmic anchor, changed gesture.
+5. At60.000s Future uses a hold while Eternal uses a tap; both keep60.294,60.441,60.514s attacks.
+   Preserving the selected musical moment does not require preserving the note type or lane.
+
+GLOBAL INTERVAL EVIDENCE (DISCRETE TIMES ONLY)
+Future has36 adjacent73–74ms intervals; Eternal95. These are global intervals, not forced same-hand speeds.
+The previous PhiChain generation contains no corresponding short onset intervals because it only used a half-beat grid.
+The earlier inference "the onset detector mostly found eighths, therefore avoid sixteenths" was too restrictive.
+These human charts are stronger evidence that the song supports selective sixteenth responses and runs.
+They do not establish every instrument/lyric attribution; a listening pass is still needed for that.
+
+REUSABLE OUTPUTS
+future-events.csv / eternal-events.csv: every source event, milliseconds, seconds, beat, end, type, source line.
+timing-comparison.csv: side-by-side discrete attack timing map, including lane/type and1ms matching.
+metrics.json: counts, interval histograms, eight-beat phrase summaries and timing differences.
+analyze.py: reproducible parser; rejects unhandled statements for these files.
+
+NEXT AUTHORING CONSTRAINTS
+Keep Happy Ending IN as the scroll/style reference; use these Override charts as same-song timing evidence.
+Align audio origins before transferring any absolute timestamps. Choose which musical layers to follow.
+Retain phrase-level repeated motifs and difficulty-specific additions; do not blindly union all timestamps.
+Arcaea arcs and combo ticks do not directly map to Phigros note objects or NPS.
+No PhiChain chart file or live editor state was modified in this study.

@@ -1,0 +1,5005 @@
+{
+ "official": {
+  "in_charts": 327,
+  "with_constant": 320,
+  "high_constant": 132,
+  "high_threshold": 15.0
+ },
+ "excluded": {
+  "charts/other/projects/stardust-ray-in": "human-charted official source",
+  "charts/other/entrance-study, poseidon-study": "official imports",
+  "charts/other/rrharil-at-scroll-130": "community chart with a speed change",
+  "charts/other/poseidon-pure-configuration": "adaptation that keeps existing note timing",
+  "override-gesture-sample": "under 8 s of play",
+  "speed-revision-01, Iris calibration B and C, override pilot": "near-duplicates of included charts"
+ },
+ "bands_high": {
+  "whole": {
+   "bg_two_plus_lines_moving_pct": {
+    "p05": 0.0,
+    "p50": 24.865,
+    "p95": 78.056,
+    "n": 132
+   },
+   "section_travel_cv": {
+    "p05": 0.364,
+    "p50": 0.533,
+    "p95": 0.8,
+    "n": 132
+   },
+   "background_present_pct": {
+    "p05": 0.0,
+    "p50": 46.17,
+    "p95": 90.289,
+    "n": 132
+   },
+   "judging_carrier_motion_pct": {
+    "p05": 52.669,
+    "p50": 86.84,
+    "p95": 99.058,
+    "n": 132
+   },
+   "required_move_median_px": {
+    "p05": 105.055,
+    "p50": 157.55,
+    "p95": 210.0,
+    "n": 132
+   },
+   "bg_lines_moving_together_median": {
+    "p05": 0.0,
+    "p50": 2.0,
+    "p95": 4.0,
+    "n": 132
+   },
+   "strong_motion_pct": {
+    "p05": 43.169,
+    "p50": 82.12,
+    "p95": 96.708,
+    "n": 132
+   },
+   "x_spread_iqr_px": {
+    "p05": 393.5,
+    "p50": 450.0,
+    "p95": 546.53,
+    "n": 132
+   },
+   "section_density_cv": {
+    "p05": 0.305,
+    "p50": 0.467,
+    "p95": 0.71,
+    "n": 132
+   },
+   "required_travel_px_per_s": {
+    "p05": 698.755,
+    "p50": 991.85,
+    "p95": 1365.92,
+    "n": 132
+   },
+   "approach_heights_per_s_median": {
+    "p05": 1.2,
+    "p50": 1.32,
+    "p95": 1.44,
+    "n": 132
+   },
+   "fresh_onsets_per_s": {
+    "p05": 3.506,
+    "p50": 4.998,
+    "p95": 6.033,
+    "n": 132
+   },
+   "required_move_under50_pct": {
+    "p05": 13.341,
+    "p50": 25.06,
+    "p95": 37.681,
+    "n": 132
+   },
+   "carrier_motion_pct": {
+    "p05": 55.133,
+    "p50": 85.985,
+    "p95": 99.024,
+    "n": 132
+   },
+   "any_motion_pct": {
+    "p05": 72.276,
+    "p50": 93.18,
+    "p95": 99.643,
+    "n": 132
+   },
+   "onset_step_under50_pct": {
+    "p05": 7.957,
+    "p50": 14.68,
+    "p95": 28.18,
+    "n": 132
+   },
+   "carrier_response_gap_p90_s": {
+    "p05": 7.673,
+    "p50": 20.4,
+    "p95": 54.767,
+    "n": 130
+   },
+   "required_move_200plus_pct": {
+    "p05": 21.259,
+    "p50": 35.715,
+    "p95": 52.379,
+    "n": 132
+   },
+   "direction_change_pct": {
+    "p05": 71.096,
+    "p50": 80.365,
+    "p95": 86.758,
+    "n": 132
+   },
+   "onset_step_median_px": {
+    "p05": 196.641,
+    "p50": 267.569,
+    "p95": 374.603,
+    "n": 132
+   },
+   "background_motion_pct": {
+    "p05": 0.0,
+    "p50": 44.84,
+    "p95": 89.025,
+    "n": 132
+   },
+   "bg_three_plus_lines_moving_pct": {
+    "p05": 0.0,
+    "p50": 9.685,
+    "p95": 59.137,
+    "n": 132
+   },
+   "longest_all_still_during_play_s": {
+    "p05": 0.5,
+    "p50": 2.0,
+    "p95": 9.5,
+    "n": 132
+   },
+   "section_spread_cv": {
+    "p05": 0.201,
+    "p50": 0.393,
+    "p95": 0.607,
+    "n": 132
+   },
+   "onset_step_200plus_pct": {
+    "p05": 48.011,
+    "p50": 65.62,
+    "p95": 78.624,
+    "n": 132
+   },
+   "longest_carrier_still_during_play_s": {
+    "p05": 0.5,
+    "p50": 3.5,
+    "p95": 17.225,
+    "n": 132
+   },
+   "section_line_activity_cv": {
+    "p05": 0.282,
+    "p50": 0.445,
+    "p95": 0.843,
+    "n": 132
+   }
+  },
+  "10": {
+   "bg_two_plus_lines_moving_pct": {
+    "p05": 0.0,
+    "p50": 68.42,
+    "p95": 100.0,
+    "n": 768
+   },
+   "section_travel_cv": {
+    "p05": 0.012,
+    "p50": 0.175,
+    "p95": 1.0,
+    "n": 738
+   },
+   "background_present_pct": {
+    "p05": 0.0,
+    "p50": 89.47,
+    "p95": 100.0,
+    "n": 768
+   },
+   "judging_carrier_motion_pct": {
+    "p05": 0.0,
+    "p50": 76.47,
+    "p95": 100.0,
+    "n": 768
+   },
+   "required_move_median_px": {
+    "p05": 7.78,
+    "p50": 156.7,
+    "p95": 233.6,
+    "n": 755
+   },
+   "bg_lines_moving_together_median": {
+    "p05": 0.0,
+    "p50": 2.0,
+    "p95": 6.0,
+    "n": 768
+   },
+   "strong_motion_pct": {
+    "p05": 21.05,
+    "p50": 89.18,
+    "p95": 100.0,
+    "n": 768
+   },
+   "x_spread_iqr_px": {
+    "p05": 212.85,
+    "p50": 450.0,
+    "p95": 644.5,
+    "n": 767
+   },
+   "section_density_cv": {
+    "p05": 0.0,
+    "p50": 0.125,
+    "p95": 0.81,
+    "n": 738
+   },
+   "required_travel_px_per_s": {
+    "p05": 191.65,
+    "p50": 953.0,
+    "p95": 1823.17,
+    "n": 767
+   },
+   "approach_heights_per_s_median": {
+    "p05": 0.9,
+    "p50": 1.32,
+    "p95": 1.44,
+    "n": 768
+   },
+   "fresh_onsets_per_s": {
+    "p05": 1.523,
+    "p50": 4.986,
+    "p95": 8.378,
+    "n": 768
+   },
+   "required_move_under50_pct": {
+    "p05": 0.0,
+    "p50": 23.08,
+    "p95": 64.416,
+    "n": 755
+   },
+   "carrier_motion_pct": {
+    "p05": 0.0,
+    "p50": 73.68,
+    "p95": 100.0,
+    "n": 768
+   },
+   "any_motion_pct": {
+    "p05": 55.196,
+    "p50": 100.0,
+    "p95": 100.0,
+    "n": 768
+   },
+   "onset_step_under50_pct": {
+    "p05": 0.0,
+    "p50": 11.54,
+    "p95": 56.52,
+    "n": 741
+   },
+   "carrier_response_gap_p90_s": {
+    "p05": 1.5,
+    "p50": 3.5,
+    "p95": 7.5,
+    "n": 461
+   },
+   "required_move_200plus_pct": {
+    "p05": 4.17,
+    "p50": 34.15,
+    "p95": 68.486,
+    "n": 755
+   },
+   "direction_change_pct": {
+    "p05": 50.0,
+    "p50": 80.65,
+    "p95": 100.0,
+    "n": 717
+   },
+   "onset_step_median_px": {
+    "p05": 3.001,
+    "p50": 262.5,
+    "p95": 459.375,
+    "n": 741
+   },
+   "background_motion_pct": {
+    "p05": 0.0,
+    "p50": 85.355,
+    "p95": 100.0,
+    "n": 768
+   },
+   "bg_three_plus_lines_moving_pct": {
+    "p05": 0.0,
+    "p50": 31.58,
+    "p95": 95.0,
+    "n": 768
+   },
+   "longest_all_still_during_play_s": {
+    "p05": 0.0,
+    "p50": 0.0,
+    "p95": 3.0,
+    "n": 768
+   },
+   "section_spread_cv": {
+    "p05": 0.0,
+    "p50": 0.1,
+    "p95": 1.0,
+    "n": 738
+   },
+   "onset_step_200plus_pct": {
+    "p05": 15.38,
+    "p50": 64.58,
+    "p95": 94.29,
+    "n": 741
+   },
+   "longest_carrier_still_during_play_s": {
+    "p05": 0.0,
+    "p50": 1.0,
+    "p95": 8.0,
+    "n": 768
+   },
+   "section_line_activity_cv": {
+    "p05": 0.0,
+    "p50": 0.12,
+    "p95": 0.606,
+    "n": 738
+   }
+  },
+  "13": {
+   "bg_two_plus_lines_moving_pct": {
+    "p05": 0.0,
+    "p50": 68.0,
+    "p95": 100.0,
+    "n": 785
+   },
+   "section_travel_cv": {
+    "p05": 0.058,
+    "p50": 0.27,
+    "p95": 1.0,
+    "n": 774
+   },
+   "background_present_pct": {
+    "p05": 0.0,
+    "p50": 88.0,
+    "p95": 100.0,
+    "n": 785
+   },
+   "judging_carrier_motion_pct": {
+    "p05": 12.0,
+    "p50": 76.0,
+    "p95": 100.0,
+    "n": 785
+   },
+   "required_move_median_px": {
+    "p05": 15.015,
+    "p50": 157.5,
+    "p95": 225.595,
+    "n": 778
+   },
+   "bg_lines_moving_together_median": {
+    "p05": 0.0,
+    "p50": 2.0,
+    "p95": 6.0,
+    "n": 785
+   },
+   "strong_motion_pct": {
+    "p05": 28.234,
+    "p50": 87.5,
+    "p95": 100.0,
+    "n": 785
+   },
+   "x_spread_iqr_px": {
+    "p05": 262.5,
+    "p50": 450.0,
+    "p95": 640.56,
+    "n": 784
+   },
+   "section_density_cv": {
+    "p05": 0.031,
+    "p50": 0.207,
+    "p95": 0.848,
+    "n": 774
+   },
+   "required_travel_px_per_s": {
+    "p05": 240.715,
+    "p50": 959.85,
+    "p95": 1806.63,
+    "n": 784
+   },
+   "approach_heights_per_s_median": {
+    "p05": 0.912,
+    "p50": 1.32,
+    "p95": 1.44,
+    "n": 785
+   },
+   "fresh_onsets_per_s": {
+    "p05": 1.476,
+    "p50": 5.039,
+    "p95": 8.06,
+    "n": 785
+   },
+   "required_move_under50_pct": {
+    "p05": 4.396,
+    "p50": 23.86,
+    "p95": 57.736,
+    "n": 778
+   },
+   "carrier_motion_pct": {
+    "p05": 11.632,
+    "p50": 73.91,
+    "p95": 100.0,
+    "n": 785
+   },
+   "any_motion_pct": {
+    "p05": 56.0,
+    "p50": 100.0,
+    "p95": 100.0,
+    "n": 785
+   },
+   "onset_step_under50_pct": {
+    "p05": 0.0,
+    "p50": 11.95,
+    "p95": 49.737,
+    "n": 768
+   },
+   "carrier_response_gap_p90_s": {
+    "p05": 1.9,
+    "p50": 4.6,
+    "p95": 10.5,
+    "n": 568
+   },
+   "required_move_200plus_pct": {
+    "p05": 7.2,
+    "p50": 34.575,
+    "p95": 66.67,
+    "n": 778
+   },
+   "direction_change_pct": {
+    "p05": 52.17,
+    "p50": 80.46,
+    "p95": 97.248,
+    "n": 756
+   },
+   "onset_step_median_px": {
+    "p05": 58.758,
+    "p50": 262.5,
+    "p95": 450.0,
+    "n": 768
+   },
+   "background_motion_pct": {
+    "p05": 0.0,
+    "p50": 84.0,
+    "p95": 100.0,
+    "n": 785
+   },
+   "bg_three_plus_lines_moving_pct": {
+    "p05": 0.0,
+    "p50": 34.78,
+    "p95": 92.31,
+    "n": 785
+   },
+   "longest_all_still_during_play_s": {
+    "p05": 0.0,
+    "p50": 0.0,
+    "p95": 3.4,
+    "n": 785
+   },
+   "section_spread_cv": {
+    "p05": 0.018,
+    "p50": 0.163,
+    "p95": 0.862,
+    "n": 774
+   },
+   "onset_step_200plus_pct": {
+    "p05": 22.777,
+    "p50": 64.325,
+    "p95": 92.472,
+    "n": 768
+   },
+   "longest_carrier_still_during_play_s": {
+    "p05": 0.0,
+    "p50": 1.5,
+    "p95": 9.0,
+    "n": 785
+   },
+   "section_line_activity_cv": {
+    "p05": 0.037,
+    "p50": 0.209,
+    "p95": 0.708,
+    "n": 774
+   }
+  },
+  "30": {
+   "bg_two_plus_lines_moving_pct": {
+    "p05": 0.0,
+    "p50": 58.97,
+    "p95": 96.357,
+    "n": 792
+   },
+   "section_travel_cv": {
+    "p05": 0.16,
+    "p50": 0.434,
+    "p95": 0.933,
+    "n": 792
+   },
+   "background_present_pct": {
+    "p05": 0.919,
+    "p50": 77.97,
+    "p95": 100.0,
+    "n": 792
+   },
+   "judging_carrier_motion_pct": {
+    "p05": 31.744,
+    "p50": 77.455,
+    "p95": 100.0,
+    "n": 792
+   },
+   "required_move_median_px": {
+    "p05": 52.95,
+    "p50": 157.5,
+    "p95": 211.7,
+    "n": 791
+   },
+   "bg_lines_moving_together_median": {
+    "p05": 0.55,
+    "p50": 2.0,
+    "p95": 5.0,
+    "n": 792
+   },
+   "strong_motion_pct": {
+    "p05": 32.508,
+    "p50": 84.75,
+    "p95": 100.0,
+    "n": 792
+   },
+   "x_spread_iqr_px": {
+    "p05": 335.36,
+    "p50": 450.8,
+    "p95": 600.0,
+    "n": 792
+   },
+   "section_density_cv": {
+    "p05": 0.128,
+    "p50": 0.347,
+    "p95": 0.878,
+    "n": 792
+   },
+   "required_travel_px_per_s": {
+    "p05": 474.605,
+    "p50": 1013.35,
+    "p95": 1670.82,
+    "n": 792
+   },
+   "approach_heights_per_s_median": {
+    "p05": 1.2,
+    "p50": 1.32,
+    "p95": 1.44,
+    "n": 792
+   },
+   "fresh_onsets_per_s": {
+    "p05": 2.627,
+    "p50": 4.998,
+    "p95": 7.467,
+    "n": 792
+   },
+   "required_move_under50_pct": {
+    "p05": 8.64,
+    "p50": 24.18,
+    "p95": 49.595,
+    "n": 791
+   },
+   "carrier_motion_pct": {
+    "p05": 33.627,
+    "p50": 76.67,
+    "p95": 98.33,
+    "n": 792
+   },
+   "any_motion_pct": {
+    "p05": 57.302,
+    "p50": 96.61,
+    "p95": 100.0,
+    "n": 792
+   },
+   "onset_step_under50_pct": {
+    "p05": 3.03,
+    "p50": 13.26,
+    "p95": 36.283,
+    "n": 790
+   },
+   "carrier_response_gap_p90_s": {
+    "p05": 3.2,
+    "p50": 8.5,
+    "p95": 20.15,
+    "n": 735
+   },
+   "required_move_200plus_pct": {
+    "p05": 15.38,
+    "p50": 35.24,
+    "p95": 58.11,
+    "n": 791
+   },
+   "direction_change_pct": {
+    "p05": 63.04,
+    "p50": 80.51,
+    "p95": 92.196,
+    "n": 789
+   },
+   "onset_step_median_px": {
+    "p05": 148.692,
+    "p50": 262.5,
+    "p95": 425.464,
+    "n": 790
+   },
+   "background_motion_pct": {
+    "p05": 0.919,
+    "p50": 76.27,
+    "p95": 100.0,
+    "n": 792
+   },
+   "bg_three_plus_lines_moving_pct": {
+    "p05": 0.0,
+    "p50": 30.0,
+    "p95": 83.33,
+    "n": 792
+   },
+   "longest_all_still_during_play_s": {
+    "p05": 0.0,
+    "p50": 0.5,
+    "p95": 5.5,
+    "n": 792
+   },
+   "section_spread_cv": {
+    "p05": 0.086,
+    "p50": 0.255,
+    "p95": 0.766,
+    "n": 792
+   },
+   "onset_step_200plus_pct": {
+    "p05": 38.84,
+    "p50": 64.165,
+    "p95": 85.221,
+    "n": 790
+   },
+   "longest_carrier_still_during_play_s": {
+    "p05": 0.0,
+    "p50": 2.5,
+    "p95": 11.5,
+    "n": 792
+   },
+   "section_line_activity_cv": {
+    "p05": 0.141,
+    "p50": 0.344,
+    "p95": 0.817,
+    "n": 792
+   }
+  }
+ },
+ "official_self_flags": {
+  "whole": {
+   "median": 2.0,
+   "p90": 6.0,
+   "n": 132
+  },
+  "excerpt": {
+   "median": 1,
+   "p90": 5.0,
+   "n": 785
+  }
+ },
+ "named_official": [
+  {
+   "title": "AbsoluTe disoRdeR",
+   "constant": 16.3,
+   "metrics": {
+    "fresh_onsets_per_s": 4.998,
+    "onset_step_median_px": 295.033,
+    "onset_step_under50_pct": 20.98,
+    "onset_step_200plus_pct": 62.94,
+    "required_travel_px_per_s": 1277.7,
+    "required_move_median_px": 171.8,
+    "required_move_under50_pct": 34.28,
+    "required_move_200plus_pct": 44.33,
+    "direction_change_pct": 81.65,
+    "x_spread_iqr_px": 529.9,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 97.3,
+    "background_motion_pct": 28.03,
+    "any_motion_pct": 97.3,
+    "strong_motion_pct": 94.61,
+    "background_present_pct": 29.11,
+    "judging_carrier_motion_pct": 98.14,
+    "longest_carrier_still_during_play_s": 1.0,
+    "longest_all_still_during_play_s": 1.0,
+    "carrier_response_gap_p90_s": 44.9,
+    "bg_lines_moving_together_median": 1.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.509,
+    "section_travel_cv": 0.548,
+    "section_spread_cv": 0.346,
+    "section_line_activity_cv": 0.548
+   },
+   "flags": []
+  },
+  {
+   "title": "Der Schneid",
+   "constant": 16.1,
+   "metrics": {
+    "fresh_onsets_per_s": 6.302,
+    "onset_step_median_px": 241.142,
+    "onset_step_under50_pct": 22.6,
+    "onset_step_200plus_pct": 60.96,
+    "required_travel_px_per_s": 1139.4,
+    "required_move_median_px": 150.0,
+    "required_move_under50_pct": 29.39,
+    "required_move_200plus_pct": 37.71,
+    "direction_change_pct": 83.31,
+    "x_spread_iqr_px": 495.4,
+    "approach_heights_per_s_median": 1.35,
+    "carrier_motion_pct": 71.19,
+    "background_motion_pct": 91.86,
+    "any_motion_pct": 98.98,
+    "strong_motion_pct": 96.95,
+    "background_present_pct": 92.54,
+    "judging_carrier_motion_pct": 70.18,
+    "longest_carrier_still_during_play_s": 8.5,
+    "longest_all_still_during_play_s": 1.0,
+    "carrier_response_gap_p90_s": 8.8,
+    "bg_lines_moving_together_median": 4,
+    "bg_two_plus_lines_moving_pct": 88.81,
+    "bg_three_plus_lines_moving_pct": 64.07,
+    "section_density_cv": 0.445,
+    "section_travel_cv": 0.565,
+    "section_spread_cv": 0.267,
+    "section_line_activity_cv": 0.4
+   },
+   "flags": [
+    "fresh_onsets_per_s",
+    "background_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct",
+    "bg_three_plus_lines_moving_pct"
+   ]
+  },
+  {
+   "title": "Entrance to the Chaos",
+   "constant": 16.8,
+   "metrics": {
+    "fresh_onsets_per_s": 5.498,
+    "onset_step_median_px": 262.5,
+    "onset_step_under50_pct": 8.08,
+    "onset_step_200plus_pct": 55.48,
+    "required_travel_px_per_s": 1320.8,
+    "required_move_median_px": 196.9,
+    "required_move_under50_pct": 15.9,
+    "required_move_200plus_pct": 34.66,
+    "direction_change_pct": 76.42,
+    "x_spread_iqr_px": 393.8,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 68.35,
+    "background_motion_pct": 90.29,
+    "any_motion_pct": 94.96,
+    "strong_motion_pct": 91.37,
+    "background_present_pct": 91.37,
+    "judging_carrier_motion_pct": 72.34,
+    "longest_carrier_still_during_play_s": 4.5,
+    "longest_all_still_during_play_s": 3.5,
+    "carrier_response_gap_p90_s": 10.0,
+    "bg_lines_moving_together_median": 3,
+    "bg_two_plus_lines_moving_pct": 83.81,
+    "bg_three_plus_lines_moving_pct": 63.67,
+    "section_density_cv": 0.694,
+    "section_travel_cv": 0.632,
+    "section_spread_cv": 0.513,
+    "section_line_activity_cv": 0.346
+   },
+   "flags": [
+    "background_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct",
+    "bg_three_plus_lines_moving_pct"
+   ]
+  },
+  {
+   "title": "Fractured Angel",
+   "constant": 16.3,
+   "metrics": {
+    "fresh_onsets_per_s": 3.623,
+    "onset_step_median_px": 237.0,
+    "onset_step_under50_pct": 12.88,
+    "onset_step_200plus_pct": 75.38,
+    "required_travel_px_per_s": 779.7,
+    "required_move_median_px": 158.3,
+    "required_move_under50_pct": 27.29,
+    "required_move_200plus_pct": 45.58,
+    "direction_change_pct": 82.74,
+    "x_spread_iqr_px": 420.0,
+    "approach_heights_per_s_median": 1.44,
+    "carrier_motion_pct": 85.34,
+    "background_motion_pct": 49.85,
+    "any_motion_pct": 90.62,
+    "strong_motion_pct": 87.1,
+    "background_present_pct": 51.03,
+    "judging_carrier_motion_pct": 85.51,
+    "longest_carrier_still_during_play_s": 2.0,
+    "longest_all_still_during_play_s": 2.0,
+    "carrier_response_gap_p90_s": 18.0,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 28.15,
+    "bg_three_plus_lines_moving_pct": 4.4,
+    "section_density_cv": 0.79,
+    "section_travel_cv": 0.804,
+    "section_spread_cv": 0.507,
+    "section_line_activity_cv": 0.382
+   },
+   "flags": [
+    "section_density_cv",
+    "section_travel_cv"
+   ]
+  },
+  {
+   "title": "Non-Melodic Ragez (MUG Edit)",
+   "constant": 16.1,
+   "metrics": {
+    "fresh_onsets_per_s": 4.6,
+    "onset_step_median_px": 225.0,
+    "onset_step_under50_pct": 16.97,
+    "onset_step_200plus_pct": 62.06,
+    "required_travel_px_per_s": 951.5,
+    "required_move_median_px": 150.0,
+    "required_move_under50_pct": 23.55,
+    "required_move_200plus_pct": 35.01,
+    "direction_change_pct": 81.33,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.32,
+    "carrier_motion_pct": 56.67,
+    "background_motion_pct": 17.41,
+    "any_motion_pct": 71.11,
+    "strong_motion_pct": 43.7,
+    "background_present_pct": 17.41,
+    "judging_carrier_motion_pct": 52.89,
+    "longest_carrier_still_during_play_s": 18.5,
+    "longest_all_still_during_play_s": 9.5,
+    "carrier_response_gap_p90_s": 21.45,
+    "bg_lines_moving_together_median": 1,
+    "bg_two_plus_lines_moving_pct": 4.07,
+    "bg_three_plus_lines_moving_pct": 3.33,
+    "section_density_cv": 0.504,
+    "section_travel_cv": 0.59,
+    "section_spread_cv": 0.496,
+    "section_line_activity_cv": 0.694
+   },
+   "flags": [
+    "any_motion_pct",
+    "longest_carrier_still_during_play_s"
+   ]
+  },
+  {
+   "title": "QZKago Requiem",
+   "constant": 16.3,
+   "metrics": {
+    "fresh_onsets_per_s": 4.73,
+    "onset_step_median_px": 262.5,
+    "onset_step_under50_pct": 8.31,
+    "onset_step_200plus_pct": 72.37,
+    "required_travel_px_per_s": 984.0,
+    "required_move_median_px": 157.5,
+    "required_move_under50_pct": 26.13,
+    "required_move_200plus_pct": 40.0,
+    "direction_change_pct": 75.37,
+    "x_spread_iqr_px": 472.5,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 78.2,
+    "background_motion_pct": 83.46,
+    "any_motion_pct": 91.35,
+    "strong_motion_pct": 84.21,
+    "background_present_pct": 83.46,
+    "judging_carrier_motion_pct": 81.9,
+    "longest_carrier_still_during_play_s": 5.0,
+    "longest_all_still_during_play_s": 0.5,
+    "carrier_response_gap_p90_s": 9.5,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 48.12,
+    "bg_three_plus_lines_moving_pct": 9.4,
+    "section_density_cv": 0.609,
+    "section_travel_cv": 0.586,
+    "section_spread_cv": 0.363,
+    "section_line_activity_cv": 0.41
+   },
+   "flags": []
+  },
+  {
+   "title": "Verrückt",
+   "constant": 16.5,
+   "metrics": {
+    "fresh_onsets_per_s": 7.39,
+    "onset_step_median_px": 350.482,
+    "onset_step_under50_pct": 9.57,
+    "onset_step_200plus_pct": 81.11,
+    "required_travel_px_per_s": 1423.5,
+    "required_move_median_px": 162.3,
+    "required_move_under50_pct": 31.01,
+    "required_move_200plus_pct": 36.9,
+    "direction_change_pct": 91.98,
+    "x_spread_iqr_px": 435.0,
+    "approach_heights_per_s_median": 1.44,
+    "carrier_motion_pct": 89.4,
+    "background_motion_pct": 60.37,
+    "any_motion_pct": 99.08,
+    "strong_motion_pct": 75.12,
+    "background_present_pct": 68.2,
+    "judging_carrier_motion_pct": 89.32,
+    "longest_carrier_still_during_play_s": 7.5,
+    "longest_all_still_during_play_s": 0.5,
+    "carrier_response_gap_p90_s": 36.0,
+    "bg_lines_moving_together_median": 3,
+    "bg_two_plus_lines_moving_pct": 51.61,
+    "bg_three_plus_lines_moving_pct": 34.1,
+    "section_density_cv": 0.456,
+    "section_travel_cv": 0.531,
+    "section_spread_cv": 0.226,
+    "section_line_activity_cv": 0.322
+   },
+   "flags": [
+    "fresh_onsets_per_s",
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "direction_change_pct"
+   ]
+  },
+  {
+   "title": "What do you want more than a Happy ending?",
+   "constant": null,
+   "metrics": {
+    "fresh_onsets_per_s": 5.587,
+    "onset_step_median_px": 209.793,
+    "onset_step_under50_pct": 25.21,
+    "onset_step_200plus_pct": 55.52,
+    "required_travel_px_per_s": 1480.8,
+    "required_move_median_px": 209.7,
+    "required_move_under50_pct": 25.9,
+    "required_move_200plus_pct": 54.32,
+    "direction_change_pct": 85.39,
+    "x_spread_iqr_px": 420.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 99.35,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 99.35,
+    "strong_motion_pct": 94.5,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 100.0,
+    "longest_carrier_still_during_play_s": 0.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": 1.9,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.506,
+    "section_travel_cv": 0.595,
+    "section_spread_cv": 0.363,
+    "section_line_activity_cv": 0.368
+   },
+   "flags": [
+    "required_travel_px_per_s",
+    "required_move_200plus_pct",
+    "carrier_motion_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "carrier_response_gap_p90_s"
+   ]
+  }
+ ],
+ "ai": [
+  {
+   "id": "he-sol-run01",
+   "path": "charts/happy-ending/happy-ending-sol-baseline/run-01/project/chart.json",
+   "verdict": "unknown",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 15,
+     "events": 14715,
+     "notes": 1388,
+     "kinds": {
+      "tap": 1119,
+      "hold": 23,
+      "drag": 231,
+      "flick": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1388,
+   "span_s": 155.822,
+   "lines": 15,
+   "kinds": {
+    "tap": 1119,
+    "hold": 23,
+    "drag": 231,
+    "flick": 15
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.859,
+    "onset_step_median_px": 320.0,
+    "onset_step_under50_pct": 14.12,
+    "onset_step_200plus_pct": 67.88,
+    "required_travel_px_per_s": 1164.4,
+    "required_move_median_px": 160.0,
+    "required_move_under50_pct": 20.93,
+    "required_move_200plus_pct": 35.46,
+    "direction_change_pct": 89.85,
+    "x_spread_iqr_px": 526.0,
+    "approach_heights_per_s_median": 1.413,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 72.35,
+    "any_motion_pct": 72.35,
+    "strong_motion_pct": 0.96,
+    "background_present_pct": 86.17,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 40.0,
+    "longest_all_still_during_play_s": 9.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 12,
+    "bg_two_plus_lines_moving_pct": 72.35,
+    "bg_three_plus_lines_moving_pct": 70.74,
+    "section_density_cv": 0.473,
+    "section_travel_cv": 0.549,
+    "section_spread_cv": 0.235,
+    "section_line_activity_cv": 0.562
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "direction_change_pct",
+    "carrier_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "bg_lines_moving_together_median",
+    "bg_three_plus_lines_moving_pct"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 90.9,
+    "onset_step_median_px": 81.1,
+    "onset_step_under50_pct": 46.6,
+    "onset_step_200plus_pct": 61.4,
+    "required_travel_px_per_s": 74.2,
+    "required_move_median_px": 56.8,
+    "required_move_under50_pct": 31.1,
+    "required_move_200plus_pct": 47.7,
+    "direction_change_pct": 99.2,
+    "x_spread_iqr_px": 90.2,
+    "approach_heights_per_s_median": 92.4,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 76.5,
+    "any_motion_pct": 5.3,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 90.9,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 92.0,
+    "bg_lines_moving_together_median": 100.0,
+    "bg_two_plus_lines_moving_pct": 91.7,
+    "bg_three_plus_lines_moving_pct": 98.5,
+    "section_density_cv": 51.9,
+    "section_travel_cv": 53.8,
+    "section_spread_cv": 10.6,
+    "section_line_activity_cv": 78.0
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "carrier_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "bg_lines_moving_together_median",
+    "bg_three_plus_lines_moving_pct"
+   ]
+  },
+  {
+   "id": "he-presentation-r01",
+   "path": "charts/happy-ending/happy-ending-sol-baseline/presentation-revision-01/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 15,
+     "events": 3473,
+     "notes": 1388,
+     "kinds": {
+      "tap": 1119,
+      "hold": 23,
+      "drag": 231,
+      "flick": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1388,
+   "span_s": 155.822,
+   "lines": 15,
+   "kinds": {
+    "tap": 1119,
+    "hold": 23,
+    "drag": 231,
+    "flick": 15
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.859,
+    "onset_step_median_px": 320.0,
+    "onset_step_under50_pct": 14.12,
+    "onset_step_200plus_pct": 68.47,
+    "required_travel_px_per_s": 1169.0,
+    "required_move_median_px": 152.2,
+    "required_move_under50_pct": 19.91,
+    "required_move_200plus_pct": 35.19,
+    "direction_change_pct": 90.12,
+    "x_spread_iqr_px": 539.0,
+    "approach_heights_per_s_median": 1.413,
+    "carrier_motion_pct": 38.91,
+    "background_motion_pct": 61.09,
+    "any_motion_pct": 65.59,
+    "strong_motion_pct": 5.47,
+    "background_present_pct": 63.02,
+    "judging_carrier_motion_pct": 39.37,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 9.0,
+    "carrier_response_gap_p90_s": 4.5,
+    "bg_lines_moving_together_median": 1.0,
+    "bg_two_plus_lines_moving_pct": 10.61,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.473,
+    "section_travel_cv": 0.547,
+    "section_spread_cv": 0.225,
+    "section_line_activity_cv": 0.559
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "direction_change_pct",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "carrier_response_gap_p90_s"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 90.9,
+    "onset_step_median_px": 81.1,
+    "onset_step_under50_pct": 46.6,
+    "onset_step_200plus_pct": 64.4,
+    "required_travel_px_per_s": 74.2,
+    "required_move_median_px": 44.7,
+    "required_move_under50_pct": 28.0,
+    "required_move_200plus_pct": 46.2,
+    "direction_change_pct": 99.2,
+    "x_spread_iqr_px": 93.9,
+    "approach_heights_per_s_median": 92.4,
+    "carrier_motion_pct": 1.5,
+    "background_motion_pct": 66.7,
+    "any_motion_pct": 3.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 65.2,
+    "judging_carrier_motion_pct": 2.3,
+    "longest_carrier_still_during_play_s": 84.8,
+    "longest_all_still_during_play_s": 92.0,
+    "carrier_response_gap_p90_s": 0.8,
+    "bg_lines_moving_together_median": 30.7,
+    "bg_two_plus_lines_moving_pct": 34.1,
+    "bg_three_plus_lines_moving_pct": 16.7,
+    "section_density_cv": 51.9,
+    "section_travel_cv": 53.0,
+    "section_spread_cv": 8.3,
+    "section_line_activity_cv": 77.3
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "carrier_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "carrier_response_gap_p90_s"
+   ]
+  },
+  {
+   "id": "he-run02",
+   "path": "charts/happy-ending/happy-ending-guided-run02/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 566,
+     "notes": 1078,
+     "kinds": {
+      "tap": 662,
+      "drag": 250,
+      "hold": 151,
+      "flick": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1078,
+   "span_s": 155.822,
+   "lines": 4,
+   "kinds": {
+    "tap": 662,
+    "drag": 250,
+    "hold": 151,
+    "flick": 15
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.096,
+    "onset_step_median_px": 388.125,
+    "onset_step_under50_pct": 8.16,
+    "onset_step_200plus_pct": 82.7,
+    "required_travel_px_per_s": 191.8,
+    "required_move_median_px": 23.8,
+    "required_move_under50_pct": 83.22,
+    "required_move_200plus_pct": 1.62,
+    "direction_change_pct": 92.79,
+    "x_spread_iqr_px": 407.5,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 17.68,
+    "background_motion_pct": 12.86,
+    "any_motion_pct": 28.62,
+    "strong_motion_pct": 8.36,
+    "background_present_pct": 17.68,
+    "judging_carrier_motion_pct": 15.81,
+    "longest_carrier_still_during_play_s": 14.5,
+    "longest_all_still_during_play_s": 9.0,
+    "carrier_response_gap_p90_s": 6.8,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 10.29,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.498,
+    "section_travel_cv": 0.459,
+    "section_spread_cv": 0.196,
+    "section_line_activity_cv": 0.753
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "carrier_response_gap_p90_s",
+    "section_spread_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 55.3,
+    "onset_step_median_px": 97.0,
+    "onset_step_under50_pct": 7.6,
+    "onset_step_200plus_pct": 99.2,
+    "required_travel_px_per_s": 0.0,
+    "required_move_median_px": 0.8,
+    "required_move_under50_pct": 100.0,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 100.0,
+    "x_spread_iqr_px": 10.6,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 23.5,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 25.8,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 92.8,
+    "longest_all_still_during_play_s": 92.0,
+    "carrier_response_gap_p90_s": 3.1,
+    "bg_lines_moving_together_median": 59.5,
+    "bg_two_plus_lines_moving_pct": 34.1,
+    "bg_three_plus_lines_moving_pct": 16.7,
+    "section_density_cv": 59.1,
+    "section_travel_cv": 22.0,
+    "section_spread_cv": 4.5,
+    "section_line_activity_cv": 92.4
+   },
+   "flags_all_in": [
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "section_spread_cv"
+   ]
+  },
+  {
+   "id": "he-run03",
+   "path": "charts/happy-ending/happy-ending-performance-run03/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 5,
+     "events": 8018,
+     "notes": 1219,
+     "kinds": {
+      "drag": 342,
+      "hold": 118,
+      "tap": 738,
+      "flick": 21
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1219,
+   "span_s": 155.822,
+   "lines": 5,
+   "kinds": {
+    "drag": 342,
+    "hold": 118,
+    "tap": 738,
+    "flick": 21
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.102,
+    "onset_step_median_px": 320.0,
+    "onset_step_under50_pct": 5.13,
+    "onset_step_200plus_pct": 72.06,
+    "required_travel_px_per_s": 890.9,
+    "required_move_median_px": 150.2,
+    "required_move_under50_pct": 16.62,
+    "required_move_200plus_pct": 39.17,
+    "direction_change_pct": 74.93,
+    "x_spread_iqr_px": 560.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 76.21,
+    "background_motion_pct": 97.43,
+    "any_motion_pct": 97.43,
+    "strong_motion_pct": 93.25,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 77.32,
+    "longest_carrier_still_during_play_s": 5.0,
+    "longest_all_still_during_play_s": 2.0,
+    "carrier_response_gap_p90_s": 6.5,
+    "bg_lines_moving_together_median": 4,
+    "bg_two_plus_lines_moving_pct": 97.43,
+    "bg_three_plus_lines_moving_pct": 97.43,
+    "section_density_cv": 0.554,
+    "section_travel_cv": 0.526,
+    "section_spread_cv": 0.307,
+    "section_line_activity_cv": 0.099
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_under50_pct",
+    "x_spread_iqr_px",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "carrier_response_gap_p90_s",
+    "bg_two_plus_lines_moving_pct",
+    "bg_three_plus_lines_moving_pct",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 55.3,
+    "onset_step_median_px": 81.1,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 79.5,
+    "required_travel_px_per_s": 29.5,
+    "required_move_median_px": 39.8,
+    "required_move_under50_pct": 15.2,
+    "required_move_200plus_pct": 62.9,
+    "direction_change_pct": 16.7,
+    "x_spread_iqr_px": 96.2,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 23.5,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 72.7,
+    "strong_motion_pct": 85.6,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 28.0,
+    "longest_carrier_still_during_play_s": 63.6,
+    "longest_all_still_during_play_s": 51.9,
+    "carrier_response_gap_p90_s": 2.3,
+    "bg_lines_moving_together_median": 94.7,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 100.0,
+    "section_density_cv": 74.6,
+    "section_travel_cv": 48.1,
+    "section_spread_cv": 26.5,
+    "section_line_activity_cv": 0.0
+   },
+   "flags_all_in": [
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct",
+    "bg_three_plus_lines_moving_pct",
+    "section_line_activity_cv"
+   ]
+  },
+  {
+   "id": "he-five-A",
+   "path": "charts/happy-ending/happy-ending-five-authors/A/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 6797,
+     "notes": 1169,
+     "kinds": {
+      "drag": 265,
+      "hold": 46,
+      "tap": 849,
+      "flick": 9
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1169,
+   "span_s": 155.822,
+   "lines": 4,
+   "kinds": {
+    "drag": 265,
+    "hold": 46,
+    "tap": 849,
+    "flick": 9
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.564,
+    "onset_step_median_px": 400.0,
+    "onset_step_under50_pct": 4.33,
+    "onset_step_200plus_pct": 79.83,
+    "required_travel_px_per_s": 686.1,
+    "required_move_median_px": 130.0,
+    "required_move_under50_pct": 30.41,
+    "required_move_200plus_pct": 19.95,
+    "direction_change_pct": 90.03,
+    "x_spread_iqr_px": 410.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 84.57,
+    "background_motion_pct": 85.85,
+    "any_motion_pct": 90.68,
+    "strong_motion_pct": 38.26,
+    "background_present_pct": 90.68,
+    "judging_carrier_motion_pct": 90.66,
+    "longest_carrier_still_during_play_s": 4.0,
+    "longest_all_still_during_play_s": 3.5,
+    "carrier_response_gap_p90_s": 19.4,
+    "bg_lines_moving_together_median": 2,
+    "bg_two_plus_lines_moving_pct": 74.6,
+    "bg_three_plus_lines_moving_pct": 5.79,
+    "section_density_cv": 0.513,
+    "section_travel_cv": 0.701,
+    "section_spread_cv": 0.297,
+    "section_line_activity_cv": 0.329
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "strong_motion_pct",
+    "background_present_pct"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 79.9,
+    "onset_step_median_px": 97.7,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 96.2,
+    "required_travel_px_per_s": 4.5,
+    "required_move_median_px": 9.1,
+    "required_move_under50_pct": 73.5,
+    "required_move_200plus_pct": 4.5,
+    "direction_change_pct": 99.2,
+    "x_spread_iqr_px": 12.1,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 41.7,
+    "background_motion_pct": 91.7,
+    "any_motion_pct": 37.9,
+    "strong_motion_pct": 2.3,
+    "background_present_pct": 96.2,
+    "judging_carrier_motion_pct": 61.4,
+    "longest_carrier_still_during_play_s": 55.7,
+    "longest_all_still_during_play_s": 69.7,
+    "carrier_response_gap_p90_s": 49.2,
+    "bg_lines_moving_together_median": 59.5,
+    "bg_two_plus_lines_moving_pct": 92.4,
+    "bg_three_plus_lines_moving_pct": 40.9,
+    "section_density_cv": 61.7,
+    "section_travel_cv": 84.8,
+    "section_spread_cv": 24.2,
+    "section_line_activity_cv": 14.4
+   },
+   "flags_all_in": [
+    "onset_step_under50_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "background_present_pct"
+   ]
+  },
+  {
+   "id": "he-five-B",
+   "path": "charts/happy-ending/happy-ending-five-authors/B/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 6380,
+     "notes": 1190,
+     "kinds": {
+      "tap": 920,
+      "hold": 32,
+      "drag": 231,
+      "flick": 7
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1190,
+   "span_s": 155.822,
+   "lines": 4,
+   "kinds": {
+    "tap": 920,
+    "hold": 32,
+    "drag": 231,
+    "flick": 7
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.769,
+    "onset_step_median_px": 310.0,
+    "onset_step_under50_pct": 8.96,
+    "onset_step_200plus_pct": 70.01,
+    "required_travel_px_per_s": 905.9,
+    "required_move_median_px": 160.0,
+    "required_move_under50_pct": 20.6,
+    "required_move_200plus_pct": 37.96,
+    "direction_change_pct": 77.14,
+    "x_spread_iqr_px": 380.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 78.78,
+    "background_motion_pct": 90.03,
+    "any_motion_pct": 91.64,
+    "strong_motion_pct": 26.37,
+    "background_present_pct": 93.89,
+    "judging_carrier_motion_pct": 86.57,
+    "longest_carrier_still_during_play_s": 9.0,
+    "longest_all_still_during_play_s": 1.0,
+    "carrier_response_gap_p90_s": 15.0,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 69.45,
+    "bg_three_plus_lines_moving_pct": 17.04,
+    "section_density_cv": 0.482,
+    "section_travel_cv": 0.551,
+    "section_spread_cv": 0.263,
+    "section_line_activity_cv": 0.391
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "x_spread_iqr_px",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 87.9,
+    "onset_step_median_px": 72.7,
+    "onset_step_under50_pct": 9.8,
+    "onset_step_200plus_pct": 70.5,
+    "required_travel_px_per_s": 31.1,
+    "required_move_median_px": 56.8,
+    "required_move_under50_pct": 30.3,
+    "required_move_200plus_pct": 58.3,
+    "direction_change_pct": 29.5,
+    "x_spread_iqr_px": 2.3,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 31.1,
+    "background_motion_pct": 97.0,
+    "any_motion_pct": 45.5,
+    "strong_motion_pct": 1.5,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 49.6,
+    "longest_carrier_still_during_play_s": 82.2,
+    "longest_all_still_during_play_s": 30.7,
+    "carrier_response_gap_p90_s": 34.2,
+    "bg_lines_moving_together_median": 59.5,
+    "bg_two_plus_lines_moving_pct": 88.6,
+    "bg_three_plus_lines_moving_pct": 64.4,
+    "section_density_cv": 53.8,
+    "section_travel_cv": 53.8,
+    "section_spread_cv": 16.3,
+    "section_line_activity_cv": 36.0
+   },
+   "flags_all_in": [
+    "x_spread_iqr_px",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct"
+   ]
+  },
+  {
+   "id": "he-five-C",
+   "path": "charts/happy-ending/happy-ending-five-authors/C/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 2504,
+     "notes": 1114,
+     "kinds": {
+      "tap": 826,
+      "hold": 38,
+      "drag": 234,
+      "flick": 16
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1114,
+   "span_s": 155.822,
+   "lines": 4,
+   "kinds": {
+    "tap": 826,
+    "hold": 38,
+    "drag": 234,
+    "flick": 16
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.41,
+    "onset_step_median_px": 510.0,
+    "onset_step_under50_pct": 5.91,
+    "onset_step_200plus_pct": 86.38,
+    "required_travel_px_per_s": 820.1,
+    "required_move_median_px": 140.0,
+    "required_move_under50_pct": 17.82,
+    "required_move_200plus_pct": 30.61,
+    "direction_change_pct": 93.16,
+    "x_spread_iqr_px": 528.8,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 69.77,
+    "background_motion_pct": 85.85,
+    "any_motion_pct": 88.75,
+    "strong_motion_pct": 67.52,
+    "background_present_pct": 88.42,
+    "judging_carrier_motion_pct": 75.35,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 5.5,
+    "carrier_response_gap_p90_s": 15.75,
+    "bg_lines_moving_together_median": 1,
+    "bg_two_plus_lines_moving_pct": 39.55,
+    "bg_three_plus_lines_moving_pct": 0.32,
+    "section_density_cv": 0.508,
+    "section_travel_cv": 0.705,
+    "section_spread_cv": 0.253,
+    "section_line_activity_cv": 0.407
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 68.2,
+    "onset_step_median_px": 100.0,
+    "onset_step_under50_pct": 0.8,
+    "onset_step_200plus_pct": 100.0,
+    "required_travel_px_per_s": 16.7,
+    "required_move_median_px": 22.0,
+    "required_move_under50_pct": 18.2,
+    "required_move_200plus_pct": 31.1,
+    "direction_change_pct": 100.0,
+    "x_spread_iqr_px": 90.2,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 17.4,
+    "background_motion_pct": 91.7,
+    "any_motion_pct": 29.5,
+    "strong_motion_pct": 18.9,
+    "background_present_pct": 90.9,
+    "judging_carrier_motion_pct": 23.5,
+    "longest_carrier_still_during_play_s": 84.8,
+    "longest_all_still_during_play_s": 83.3,
+    "carrier_response_gap_p90_s": 35.4,
+    "bg_lines_moving_together_median": 30.7,
+    "bg_two_plus_lines_moving_pct": 62.9,
+    "bg_three_plus_lines_moving_pct": 33.3,
+    "section_density_cv": 60.6,
+    "section_travel_cv": 86.4,
+    "section_spread_cv": 13.6,
+    "section_line_activity_cv": 41.3
+   },
+   "flags_all_in": [
+    "onset_step_median_px",
+    "onset_step_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median"
+   ]
+  },
+  {
+   "id": "he-five-D",
+   "path": "charts/happy-ending/happy-ending-five-authors/D/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 6956,
+     "notes": 1148,
+     "kinds": {
+      "tap": 889,
+      "hold": 21,
+      "drag": 228,
+      "flick": 10
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1148,
+   "span_s": 155.822,
+   "lines": 4,
+   "kinds": {
+    "tap": 889,
+    "hold": 21,
+    "drag": 228,
+    "flick": 10
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.801,
+    "onset_step_median_px": 460.0,
+    "onset_step_under50_pct": 2.37,
+    "onset_step_200plus_pct": 95.38,
+    "required_travel_px_per_s": 517.1,
+    "required_move_median_px": 95.0,
+    "required_move_under50_pct": 31.77,
+    "required_move_200plus_pct": 8.78,
+    "direction_change_pct": 96.6,
+    "x_spread_iqr_px": 470.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 77.49,
+    "background_motion_pct": 89.07,
+    "any_motion_pct": 91.32,
+    "strong_motion_pct": 78.78,
+    "background_present_pct": 91.32,
+    "judging_carrier_motion_pct": 83.97,
+    "longest_carrier_still_during_play_s": 5.5,
+    "longest_all_still_during_play_s": 4.0,
+    "carrier_response_gap_p90_s": 18.65,
+    "bg_lines_moving_together_median": 2,
+    "bg_two_plus_lines_moving_pct": 58.52,
+    "bg_three_plus_lines_moving_pct": 13.18,
+    "section_density_cv": 0.486,
+    "section_travel_cv": 0.842,
+    "section_spread_cv": 0.215,
+    "section_line_activity_cv": 0.369
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "section_travel_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 87.9,
+    "onset_step_median_px": 100.0,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 100.0,
+    "required_travel_px_per_s": 0.8,
+    "required_move_median_px": 3.0,
+    "required_move_under50_pct": 78.8,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 100.0,
+    "x_spread_iqr_px": 63.6,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 26.5,
+    "background_motion_pct": 94.7,
+    "any_motion_pct": 43.2,
+    "strong_motion_pct": 37.1,
+    "background_present_pct": 96.2,
+    "judging_carrier_motion_pct": 39.4,
+    "longest_carrier_still_during_play_s": 67.0,
+    "longest_all_still_during_play_s": 74.2,
+    "carrier_response_gap_p90_s": 46.9,
+    "bg_lines_moving_together_median": 59.5,
+    "bg_two_plus_lines_moving_pct": 81.8,
+    "bg_three_plus_lines_moving_pct": 56.1,
+    "section_density_cv": 54.2,
+    "section_travel_cv": 97.3,
+    "section_spread_cv": 7.6,
+    "section_line_activity_cv": 26.5
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "section_travel_cv"
+   ]
+  },
+  {
+   "id": "he-five-E",
+   "path": "charts/happy-ending/happy-ending-five-authors/E/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 6055,
+     "notes": 1104,
+     "kinds": {
+      "tap": 844,
+      "hold": 37,
+      "drag": 217,
+      "flick": 6
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1104,
+   "span_s": 155.822,
+   "lines": 4,
+   "kinds": {
+    "tap": 844,
+    "hold": 37,
+    "drag": 217,
+    "flick": 6
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.603,
+    "onset_step_median_px": 360.0,
+    "onset_step_under50_pct": 2.12,
+    "onset_step_200plus_pct": 77.96,
+    "required_travel_px_per_s": 790.9,
+    "required_move_median_px": 150.0,
+    "required_move_under50_pct": 21.2,
+    "required_move_200plus_pct": 32.17,
+    "direction_change_pct": 91.46,
+    "x_spread_iqr_px": 420.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 72.35,
+    "background_motion_pct": 88.1,
+    "any_motion_pct": 89.39,
+    "strong_motion_pct": 81.03,
+    "background_present_pct": 90.03,
+    "judging_carrier_motion_pct": 78.12,
+    "longest_carrier_still_during_play_s": 8.0,
+    "longest_all_still_during_play_s": 4.5,
+    "carrier_response_gap_p90_s": 15.75,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 77.49,
+    "bg_three_plus_lines_moving_pct": 19.61,
+    "section_density_cv": 0.509,
+    "section_travel_cv": 0.747,
+    "section_spread_cv": 0.355,
+    "section_line_activity_cv": 0.38
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_under50_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 82.6,
+    "onset_step_median_px": 92.4,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 93.9,
+    "required_travel_px_per_s": 14.4,
+    "required_move_median_px": 31.1,
+    "required_move_under50_pct": 34.1,
+    "required_move_200plus_pct": 35.6,
+    "direction_change_pct": 99.2,
+    "x_spread_iqr_px": 19.7,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 18.9,
+    "background_motion_pct": 93.2,
+    "any_motion_pct": 32.6,
+    "strong_motion_pct": 45.5,
+    "background_present_pct": 93.9,
+    "judging_carrier_motion_pct": 28.8,
+    "longest_carrier_still_during_play_s": 76.9,
+    "longest_all_still_during_play_s": 78.0,
+    "carrier_response_gap_p90_s": 35.4,
+    "bg_lines_moving_together_median": 59.5,
+    "bg_two_plus_lines_moving_pct": 94.7,
+    "bg_three_plus_lines_moving_pct": 65.9,
+    "section_density_cv": 61.0,
+    "section_travel_cv": 90.2,
+    "section_spread_cv": 39.8,
+    "section_line_activity_cv": 29.5
+   },
+   "flags_all_in": [
+    "onset_step_under50_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct"
+   ]
+  },
+  {
+   "id": "he-full-c",
+   "path": "charts/happy-ending/happy-ending-full-c-revision/full/project/chart.json",
+   "verdict": "pending",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 8,
+     "events": 6954,
+     "notes": 1217,
+     "kinds": {
+      "tap": 933,
+      "hold": 198,
+      "drag": 54,
+      "flick": 32
+     },
+     "max_contacts": 2,
+     "last_contact_s": 160.137,
+     "audio_s": 162.198639
+    }
+   },
+   "notes": 1217,
+   "span_s": 156.438,
+   "lines": 8,
+   "kinds": {
+    "tap": 933,
+    "hold": 198,
+    "drag": 54,
+    "flick": 32
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.504,
+    "onset_step_median_px": 300.0,
+    "onset_step_under50_pct": 8.58,
+    "onset_step_200plus_pct": 65.69,
+    "required_travel_px_per_s": 997.4,
+    "required_move_median_px": 130.5,
+    "required_move_under50_pct": 21.02,
+    "required_move_200plus_pct": 25.79,
+    "direction_change_pct": 76.51,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 53.21,
+    "background_motion_pct": 90.38,
+    "any_motion_pct": 92.31,
+    "strong_motion_pct": 75.64,
+    "background_present_pct": 91.35,
+    "judging_carrier_motion_pct": 58.25,
+    "longest_carrier_still_during_play_s": 9.0,
+    "longest_all_still_during_play_s": 1.5,
+    "carrier_response_gap_p90_s": 7.15,
+    "bg_lines_moving_together_median": 3.0,
+    "bg_two_plus_lines_moving_pct": 83.65,
+    "bg_three_plus_lines_moving_pct": 50.0,
+    "section_density_cv": 0.498,
+    "section_travel_cv": 0.565,
+    "section_spread_cv": 0.294,
+    "section_line_activity_cv": 0.354
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "approach_heights_per_s_median",
+    "carrier_motion_pct",
+    "background_motion_pct",
+    "background_present_pct",
+    "carrier_response_gap_p90_s",
+    "bg_two_plus_lines_moving_pct"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 75.0,
+    "onset_step_median_px": 66.7,
+    "onset_step_under50_pct": 9.1,
+    "onset_step_200plus_pct": 50.8,
+    "required_travel_px_per_s": 51.5,
+    "required_move_median_px": 9.1,
+    "required_move_under50_pct": 31.8,
+    "required_move_200plus_pct": 11.4,
+    "direction_change_pct": 25.8,
+    "x_spread_iqr_px": 73.9,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 4.5,
+    "background_motion_pct": 99.2,
+    "any_motion_pct": 48.9,
+    "strong_motion_pct": 34.1,
+    "background_present_pct": 96.2,
+    "judging_carrier_motion_pct": 8.3,
+    "longest_carrier_still_during_play_s": 82.2,
+    "longest_all_still_during_play_s": 41.7,
+    "carrier_response_gap_p90_s": 3.1,
+    "bg_lines_moving_together_median": 83.3,
+    "bg_two_plus_lines_moving_pct": 97.7,
+    "bg_three_plus_lines_moving_pct": 91.7,
+    "section_density_cv": 59.1,
+    "section_travel_cv": 56.4,
+    "section_spread_cv": 23.5,
+    "section_line_activity_cv": 25.0
+   },
+   "flags_all_in": [
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct"
+   ]
+  },
+  {
+   "id": "override-sol-in163",
+   "path": "charts/override/override-sol-in163/project/chart.json",
+   "verdict": "unknown",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 1596,
+     "notes": 931,
+     "kinds": {
+      "tap": 905,
+      "hold": 25,
+      "flick": 1
+     },
+     "max_contacts": 2,
+     "last_contact_s": 137.647,
+     "audio_s": 138.533356
+    }
+   },
+   "notes": 931,
+   "span_s": 136.471,
+   "lines": 3,
+   "kinds": {
+    "tap": 905,
+    "hold": 25,
+    "flick": 1
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.774,
+    "onset_step_median_px": 340.0,
+    "onset_step_under50_pct": 6.32,
+    "onset_step_200plus_pct": 74.06,
+    "required_travel_px_per_s": 759.9,
+    "required_move_median_px": 120.0,
+    "required_move_under50_pct": 30.79,
+    "required_move_200plus_pct": 14.24,
+    "direction_change_pct": 87.45,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.707,
+    "carrier_motion_pct": 32.72,
+    "background_motion_pct": 52.21,
+    "any_motion_pct": 71.32,
+    "strong_motion_pct": 21.69,
+    "background_present_pct": 52.21,
+    "judging_carrier_motion_pct": 32.84,
+    "longest_carrier_still_during_play_s": 9.0,
+    "longest_all_still_during_play_s": 4.0,
+    "carrier_response_gap_p90_s": 5.3,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 49.63,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.213,
+    "section_travel_cv": 0.413,
+    "section_spread_cv": 0.148,
+    "section_line_activity_cv": 0.648
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "carrier_response_gap_p90_s",
+    "section_density_cv",
+    "section_spread_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 87.9,
+    "onset_step_median_px": 88.6,
+    "onset_step_under50_pct": 0.8,
+    "onset_step_200plus_pct": 89.4,
+    "required_travel_px_per_s": 9.8,
+    "required_move_median_px": 9.1,
+    "required_move_under50_pct": 75.8,
+    "required_move_200plus_pct": 2.3,
+    "direction_change_pct": 95.5,
+    "x_spread_iqr_px": 73.9,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 0.8,
+    "background_motion_pct": 59.1,
+    "any_motion_pct": 4.5,
+    "strong_motion_pct": 1.5,
+    "background_present_pct": 58.3,
+    "judging_carrier_motion_pct": 1.5,
+    "longest_carrier_still_during_play_s": 82.2,
+    "longest_all_still_during_play_s": 74.2,
+    "carrier_response_gap_p90_s": 0.8,
+    "bg_lines_moving_together_median": 59.5,
+    "bg_two_plus_lines_moving_pct": 73.5,
+    "bg_three_plus_lines_moving_pct": 16.7,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 10.6,
+    "section_spread_cv": 1.5,
+    "section_line_activity_cv": 84.8
+   },
+   "flags_all_in": [
+    "approach_heights_per_s_median",
+    "carrier_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "carrier_response_gap_p90_s",
+    "section_density_cv",
+    "section_spread_cv"
+   ]
+  },
+  {
+   "id": "override-sol-in163-perf",
+   "path": "charts/override/override-sol-in163-performance/project/chart.json",
+   "verdict": "pending",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 51
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 8,
+     "events": 10210,
+     "notes": 931,
+     "kinds": {
+      "tap": 905,
+      "hold": 25,
+      "flick": 1
+     },
+     "max_contacts": 2,
+     "last_contact_s": 137.647,
+     "audio_s": 138.533356
+    }
+   },
+   "notes": 931,
+   "span_s": 136.471,
+   "lines": 8,
+   "kinds": {
+    "tap": 905,
+    "hold": 25,
+    "flick": 1
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.774,
+    "onset_step_median_px": 340.0,
+    "onset_step_under50_pct": 6.32,
+    "onset_step_200plus_pct": 74.06,
+    "required_travel_px_per_s": 759.9,
+    "required_move_median_px": 120.0,
+    "required_move_under50_pct": 30.79,
+    "required_move_200plus_pct": 14.24,
+    "direction_change_pct": 87.45,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.707,
+    "carrier_motion_pct": 91.18,
+    "background_motion_pct": 99.26,
+    "any_motion_pct": 99.63,
+    "strong_motion_pct": 90.81,
+    "background_present_pct": 99.26,
+    "judging_carrier_motion_pct": 91.14,
+    "longest_carrier_still_during_play_s": 3.5,
+    "longest_all_still_during_play_s": 0.5,
+    "carrier_response_gap_p90_s": 22.0,
+    "bg_lines_moving_together_median": 3.0,
+    "bg_two_plus_lines_moving_pct": 90.44,
+    "bg_three_plus_lines_moving_pct": 53.31,
+    "section_density_cv": 0.213,
+    "section_travel_cv": 0.413,
+    "section_spread_cv": 0.148,
+    "section_line_activity_cv": 0.24
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct",
+    "section_density_cv",
+    "section_spread_cv",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 87.9,
+    "onset_step_median_px": 88.6,
+    "onset_step_under50_pct": 0.8,
+    "onset_step_200plus_pct": 89.4,
+    "required_travel_px_per_s": 9.8,
+    "required_move_median_px": 9.1,
+    "required_move_under50_pct": 75.8,
+    "required_move_200plus_pct": 2.3,
+    "direction_change_pct": 95.5,
+    "x_spread_iqr_px": 73.9,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 64.4,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 94.3,
+    "strong_motion_pct": 75.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 63.6,
+    "longest_carrier_still_during_play_s": 51.1,
+    "longest_all_still_during_play_s": 15.2,
+    "carrier_response_gap_p90_s": 54.6,
+    "bg_lines_moving_together_median": 83.3,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 93.9,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 10.6,
+    "section_spread_cv": 1.5,
+    "section_line_activity_cv": 1.5
+   },
+   "flags_all_in": [
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "any_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct",
+    "section_density_cv",
+    "section_spread_cv",
+    "section_line_activity_cv"
+   ]
+  },
+  {
+   "id": "override-three-a",
+   "path": "charts/override/override-three-2026-11-02/a/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 565
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 20,
+     "notes": 565,
+     "kinds": {
+      "hold": 83,
+      "tap": 360,
+      "drag": 108,
+      "flick": 14
+     },
+     "max_contacts": 2,
+     "last_contact_s": 58.824,
+     "audio_s": 138.533356
+    }
+   },
+   "notes": 565,
+   "span_s": 57.647,
+   "lines": 4,
+   "kinds": {
+    "hold": 83,
+    "tap": 360,
+    "drag": 108,
+    "flick": 14
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 6.123,
+    "onset_step_median_px": 274.21,
+    "onset_step_under50_pct": 20.57,
+    "onset_step_200plus_pct": 67.14,
+    "required_travel_px_per_s": 122.8,
+    "required_move_median_px": 12.1,
+    "required_move_under50_pct": 98.2,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 77.98,
+    "x_spread_iqr_px": 452.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 57.5,
+    "longest_all_still_during_play_s": 57.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.102,
+    "section_travel_cv": 0.235,
+    "section_spread_cv": 0.149,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "section_density_cv",
+    "section_travel_cv",
+    "section_spread_cv",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 95.5,
+    "onset_step_median_px": 51.5,
+    "onset_step_under50_pct": 86.4,
+    "onset_step_200plus_pct": 59.8,
+    "required_travel_px_per_s": 0.0,
+    "required_move_median_px": 0.0,
+    "required_move_under50_pct": 100.0,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 32.6,
+    "x_spread_iqr_px": 54.5,
+    "approach_heights_per_s_median": 81.1,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 9.5,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 100.0,
+    "bg_lines_moving_together_median": 9.5,
+    "bg_two_plus_lines_moving_pct": 12.9,
+    "bg_three_plus_lines_moving_pct": 16.7,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 0.0,
+    "section_spread_cv": 1.5,
+    "section_line_activity_cv": 0.0
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "section_density_cv",
+    "section_travel_cv",
+    "section_spread_cv",
+    "section_line_activity_cv"
+   ]
+  },
+  {
+   "id": "override-three-b",
+   "path": "charts/override/override-three-2026-11-02/b/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 384
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 11,
+     "events": 179,
+     "notes": 384,
+     "kinds": {
+      "tap": 291,
+      "hold": 31,
+      "drag": 52,
+      "flick": 10
+     },
+     "max_contacts": 3,
+     "last_contact_s": 58.824,
+     "audio_s": 138.533356
+    }
+   },
+   "notes": 384,
+   "span_s": 57.647,
+   "lines": 11,
+   "kinds": {
+    "tap": 291,
+    "hold": 31,
+    "drag": 52,
+    "flick": 10
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.1,
+    "onset_step_median_px": 405.0,
+    "onset_step_under50_pct": 1.06,
+    "onset_step_200plus_pct": 83.8,
+    "required_travel_px_per_s": 520.6,
+    "required_move_median_px": 95.0,
+    "required_move_under50_pct": 6.83,
+    "required_move_200plus_pct": 0.62,
+    "direction_change_pct": 90.71,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 57.5,
+    "longest_all_still_during_play_s": 57.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.148,
+    "section_travel_cv": 0.112,
+    "section_spread_cv": 0.094,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "section_density_cv",
+    "section_travel_cv",
+    "section_spread_cv",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 55.3,
+    "onset_step_median_px": 97.7,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 99.2,
+    "required_travel_px_per_s": 0.8,
+    "required_move_median_px": 3.0,
+    "required_move_under50_pct": 0.8,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 99.2,
+    "x_spread_iqr_px": 73.9,
+    "approach_heights_per_s_median": 81.1,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 9.5,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 100.0,
+    "bg_lines_moving_together_median": 9.5,
+    "bg_two_plus_lines_moving_pct": 12.9,
+    "bg_three_plus_lines_moving_pct": 16.7,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 0.0,
+    "section_spread_cv": 0.0,
+    "section_line_activity_cv": 0.0
+   },
+   "flags_all_in": [
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "section_density_cv",
+    "section_travel_cv",
+    "section_spread_cv",
+    "section_line_activity_cv"
+   ]
+  },
+  {
+   "id": "override-three-c",
+   "path": "charts/override/override-three-2026-11-02/c/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 516
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 15,
+     "events": 1159,
+     "notes": 516,
+     "kinds": {
+      "hold": 30,
+      "tap": 319,
+      "flick": 17,
+      "drag": 150
+     },
+     "max_contacts": 2,
+     "last_contact_s": 58.824,
+     "audio_s": 138.533356
+    }
+   },
+   "notes": 516,
+   "span_s": 57.647,
+   "lines": 15,
+   "kinds": {
+    "hold": 30,
+    "tap": 319,
+    "flick": 17,
+    "drag": 150
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.915,
+    "onset_step_median_px": 340.0,
+    "onset_step_under50_pct": 2.96,
+    "onset_step_200plus_pct": 81.66,
+    "required_travel_px_per_s": 844.4,
+    "required_move_median_px": 130.0,
+    "required_move_under50_pct": 3.88,
+    "required_move_200plus_pct": 14.4,
+    "direction_change_pct": 95.41,
+    "x_spread_iqr_px": 350.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 57.5,
+    "longest_all_still_during_play_s": 57.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.115,
+    "section_travel_cv": 0.291,
+    "section_spread_cv": 0.229,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "x_spread_iqr_px",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "section_density_cv",
+    "section_travel_cv",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 91.7,
+    "onset_step_median_px": 88.6,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 98.5,
+    "required_travel_px_per_s": 20.5,
+    "required_move_median_px": 9.1,
+    "required_move_under50_pct": 0.0,
+    "required_move_200plus_pct": 2.3,
+    "direction_change_pct": 100.0,
+    "x_spread_iqr_px": 1.5,
+    "approach_heights_per_s_median": 81.1,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 9.5,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 100.0,
+    "bg_lines_moving_together_median": 9.5,
+    "bg_two_plus_lines_moving_pct": 12.9,
+    "bg_three_plus_lines_moving_pct": 16.7,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 1.5,
+    "section_spread_cv": 10.6,
+    "section_line_activity_cv": 0.0
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "onset_step_under50_pct",
+    "required_move_under50_pct",
+    "direction_change_pct",
+    "x_spread_iqr_px",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "section_density_cv",
+    "section_travel_cv",
+    "section_line_activity_cv"
+   ]
+  },
+  {
+   "id": "xterfusion-first",
+   "path": "charts/xterfusion/Xterfusion/chart.json",
+   "verdict": "unknown",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 12,
+     "events": 1807,
+     "notes": 1472,
+     "kinds": {
+      "hold": 168,
+      "tap": 582,
+      "drag": 687,
+      "flick": 35
+     },
+     "max_contacts": 2,
+     "last_contact_s": 165.576,
+     "audio_s": 169.918707
+    }
+   },
+   "notes": 1472,
+   "span_s": 165.108,
+   "lines": 12,
+   "kinds": {
+    "hold": 168,
+    "tap": 582,
+    "drag": 687,
+    "flick": 35
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 4.058,
+    "onset_step_median_px": 235.793,
+    "onset_step_under50_pct": 12.83,
+    "onset_step_200plus_pct": 54.01,
+    "required_travel_px_per_s": 459.2,
+    "required_move_median_px": 77.7,
+    "required_move_under50_pct": 43.14,
+    "required_move_200plus_pct": 5.64,
+    "direction_change_pct": 71.93,
+    "x_spread_iqr_px": 376.9,
+    "approach_heights_per_s_median": 1.133,
+    "carrier_motion_pct": 12.12,
+    "background_motion_pct": 16.67,
+    "any_motion_pct": 23.33,
+    "strong_motion_pct": 18.79,
+    "background_present_pct": 20.3,
+    "judging_carrier_motion_pct": 12.23,
+    "longest_carrier_still_during_play_s": 26.5,
+    "longest_all_still_during_play_s": 6.5,
+    "carrier_response_gap_p90_s": 19.9,
+    "bg_lines_moving_together_median": 7,
+    "bg_two_plus_lines_moving_pct": 16.67,
+    "bg_three_plus_lines_moving_pct": 16.67,
+    "section_density_cv": 0.441,
+    "section_travel_cv": 0.469,
+    "section_spread_cv": 0.289,
+    "section_line_activity_cv": 0.767
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "x_spread_iqr_px",
+    "approach_heights_per_s_median",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "bg_lines_moving_together_median"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 18.2,
+    "onset_step_median_px": 30.3,
+    "onset_step_under50_pct": 37.9,
+    "onset_step_200plus_pct": 13.6,
+    "required_travel_px_per_s": 0.0,
+    "required_move_median_px": 0.8,
+    "required_move_under50_pct": 97.7,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 7.6,
+    "x_spread_iqr_px": 2.3,
+    "approach_heights_per_s_median": 2.3,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 24.2,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 1.5,
+    "background_present_pct": 28.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 87.9,
+    "carrier_response_gap_p90_s": 49.2,
+    "bg_lines_moving_together_median": 99.2,
+    "bg_two_plus_lines_moving_pct": 41.7,
+    "bg_three_plus_lines_moving_pct": 63.3,
+    "section_density_cv": 43.2,
+    "section_travel_cv": 24.2,
+    "section_spread_cv": 23.5,
+    "section_line_activity_cv": 92.4
+   },
+   "flags_all_in": [
+    "required_move_200plus_pct",
+    "x_spread_iqr_px",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "bg_lines_moving_together_median"
+   ]
+  },
+  {
+   "id": "xterfusion-sol",
+   "path": "charts/xterfusion/Xterfusion-Sol-20261102/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 207,
+     "notes": 902,
+     "kinds": {
+      "hold": 31,
+      "tap": 798,
+      "drag": 73
+     },
+     "max_contacts": 2,
+     "last_contact_s": 165.576,
+     "audio_s": 169.918707
+    }
+   },
+   "notes": 902,
+   "span_s": 165.108,
+   "lines": 3,
+   "kinds": {
+    "hold": 31,
+    "tap": 798,
+    "drag": 73
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 3.991,
+    "onset_step_median_px": 240.0,
+    "onset_step_under50_pct": 13.0,
+    "onset_step_200plus_pct": 61.73,
+    "required_travel_px_per_s": 619.6,
+    "required_move_median_px": 100.0,
+    "required_move_under50_pct": 34.0,
+    "required_move_200plus_pct": 31.14,
+    "direction_change_pct": 69.02,
+    "x_spread_iqr_px": 358.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 6.67,
+    "any_motion_pct": 6.67,
+    "strong_motion_pct": 0.61,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 33.0,
+    "longest_all_still_during_play_s": 16.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 6.06,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.456,
+    "section_travel_cv": 0.547,
+    "section_spread_cv": 0.343,
+    "section_line_activity_cv": 1.397
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "direction_change_pct",
+    "x_spread_iqr_px",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 18.2,
+    "onset_step_median_px": 31.8,
+    "onset_step_under50_pct": 38.6,
+    "onset_step_200plus_pct": 38.6,
+    "required_travel_px_per_s": 3.0,
+    "required_move_median_px": 4.5,
+    "required_move_under50_pct": 85.6,
+    "required_move_200plus_pct": 31.1,
+    "direction_change_pct": 3.0,
+    "x_spread_iqr_px": 1.5,
+    "approach_heights_per_s_median": 81.1,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 22.7,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 98.5,
+    "bg_lines_moving_together_median": 59.5,
+    "bg_two_plus_lines_moving_pct": 31.8,
+    "bg_three_plus_lines_moving_pct": 16.7,
+    "section_density_cv": 45.8,
+    "section_travel_cv": 53.0,
+    "section_spread_cv": 37.9,
+    "section_line_activity_cv": 100.0
+   },
+   "flags_all_in": [
+    "x_spread_iqr_px",
+    "carrier_motion_pct",
+    "any_motion_pct",
+    "strong_motion_pct",
+    "background_present_pct",
+    "judging_carrier_motion_pct",
+    "longest_carrier_still_during_play_s",
+    "longest_all_still_during_play_s",
+    "section_line_activity_cv"
+   ]
+  },
+  {
+   "id": "xterfusion-audio-only",
+   "path": "charts/xterfusion/xterfusion-audio-only-run01/full/project/chart.json",
+   "verdict": "pending",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 8,
+     "events": 4245,
+     "notes": 882,
+     "kinds": {
+      "tap": 747,
+      "flick": 48,
+      "hold": 36,
+      "drag": 51
+     },
+     "max_contacts": 2,
+     "last_contact_s": 167.468,
+     "audio_s": 169.918707
+    }
+   },
+   "notes": 882,
+   "span_s": 165.454,
+   "lines": 8,
+   "kinds": {
+    "tap": 747,
+    "flick": 48,
+    "hold": 36,
+    "drag": 51
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 4.877,
+    "onset_step_median_px": 442.231,
+    "onset_step_under50_pct": 1.4,
+    "onset_step_200plus_pct": 91.87,
+    "required_travel_px_per_s": 618.9,
+    "required_move_median_px": 117.1,
+    "required_move_under50_pct": 15.8,
+    "required_move_200plus_pct": 18.68,
+    "direction_change_pct": 94.02,
+    "x_spread_iqr_px": 493.9,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 55.45,
+    "background_motion_pct": 93.94,
+    "any_motion_pct": 94.55,
+    "strong_motion_pct": 67.58,
+    "background_present_pct": 98.18,
+    "judging_carrier_motion_pct": 56.83,
+    "longest_carrier_still_during_play_s": 12.5,
+    "longest_all_still_during_play_s": 1.0,
+    "carrier_response_gap_p90_s": 8.85,
+    "bg_lines_moving_together_median": 3.0,
+    "bg_two_plus_lines_moving_pct": 84.55,
+    "bg_three_plus_lines_moving_pct": 53.03,
+    "section_density_cv": 0.392,
+    "section_travel_cv": 0.54,
+    "section_spread_cv": 0.142,
+    "section_line_activity_cv": 0.308
+   },
+   "comparable": true,
+   "scope": "whole",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct",
+    "section_spread_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 43.9,
+    "onset_step_median_px": 98.5,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 100.0,
+    "required_travel_px_per_s": 3.0,
+    "required_move_median_px": 8.3,
+    "required_move_under50_pct": 9.1,
+    "required_move_200plus_pct": 3.0,
+    "direction_change_pct": 100.0,
+    "x_spread_iqr_px": 72.7,
+    "approach_heights_per_s_median": 100.0,
+    "carrier_motion_pct": 5.3,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 55.7,
+    "strong_motion_pct": 18.9,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 8.3,
+    "longest_carrier_still_during_play_s": 90.2,
+    "longest_all_still_during_play_s": 30.7,
+    "carrier_response_gap_p90_s": 8.5,
+    "bg_lines_moving_together_median": 83.3,
+    "bg_two_plus_lines_moving_pct": 98.5,
+    "bg_three_plus_lines_moving_pct": 93.9,
+    "section_density_cv": 28.4,
+    "section_travel_cv": 51.1,
+    "section_spread_cv": 1.5,
+    "section_line_activity_cv": 11.4
+   },
+   "flags_all_in": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "direction_change_pct",
+    "approach_heights_per_s_median",
+    "background_motion_pct",
+    "background_present_pct",
+    "bg_two_plus_lines_moving_pct",
+    "section_spread_cv"
+   ]
+  },
+  {
+   "id": "climax-A",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/A/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 496,
+     "notes": 124,
+     "kinds": {
+      "tap": 111,
+      "hold": 13
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.74,
+     "audio_s": 13.15068
+    }
+   },
+   "notes": 124,
+   "span_s": 11.644,
+   "lines": 3,
+   "kinds": {
+    "tap": 111,
+    "hold": 13
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 8.073,
+    "onset_step_median_px": 327.3,
+    "onset_step_under50_pct": 10.0,
+    "onset_step_200plus_pct": 72.22,
+    "required_travel_px_per_s": 2222.2,
+    "required_move_median_px": 210.0,
+    "required_move_under50_pct": 4.92,
+    "required_move_200plus_pct": 53.28,
+    "direction_change_pct": 73.75,
+    "x_spread_iqr_px": 557.5,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 91.3,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 69.57,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 91.3,
+    "longest_carrier_still_during_play_s": 1.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 2,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.061,
+    "section_travel_cv": 0.046,
+    "section_spread_cv": 0.066,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "13",
+   "flags": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "approach_heights_per_s_median",
+    "section_travel_cv",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 95.0,
+    "onset_step_median_px": 69.7,
+    "onset_step_under50_pct": 42.5,
+    "onset_step_200plus_pct": 65.8,
+    "required_travel_px_per_s": 98.9,
+    "required_move_median_px": 85.5,
+    "required_move_under50_pct": 6.0,
+    "required_move_200plus_pct": 85.3,
+    "direction_change_pct": 29.4,
+    "x_spread_iqr_px": 84.7,
+    "approach_heights_per_s_median": 99.2,
+    "carrier_motion_pct": 74.9,
+    "background_motion_pct": 87.1,
+    "any_motion_pct": 72.8,
+    "strong_motion_pct": 29.0,
+    "background_present_pct": 84.6,
+    "judging_carrier_motion_pct": 73.4,
+    "longest_carrier_still_during_play_s": 41.5,
+    "longest_all_still_during_play_s": 28.5,
+    "bg_lines_moving_together_median": 35.4,
+    "bg_two_plus_lines_moving_pct": 94.2,
+    "bg_three_plus_lines_moving_pct": 9.7,
+    "section_density_cv": 12.6,
+    "section_travel_cv": 3.1,
+    "section_spread_cv": 17.6,
+    "section_line_activity_cv": 0.8
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "approach_heights_per_s_median",
+    "section_travel_cv",
+    "section_line_activity_cv"
+   ]
+  },
+  {
+   "id": "climax-B",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/B/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 399,
+     "notes": 120,
+     "kinds": {
+      "tap": 96,
+      "hold": 16,
+      "drag": 4,
+      "flick": 4
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.808,
+     "audio_s": 13.15068
+    }
+   },
+   "notes": 120,
+   "span_s": 11.712,
+   "lines": 3,
+   "kinds": {
+    "tap": 96,
+    "hold": 16,
+    "drag": 4,
+    "flick": 4
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 7.855,
+    "onset_step_median_px": 412.5,
+    "onset_step_under50_pct": 7.95,
+    "onset_step_200plus_pct": 78.41,
+    "required_travel_px_per_s": 2017.4,
+    "required_move_median_px": 200.0,
+    "required_move_under50_pct": 16.67,
+    "required_move_200plus_pct": 52.63,
+    "direction_change_pct": 77.5,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 86.96,
+    "background_motion_pct": 95.65,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 82.61,
+    "background_present_pct": 95.65,
+    "judging_carrier_motion_pct": 86.96,
+    "longest_carrier_still_during_play_s": 1.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 73.91,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.088,
+    "section_travel_cv": 0.027,
+    "section_spread_cv": 0.108,
+    "section_line_activity_cv": 0.171
+   },
+   "comparable": true,
+   "scope": "13",
+   "flags": [
+    "required_travel_px_per_s",
+    "approach_heights_per_s_median",
+    "section_travel_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 93.2,
+    "onset_step_median_px": 87.8,
+    "onset_step_under50_pct": 34.8,
+    "onset_step_200plus_pct": 77.6,
+    "required_travel_px_per_s": 97.2,
+    "required_move_median_px": 81.5,
+    "required_move_under50_pct": 31.1,
+    "required_move_200plus_pct": 84.8,
+    "direction_change_pct": 39.6,
+    "x_spread_iqr_px": 69.3,
+    "approach_heights_per_s_median": 99.2,
+    "carrier_motion_pct": 68.4,
+    "background_motion_pct": 65.6,
+    "any_motion_pct": 72.8,
+    "strong_motion_pct": 42.9,
+    "background_present_pct": 61.4,
+    "judging_carrier_motion_pct": 66.4,
+    "longest_carrier_still_during_play_s": 52.2,
+    "longest_all_still_during_play_s": 28.5,
+    "bg_lines_moving_together_median": 35.4,
+    "bg_two_plus_lines_moving_pct": 56.1,
+    "bg_three_plus_lines_moving_pct": 9.7,
+    "section_density_cv": 20.1,
+    "section_travel_cv": 1.6,
+    "section_spread_cv": 32.4,
+    "section_line_activity_cv": 41.7
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "approach_heights_per_s_median",
+    "section_travel_cv"
+   ]
+  },
+  {
+   "id": "climax-C-initial",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/history/C-before-orientation-fix/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 301,
+     "notes": 114,
+     "kinds": {
+      "tap": 99,
+      "hold": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.74,
+     "audio_s": 13.15068
+    }
+   },
+   "notes": 114,
+   "span_s": 11.644,
+   "lines": 3,
+   "kinds": {
+    "tap": 99,
+    "hold": 15
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 7.3,
+    "onset_step_median_px": 269.193,
+    "onset_step_under50_pct": 7.41,
+    "onset_step_200plus_pct": 69.14,
+    "required_travel_px_per_s": 1775.7,
+    "required_move_median_px": 200.0,
+    "required_move_under50_pct": 10.71,
+    "required_move_200plus_pct": 50.89,
+    "direction_change_pct": 82.43,
+    "x_spread_iqr_px": 453.2,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 95.65,
+    "background_motion_pct": 91.3,
+    "any_motion_pct": 95.65,
+    "strong_motion_pct": 78.26,
+    "background_present_pct": 95.65,
+    "judging_carrier_motion_pct": 95.65,
+    "longest_carrier_still_during_play_s": 0.5,
+    "longest_all_still_during_play_s": 0.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 1,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.016,
+    "section_travel_cv": 0.001,
+    "section_spread_cv": 0.239,
+    "section_line_activity_cv": 0.027
+   },
+   "comparable": true,
+   "scope": "13",
+   "flags": [
+    "approach_heights_per_s_median",
+    "section_density_cv",
+    "section_travel_cv",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 88.2,
+    "onset_step_median_px": 53.5,
+    "onset_step_under50_pct": 32.2,
+    "onset_step_200plus_pct": 59.2,
+    "required_travel_px_per_s": 94.5,
+    "required_move_median_px": 81.5,
+    "required_move_under50_pct": 16.0,
+    "required_move_200plus_pct": 83.0,
+    "direction_change_pct": 56.7,
+    "x_spread_iqr_px": 53.2,
+    "approach_heights_per_s_median": 99.2,
+    "carrier_motion_pct": 82.1,
+    "background_motion_pct": 59.0,
+    "any_motion_pct": 35.3,
+    "strong_motion_pct": 38.2,
+    "background_present_pct": 61.4,
+    "judging_carrier_motion_pct": 81.8,
+    "longest_carrier_still_during_play_s": 24.0,
+    "longest_all_still_during_play_s": 64.6,
+    "bg_lines_moving_together_median": 12.8,
+    "bg_two_plus_lines_moving_pct": 5.5,
+    "bg_three_plus_lines_moving_pct": 9.7,
+    "section_density_cv": 2.3,
+    "section_travel_cv": 0.5,
+    "section_spread_cv": 64.5,
+    "section_line_activity_cv": 3.7
+   },
+   "flags_all_in": [
+    "required_travel_px_per_s",
+    "approach_heights_per_s_median",
+    "section_density_cv",
+    "section_travel_cv"
+   ]
+  },
+  {
+   "id": "climax-C-orientation",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/history/C-before-ensemble/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 296,
+     "notes": 114,
+     "kinds": {
+      "tap": 99,
+      "hold": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.74,
+     "audio_s": 13.15068
+    }
+   },
+   "notes": 114,
+   "span_s": 11.644,
+   "lines": 3,
+   "kinds": {
+    "tap": 99,
+    "hold": 15
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 7.3,
+    "onset_step_median_px": 269.193,
+    "onset_step_under50_pct": 7.41,
+    "onset_step_200plus_pct": 69.14,
+    "required_travel_px_per_s": 1778.8,
+    "required_move_median_px": 200.0,
+    "required_move_under50_pct": 10.71,
+    "required_move_200plus_pct": 51.79,
+    "direction_change_pct": 82.43,
+    "x_spread_iqr_px": 453.2,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 95.65,
+    "background_motion_pct": 91.3,
+    "any_motion_pct": 95.65,
+    "strong_motion_pct": 73.91,
+    "background_present_pct": 95.65,
+    "judging_carrier_motion_pct": 95.65,
+    "longest_carrier_still_during_play_s": 0.5,
+    "longest_all_still_during_play_s": 0.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 1,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.016,
+    "section_travel_cv": 0.001,
+    "section_spread_cv": 0.239,
+    "section_line_activity_cv": 0.027
+   },
+   "comparable": true,
+   "scope": "13",
+   "flags": [
+    "approach_heights_per_s_median",
+    "section_density_cv",
+    "section_travel_cv",
+    "section_line_activity_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 88.2,
+    "onset_step_median_px": 53.5,
+    "onset_step_under50_pct": 32.2,
+    "onset_step_200plus_pct": 59.2,
+    "required_travel_px_per_s": 94.5,
+    "required_move_median_px": 81.5,
+    "required_move_under50_pct": 16.0,
+    "required_move_200plus_pct": 83.5,
+    "direction_change_pct": 56.7,
+    "x_spread_iqr_px": 53.2,
+    "approach_heights_per_s_median": 99.2,
+    "carrier_motion_pct": 82.1,
+    "background_motion_pct": 59.0,
+    "any_motion_pct": 35.3,
+    "strong_motion_pct": 34.2,
+    "background_present_pct": 61.4,
+    "judging_carrier_motion_pct": 81.8,
+    "longest_carrier_still_during_play_s": 24.0,
+    "longest_all_still_during_play_s": 64.6,
+    "bg_lines_moving_together_median": 12.8,
+    "bg_two_plus_lines_moving_pct": 5.5,
+    "bg_three_plus_lines_moving_pct": 9.7,
+    "section_density_cv": 2.3,
+    "section_travel_cv": 0.5,
+    "section_spread_cv": 64.5,
+    "section_line_activity_cv": 3.7
+   },
+   "flags_all_in": [
+    "required_travel_px_per_s",
+    "approach_heights_per_s_median",
+    "section_density_cv",
+    "section_travel_cv"
+   ]
+  },
+  {
+   "id": "climax-C-ensemble",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/C/project/chart.json",
+   "verdict": "approved",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 8,
+     "events": 1056,
+     "notes": 114,
+     "kinds": {
+      "tap": 99,
+      "hold": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.74,
+     "audio_s": 13.15068
+    }
+   },
+   "notes": 114,
+   "span_s": 11.644,
+   "lines": 8,
+   "kinds": {
+    "tap": 99,
+    "hold": 15
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 7.3,
+    "onset_step_median_px": 269.193,
+    "onset_step_under50_pct": 7.41,
+    "onset_step_200plus_pct": 69.14,
+    "required_travel_px_per_s": 1778.8,
+    "required_move_median_px": 200.0,
+    "required_move_under50_pct": 10.71,
+    "required_move_200plus_pct": 51.79,
+    "direction_change_pct": 82.43,
+    "x_spread_iqr_px": 453.2,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 95.65,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 95.65,
+    "longest_carrier_still_during_play_s": 0.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 4,
+    "bg_two_plus_lines_moving_pct": 91.3,
+    "bg_three_plus_lines_moving_pct": 78.26,
+    "section_density_cv": 0.016,
+    "section_travel_cv": 0.001,
+    "section_spread_cv": 0.239,
+    "section_line_activity_cv": 0.258
+   },
+   "comparable": true,
+   "scope": "13",
+   "flags": [
+    "approach_heights_per_s_median",
+    "section_density_cv",
+    "section_travel_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 88.2,
+    "onset_step_median_px": 53.5,
+    "onset_step_under50_pct": 32.2,
+    "onset_step_200plus_pct": 59.2,
+    "required_travel_px_per_s": 94.5,
+    "required_move_median_px": 81.5,
+    "required_move_under50_pct": 16.0,
+    "required_move_200plus_pct": 83.5,
+    "direction_change_pct": 56.7,
+    "x_spread_iqr_px": 53.2,
+    "approach_heights_per_s_median": 99.2,
+    "carrier_motion_pct": 82.1,
+    "background_motion_pct": 87.1,
+    "any_motion_pct": 72.8,
+    "strong_motion_pct": 87.0,
+    "background_present_pct": 84.6,
+    "judging_carrier_motion_pct": 81.8,
+    "longest_carrier_still_during_play_s": 24.0,
+    "longest_all_still_during_play_s": 28.5,
+    "bg_lines_moving_together_median": 78.0,
+    "bg_two_plus_lines_moving_pct": 75.7,
+    "bg_three_plus_lines_moving_pct": 85.2,
+    "section_density_cv": 2.3,
+    "section_travel_cv": 0.5,
+    "section_spread_cv": 64.5,
+    "section_line_activity_cv": 61.4
+   },
+   "flags_all_in": [
+    "required_travel_px_per_s",
+    "approach_heights_per_s_median",
+    "section_density_cv",
+    "section_travel_cv"
+   ]
+  },
+  {
+   "id": "iris-original",
+   "path": "charts/xterfusion/xterfusion-iris-study/project/chart.json",
+   "verdict": "rejected",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 4380,
+     "notes": 85,
+     "kinds": {
+      "tap": 82,
+      "hold": 3
+     },
+     "max_contacts": 2,
+     "last_contact_s": 10.744,
+     "audio_s": 11.163991
+    }
+   },
+   "notes": 85,
+   "span_s": 9.994,
+   "lines": 3,
+   "kinds": {
+    "tap": 82,
+    "hold": 3
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 8.305,
+    "onset_step_median_px": 280.0,
+    "onset_step_under50_pct": 7.32,
+    "onset_step_200plus_pct": 71.95,
+    "required_travel_px_per_s": 957.2,
+    "required_move_median_px": 110.1,
+    "required_move_under50_pct": 20.51,
+    "required_move_200plus_pct": 19.23,
+    "direction_change_pct": 97.33,
+    "x_spread_iqr_px": 275.0,
+    "approach_heights_per_s_median": 0.987,
+    "carrier_motion_pct": 100.0,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 94.74,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 100.0,
+    "longest_carrier_still_during_play_s": 0.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 2,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.069,
+    "section_travel_cv": 0.072,
+    "section_spread_cv": 0.078,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "10",
+   "flags": [],
+   "percentile_high": {
+    "fresh_onsets_per_s": 94.8,
+    "onset_step_median_px": 54.7,
+    "onset_step_under50_pct": 34.1,
+    "onset_step_200plus_pct": 64.8,
+    "required_travel_px_per_s": 50.2,
+    "required_move_median_px": 22.8,
+    "required_move_under50_pct": 43.0,
+    "required_move_200plus_pct": 19.3,
+    "direction_change_pct": 93.6,
+    "x_spread_iqr_px": 8.1,
+    "approach_heights_per_s_median": 6.8,
+    "carrier_motion_pct": 92.3,
+    "background_motion_pct": 83.0,
+    "any_motion_pct": 70.0,
+    "strong_motion_pct": 61.6,
+    "background_present_pct": 80.8,
+    "judging_carrier_motion_pct": 91.3,
+    "longest_carrier_still_during_play_s": 8.7,
+    "longest_all_still_during_play_s": 30.7,
+    "bg_lines_moving_together_median": 37.2,
+    "bg_two_plus_lines_moving_pct": 90.8,
+    "bg_three_plus_lines_moving_pct": 12.0,
+    "section_density_cv": 33.2,
+    "section_travel_cv": 23.2,
+    "section_spread_cv": 41.5,
+    "section_line_activity_cv": 3.9
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s"
+   ]
+  },
+  {
+   "id": "iris-revision-D",
+   "path": "charts/xterfusion/xterfusion-iris-study/calibration/D/project/chart.json",
+   "verdict": "pending",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 6895,
+     "notes": 85,
+     "kinds": {
+      "tap": 82,
+      "hold": 3
+     },
+     "max_contacts": 2,
+     "last_contact_s": 10.744,
+     "audio_s": 11.163991
+    }
+   },
+   "notes": 85,
+   "span_s": 9.994,
+   "lines": 3,
+   "kinds": {
+    "tap": 82,
+    "hold": 3
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 8.305,
+    "onset_step_median_px": 279.996,
+    "onset_step_under50_pct": 7.32,
+    "onset_step_200plus_pct": 71.95,
+    "required_travel_px_per_s": 953.6,
+    "required_move_median_px": 109.9,
+    "required_move_under50_pct": 17.95,
+    "required_move_200plus_pct": 19.23,
+    "direction_change_pct": 97.33,
+    "x_spread_iqr_px": 275.0,
+    "approach_heights_per_s_median": 2.0,
+    "carrier_motion_pct": 100.0,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 100.0,
+    "longest_carrier_still_during_play_s": 0.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 2,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.069,
+    "section_travel_cv": 0.078,
+    "section_spread_cv": 0.078,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "10",
+   "flags": [
+    "approach_heights_per_s_median"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 94.8,
+    "onset_step_median_px": 54.7,
+    "onset_step_under50_pct": 34.1,
+    "onset_step_200plus_pct": 64.8,
+    "required_travel_px_per_s": 50.2,
+    "required_move_median_px": 22.8,
+    "required_move_under50_pct": 37.7,
+    "required_move_200plus_pct": 19.3,
+    "direction_change_pct": 93.6,
+    "x_spread_iqr_px": 8.1,
+    "approach_heights_per_s_median": 99.2,
+    "carrier_motion_pct": 92.3,
+    "background_motion_pct": 83.0,
+    "any_motion_pct": 70.0,
+    "strong_motion_pct": 83.1,
+    "background_present_pct": 80.8,
+    "judging_carrier_motion_pct": 91.3,
+    "longest_carrier_still_during_play_s": 8.7,
+    "longest_all_still_during_play_s": 30.7,
+    "bg_lines_moving_together_median": 37.2,
+    "bg_two_plus_lines_moving_pct": 90.8,
+    "bg_three_plus_lines_moving_pct": 12.0,
+    "section_density_cv": 33.2,
+    "section_travel_cv": 24.2,
+    "section_spread_cv": 41.5,
+    "section_line_activity_cv": 3.9
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "approach_heights_per_s_median"
+   ]
+  },
+  {
+   "id": "escapement-transfer",
+   "path": "charts/other/line-phrase-transfer/project/chart.json",
+   "verdict": "unknown",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 2,
+     "events": 3695,
+     "notes": 65,
+     "kinds": {
+      "tap": 59,
+      "hold": 6
+     },
+     "max_contacts": 2,
+     "last_contact_s": 9.558,
+     "audio_s": 10.0
+    }
+   },
+   "notes": 65,
+   "span_s": 9.089,
+   "lines": 2,
+   "kinds": {
+    "tap": 59,
+    "hold": 6
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.611,
+    "onset_step_median_px": 325.0,
+    "onset_step_under50_pct": 8.89,
+    "onset_step_200plus_pct": 77.78,
+    "required_travel_px_per_s": 987.2,
+    "required_move_median_px": 152.5,
+    "required_move_under50_pct": 11.29,
+    "required_move_200plus_pct": 16.13,
+    "direction_change_pct": 90.0,
+    "x_spread_iqr_px": 375.0,
+    "approach_heights_per_s_median": 2.0,
+    "carrier_motion_pct": 38.89,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 38.89,
+    "longest_carrier_still_during_play_s": 5.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 1.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.149,
+    "section_travel_cv": 0.222,
+    "section_spread_cv": 0.049,
+    "section_line_activity_cv": 0.238
+   },
+   "comparable": true,
+   "scope": "10",
+   "flags": [
+    "approach_heights_per_s_median"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 60.4,
+    "onset_step_median_px": 68.9,
+    "onset_step_under50_pct": 41.5,
+    "onset_step_200plus_pct": 75.8,
+    "required_travel_px_per_s": 52.2,
+    "required_move_median_px": 48.5,
+    "required_move_under50_pct": 20.3,
+    "required_move_200plus_pct": 14.0,
+    "direction_change_pct": 81.9,
+    "x_spread_iqr_px": 20.5,
+    "approach_heights_per_s_median": 99.2,
+    "carrier_motion_pct": 19.5,
+    "background_motion_pct": 83.0,
+    "any_motion_pct": 70.0,
+    "strong_motion_pct": 83.1,
+    "background_present_pct": 80.8,
+    "judging_carrier_motion_pct": 20.1,
+    "longest_carrier_still_during_play_s": 88.9,
+    "longest_all_still_during_play_s": 30.7,
+    "bg_lines_moving_together_median": 14.3,
+    "bg_two_plus_lines_moving_pct": 6.4,
+    "bg_three_plus_lines_moving_pct": 12.0,
+    "section_density_cv": 55.9,
+    "section_travel_cv": 57.7,
+    "section_spread_cv": 28.7,
+    "section_line_activity_cv": 72.4
+   },
+   "flags_all_in": [
+    "approach_heights_per_s_median"
+   ]
+  },
+  {
+   "id": "entrance-transfer",
+   "path": "charts/other/entrance-in-transfer/project/chart.json",
+   "verdict": "unknown",
+   "axes": [
+    "hand",
+    "line",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 2
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 8,
+     "events": 12164,
+     "notes": 65,
+     "kinds": {
+      "tap": 59,
+      "hold": 6
+     },
+     "max_contacts": 2,
+     "last_contact_s": 9.558,
+     "audio_s": 10.0
+    }
+   },
+   "notes": 65,
+   "span_s": 9.089,
+   "lines": 8,
+   "kinds": {
+    "tap": 59,
+    "hold": 6
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.611,
+    "onset_step_median_px": 323.406,
+    "onset_step_under50_pct": 8.89,
+    "onset_step_200plus_pct": 77.78,
+    "required_travel_px_per_s": 988.3,
+    "required_move_median_px": 152.5,
+    "required_move_under50_pct": 9.68,
+    "required_move_200plus_pct": 16.13,
+    "direction_change_pct": 90.0,
+    "x_spread_iqr_px": 374.9,
+    "approach_heights_per_s_median": 2.0,
+    "carrier_motion_pct": 100.0,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 100.0,
+    "longest_carrier_still_during_play_s": 0.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 5.0,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 72.22,
+    "section_density_cv": 0.149,
+    "section_travel_cv": 0.222,
+    "section_spread_cv": 0.049,
+    "section_line_activity_cv": 0.059
+   },
+   "comparable": true,
+   "scope": "10",
+   "flags": [
+    "approach_heights_per_s_median"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 60.4,
+    "onset_step_median_px": 68.8,
+    "onset_step_under50_pct": 41.5,
+    "onset_step_200plus_pct": 75.8,
+    "required_travel_px_per_s": 52.3,
+    "required_move_median_px": 48.5,
+    "required_move_under50_pct": 17.4,
+    "required_move_200plus_pct": 14.0,
+    "direction_change_pct": 81.9,
+    "x_spread_iqr_px": 19.8,
+    "approach_heights_per_s_median": 99.2,
+    "carrier_motion_pct": 92.3,
+    "background_motion_pct": 83.0,
+    "any_motion_pct": 70.0,
+    "strong_motion_pct": 83.1,
+    "background_present_pct": 80.8,
+    "judging_carrier_motion_pct": 91.3,
+    "longest_carrier_still_during_play_s": 8.7,
+    "longest_all_still_during_play_s": 30.7,
+    "bg_lines_moving_together_median": 88.9,
+    "bg_two_plus_lines_moving_pct": 90.8,
+    "bg_three_plus_lines_moving_pct": 78.1,
+    "section_density_cv": 55.9,
+    "section_travel_cv": 57.7,
+    "section_spread_cv": 28.7,
+    "section_line_activity_cv": 27.5
+   },
+   "flags_all_in": [
+    "approach_heights_per_s_median"
+   ]
+  },
+  {
+   "id": "silent-180-wide-travel",
+   "path": "charts/silent/silent-180-sixteenths/project/chart.json",
+   "verdict": "approved",
+   "axes": [
+    "hand",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 360,
+     "kinds": {
+      "tap": 360
+     },
+     "max_contacts": 1,
+     "last_contact_s": 31.25,
+     "audio_s": 32.0
+    }
+   },
+   "notes": 360,
+   "span_s": 29.917,
+   "lines": 1,
+   "kinds": {
+    "tap": 360
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 12.033,
+    "onset_step_median_px": 320.0,
+    "onset_step_under50_pct": 12.26,
+    "onset_step_200plus_pct": 80.78,
+    "required_travel_px_per_s": 2099.2,
+    "required_move_median_px": 180.0,
+    "required_move_under50_pct": 31.84,
+    "required_move_200plus_pct": 40.5,
+    "direction_change_pct": 85.99,
+    "x_spread_iqr_px": 400.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 29.5,
+    "longest_all_still_during_play_s": 29.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.007,
+    "section_travel_cv": 0.07,
+    "section_spread_cv": 0.099,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "30",
+   "flags": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "section_density_cv",
+    "section_travel_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 100.0,
+    "onset_step_median_px": 71.3,
+    "onset_step_under50_pct": 44.7,
+    "onset_step_200plus_pct": 87.3,
+    "required_travel_px_per_s": 98.9,
+    "required_move_median_px": 72.5,
+    "required_move_under50_pct": 71.8,
+    "required_move_200plus_pct": 67.0,
+    "direction_change_pct": 77.2,
+    "x_spread_iqr_px": 19.4,
+    "approach_heights_per_s_median": 80.4,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 2.5,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.1,
+    "background_present_pct": 2.5,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 100.0,
+    "bg_lines_moving_together_median": 2.5,
+    "bg_two_plus_lines_moving_pct": 4.7,
+    "bg_three_plus_lines_moving_pct": 7.8,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 0.0,
+    "section_spread_cv": 7.2,
+    "section_line_activity_cv": 0.0
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "section_density_cv",
+    "section_travel_cv"
+   ]
+  },
+  {
+   "id": "silent-180-arrangement",
+   "path": "charts/silent/silent-180-arrangement/project/chart.json",
+   "verdict": "unknown",
+   "axes": [
+    "hand",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 214,
+     "kinds": {
+      "tap": 198,
+      "drag": 16
+     },
+     "max_contacts": 2,
+     "last_contact_s": 29.333,
+     "audio_s": 30.0
+    }
+   },
+   "notes": 214,
+   "span_s": 28.0,
+   "lines": 1,
+   "kinds": {
+    "tap": 198,
+    "drag": 16
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 7.036,
+    "onset_step_median_px": 460.0,
+    "onset_step_under50_pct": 1.04,
+    "onset_step_200plus_pct": 86.98,
+    "required_travel_px_per_s": 454.6,
+    "required_move_median_px": 80.0,
+    "required_move_under50_pct": 36.46,
+    "required_move_200plus_pct": 2.08,
+    "direction_change_pct": 88.36,
+    "x_spread_iqr_px": 480.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 28.0,
+    "longest_all_still_during_play_s": 28.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.259,
+    "section_travel_cv": 0.26,
+    "section_spread_cv": 0.202,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "30",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "required_move_200plus_pct"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 91.9,
+    "onset_step_median_px": 98.5,
+    "onset_step_under50_pct": 2.2,
+    "onset_step_200plus_pct": 96.7,
+    "required_travel_px_per_s": 4.4,
+    "required_move_median_px": 8.8,
+    "required_move_under50_pct": 81.7,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 85.2,
+    "x_spread_iqr_px": 61.6,
+    "approach_heights_per_s_median": 80.4,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 2.5,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.1,
+    "background_present_pct": 2.5,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 100.0,
+    "bg_lines_moving_together_median": 2.5,
+    "bg_two_plus_lines_moving_pct": 4.7,
+    "bg_three_plus_lines_moving_pct": 7.8,
+    "section_density_cv": 33.1,
+    "section_travel_cv": 20.8,
+    "section_spread_cv": 34.5,
+    "section_line_activity_cv": 0.0
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "onset_step_median_px",
+    "required_move_200plus_pct"
+   ]
+  },
+  {
+   "id": "silent-150-style-one",
+   "path": "charts/silent/silent-150-two-styles/style-one/project/chart.json",
+   "verdict": "accepted",
+   "axes": [
+    "hand",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 220,
+     "kinds": {
+      "hold": 12,
+      "tap": 151,
+      "drag": 57
+     },
+     "max_contacts": 2,
+     "last_contact_s": 31.6,
+     "audio_s": 32.0
+    }
+   },
+   "notes": 220,
+   "span_s": 30.0,
+   "lines": 1,
+   "kinds": {
+    "hold": 12,
+    "tap": 151,
+    "drag": 57
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 4.8,
+    "onset_step_median_px": 40.0,
+    "onset_step_under50_pct": 52.1,
+    "onset_step_200plus_pct": 42.02,
+    "required_travel_px_per_s": 164.5,
+    "required_move_median_px": 30.0,
+    "required_move_under50_pct": 86.36,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 57.14,
+    "x_spread_iqr_px": 575.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 30.0,
+    "longest_all_still_during_play_s": 30.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.123,
+    "section_travel_cv": 0.155,
+    "section_spread_cv": 0.115,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "30",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "section_density_cv",
+    "section_travel_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 44.4,
+    "onset_step_median_px": 1.4,
+    "onset_step_under50_pct": 98.9,
+    "onset_step_200plus_pct": 8.0,
+    "required_travel_px_per_s": 0.4,
+    "required_move_median_px": 3.2,
+    "required_move_under50_pct": 99.9,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 2.5,
+    "x_spread_iqr_px": 89.8,
+    "approach_heights_per_s_median": 80.4,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 2.5,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.1,
+    "background_present_pct": 2.5,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 100.0,
+    "bg_lines_moving_together_median": 2.5,
+    "bg_two_plus_lines_moving_pct": 4.7,
+    "bg_three_plus_lines_moving_pct": 7.8,
+    "section_density_cv": 4.4,
+    "section_travel_cv": 4.6,
+    "section_spread_cv": 11.0,
+    "section_line_activity_cv": 0.0
+   },
+   "flags_all_in": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "required_travel_px_per_s",
+    "required_move_under50_pct",
+    "required_move_200plus_pct",
+    "direction_change_pct",
+    "section_density_cv",
+    "section_travel_cv"
+   ]
+  },
+  {
+   "id": "silent-150-style-two",
+   "path": "charts/silent/silent-150-two-styles/style-two/project/chart.json",
+   "verdict": "accepted",
+   "axes": [
+    "hand",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 214,
+     "kinds": {
+      "tap": 202,
+      "hold": 4,
+      "drag": 8
+     },
+     "max_contacts": 2,
+     "last_contact_s": 31.2,
+     "audio_s": 32.0
+    }
+   },
+   "notes": 214,
+   "span_s": 29.6,
+   "lines": 1,
+   "kinds": {
+    "tap": 202,
+    "hold": 4,
+    "drag": 8
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 4.291,
+    "onset_step_median_px": 180.0,
+    "onset_step_under50_pct": 36.54,
+    "onset_step_200plus_pct": 44.23,
+    "required_travel_px_per_s": 843.2,
+    "required_move_median_px": 120.0,
+    "required_move_under50_pct": 15.62,
+    "required_move_200plus_pct": 16.67,
+    "direction_change_pct": 80.0,
+    "x_spread_iqr_px": 600.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 29.5,
+    "longest_all_still_during_play_s": 29.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.241,
+    "section_travel_cv": 0.241,
+    "section_spread_cv": 0.079,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "30",
+   "flags": [
+    "onset_step_under50_pct",
+    "section_spread_cv"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 31.3,
+    "onset_step_median_px": 12.2,
+    "onset_step_under50_pct": 94.9,
+    "onset_step_200plus_pct": 9.4,
+    "required_travel_px_per_s": 32.8,
+    "required_move_median_px": 18.7,
+    "required_move_under50_pct": 20.2,
+    "required_move_200plus_pct": 6.4,
+    "direction_change_pct": 47.0,
+    "x_spread_iqr_px": 94.4,
+    "approach_heights_per_s_median": 80.4,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 2.5,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.1,
+    "background_present_pct": 2.5,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 100.0,
+    "longest_all_still_during_play_s": 100.0,
+    "bg_lines_moving_together_median": 2.5,
+    "bg_two_plus_lines_moving_pct": 4.7,
+    "bg_three_plus_lines_moving_pct": 7.8,
+    "section_density_cv": 30.1,
+    "section_travel_cv": 17.3,
+    "section_spread_cv": 4.2,
+    "section_line_activity_cv": 0.0
+   },
+   "flags_all_in": [
+    "onset_step_under50_pct",
+    "section_spread_cv"
+   ]
+  },
+  {
+   "id": "silent-150-tech",
+   "path": "charts/silent/silent-150-four-key/tech/project/chart.json",
+   "verdict": "accepted",
+   "axes": [
+    "hand",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 88,
+     "kinds": {
+      "tap": 88
+     },
+     "max_contacts": 2,
+     "last_contact_s": 11.4,
+     "audio_s": 12.0
+    }
+   },
+   "notes": 88,
+   "span_s": 9.8,
+   "lines": 1,
+   "kinds": {
+    "tap": 88
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 6.735,
+    "onset_step_median_px": 300.0,
+    "onset_step_under50_pct": 18.46,
+    "onset_step_200plus_pct": 58.46,
+    "required_travel_px_per_s": 1898.0,
+    "required_move_median_px": 300.0,
+    "required_move_under50_pct": 37.65,
+    "required_move_200plus_pct": 62.35,
+    "direction_change_pct": 76.92,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 9.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.019,
+    "section_travel_cv": 0.106,
+    "section_spread_cv": 0.429,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "10",
+   "flags": [
+    "required_travel_px_per_s",
+    "required_move_median_px"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 79.3,
+    "onset_step_median_px": 61.4,
+    "onset_step_under50_pct": 66.4,
+    "onset_step_200plus_pct": 38.9,
+    "required_travel_px_per_s": 95.7,
+    "required_move_median_px": 98.1,
+    "required_move_under50_pct": 77.4,
+    "required_move_200plus_pct": 91.3,
+    "direction_change_pct": 38.8,
+    "x_spread_iqr_px": 50.2,
+    "approach_heights_per_s_median": 82.3,
+    "carrier_motion_pct": 2.8,
+    "background_motion_pct": 3.5,
+    "any_motion_pct": 0.3,
+    "strong_motion_pct": 0.7,
+    "background_present_pct": 3.5,
+    "judging_carrier_motion_pct": 2.9,
+    "longest_carrier_still_during_play_s": 98.2,
+    "longest_all_still_during_play_s": 99.9,
+    "bg_lines_moving_together_median": 3.5,
+    "bg_two_plus_lines_moving_pct": 6.4,
+    "bg_three_plus_lines_moving_pct": 12.0,
+    "section_density_cv": 12.1,
+    "section_travel_cv": 30.8,
+    "section_spread_cv": 88.4,
+    "section_line_activity_cv": 3.9
+   },
+   "flags_all_in": [
+    "required_travel_px_per_s",
+    "required_move_median_px"
+   ]
+  },
+  {
+   "id": "silent-150-speed",
+   "path": "charts/silent/silent-150-four-key/speed/project/chart.json",
+   "verdict": "accepted",
+   "axes": [
+    "hand",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 100,
+     "kinds": {
+      "tap": 100
+     },
+     "max_contacts": 1,
+     "last_contact_s": 11.5,
+     "audio_s": 12.0
+    }
+   },
+   "notes": 100,
+   "span_s": 9.9,
+   "lines": 1,
+   "kinds": {
+    "tap": 100
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 10.101,
+    "onset_step_median_px": 300.0,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 100.0,
+    "required_travel_px_per_s": 2090.9,
+    "required_move_median_px": 300.0,
+    "required_move_under50_pct": 32.99,
+    "required_move_200plus_pct": 67.01,
+    "direction_change_pct": 75.51,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 9.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 0.055,
+    "section_spread_cv": 0.0,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "10",
+   "flags": [
+    "fresh_onsets_per_s",
+    "onset_step_200plus_pct",
+    "required_travel_px_per_s",
+    "required_move_median_px"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 98.8,
+    "onset_step_median_px": 61.4,
+    "onset_step_under50_pct": 7.6,
+    "onset_step_200plus_pct": 98.4,
+    "required_travel_px_per_s": 97.8,
+    "required_move_median_px": 98.1,
+    "required_move_under50_pct": 70.5,
+    "required_move_200plus_pct": 94.3,
+    "direction_change_pct": 35.1,
+    "x_spread_iqr_px": 50.2,
+    "approach_heights_per_s_median": 82.3,
+    "carrier_motion_pct": 2.8,
+    "background_motion_pct": 3.5,
+    "any_motion_pct": 0.3,
+    "strong_motion_pct": 0.7,
+    "background_present_pct": 3.5,
+    "judging_carrier_motion_pct": 2.9,
+    "longest_carrier_still_during_play_s": 98.2,
+    "longest_all_still_during_play_s": 99.9,
+    "bg_lines_moving_together_median": 3.5,
+    "bg_two_plus_lines_moving_pct": 6.4,
+    "bg_three_plus_lines_moving_pct": 12.0,
+    "section_density_cv": 4.9,
+    "section_travel_cv": 19.1,
+    "section_spread_cv": 3.3,
+    "section_line_activity_cv": 3.9
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "required_move_median_px"
+   ]
+  },
+  {
+   "id": "silent-150-stream",
+   "path": "charts/silent/silent-150-four-key/stream/project/chart.json",
+   "verdict": "accepted",
+   "axes": [
+    "hand",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 148,
+     "kinds": {
+      "tap": 148
+     },
+     "max_contacts": 3,
+     "last_contact_s": 11.4,
+     "audio_s": 12.0
+    }
+   },
+   "notes": 148,
+   "span_s": 9.8,
+   "lines": 1,
+   "kinds": {
+    "tap": 148
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 10.0,
+    "onset_step_median_px": 450.0,
+    "onset_step_under50_pct": 16.49,
+    "onset_step_200plus_pct": 67.01,
+    "required_travel_px_per_s": 3979.6,
+    "required_move_median_px": 300.0,
+    "required_move_under50_pct": 5.8,
+    "required_move_200plus_pct": 94.2,
+    "direction_change_pct": 70.0,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 9.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 0.078,
+    "section_spread_cv": 0.0,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "10",
+   "flags": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_200plus_pct"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 98.8,
+    "onset_step_median_px": 93.7,
+    "onset_step_under50_pct": 62.5,
+    "onset_step_200plus_pct": 57.0,
+    "required_travel_px_per_s": 100.0,
+    "required_move_median_px": 98.1,
+    "required_move_under50_pct": 10.6,
+    "required_move_200plus_pct": 98.9,
+    "direction_change_pct": 24.1,
+    "x_spread_iqr_px": 50.2,
+    "approach_heights_per_s_median": 82.3,
+    "carrier_motion_pct": 2.8,
+    "background_motion_pct": 3.5,
+    "any_motion_pct": 0.3,
+    "strong_motion_pct": 0.7,
+    "background_present_pct": 3.5,
+    "judging_carrier_motion_pct": 2.9,
+    "longest_carrier_still_during_play_s": 98.2,
+    "longest_all_still_during_play_s": 99.9,
+    "bg_lines_moving_together_median": 3.5,
+    "bg_two_plus_lines_moving_pct": 6.4,
+    "bg_three_plus_lines_moving_pct": 12.0,
+    "section_density_cv": 4.9,
+    "section_travel_cv": 24.2,
+    "section_spread_cv": 3.3,
+    "section_line_activity_cv": 3.9
+   },
+   "flags_all_in": [
+    "fresh_onsets_per_s",
+    "required_travel_px_per_s",
+    "required_move_median_px",
+    "required_move_200plus_pct"
+   ]
+  },
+  {
+   "id": "silent-150-jack",
+   "path": "charts/silent/silent-150-four-key/jack/project/chart.json",
+   "verdict": "corrected",
+   "axes": [
+    "hand",
+    "approach",
+    "structure"
+   ],
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 100,
+     "kinds": {
+      "tap": 100
+     },
+     "max_contacts": 2,
+     "last_contact_s": 11.4,
+     "audio_s": 12.0
+    }
+   },
+   "notes": 100,
+   "span_s": 9.8,
+   "lines": 1,
+   "kinds": {
+    "tap": 100
+   },
+   "metrics": {
+    "fresh_onsets_per_s": 5.102,
+    "onset_step_median_px": 0.0,
+    "onset_step_under50_pct": 79.59,
+    "onset_step_200plus_pct": 12.24,
+    "required_travel_px_per_s": 734.7,
+    "required_move_median_px": 0.0,
+    "required_move_under50_pct": 78.57,
+    "required_move_200plus_pct": 21.43,
+    "direction_change_pct": 88.89,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 9.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 0.222,
+    "section_spread_cv": 0.0,
+    "section_line_activity_cv": 0.0
+   },
+   "comparable": true,
+   "scope": "10",
+   "flags": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_move_median_px",
+    "required_move_under50_pct"
+   ],
+   "percentile_high": {
+    "fresh_onsets_per_s": 51.3,
+    "onset_step_median_px": 2.2,
+    "onset_step_under50_pct": 97.2,
+    "onset_step_200plus_pct": 4.3,
+    "required_travel_px_per_s": 32.2,
+    "required_move_median_px": 1.9,
+    "required_move_under50_pct": 97.0,
+    "required_move_200plus_pct": 22.3,
+    "direction_change_pct": 78.7,
+    "x_spread_iqr_px": 50.2,
+    "approach_heights_per_s_median": 82.3,
+    "carrier_motion_pct": 2.8,
+    "background_motion_pct": 3.5,
+    "any_motion_pct": 0.3,
+    "strong_motion_pct": 0.7,
+    "background_present_pct": 3.5,
+    "judging_carrier_motion_pct": 2.9,
+    "longest_carrier_still_during_play_s": 98.2,
+    "longest_all_still_during_play_s": 99.9,
+    "bg_lines_moving_together_median": 3.5,
+    "bg_two_plus_lines_moving_pct": 6.4,
+    "bg_three_plus_lines_moving_pct": 12.0,
+    "section_density_cv": 4.9,
+    "section_travel_cv": 57.7,
+    "section_spread_cv": 3.3,
+    "section_line_activity_cv": 3.9
+   },
+   "flags_all_in": [
+    "onset_step_median_px",
+    "onset_step_under50_pct",
+    "onset_step_200plus_pct",
+    "required_move_under50_pct"
+   ]
+  }
+ ]
+}

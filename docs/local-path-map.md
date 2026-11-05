@@ -7,6 +7,7 @@ Current paths are relative to the workspace root (the folder containing `main/`)
 | Former path | Current path |
 | --- | --- |
 | `phichain` | `main` |
+| `research/agent-evals` | `main/tools/agent-evals` |
 | `local/AGENTS.md` | `docs/AGENTS.md` |
 | `local/arrangement-training` | `research/arrangement-training` |
 | `local/BUILD-INFO.txt` | `apps/BUILD-INFO.txt` |

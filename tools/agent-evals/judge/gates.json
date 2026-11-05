@@ -1,0 +1,5 @@
+{
+ "generated_by": "backtest/backtest.py",
+ "note": "Provisional. Small labelled sample. Gates stop candidates; they never approve them.",
+ "gates": []
+}

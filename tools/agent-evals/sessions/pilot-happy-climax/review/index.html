@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blind Chart Review</title>
+<style>
+:root{--bg:#f6f5f2;--panel:#fff;--ink:#1d1d1b;--mute:#6b6a65;--line:#dcdad4;--accent:#2f5d8a;--on:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#151514;--panel:#1f1f1d;--ink:#ecebe6;--mute:#a09f98;--line:#3a3935;--accent:#8fb8de;--on:#10202e}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:24px 16px 72px}h1{font-size:22px;margin:0 0 4px}
+p{margin:0;color:var(--mute)}nav{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0}
+nav button{min-width:44px;min-height:44px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;font:inherit;cursor:pointer}
+nav button.done{background:var(--accent);color:var(--on);border-color:var(--accent)}nav button.here{outline:2px solid var(--ink);outline-offset:1px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:20px;align-items:start}@media(max-width:800px){.grid{grid-template-columns:minmax(0,1fr)}}
+video{width:100%;background:#000;border-radius:6px;display:block}h2{font-size:17px;margin:0 0 10px}
+fieldset{border:0;padding:0;margin:0 0 18px;min-width:0}legend{padding:0;font-weight:600}legend span{display:block;font-weight:400;font-size:14px;color:var(--mute)}
+.scale,.verdict{display:flex;gap:6px;margin-top:8px}.scale label,.verdict label{flex:1;min-width:0;cursor:pointer}input[type=radio]{position:absolute;opacity:0}
+label b{display:flex;align-items:center;justify-content:center;min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--panel);font-weight:500}
+input:checked+b{background:var(--accent);color:var(--on);border-color:var(--accent)}input:focus-visible+b{outline:2px solid var(--ink)}
+textarea{width:100%;min-height:72px;margin-top:8px;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);font:inherit}
+.bar{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}.bar button{min-height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;cursor:pointer}
+.bar .go{background:var(--accent);color:var(--on);border-color:var(--accent)}#status{color:var(--mute);font-size:14px}
+</style></head><body><main>
+<h1>Pilot: Happy Ending climax</h1><p>1 terrible · 2 bad · 3 passable · 4 good · 5 official-level. Clips are in random order and some are reference clips. Judge what you see and hear.</p>
+<nav id="nav"></nav>
+<div class="grid"><div><video id="video" controls playsinline preload="metadata"></video></div>
+<form id="form" onsubmit="return false"><h2 id="heading"></h2><fieldset data-dim="hand_action"><legend>Hand action<span>Is the movement satisfying and purposeful to play?</span></legend><div class="scale"><label><input type="radio" value="1"><b>1</b></label><label><input type="radio" value="2"><b>2</b></label><label><input type="radio" value="3"><b>3</b></label><label><input type="radio" value="4"><b>4</b></label><label><input type="radio" value="5"><b>5</b></label></div></fieldset><fieldset data-dim="rhythm_fit"><legend>Rhythm fit<span>Do the notes follow what you hear?</span></legend><div class="scale"><label><input type="radio" value="1"><b>1</b></label><label><input type="radio" value="2"><b>2</b></label><label><input type="radio" value="3"><b>3</b></label><label><input type="radio" value="4"><b>4</b></label><label><input type="radio" value="5"><b>5</b></label></div></fieldset><fieldset data-dim="line_performance"><legend>Line performance<span>Do the lines perform the music, without noise?</span></legend><div class="scale"><label><input type="radio" value="1"><b>1</b></label><label><input type="radio" value="2"><b>2</b></label><label><input type="radio" value="3"><b>3</b></label><label><input type="radio" value="4"><b>4</b></label><label><input type="radio" value="5"><b>5</b></label></div></fieldset><fieldset data-dim="readability"><legend>Readability<span>Is it clear which line each note belongs to and where to hit?</span></legend><div class="scale"><label><input type="radio" value="1"><b>1</b></label><label><input type="radio" value="2"><b>2</b></label><label><input type="radio" value="3"><b>3</b></label><label><input type="radio" value="4"><b>4</b></label><label><input type="radio" value="5"><b>5</b></label></div></fieldset>
+<fieldset data-dim="verdict"><legend>Verdict</legend><div class="verdict"><label title="Good enough to build on as it is."><input type="radio" value="keep"><b>Keep</b></label><label title="Good idea, needs specific changes."><input type="radio" value="fix"><b>Fix</b></label><label title="Start over."><input type="radio" value="reject"><b>Reject</b></label></div></fieldset>
+<fieldset><legend>What is wrong or right?<span>Optional. Name the moment if you can.</span></legend><textarea id="note"></textarea></fieldset>
+<div class="bar"><button class="go" id="next" type="button">Next clip</button><button id="export" type="button">Download ratings</button><span id="status"></span></div>
+</form></div></main>
+<script>
+const session="2af2f1f7dc",labels=["c5e22a7", "c1a1d38", "ca25898", "ca54a8d", "c60a11f", "c3d82d1"],storeKey='blind-review-'+session;
+let ratings={},here=0;
+try{ratings=JSON.parse(localStorage.getItem(storeKey))||{}}catch(e){}
+const save=()=>{try{localStorage.setItem(storeKey,JSON.stringify(ratings))}catch(e){}};
+const required=["hand_action", "rhythm_fit", "line_performance", "readability", "verdict"];
+const complete=l=>required.every(k=>ratings[l]&&ratings[l][k]!=null);
+function drawNav(){const n=document.getElementById('nav');n.textContent='';labels.forEach((l,i)=>{const b=document.createElement('button');b.type='button';b.textContent=i+1;b.setAttribute('aria-label','Clip '+(i+1));if(complete(l))b.className='done';if(i===here)b.className+=' here';b.onclick=()=>show(i);n.append(b)});
+const c=labels.filter(complete).length;document.getElementById('status').textContent=c+' of '+labels.length+' rated'}
+function show(i){here=i;const l=labels[i],r=ratings[l]||{};const v=document.getElementById('video');v.src='clips/'+l+'.mp4';document.getElementById('heading').textContent='Clip '+(i+1);
+document.querySelectorAll('fieldset[data-dim]').forEach(f=>{f.querySelectorAll('input').forEach(x=>{x.name=f.dataset.dim;x.checked=String(r[f.dataset.dim])===x.value})});
+document.getElementById('note').value=r.note||'';drawNav()}
+document.getElementById('form').addEventListener('change',e=>{const l=labels[here];ratings[l]=ratings[l]||{};if(e.target.type==='radio')ratings[l][e.target.name]=/^\d$/.test(e.target.value)?+e.target.value:e.target.value;save();drawNav()});
+document.getElementById('note').addEventListener('input',e=>{const l=labels[here];ratings[l]=ratings[l]||{};ratings[l].note=e.target.value;save()});
+document.getElementById('next').onclick=()=>show((here+1)%labels.length);
+document.getElementById('export').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({session,ratings},null,1)],{type:'application/json'}));a.download='ratings-'+session+'.json';a.click()};
+show(0);
+</script></body></html>

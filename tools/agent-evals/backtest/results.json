@@ -1,0 +1,1743 @@
+{
+ "rows": [
+  {
+   "id": "silent-180-wide-travel",
+   "path": "charts/silent/silent-180-sixteenths/project/chart.json",
+   "hand": "pass",
+   "line": null,
+   "overall": null,
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 360,
+     "kinds": {
+      "tap": 360
+     },
+     "max_contacts": 1,
+     "last_contact_s": 31.25,
+     "audio_s": 32.0
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 12.033,
+    "onset_step_median_px": 320.0,
+    "onset_step_under50_pct": 12.26,
+    "onset_step_200plus_pct": 80.78,
+    "required_travel_px_per_s": 2099.2,
+    "required_move_median_px": 180.0,
+    "required_move_under50_pct": 31.84,
+    "required_move_200plus_pct": 40.5,
+    "direction_change_pct": 85.99,
+    "x_spread_iqr_px": 400.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 29.5,
+    "longest_all_still_during_play_s": 29.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.007,
+    "section_travel_cv": 0.07,
+    "section_spread_cv": 0.099,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 360,
+   "span_s": 29.917
+  },
+  {
+   "id": "silent-150-style-one",
+   "path": "charts/silent/silent-150-two-styles/style-one/project/chart.json",
+   "hand": "pass",
+   "line": null,
+   "overall": null,
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 220,
+     "kinds": {
+      "hold": 12,
+      "tap": 151,
+      "drag": 57
+     },
+     "max_contacts": 2,
+     "last_contact_s": 31.6,
+     "audio_s": 32.0
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 4.8,
+    "onset_step_median_px": 40.0,
+    "onset_step_under50_pct": 52.1,
+    "onset_step_200plus_pct": 42.02,
+    "required_travel_px_per_s": 164.5,
+    "required_move_median_px": 30.0,
+    "required_move_under50_pct": 86.36,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 57.14,
+    "x_spread_iqr_px": 575.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 30.0,
+    "longest_all_still_during_play_s": 30.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.123,
+    "section_travel_cv": 0.155,
+    "section_spread_cv": 0.115,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 220,
+   "span_s": 30.0
+  },
+  {
+   "id": "silent-150-style-two",
+   "path": "charts/silent/silent-150-two-styles/style-two/project/chart.json",
+   "hand": "pass",
+   "line": null,
+   "overall": null,
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 214,
+     "kinds": {
+      "tap": 202,
+      "hold": 4,
+      "drag": 8
+     },
+     "max_contacts": 2,
+     "last_contact_s": 31.2,
+     "audio_s": 32.0
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 4.291,
+    "onset_step_median_px": 180.0,
+    "onset_step_under50_pct": 36.54,
+    "onset_step_200plus_pct": 44.23,
+    "required_travel_px_per_s": 843.2,
+    "required_move_median_px": 120.0,
+    "required_move_under50_pct": 15.62,
+    "required_move_200plus_pct": 16.67,
+    "direction_change_pct": 80.0,
+    "x_spread_iqr_px": 600.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 29.5,
+    "longest_all_still_during_play_s": 29.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.241,
+    "section_travel_cv": 0.241,
+    "section_spread_cv": 0.079,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 214,
+   "span_s": 29.6
+  },
+  {
+   "id": "silent-150-tech",
+   "path": "charts/silent/silent-150-four-key/tech/project/chart.json",
+   "hand": "pass",
+   "line": null,
+   "overall": null,
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 88,
+     "kinds": {
+      "tap": 88
+     },
+     "max_contacts": 2,
+     "last_contact_s": 11.4,
+     "audio_s": 12.0
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 6.735,
+    "onset_step_median_px": 300.0,
+    "onset_step_under50_pct": 18.46,
+    "onset_step_200plus_pct": 58.46,
+    "required_travel_px_per_s": 1898.0,
+    "required_move_median_px": 300.0,
+    "required_move_under50_pct": 37.65,
+    "required_move_200plus_pct": 62.35,
+    "direction_change_pct": 76.92,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 9.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.019,
+    "section_travel_cv": 0.106,
+    "section_spread_cv": 0.429,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 88,
+   "span_s": 9.8
+  },
+  {
+   "id": "silent-150-speed",
+   "path": "charts/silent/silent-150-four-key/speed/project/chart.json",
+   "hand": "pass",
+   "line": null,
+   "overall": null,
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 100,
+     "kinds": {
+      "tap": 100
+     },
+     "max_contacts": 1,
+     "last_contact_s": 11.5,
+     "audio_s": 12.0
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 10.101,
+    "onset_step_median_px": 300.0,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 100.0,
+    "required_travel_px_per_s": 2090.9,
+    "required_move_median_px": 300.0,
+    "required_move_under50_pct": 32.99,
+    "required_move_200plus_pct": 67.01,
+    "direction_change_pct": 75.51,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 9.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 0.055,
+    "section_spread_cv": 0.0,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 100,
+   "span_s": 9.9
+  },
+  {
+   "id": "silent-150-stream",
+   "path": "charts/silent/silent-150-four-key/stream/project/chart.json",
+   "hand": "pass",
+   "line": null,
+   "overall": null,
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 1,
+     "events": 5,
+     "notes": 148,
+     "kinds": {
+      "tap": 148
+     },
+     "max_contacts": 3,
+     "last_contact_s": 11.4,
+     "audio_s": 12.0
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 10.0,
+    "onset_step_median_px": 450.0,
+    "onset_step_under50_pct": 16.49,
+    "onset_step_200plus_pct": 67.01,
+    "required_travel_px_per_s": 3979.6,
+    "required_move_median_px": 300.0,
+    "required_move_under50_pct": 5.8,
+    "required_move_200plus_pct": 94.2,
+    "direction_change_pct": 70.0,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 0.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 9.5,
+    "longest_all_still_during_play_s": 9.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.0,
+    "section_travel_cv": 0.078,
+    "section_spread_cv": 0.0,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 148,
+   "span_s": 9.8
+  },
+  {
+   "id": "climax-C-approved",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/C/project/chart.json",
+   "hand": "pass",
+   "line": "pass",
+   "overall": "pass",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 8,
+     "events": 1056,
+     "notes": 114,
+     "kinds": {
+      "tap": 99,
+      "hold": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.74,
+     "audio_s": 13.15068
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.3,
+    "onset_step_median_px": 269.193,
+    "onset_step_under50_pct": 7.41,
+    "onset_step_200plus_pct": 69.14,
+    "required_travel_px_per_s": 1778.8,
+    "required_move_median_px": 200.0,
+    "required_move_under50_pct": 10.71,
+    "required_move_200plus_pct": 51.79,
+    "direction_change_pct": 82.43,
+    "x_spread_iqr_px": 453.2,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 95.65,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 95.65,
+    "longest_carrier_still_during_play_s": 0.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 4,
+    "bg_two_plus_lines_moving_pct": 91.3,
+    "bg_three_plus_lines_moving_pct": 78.26,
+    "section_density_cv": 0.016,
+    "section_travel_cv": 0.001,
+    "section_spread_cv": 0.239,
+    "section_line_activity_cv": 0.258
+   },
+   "notes": 114,
+   "span_s": 11.644
+  },
+  {
+   "id": "climax-C-before-ensemble",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/history/C-before-ensemble/project/chart.json",
+   "hand": null,
+   "line": "fail",
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 296,
+     "notes": 114,
+     "kinds": {
+      "tap": 99,
+      "hold": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.74,
+     "audio_s": 13.15068
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.3,
+    "onset_step_median_px": 269.193,
+    "onset_step_under50_pct": 7.41,
+    "onset_step_200plus_pct": 69.14,
+    "required_travel_px_per_s": 1778.8,
+    "required_move_median_px": 200.0,
+    "required_move_under50_pct": 10.71,
+    "required_move_200plus_pct": 51.79,
+    "direction_change_pct": 82.43,
+    "x_spread_iqr_px": 453.2,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 95.65,
+    "background_motion_pct": 91.3,
+    "any_motion_pct": 95.65,
+    "strong_motion_pct": 73.91,
+    "background_present_pct": 95.65,
+    "judging_carrier_motion_pct": 95.65,
+    "longest_carrier_still_during_play_s": 0.5,
+    "longest_all_still_during_play_s": 0.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 1,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.016,
+    "section_travel_cv": 0.001,
+    "section_spread_cv": 0.239,
+    "section_line_activity_cv": 0.027
+   },
+   "notes": 114,
+   "span_s": 11.644
+  },
+  {
+   "id": "climax-C-before-orientation",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/history/C-before-orientation-fix/project/chart.json",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 301,
+     "notes": 114,
+     "kinds": {
+      "tap": 99,
+      "hold": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.74,
+     "audio_s": 13.15068
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.3,
+    "onset_step_median_px": 269.193,
+    "onset_step_under50_pct": 7.41,
+    "onset_step_200plus_pct": 69.14,
+    "required_travel_px_per_s": 1775.7,
+    "required_move_median_px": 200.0,
+    "required_move_under50_pct": 10.71,
+    "required_move_200plus_pct": 50.89,
+    "direction_change_pct": 82.43,
+    "x_spread_iqr_px": 453.2,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 95.65,
+    "background_motion_pct": 91.3,
+    "any_motion_pct": 95.65,
+    "strong_motion_pct": 78.26,
+    "background_present_pct": 95.65,
+    "judging_carrier_motion_pct": 95.65,
+    "longest_carrier_still_during_play_s": 0.5,
+    "longest_all_still_during_play_s": 0.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 1,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.016,
+    "section_travel_cv": 0.001,
+    "section_spread_cv": 0.239,
+    "section_line_activity_cv": 0.027
+   },
+   "notes": 114,
+   "span_s": 11.644
+  },
+  {
+   "id": "climax-A",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/A/project/chart.json",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 496,
+     "notes": 124,
+     "kinds": {
+      "tap": 111,
+      "hold": 13
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.74,
+     "audio_s": 13.15068
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 8.073,
+    "onset_step_median_px": 327.3,
+    "onset_step_under50_pct": 10.0,
+    "onset_step_200plus_pct": 72.22,
+    "required_travel_px_per_s": 2222.2,
+    "required_move_median_px": 210.0,
+    "required_move_under50_pct": 4.92,
+    "required_move_200plus_pct": 53.28,
+    "direction_change_pct": 73.75,
+    "x_spread_iqr_px": 557.5,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 91.3,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 69.57,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 91.3,
+    "longest_carrier_still_during_play_s": 1.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 2,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.061,
+    "section_travel_cv": 0.046,
+    "section_spread_cv": 0.066,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 124,
+   "span_s": 11.644
+  },
+  {
+   "id": "climax-B",
+   "path": "charts/happy-ending/happy-ending-climax-diagnostics/B/project/chart.json",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 399,
+     "notes": 120,
+     "kinds": {
+      "tap": 96,
+      "hold": 16,
+      "drag": 4,
+      "flick": 4
+     },
+     "max_contacts": 2,
+     "last_contact_s": 12.808,
+     "audio_s": 13.15068
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.855,
+    "onset_step_median_px": 412.5,
+    "onset_step_under50_pct": 7.95,
+    "onset_step_200plus_pct": 78.41,
+    "required_travel_px_per_s": 2017.4,
+    "required_move_median_px": 200.0,
+    "required_move_under50_pct": 16.67,
+    "required_move_200plus_pct": 52.63,
+    "direction_change_pct": 77.5,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 86.96,
+    "background_motion_pct": 95.65,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 82.61,
+    "background_present_pct": 95.65,
+    "judging_carrier_motion_pct": 86.96,
+    "longest_carrier_still_during_play_s": 1.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 73.91,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.088,
+    "section_travel_cv": 0.027,
+    "section_spread_cv": 0.108,
+    "section_line_activity_cv": 0.171
+   },
+   "notes": 120,
+   "span_s": 11.712
+  },
+  {
+   "id": "he-run02",
+   "path": "charts/happy-ending/happy-ending-guided-run02/project/chart.json",
+   "slice": "happy-climax",
+   "hand": "fail",
+   "line": "fail",
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 566,
+     "notes": 1078,
+     "kinds": {
+      "tap": 662,
+      "drag": 250,
+      "hold": 151,
+      "flick": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.03,
+    "onset_step_median_px": 401.875,
+    "onset_step_under50_pct": 2.13,
+    "onset_step_200plus_pct": 93.62,
+    "required_travel_px_per_s": 207.6,
+    "required_move_median_px": 21.3,
+    "required_move_under50_pct": 90.62,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 97.8,
+    "x_spread_iqr_px": 409.7,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 13.79,
+    "background_motion_pct": 13.79,
+    "any_motion_pct": 24.14,
+    "strong_motion_pct": 13.79,
+    "background_present_pct": 41.38,
+    "judging_carrier_motion_pct": 10.71,
+    "longest_carrier_still_during_play_s": 8.5,
+    "longest_all_still_during_play_s": 4.0,
+    "carrier_response_gap_p90_s": 1.0,
+    "bg_lines_moving_together_median": 1.5,
+    "bg_two_plus_lines_moving_pct": 6.9,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.13,
+    "section_travel_cv": 0.045,
+    "section_spread_cv": 0.034,
+    "section_line_activity_cv": 0.935
+   },
+   "notes": 102,
+   "span_s": 14.795
+  },
+  {
+   "id": "he-run03",
+   "path": "charts/happy-ending/happy-ending-performance-run03/project/chart.json",
+   "slice": "happy-climax",
+   "hand": null,
+   "line": "fail",
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 5,
+     "events": 8018,
+     "notes": 1219,
+     "kinds": {
+      "drag": 342,
+      "hold": 118,
+      "tap": 738,
+      "flick": 21
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.095,
+    "onset_step_median_px": 355.0,
+    "onset_step_under50_pct": 1.01,
+    "onset_step_200plus_pct": 77.78,
+    "required_travel_px_per_s": 1013.9,
+    "required_move_median_px": 115.0,
+    "required_move_under50_pct": 14.42,
+    "required_move_200plus_pct": 32.69,
+    "direction_change_pct": 71.13,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 93.1,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 92.86,
+    "longest_carrier_still_during_play_s": 1.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": 13.0,
+    "bg_lines_moving_together_median": 4,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 100.0,
+    "section_density_cv": 0.074,
+    "section_travel_cv": 0.027,
+    "section_spread_cv": 0.115,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 110,
+   "span_s": 14.658
+  },
+  {
+   "id": "he-presentation-r01",
+   "path": "charts/happy-ending/happy-ending-sol-baseline/presentation-revision-01/project/chart.json",
+   "slice": "happy-climax",
+   "hand": null,
+   "line": "fail",
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 15,
+     "events": 3473,
+     "notes": 1388,
+     "kinds": {
+      "tap": 1119,
+      "hold": 23,
+      "drag": 231,
+      "flick": 15
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 8.289,
+    "onset_step_median_px": 310.0,
+    "onset_step_under50_pct": 15.38,
+    "onset_step_200plus_pct": 67.31,
+    "required_travel_px_per_s": 1701.0,
+    "required_move_median_px": 167.9,
+    "required_move_under50_pct": 27.74,
+    "required_move_200plus_pct": 40.15,
+    "direction_change_pct": 91.95,
+    "x_spread_iqr_px": 482.0,
+    "approach_heights_per_s_median": 1.413,
+    "carrier_motion_pct": 53.85,
+    "background_motion_pct": 76.92,
+    "any_motion_pct": 76.92,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 76.92,
+    "judging_carrier_motion_pct": 56.0,
+    "longest_carrier_still_during_play_s": 1.5,
+    "longest_all_still_during_play_s": 1.5,
+    "carrier_response_gap_p90_s": 4.3,
+    "bg_lines_moving_together_median": 1.0,
+    "bg_two_plus_lines_moving_pct": 7.69,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.058,
+    "section_travel_cv": 0.245,
+    "section_spread_cv": 0.117,
+    "section_line_activity_cv": 0.236
+   },
+   "notes": 145,
+   "span_s": 13.151
+  },
+  {
+   "id": "he-five-A",
+   "path": "charts/happy-ending/happy-ending-five-authors/A/project/chart.json",
+   "slice": "happy-climax",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 6797,
+     "notes": 1169,
+     "kinds": {
+      "drag": 265,
+      "hold": 46,
+      "tap": 849,
+      "flick": 9
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.908,
+    "onset_step_median_px": 290.0,
+    "onset_step_under50_pct": 7.14,
+    "onset_step_200plus_pct": 82.14,
+    "required_travel_px_per_s": 726.1,
+    "required_move_median_px": 37.5,
+    "required_move_under50_pct": 51.94,
+    "required_move_200plus_pct": 13.95,
+    "direction_change_pct": 84.47,
+    "x_spread_iqr_px": 350.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 89.66,
+    "background_motion_pct": 96.55,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 72.41,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 92.86,
+    "longest_carrier_still_during_play_s": 1.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": 10.5,
+    "bg_lines_moving_together_median": 2.0,
+    "bg_two_plus_lines_moving_pct": 86.21,
+    "bg_three_plus_lines_moving_pct": 37.93,
+    "section_density_cv": 0.058,
+    "section_travel_cv": 0.567,
+    "section_spread_cv": 0.122,
+    "section_line_activity_cv": 0.141
+   },
+   "notes": 130,
+   "span_s": 14.795
+  },
+  {
+   "id": "he-five-B",
+   "path": "charts/happy-ending/happy-ending-five-authors/B/project/chart.json",
+   "slice": "happy-climax",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 6380,
+     "notes": 1190,
+     "kinds": {
+      "tap": 920,
+      "hold": 32,
+      "drag": 231,
+      "flick": 7
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 8.213,
+    "onset_step_median_px": 260.0,
+    "onset_step_under50_pct": 14.56,
+    "onset_step_200plus_pct": 71.84,
+    "required_travel_px_per_s": 1267.3,
+    "required_move_median_px": 180.0,
+    "required_move_under50_pct": 29.36,
+    "required_move_200plus_pct": 38.53,
+    "direction_change_pct": 78.16,
+    "x_spread_iqr_px": 290.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 84.62,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 53.85,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 88.0,
+    "longest_carrier_still_during_play_s": 1.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 3.0,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 88.46,
+    "section_density_cv": 0.062,
+    "section_travel_cv": 0.062,
+    "section_spread_cv": 0.16,
+    "section_line_activity_cv": 0.046
+   },
+   "notes": 119,
+   "span_s": 13.151
+  },
+  {
+   "id": "he-five-C",
+   "path": "charts/happy-ending/happy-ending-five-authors/C/project/chart.json",
+   "slice": "happy-climax",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 2504,
+     "notes": 1114,
+     "kinds": {
+      "tap": 826,
+      "hold": 38,
+      "drag": 234,
+      "flick": 16
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.809,
+    "onset_step_median_px": 512.5,
+    "onset_step_under50_pct": 2.73,
+    "onset_step_200plus_pct": 92.73,
+    "required_travel_px_per_s": 1432.9,
+    "required_move_median_px": 185.0,
+    "required_move_under50_pct": 11.61,
+    "required_move_200plus_pct": 44.64,
+    "direction_change_pct": 95.28,
+    "x_spread_iqr_px": 480.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 93.1,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 96.55,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 96.43,
+    "longest_carrier_still_during_play_s": 0.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": 10.55,
+    "bg_lines_moving_together_median": 2,
+    "bg_two_plus_lines_moving_pct": 65.52,
+    "bg_three_plus_lines_moving_pct": 3.45,
+    "section_density_cv": 0.047,
+    "section_travel_cv": 0.022,
+    "section_spread_cv": 0.095,
+    "section_line_activity_cv": 0.181
+   },
+   "notes": 115,
+   "span_s": 14.726
+  },
+  {
+   "id": "he-five-D",
+   "path": "charts/happy-ending/happy-ending-five-authors/D/project/chart.json",
+   "slice": "happy-climax",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 6956,
+     "notes": 1148,
+     "kinds": {
+      "tap": 889,
+      "hold": 21,
+      "drag": 228,
+      "flick": 10
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 8.289,
+    "onset_step_median_px": 450.0,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 99.04,
+    "required_travel_px_per_s": 1085.7,
+    "required_move_median_px": 125.0,
+    "required_move_under50_pct": 9.9,
+    "required_move_200plus_pct": 24.75,
+    "direction_change_pct": 100.0,
+    "x_spread_iqr_px": 450.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 96.15,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 100.0,
+    "longest_carrier_still_during_play_s": 0.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": 11.5,
+    "bg_lines_moving_together_median": 1.0,
+    "bg_two_plus_lines_moving_pct": 19.23,
+    "bg_three_plus_lines_moving_pct": 3.85,
+    "section_density_cv": 0.058,
+    "section_travel_cv": 0.129,
+    "section_spread_cv": 0.115,
+    "section_line_activity_cv": 0.083
+   },
+   "notes": 113,
+   "span_s": 13.151
+  },
+  {
+   "id": "he-five-E",
+   "path": "charts/happy-ending/happy-ending-five-authors/E/project/chart.json",
+   "slice": "happy-climax",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 6055,
+     "notes": 1104,
+     "kinds": {
+      "tap": 844,
+      "hold": 37,
+      "drag": 217,
+      "flick": 6
+     },
+     "max_contacts": 2,
+     "last_contact_s": 159.521,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.908,
+    "onset_step_median_px": 380.0,
+    "onset_step_under50_pct": 0.0,
+    "onset_step_200plus_pct": 71.56,
+    "required_travel_px_per_s": 1069.6,
+    "required_move_median_px": 150.0,
+    "required_move_under50_pct": 12.73,
+    "required_move_200plus_pct": 41.82,
+    "direction_change_pct": 80.56,
+    "x_spread_iqr_px": 300.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 86.21,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 89.29,
+    "longest_carrier_still_during_play_s": 1.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": 10.55,
+    "bg_lines_moving_together_median": 3,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 65.52,
+    "section_density_cv": 0.105,
+    "section_travel_cv": 0.066,
+    "section_spread_cv": 0.129,
+    "section_line_activity_cv": 0.069
+   },
+   "notes": 114,
+   "span_s": 14.795
+  },
+  {
+   "id": "iris-original",
+   "path": "charts/xterfusion/xterfusion-iris-study/project/chart.json",
+   "hand": null,
+   "line": "fail",
+   "overall": "fail",
+   "approach": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 3,
+     "events": 4380,
+     "notes": 85,
+     "kinds": {
+      "tap": 82,
+      "hold": 3
+     },
+     "max_contacts": 2,
+     "last_contact_s": 10.744,
+     "audio_s": 11.163991
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 8.305,
+    "onset_step_median_px": 280.0,
+    "onset_step_under50_pct": 7.32,
+    "onset_step_200plus_pct": 71.95,
+    "required_travel_px_per_s": 957.2,
+    "required_move_median_px": 110.1,
+    "required_move_under50_pct": 20.51,
+    "required_move_200plus_pct": 19.23,
+    "direction_change_pct": 97.33,
+    "x_spread_iqr_px": 275.0,
+    "approach_heights_per_s_median": 0.987,
+    "carrier_motion_pct": 100.0,
+    "background_motion_pct": 100.0,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 94.74,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 100.0,
+    "longest_carrier_still_during_play_s": 0.0,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 2,
+    "bg_two_plus_lines_moving_pct": 100.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.069,
+    "section_travel_cv": 0.072,
+    "section_spread_cv": 0.078,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 85,
+   "span_s": 9.994
+  },
+  {
+   "id": "override-three-a",
+   "path": "charts/override/override-three-2026-11-02/a/project/chart.json",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 565
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 4,
+     "events": 20,
+     "notes": 565,
+     "kinds": {
+      "hold": 83,
+      "tap": 360,
+      "drag": 108,
+      "flick": 14
+     },
+     "max_contacts": 2,
+     "last_contact_s": 58.824,
+     "audio_s": 138.533356
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 6.123,
+    "onset_step_median_px": 274.21,
+    "onset_step_under50_pct": 20.57,
+    "onset_step_200plus_pct": 67.14,
+    "required_travel_px_per_s": 122.8,
+    "required_move_median_px": 12.1,
+    "required_move_under50_pct": 98.2,
+    "required_move_200plus_pct": 0.0,
+    "direction_change_pct": 77.98,
+    "x_spread_iqr_px": 452.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 57.5,
+    "longest_all_still_during_play_s": 57.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.102,
+    "section_travel_cv": 0.235,
+    "section_spread_cv": 0.149,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 565,
+   "span_s": 57.647
+  },
+  {
+   "id": "override-three-b",
+   "path": "charts/override/override-three-2026-11-02/b/project/chart.json",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 384
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 11,
+     "events": 179,
+     "notes": 384,
+     "kinds": {
+      "tap": 291,
+      "hold": 31,
+      "drag": 52,
+      "flick": 10
+     },
+     "max_contacts": 3,
+     "last_contact_s": 58.824,
+     "audio_s": 138.533356
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 5.1,
+    "onset_step_median_px": 405.0,
+    "onset_step_under50_pct": 1.06,
+    "onset_step_200plus_pct": 83.8,
+    "required_travel_px_per_s": 520.6,
+    "required_move_median_px": 95.0,
+    "required_move_under50_pct": 6.83,
+    "required_move_200plus_pct": 0.62,
+    "direction_change_pct": 90.71,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 57.5,
+    "longest_all_still_during_play_s": 57.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.148,
+    "section_travel_cv": 0.112,
+    "section_spread_cv": 0.094,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 384,
+   "span_s": 57.647
+  },
+  {
+   "id": "override-three-c",
+   "path": "charts/override/override-three-2026-11-02/c/project/chart.json",
+   "hand": null,
+   "line": null,
+   "overall": "fail",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 516
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 15,
+     "events": 1159,
+     "notes": 516,
+     "kinds": {
+      "hold": 30,
+      "tap": 319,
+      "flick": 17,
+      "drag": 150
+     },
+     "max_contacts": 2,
+     "last_contact_s": 58.824,
+     "audio_s": 138.533356
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 5.915,
+    "onset_step_median_px": 340.0,
+    "onset_step_under50_pct": 2.96,
+    "onset_step_200plus_pct": 81.66,
+    "required_travel_px_per_s": 844.4,
+    "required_move_median_px": 130.0,
+    "required_move_under50_pct": 3.88,
+    "required_move_200plus_pct": 14.4,
+    "direction_change_pct": 95.41,
+    "x_spread_iqr_px": 350.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 0.0,
+    "background_motion_pct": 0.0,
+    "any_motion_pct": 0.0,
+    "strong_motion_pct": 0.0,
+    "background_present_pct": 100.0,
+    "judging_carrier_motion_pct": 0.0,
+    "longest_carrier_still_during_play_s": 57.5,
+    "longest_all_still_during_play_s": 57.5,
+    "carrier_response_gap_p90_s": null,
+    "bg_lines_moving_together_median": 0.0,
+    "bg_two_plus_lines_moving_pct": 0.0,
+    "bg_three_plus_lines_moving_pct": 0.0,
+    "section_density_cv": 0.115,
+    "section_travel_cv": 0.291,
+    "section_spread_cv": 0.229,
+    "section_line_activity_cv": 0.0
+   },
+   "notes": 516,
+   "span_s": 57.647
+  },
+  {
+   "id": "he-official-climax",
+   "path": "research/reference-studies/happy-ending-official-in/native-reference/chart.json",
+   "slice": "happy-climax",
+   "note": "Official IN of the same passage, for direct comparison.",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [
+     {
+      "code": "offscreen_head",
+      "detail": "1 of 1217 note heads judged outside the screen",
+      "count": 1
+     },
+     {
+      "code": "hidden_carrier_hit",
+      "detail": "notes judged on a line at opacity <= 1%; deliberate in some official charts",
+      "count": 451
+     }
+    ],
+    "stats": {
+     "format": "native",
+     "lines": 24,
+     "events": 160266,
+     "notes": 1217,
+     "kinds": {
+      "drag": 64,
+      "flick": 31,
+      "tap": 932,
+      "hold": 190
+     },
+     "max_contacts": 2,
+     "last_contact_s": 160.137,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 7.449,
+    "onset_step_median_px": 210.0,
+    "onset_step_under50_pct": 18.95,
+    "onset_step_200plus_pct": 56.84,
+    "required_travel_px_per_s": 1689.0,
+    "required_move_median_px": 210.0,
+    "required_move_under50_pct": 23.58,
+    "required_move_200plus_pct": 52.03,
+    "direction_change_pct": 86.84,
+    "x_spread_iqr_px": 420.0,
+    "approach_heights_per_s_median": 1.38,
+    "carrier_motion_pct": 96.15,
+    "background_motion_pct": 84.62,
+    "any_motion_pct": 100.0,
+    "strong_motion_pct": 100.0,
+    "background_present_pct": 84.62,
+    "judging_carrier_motion_pct": 96.0,
+    "longest_carrier_still_during_play_s": 0.5,
+    "longest_all_still_during_play_s": 0.0,
+    "carrier_response_gap_p90_s": 8.5,
+    "bg_lines_moving_together_median": 4.0,
+    "bg_two_plus_lines_moving_pct": 84.62,
+    "bg_three_plus_lines_moving_pct": 65.38,
+    "section_density_cv": 0.127,
+    "section_travel_cv": 0.14,
+    "section_spread_cv": 0.04,
+    "section_line_activity_cv": 0.115
+   },
+   "notes": 126,
+   "span_s": 13.425
+  },
+  {
+   "id": "he-full-c",
+   "path": "charts/happy-ending/happy-ending-full-c-revision/full/project/chart.json",
+   "note": "Full-song judgment pending.",
+   "l0": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+     "format": "native",
+     "lines": 8,
+     "events": 6954,
+     "notes": 1217,
+     "kinds": {
+      "tap": 933,
+      "hold": 198,
+      "drag": 54,
+      "flick": 32
+     },
+     "max_contacts": 2,
+     "last_contact_s": 160.137,
+     "audio_s": 162.198639
+    }
+   },
+   "l1": {
+    "fresh_onsets_per_s": 5.504,
+    "onset_step_median_px": 300.0,
+    "onset_step_under50_pct": 8.58,
+    "onset_step_200plus_pct": 65.69,
+    "required_travel_px_per_s": 997.4,
+    "required_move_median_px": 130.5,
+    "required_move_under50_pct": 21.02,
+    "required_move_200plus_pct": 25.79,
+    "direction_change_pct": 76.51,
+    "x_spread_iqr_px": 500.0,
+    "approach_heights_per_s_median": 1.837,
+    "carrier_motion_pct": 53.21,
+    "background_motion_pct": 90.38,
+    "any_motion_pct": 92.31,
+    "strong_motion_pct": 75.64,
+    "background_present_pct": 91.35,
+    "judging_carrier_motion_pct": 58.25,
+    "longest_carrier_still_during_play_s": 9.0,
+    "longest_all_still_during_play_s": 1.5,
+    "carrier_response_gap_p90_s": 7.15,
+    "bg_lines_moving_together_median": 3.0,
+    "bg_two_plus_lines_moving_pct": 83.65,
+    "bg_three_plus_lines_moving_pct": 50.0,
+    "section_density_cv": 0.498,
+    "section_travel_cv": 0.565,
+    "section_spread_cv": 0.294,
+    "section_line_activity_cv": 0.354
+   },
+   "notes": 1217,
+   "span_s": 156.438
+  }
+ ],
+ "hypotheses": [
+  {
+   "metric": "required_move_under50_pct",
+   "axis": "hand",
+   "direction": "ceiling",
+   "why": "Hands can stay nearly still (run02 finding).",
+   "threshold": 86.36,
+   "official_edge": 66.67,
+   "passed_n": 7,
+   "failed_n": 1,
+   "caught": [
+    "he-run02"
+   ],
+   "missed": [],
+   "also_caught_overall_fail": [
+    "override-three-a"
+   ],
+   "passed_values": {
+    "silent-180-wide-travel": 31.84,
+    "silent-150-style-one": 86.36,
+    "silent-150-style-two": 15.62,
+    "silent-150-tech": 37.65,
+    "silent-150-speed": 32.99,
+    "silent-150-stream": 5.8,
+    "climax-C-approved": 10.71
+   },
+   "failed_values": {
+    "he-run02": 90.62
+   },
+   "status": "weak_signal"
+  },
+  {
+   "metric": "required_move_median_px",
+   "axis": "hand",
+   "direction": "floor",
+   "why": "Typical required move is too small.",
+   "threshold": 1.08,
+   "official_edge": 1.08,
+   "passed_n": 7,
+   "failed_n": 1,
+   "caught": [],
+   "missed": [
+    "he-run02"
+   ],
+   "also_caught_overall_fail": [],
+   "passed_values": {
+    "silent-180-wide-travel": 180.0,
+    "silent-150-style-one": 30.0,
+    "silent-150-style-two": 120.0,
+    "silent-150-tech": 300.0,
+    "silent-150-speed": 300.0,
+    "silent-150-stream": 300.0,
+    "climax-C-approved": 200.0
+   },
+   "failed_values": {
+    "he-run02": 21.3
+   },
+   "status": "report_only"
+  },
+  {
+   "metric": "required_travel_px_per_s",
+   "axis": "hand",
+   "direction": "floor",
+   "why": "Too little total hand movement.",
+   "threshold": 164.5,
+   "official_edge": 166.795,
+   "passed_n": 7,
+   "failed_n": 1,
+   "caught": [],
+   "missed": [
+    "he-run02"
+   ],
+   "also_caught_overall_fail": [
+    "override-three-a"
+   ],
+   "passed_values": {
+    "silent-180-wide-travel": 2099.2,
+    "silent-150-style-one": 164.5,
+    "silent-150-style-two": 843.2,
+    "silent-150-tech": 1898.0,
+    "silent-150-speed": 2090.9,
+    "silent-150-stream": 3979.6,
+    "climax-C-approved": 1778.8
+   },
+   "failed_values": {
+    "he-run02": 207.6
+   },
+   "status": "report_only"
+  },
+  {
+   "metric": "any_motion_pct",
+   "axis": "line",
+   "direction": "floor",
+   "why": "Lines rest through most of the passage.",
+   "threshold": 40.0,
+   "official_edge": 40.0,
+   "passed_n": 1,
+   "failed_n": 5,
+   "caught": [
+    "he-run02"
+   ],
+   "missed": [
+    "climax-C-before-ensemble",
+    "he-run03",
+    "he-presentation-r01",
+    "iris-original"
+   ],
+   "also_caught_overall_fail": [
+    "override-three-a",
+    "override-three-b",
+    "override-three-c"
+   ],
+   "passed_values": {
+    "climax-C-approved": 100.0
+   },
+   "failed_values": {
+    "climax-C-before-ensemble": 95.65,
+    "he-run02": 24.14,
+    "he-run03": 100.0,
+    "he-presentation-r01": 76.92,
+    "iris-original": 100.0
+   },
+   "status": "report_only"
+  },
+  {
+   "metric": "strong_motion_pct",
+   "axis": "line",
+   "direction": "floor",
+   "why": "Line motion is imperceptible (run02 finding).",
+   "threshold": 8.0,
+   "official_edge": 8.0,
+   "passed_n": 1,
+   "failed_n": 5,
+   "caught": [
+    "he-presentation-r01"
+   ],
+   "missed": [
+    "climax-C-before-ensemble",
+    "he-run02",
+    "he-run03",
+    "iris-original"
+   ],
+   "also_caught_overall_fail": [
+    "override-three-a",
+    "override-three-b",
+    "override-three-c"
+   ],
+   "passed_values": {
+    "climax-C-approved": 100.0
+   },
+   "failed_values": {
+    "climax-C-before-ensemble": 73.91,
+    "he-run02": 13.79,
+    "he-run03": 100.0,
+    "he-presentation-r01": 0.0,
+    "iris-original": 94.74
+   },
+   "status": "report_only"
+  },
+  {
+   "metric": "judging_carrier_motion_pct",
+   "axis": "line",
+   "direction": "floor",
+   "why": "Receiver is stiff during play (Iris, Override findings).",
+   "threshold": 4.17,
+   "official_edge": 4.17,
+   "passed_n": 1,
+   "failed_n": 5,
+   "caught": [],
+   "missed": [
+    "climax-C-before-ensemble",
+    "he-run02",
+    "he-run03",
+    "he-presentation-r01",
+    "iris-original"
+   ],
+   "also_caught_overall_fail": [
+    "override-three-a",
+    "override-three-b",
+    "override-three-c"
+   ],
+   "passed_values": {
+    "climax-C-approved": 95.65
+   },
+   "failed_values": {
+    "climax-C-before-ensemble": 95.65,
+    "he-run02": 10.71,
+    "he-run03": 92.86,
+    "he-presentation-r01": 56.0,
+    "iris-original": 100.0
+   },
+   "status": "report_only"
+  },
+  {
+   "metric": "longest_all_still_during_play_s",
+   "axis": "line",
+   "direction": "ceiling",
+   "why": "Long dead stretches during play (run02 finding).",
+   "threshold": 4.5,
+   "official_edge": 4.5,
+   "passed_n": 1,
+   "failed_n": 5,
+   "caught": [],
+   "missed": [
+    "climax-C-before-ensemble",
+    "he-run02",
+    "he-run03",
+    "he-presentation-r01",
+    "iris-original"
+   ],
+   "also_caught_overall_fail": [
+    "override-three-a",
+    "override-three-b",
+    "override-three-c"
+   ],
+   "passed_values": {
+    "climax-C-approved": 0.0
+   },
+   "failed_values": {
+    "climax-C-before-ensemble": 0.5,
+    "he-run02": 4.0,
+    "he-run03": 0.0,
+    "he-presentation-r01": 1.5,
+    "iris-original": 0.0
+   },
+   "status": "report_only"
+  },
+  {
+   "metric": "bg_two_plus_lines_moving_pct",
+   "axis": "line",
+   "direction": "floor",
+   "why": "One line dancing rather than an ensemble (C finding).",
+   "threshold": 0.0,
+   "official_edge": 0.0,
+   "passed_n": 1,
+   "failed_n": 5,
+   "caught": [],
+   "missed": [
+    "climax-C-before-ensemble",
+    "he-run02",
+    "he-run03",
+    "he-presentation-r01",
+    "iris-original"
+   ],
+   "also_caught_overall_fail": [],
+   "passed_values": {
+    "climax-C-approved": 91.3
+   },
+   "failed_values": {
+    "climax-C-before-ensemble": 0.0,
+    "he-run02": 6.9,
+    "he-run03": 100.0,
+    "he-presentation-r01": 7.69,
+    "iris-original": 100.0
+   },
+   "status": "report_only"
+  },
+  {
+   "metric": "approach_heights_per_s_median",
+   "axis": "approach",
+   "direction": "floor",
+   "why": "Slow note approach (Iris, Happy Ending speed findings).",
+   "threshold": 0.9,
+   "official_edge": 0.9,
+   "passed_n": 0,
+   "failed_n": 1,
+   "caught": [],
+   "missed": [
+    "iris-original"
+   ],
+   "also_caught_overall_fail": [],
+   "passed_values": {},
+   "failed_values": {
+    "iris-original": 0.987
+   },
+   "status": "no_passed_sample"
+  }
+ ]
+}

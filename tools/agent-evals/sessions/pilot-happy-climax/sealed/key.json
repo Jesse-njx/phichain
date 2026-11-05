@@ -1,0 +1,44 @@
+{
+ "session": "2af2f1f7dc",
+ "title": "Pilot: Happy Ending climax",
+ "key": {
+  "c5e22a7": {
+   "id": "climax-B",
+   "condition": "pilot-B",
+   "role": "candidate",
+   "video": "../../../../charts/happy-ending/happy-ending-climax-diagnostics/B/preview/B.mp4"
+  },
+  "c1a1d38": {
+   "id": "official",
+   "role": "anchor_official",
+   "video": "../../../reference-studies/happy-ending-official-in/official-IN.mp4",
+   "start": 129.315,
+   "end": 142.466
+  },
+  "ca25898": {
+   "id": "climax-A",
+   "condition": "pilot-A",
+   "role": "candidate",
+   "video": "../../../../charts/happy-ending/happy-ending-climax-diagnostics/A/preview/A.mp4"
+  },
+  "ca54a8d": {
+   "id": "climax-C-approved",
+   "condition": "pilot-C-approved",
+   "role": "candidate",
+   "video": "../../../../charts/happy-ending/happy-ending-climax-diagnostics/C/preview/C.mp4"
+  },
+  "c60a11f": {
+   "id": "climax-C-before-ensemble",
+   "condition": "pilot-C-before",
+   "role": "candidate",
+   "video": "../../../../charts/happy-ending/happy-ending-climax-diagnostics/history/C-before-ensemble/preview/C.mp4"
+  },
+  "c3d82d1": {
+   "id": "run02",
+   "role": "anchor_rejected",
+   "video": "../../../../charts/happy-ending/happy-ending-guided-run02/preview/happy-ending-guided-run02.mp4",
+   "start": 129.315,
+   "end": 142.466
+  }
+ }
+}

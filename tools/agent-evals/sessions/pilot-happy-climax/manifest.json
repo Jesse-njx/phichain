@@ -1,0 +1,12 @@
+{
+ "title": "Pilot: Happy Ending climax",
+ "note": "Form and test-retest pilot on charts already judged. No chart fields, so it writes no backtest labels.",
+ "clips": [
+  {"id": "climax-A", "condition": "pilot-A", "role": "candidate", "video": "../../../../charts/happy-ending/happy-ending-climax-diagnostics/A/preview/A.mp4"},
+  {"id": "climax-B", "condition": "pilot-B", "role": "candidate", "video": "../../../../charts/happy-ending/happy-ending-climax-diagnostics/B/preview/B.mp4"},
+  {"id": "climax-C-before-ensemble", "condition": "pilot-C-before", "role": "candidate", "video": "../../../../charts/happy-ending/happy-ending-climax-diagnostics/history/C-before-ensemble/preview/C.mp4"},
+  {"id": "climax-C-approved", "condition": "pilot-C-approved", "role": "candidate", "video": "../../../../charts/happy-ending/happy-ending-climax-diagnostics/C/preview/C.mp4"},
+  {"id": "official", "role": "anchor_official", "video": "../../../reference-studies/happy-ending-official-in/official-IN.mp4", "start": 129.315, "end": 142.466},
+  {"id": "run02", "role": "anchor_rejected", "video": "../../../../charts/happy-ending/happy-ending-guided-run02/preview/happy-ending-guided-run02.mp4", "start": 129.315, "end": 142.466}
+ ]
+}

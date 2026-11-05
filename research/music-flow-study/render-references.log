@@ -1,0 +1,21 @@
+Converted [36m/tmp/phigros-research-0.json[39m ([36mofficial[39m) -> [32m/Users/jesse/Projects/PhiChain/research/music-flow-study/references/crush-beta/chart.json[39m ([32mphichain[39m)
+2026-10-22T20:54:39.835892Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel
+RENDERED Crush BETA 1
+Converted [36m/tmp/phigros-research-1.json[39m ([36mofficial[39m) -> [32m/Users/jesse/Projects/PhiChain/research/music-flow-study/references/aphrodites-child/chart.json[39m ([32mphichain[39m)
+2026-10-22T20:55:15.383463Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel
+RENDERED Aphrodite's Child 1
+2026-10-22T20:55:26.085348Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel
+RENDERED Aphrodite's Child 2
+Converted [36m/tmp/phigros-research-2.json[39m ([36mofficial[39m) -> [32m/Users/jesse/Projects/PhiChain/research/music-flow-study/references/frozen-heart/chart.json[39m ([32mphichain[39m)
+2026-10-22T20:56:28.545982Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel
+RENDERED Frozen Heart 1
+2026-10-22T20:56:46.133562Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel
+RENDERED Frozen Heart 2
+Converted [36m/tmp/phigros-research-4.json[39m ([36mofficial[39m) -> [32m/Users/jesse/Projects/PhiChain/research/music-flow-study/references/brain-hacker/chart.json[39m ([32mphichain[39m)
+2026-10-22T20:56:58.078464Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel
+RENDERED BRAIN HACKER 1
+Converted [36m/tmp/phigros-research-6.json[39m ([36mofficial[39m) -> [32m/Users/jesse/Projects/PhiChain/research/music-flow-study/references/ranbu/chart.json[39m ([32mphichain[39m)
+2026-10-22T20:57:11.758200Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel
+RENDERED Ranbu 1
+2026-10-22T20:57:18.373722Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel
+RENDERED Ranbu 2

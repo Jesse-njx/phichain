@@ -1,0 +1,9 @@
+{
+  "answer": "The clip features a single, softly played piano note with a gentle attack and natural decay, resonating in a quiet, intimate space. There are no vocals, drums, or additional instrumentation\u2014just the pure, unaccompanied tone of the piano, which lingers briefly before fading into silence. The overall effect is minimal and contemplative, emphasizing the acoustic texture and emotional subtlety of the note.",
+  "model": "/Users/jesse/Projects/PhiChain/runtime/music-model/MOSS-Music-8B-Instruct-4bit",
+  "backend": "mlx-audio",
+  "generation_tokens": 81,
+  "output_may_be_truncated": false,
+  "prompt_tokens": 94,
+  "mlx_peak_memory_bytes": 6251384118
+}

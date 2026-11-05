@@ -1,6 +1,6 @@
 """L1: measured chart properties, comparable across native and official charts.
 
-Motion windows use the definitions of ../research/judgment-line-study/cadence.py so
+Motion windows use the definitions of research/judgment-line-study/cadence.py so
 results line up with the existing study: half-second windows, 0.05 s sampling,
 per-line variation aggregated across lines with max, never sum.
 

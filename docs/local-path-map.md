@@ -2,7 +2,7 @@
 
 The `local/` directory no longer exists. Older records may still use these paths, including absolute `/Users/jesse/Projects/PhiChain/local/...` forms.
 
-Current paths are relative to the workspace root (the folder containing `main/`). `docs/` is now `main/docs/`, and the former `phichain/` repository is `main/`.
+Current paths are relative to the workspace root (the folder containing `main/`). `docs/`, `research/` and `runtime/` are now under `main/`, and the former `phichain/` repository is `main/`.
 
 | Former path | Current path |
 | --- | --- |

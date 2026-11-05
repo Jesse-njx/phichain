@@ -13,7 +13,7 @@ from l1_detectors import analyze, quantile
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
-STUDY = ROOT / "research" / "judgment-line-study"
+STUDY = ROOT / "main" / "research" / "judgment-line-study"
 OUT = HERE.parent / "bands" / "official-in.json"
 SLICE_S = 13.0
 SLICES_PER_CHART = 6

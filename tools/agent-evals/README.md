@@ -61,7 +61,7 @@ L0 does not check whether notes match audio onsets; that needs a song's timing l
 
 ## L1
 
-Motion windows reproduce `../research/judgment-line-study/cadence.py`. A test confirms the numbers recorded
+Motion windows reproduce `research/judgment-line-study/cadence.py`. A test confirms the numbers recorded
 for Override and that one chart measures the same in native and exported form.
 
 The main hand measure is `required_move_*`: the least travel any two-finger route needs, found by

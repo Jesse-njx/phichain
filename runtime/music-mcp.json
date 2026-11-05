@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "phichain-music": {
+      "command": "/Users/jesse/Projects/PhiChain/main/runtime/music-runtime/bin/python",
+      "args": [
+        "/Users/jesse/Projects/PhiChain/main/tools/phichain-mcp/music_server.py",
+        "--endpoint",
+        "/Users/jesse/Projects/PhiChain/main/.phichain-mcp.json"
+      ]
+    }
+  }
+}

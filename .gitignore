@@ -19,8 +19,6 @@ Chart*.json
 # Workspace data that stays outside this repository
 /charts/
 /deployments/
-/research/
-/runtime/
 /artifacts/
 /apps/
 .env
@@ -29,3 +27,12 @@ Chart*.json
 
 __pycache__/
 *.pyc
+
+# Model weights, environments and caches: regenerable, and some files exceed GitHub's limit
+/runtime/music-model/
+/runtime/music-runtime/
+.venv/
+*-cache/
+
+# Third-party clone with its own Git history
+/research/overnight-study/research/downloader/

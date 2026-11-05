@@ -27,18 +27,18 @@ First create a new project through PhiChain using the analysis output's
 endpoint if another editor/project is already open. Inspect the track counts:
 
 ```sh
-python3 tools/music-analysis/to_phichain.py ../research/note-analysis/song/analysis.json --summary
+python3 tools/music-analysis/to_phichain.py research/note-analysis/song/analysis.json --summary
 ```
 
 Validate without editing (default):
 
 ```sh
-python3 tools/music-analysis/to_phichain.py ../research/note-analysis/song/analysis.json \
+python3 tools/music-analysis/to_phichain.py research/note-analysis/song/analysis.json \
   --endpoint /absolute/path/to/experiment-endpoint.json \
   --project /absolute/path/to/empty-experiment --title "Song - Analysis Layers"
 ```
 
-Add `--apply --save --receipt ../research/note-analysis/song-import.json` to validate
+Add `--apply --save --receipt research/note-analysis/song-import.json` to validate
 again, commit one shared undo entry and save. Omitting `--save` leaves the change
 in live memory, subject to ordinary editor autosave. The script checks the exact
 project path, canonical PCM SHA-256, duration and revision. It rejects populated
@@ -76,20 +76,20 @@ are real chart objects, not fake notes.
 Use Python 3.11+ and ffmpeg/ffprobe. From the repository root, a clean setup is:
 
 ```sh
-python3.11 -m venv ../runtime/note-analysis-runtime
-../runtime/note-analysis-runtime/bin/python -m pip install -r tools/music-analysis/requirements.txt
-../runtime/note-analysis-runtime/bin/python tools/music-analysis/analyze.py "/absolute/path/song.mp3" --out ../research/note-analysis/song
+python3.11 -m venv runtime/note-analysis-runtime
+runtime/note-analysis-runtime/bin/python -m pip install -r tools/music-analysis/requirements.txt
+runtime/note-analysis-runtime/bin/python tools/music-analysis/analyze.py "/absolute/path/song.mp3" --out research/note-analysis/song
 ```
 
-In this workspace, the existing `../research/music-flow-study/.venv/bin/python` has
+In this workspace, the existing `research/music-flow-study/.venv/bin/python` has
 the needed dependencies and can be used instead. Generated audio and artifacts
 belong under the workspace outside this repository; do not publish source audio.
 
 For a **known** timing grid:
 
 ```sh
-../research/music-flow-study/.venv/bin/python tools/music-analysis/analyze.py "/absolute/path/song.mp3" \
-  --out ../research/note-analysis/song-with-grid --bpm 204 --offset 0.348
+research/music-flow-study/.venv/bin/python tools/music-analysis/analyze.py "/absolute/path/song.mp3" \
+  --out research/note-analysis/song-with-grid --bpm 204 --offset 0.348
 ```
 
 All timestamps use **elapsed FFmpeg-decoded audio seconds**. The offset is the
@@ -133,8 +133,8 @@ The browser can change selection and intensity, and section labels/bounds/climax
 flags. Export **Review JSON**, then regenerate with **identical analysis options**:
 
 ```sh
-../research/music-flow-study/.venv/bin/python tools/music-analysis/analyze.py "/absolute/path/song.mp3" \
-  --out ../research/note-analysis/song-reviewed --review "/absolute/path/review.json"
+research/music-flow-study/.venv/bin/python tools/music-analysis/analyze.py "/absolute/path/song.mp3" \
+  --out research/note-analysis/song-reviewed --review "/absolute/path/review.json"
 ```
 
 If the original run used `--bpm`, `--offset`, `--threshold`, `--min-gap` or
@@ -226,7 +226,7 @@ does not run separation or download models. Leakage remains possible and
 ## Verification
 
 ```sh
-NUMBA_CACHE_DIR=/private/tmp/phichain-music-numba ../research/music-flow-study/.venv/bin/python \
+NUMBA_CACHE_DIR=/private/tmp/phichain-music-numba research/music-flow-study/.venv/bin/python \
   -m unittest discover -s tools/music-analysis -p 'test_*.py' -v
 ```
 

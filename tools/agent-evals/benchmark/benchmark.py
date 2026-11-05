@@ -24,7 +24,7 @@ from l0_validity import check  # noqa: E402
 from l1_detectors import analyze, quantile  # noqa: E402
 
 ROOT = HERE.parents[3]
-STUDY = ROOT / "research" / "judgment-line-study"
+STUDY = ROOT / "main" / "research" / "judgment-line-study"
 LENGTHS = (10.0, 13.0, 30.0)
 SLICES = 6
 EXCERPT_LIMIT = 45.0
@@ -105,7 +105,7 @@ def axis_of(metric):
 
 def constants():
     table = {}
-    for row in csv.reader((ROOT / "research/overnight-study/corpus/difficulty.tsv").open(), delimiter="\t"):
+    for row in csv.reader((ROOT / "main/research/overnight-study/corpus/difficulty.tsv").open(), delimiter="\t"):
         if len(row) >= 4:
             table[row[0]] = float(row[3])
     return table

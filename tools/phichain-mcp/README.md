@@ -40,8 +40,8 @@ The endpoint file is removed on a clean shutdown. After a crash, check that the 
 Run from the repository root in a separate process and use a unique endpoint:
 
 ```sh
-cargo run -p phichain -- --headless --mcp-endpoint "$PWD/../runtime/headless-endpoint.json"
-python3 tools/phichain-mcp/agent_server.py --endpoint "$PWD/../runtime/headless-endpoint.json"
+cargo run -p phichain -- --headless --mcp-endpoint "$PWD/runtime/headless-endpoint.json"
+python3 tools/phichain-mcp/agent_server.py --endpoint "$PWD/runtime/headless-endpoint.json"
 ```
 
 The second command is an MCP stdio entrypoint for your client, not an interactive
@@ -160,9 +160,9 @@ The base and experimental authoring servers remain independent.
 From the repository root (Apple Silicon macOS, Python 3.11+ and ffmpeg on PATH):
 
 ```sh
-python3 -m venv ../runtime/music-runtime
-../runtime/music-runtime/bin/python -m pip install -r tools/phichain-mcp/requirements-music.txt
-../runtime/music-runtime/bin/hf download rtikw/MOSS-Music-8B-Instruct-4bit --revision 6b3e335a0e6ee62ea102d8d11521a7b435012618 --local-dir ../runtime/music-model/MOSS-Music-8B-Instruct-4bit
+python3 -m venv runtime/music-runtime
+runtime/music-runtime/bin/python -m pip install -r tools/phichain-mcp/requirements-music.txt
+runtime/music-runtime/bin/hf download rtikw/MOSS-Music-8B-Instruct-4bit --revision 6b3e335a0e6ee62ea102d8d11521a7b435012618 --local-dir runtime/music-model/MOSS-Music-8B-Instruct-4bit
 ```
 
 The community 4-bit Instruct conversion retains a BF16 audio encoder; weights

@@ -18,7 +18,7 @@ import wave
 import server
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_MODEL = ROOT.parent / 'runtime/music-model/MOSS-Music-8B-Instruct-4bit'
+DEFAULT_MODEL = ROOT / 'runtime/music-model/MOSS-Music-8B-Instruct-4bit'
 TOOLS = [server.BY_NAME['get_context'], server.tool(
     'music_chat',
     'Ask the local MOSS-Music model about the open project audio. Read get_context first; '

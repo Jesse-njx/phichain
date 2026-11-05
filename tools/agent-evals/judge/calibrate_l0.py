@@ -8,7 +8,7 @@ from chartmodel import load
 from l0_validity import check
 
 HERE = Path(__file__).resolve().parent
-STUDY = HERE.parents[3] / "research" / "judgment-line-study"
+STUDY = HERE.parents[2] / "research" / "judgment-line-study"
 OUT = HERE.parent / "bands" / "l0-corpus.json"
 
 

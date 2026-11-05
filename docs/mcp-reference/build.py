@@ -75,7 +75,7 @@ Restart the MCP client to refresh the tool inventory. The endpoint is reread on 
 <div class="notice">Examples are documentation only. Replace guards and numeric IDs
 with values from the live project. This page makes no editor calls.</div>
 <h2 id="headless">Headless operation</h2>
-<pre><code>cargo run -p phichain -- --headless --mcp-endpoint "$PWD/../runtime/headless-endpoint.json"</code></pre>
+<pre><code>cargo run -p phichain -- --headless --mcp-endpoint "$PWD/runtime/headless-endpoint.json"</code></pre>
 <p>Connect either chart adapter to that unique endpoint. No window, GPU or audio output
 is initialized; native chart entities, editing commands, undo and save are shared with
 the GUI implementation. The current executable still links GUI dependencies.</p>
@@ -107,7 +107,7 @@ audio comparison and source-bound JSON review corrections. Open reports yourself
 <p>This is an acoustic heuristic draft, not verified transcription or a playable
 chart. It does not edit the live project or add MCP tools. No automatic model
 downloads or remote inference. Optional known BPM annotates beats without snapping.</p>
-<pre><code>../research/music-flow-study/.venv/bin/python tools/music-analysis/analyze.py /absolute/path/song.mp3 --out ../research/note-analysis/song</code></pre>
+<pre><code>research/music-flow-study/.venv/bin/python tools/music-analysis/analyze.py /absolute/path/song.mp3 --out research/note-analysis/song</code></pre>
 <p>Requires ffmpeg/ffprobe and the dependencies in
 <code>tools/music-analysis/requirements.txt</code>. See
 <a href="../../tools/music-analysis/README.md">the CLI documentation</a> for setup,
@@ -183,8 +183,8 @@ parts.append('<h2 id="music">Local music MCP</h2><p>Separate read-only entrypoin
     '<code>tools/phichain-mcp/music_server.py</code>, exposing get_context and music_chat. '
     'Uses local MOSS-Music Instruct through MLX; source audio comes from the guarded open editor. '
     'No chart edits, playback changes, cloud inference, or automatic downloads.</p>'
-    '<p>Install the pinned requirements-music.txt into ../runtime/music-runtime and download '
-    'rtikw/MOSS-Music-8B-Instruct-4bit into ../runtime/music-model/MOSS-Music-8B-Instruct-4bit. '
+    '<p>Install the pinned requirements-music.txt into runtime/music-runtime and download '
+    'rtikw/MOSS-Music-8B-Instruct-4bit into runtime/music-model/MOSS-Music-8B-Instruct-4bit. '
     'Launch with that Python and --endpoint /absolute/path/to/.phichain-mcp.json. '
     'Optional --model selects a local directory, --python selects the worker interpreter, '
     'and --timeout sets 10–1800 seconds (default 300). Requires ffmpeg and Apple Silicon. '

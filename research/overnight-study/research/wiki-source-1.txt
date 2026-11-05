@@ -1,0 +1,21 @@
+アップデート履歴 - phigros (https://wikiwiki.jp/phigros/%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E5%B1%A5%E6%AD%B4)
+citeturn14view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://wikiwiki.jp/phigros/アップデート履歴","lineno":null}); Total lines: 18
+L0: #freeze
+L1:     -ストアで確認できるものに補足を加えてます。
+L2:     -上が最新のものになります。
+L3:     RIGHT:&edit(アップデート履歴/3){v3.0.0~の編集はこちらから};
+L4: 
+L5:     //----
+L6:     //#fold(目次){{
+L7:     //#contents
+L8:     //}}
+L9:     //---
+L10: 
+L11:     *今後のアプデ予定 [#next]
+L12:     -「Phigros」×「Rizline」 シングル精選集追加
+L13: 
+L14:     *過去のアップデート一覧 [#previous]
+L15:     #include(アップデート履歴/3,notitle)
+L16:     #include(アップデート履歴/2,notitle)
+L17:     #include(アップデート履歴/1,notitle)
+

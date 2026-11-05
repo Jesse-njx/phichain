@@ -1,0 +1,21 @@
+# Retribution — Four voices, one cycle
+
+Full-song fanmade arrangement of **Retribution ~ Cycle of Redemption ~**, Ardolf vs. Daily天利. **AT17 is a provisional working label**, not an official chart or a player-calibrated rating.
+
+The reviewed release is `release-final/`. Open that directory as a PhiChain project: it contains native `chart.json`, `meta.json`, copied `music.ogg` and `illustration.png`. `chart.phigros.json` is the official-v3-format custom-player export. Choose it together with the audio/background in a player supporting that format; custom-player input has not been tested. Stock Phigros has no custom-chart import interface.
+
+Portable ZIPs are `Retribution-fanmade-AT-native.zip` and `Retribution-fanmade-AT-official-v3.zip`. Each contains copied audio, illustration, metadata and a checksum manifest. The native bundle also preserves the annotated authoring checkpoint.
+
+The complete preview is `release-v2/fullsong.mp4`. Its chart and official-v3 export are byte-identical to `release-final/`, verified in `release-final/reviewed-artifact-parity.json`. Risk previews and labelled sheets in the same directory cover the chorus/reset, sparse melody, carrier approach, ending and a 7:3 wide viewport. The source illustration is blurred/dimmed by the native renderer; gameplay cyan/yellow contrasts remained readable in inspected samples.
+
+The arrangement has 1,161 objects: 689 taps, 291 drags, 176 holds and five flicks. One main playing line supports the regular arrangement. Five hidden single-note carriers shape isolated approaches and settle 0.2 seconds before impact. Four empty guides form a recurring fan. The main line lifts with that frame during a true contact rest and returns 1.6 seconds before the pickup. Terminal held bars stay fixed through release; the fan opens toward that release and closes in the audio tail.
+
+`authored-phrase-plan.md` records the 26-section musical design. `recipe/phrase_recipe.json` selects reusable motifs from cached timing/audio evidence; `recipe/presentation_recipe.json` specifies lateral contours, settled carriers, decorative folds and the main-anchor transitions. The generic compiler is also available through the standalone server's public `authoring_plan_phrase` tool. It assigns preferred fingers, reserves hold/drag occupancy and recovery, and records per-note rationale. All creation, planning, checking, application and export occurred through public MCP, with complete receipts under `receipts/`.
+
+Replay uses the standalone package at `/Users/jesse/Projects/phigros-chart-mcp`; run the scripts with that package's `.venv/bin/python`, or another interpreter with the package installed. Run `recipe/replay_baseline.py NEW_BASELINE_DIRECTORY`, then `recipe/apply_presentation.py NEW_OUTPUT_DIRECTORY NEW_BASELINE_DIRECTORY`. The official MCP SDK transport launches the installed server module; no editor integration is required. Export tools refuse to overwrite existing artifacts. `recipe/render_reviews.py DIRECTORY` records local renderer commands, wall times and diagnostics. `recipe/audit_release.py DIRECTORY` inspects the exported checkpoint without modifying the chart.
+
+The reviewed baseline is `baseline-v3/`. Earlier baseline/effect candidates remain preserved with matching receipts; they are not the release. No notes were created while the study/plan gate was closed. After explicit release, the rhythm baseline was exported and reviewed before presentation effects.
+
+Structural checks found no ownership conflicts, a peak of four assigned contacts, ten four-contact witnesses, and a fastest same-finger fresh-strike gap of 133.3 ms. Hold/drag release and world-position checks, native rendering and official-v3 converter roundtrip passed. These do **not** establish human comfort, device input compatibility, official quality or the rating. Music decisions use official timing plus digital attack/sustain/register evidence; instrument identity and new pulse candidates remain explicitly qualified. There has been no human playtest.
+
+The song is in the fetched game catalog as EZ/HD/IN with no normal AT. Its historic 2024 SP is distinct. Audio and illustration provenance are retained in the corpus manifests; the bundle is for local study and contains no publishing workflow.

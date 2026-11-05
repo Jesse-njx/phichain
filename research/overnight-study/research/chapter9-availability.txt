@@ -1,0 +1,290 @@
+Chapter 9 隠し曲 4 - phigros (https://wikiwiki.jp/phigros/Chapter%209%20%E9%9A%A0%E3%81%97%E6%9B%B2%204)
+citeturn25view0 [wordlim: 200] Crawled: 2 days ago; Content type: text/html; Source: open({"ref_id":"https://wikiwiki.jp/phigros/Chapter%209%20隠し曲%204","lineno":null}); Total lines: 132
+L0: TITLE: SECRET song 4
+L1:     ----
+L2:     #br
+L3:     CENTER:''&size(20){&color(White,Black){&#119826;&#119816;&#119814;：&#119810;&#119815;&#119822;&#119808;&#119826;};};''
+L4:     #br
+L5:     ----
+L6:     *解禁方法 [#Unlock]
+L7:     #ntbr(ここをタップすると表示されます※ネタバレ注意){{{{
+L8:     &color(Green){''[EZ]''};、&color(Dodgerblue){''[HD]''};、&color(Red){''[IN]''};
+L9:     1.「[[About The Universe]]」「[[Implexrough]]」「[[Evanescent]]」を解禁する。
+L10:     2.「[[Implexrough]]」から伸びた光の先のコレクションを読んでから、その先の砂嵐のようなものがかかった黒いジャケットが現れるので、そこをタップ。すると画面が明転し‥‥？
+L11:     #fold(この先は更にネタバレ演出があるため2重に折りたたみを設置。){{{
+L12:     その先には課題モードで曲を選ぶ画面のに似た画面になり、曲はすでに決められていて、変更はできない。
+L13:     よく見るとLIFEと書かれ、その横にはPerfect以外で-1、LIFE0で強制終了と書かれている。
+L14:     実はこのチャレンジ、課題モード特有の''Perfect判定が普段より狭い状態''でプレイをしなければいけない。
+L15:     このLIFEは強制終了された回数に応じ緩和される。
+L16:     ちなみに緩和後も緩和前のLIFE数で挑戦できる。緩和条件は最緩和された状態で失敗した時のみ。
+L17:     難易度は&color(Green){''EZ''};、&color(Dodgerblue){''HD''};、&color(Red){''IN''};から選べる。
+L18:     #fold(緩和段階){{
+L19:     初期：10(1にもできる)
+L20:     2回目：50
+L21:     3回目：100(ここからはBad,missのみでLIFE減少)
+L22:     4回目：200
+L23:     }}
+L24:     この曲では「[[Implexrough]]」→「[[About The Universe]]」→本楽曲という順で演奏する。勿論本楽曲もLIFE付きで演奏する。
+L25:     LIFEを残して本楽曲を完走すれば解禁。しかし課題モード扱いのためスコアは残らない。
+L26: 
+L27:     ちなみに一度解禁演出を見ても失敗した場合、本楽曲をプレイするときに毎回解禁演出を見る。
+L28:     }}}
+L29:     &color(Purple){''[AT]''};
+L30:     &color(Red){''IN''};譜面で&color(Fuchsia){S};ランク以上を取得する。
+L31:     }}}}
+L32:     #accordion(楽曲情報等※ネタバレ注意(クリックして展開),*,close){{{
+L33:     TITLE: SECRET song 4
+L34:     |CENTER:150|CENTER:80|CENTER:90|CENTER:90|CENTER:90|CENTER:90|CENTER:90|CENTER:90|c
+L35:     |>|>|>|>|>|>|>|&attachref(./Entrance_to_the_Chaos.jpg,nolink,1600x900);|
+L36:     |~Composer|>|>|>|>|>|>|[[打打だいず>楽曲一覧（アーティスト順）#DDDice]] vs. [[siromaru>楽曲一覧（アーティスト順）#siromaru]]|
+L37:     |~Charter|~EZ|>|>|>|>|>|[[Approaching the Gate>譜面制作者#Unknown]]|
+L38:     |~|~HD|>|>|>|>|>|[[Crossing the Threshold>譜面制作者#Unknown]]|
+L39:     |~|~IN|>|>|>|>|>|[[Descending the Abyss>譜面制作者#Likey]]|
+L40:     |~|~AT|>|>|>|>|>|[[Embracing the Madness>譜面制作者#Unknown]]|
+L41:     |~Cover Artist|>|>|>|>|>|>|[[Rallxkurara>Artwork製作者#Rallxkurara]]|
+L42:     |~Difficulty|~EZ|&color(green){''8''};|~CC| &color(green,yellow){''8.8''};|~Notes|>|495|
+L43:     |~|~HD|&color(dodgerblue){''13''};|~| &color(dodgerblue,yellow){''13.7''};|~|>|800|
+L44:     |~|~IN|&color(red){''16''};|~|&color(red,yellow){''16.8''};|~|>|&color(red){''1334''};|
+L45:     |~|~AT|&color(Purple){''17''};|~|&color(Purple,yellow){''17.6''};|~|>|&color(purple){1249};|
+L46:     |~Length|>|>|>|>|>|>|2:22|
+L47:     |~BPM|>|>|>|>|>|>|&color(red){207};|
+L48:     |~Genre|>|>|>|>|>|>|Symphonic Schranz|
+L49:     |~Song Chapter|>|>|>|[[Chapter 9:穹窿の孤舟>楽曲一覧#M_9]]|~Song Number|>|4|
+L50: 
+L51:     -Ver.4.0.0追加楽曲。
+L52:     -書き下ろし楽曲。告知での「SIG：CHAOS」にあたる。
+L53:     -「Entrance to the Chaos」は「混沌への入口」を意味する。
+L54:     -ジャケットのキャラクターはPhigrosの主人公の一人であるGino。
+L55:     //BMS収録楽曲や、ジャンル名が明記している楽曲はGenre欄を追加お願いします。
+L56: 
+L57:     //*トリビア [#trivia]
+L58: 
+L59:     //*歌詞 [#lyrics]
+L60:     //#fold(展開){{
+L61:     //--
+L62:     //}}
+L63: 
+L64: 
+L65:     *攻略 [#strategy]
+L66:     #fold(レベル・定数変更履歴){{
+L67:     |バージョン|EZ|HD|IN|AT|
+L68:     |4.0.0|8.8|13.7|16.8|17.6|
+L69:     }}
+L70:     //主観が入りすぎていない文章になっているかどうか更新前に確認をお願いします。
+L71: 
+L72:     ''[全難易度共通]''
+L73:     -''最終章の前座（？）だけあって全難易度最高定数を誇る。''
+L74:     -イントロ後、それぞれの難易度で[[過去>Spasmodic]][[の>Igallta]][[ボス>Rrhar'il]][[曲>DESTRUCTION 3,2,1]][[たち>Distorted Fate]]の再現がある。
+L75: 
+L76:     &color(Green){''[EZ]''};
+L77:     -&color(Red){''ラストに爆速の2点フリック''};があるため、最後まで気を抜かないように。
+L78: 
+L79:     &color(Dodgerblue){''[HD]''};
+L80:     &color(Red){''現在HD最難関''};
+L81:     //--
+L82: 
+L83:     &color(Red){''[IN]''};
+L84:     -譜面制作者はLikey氏。
+L85:     -その定数に相応しい難易度を誇り、物量はもちろん、交差配置やギミックも多くまさにPhigros力が試される譜面。
+L86:     -&color(Red){''ラストには四点押しが存在する。''};またこの四点押しの後スコア約20万分のドラッグが中心で判定される((ホールド4ノーツ＋ドラッグ260ノーツ))。
+L87: 
+L88:     &color(Purple){''[AT]''};
+L89:     -''[[相方>Chapter 9 隠し曲 5]]の印象が大きいために埋もれがちだが、譜面定数はあの[[Rrhar'il]]と同じ&color(Purple){AT 17.6};。''
+L90:     -''ただですら難しいINをさらに強化した、まさに混沌を体現したような譜面が降ってくる。''
+L91:     -''鏡面地帯の上下２本×２ホールド＋中心二重タップフリックは押した二本の指のうち片方を離すことができる。''
+L92:     --ラストの24分階段の段数の流れは「5→6→5→4→3→2(左の同時ホールドを併せれば4)」。
+L93:     -なお余談だがIN譜面の制作者であるLikey氏曰く''百九十八氏がAT譜面を手伝ってくれた((下記のLikey氏のIN譜面Phi動画の概要欄より))らしい。''
+L94:     //-&color(Gray){''[Legacy]''};
+L95:     //
+L96: 
+L97:     //-&color(Aqua,Black){''[SP]''};
+L98:     //--
+L99: 
+L100: 
+L101:     *プレイ動画 [#playvideo]
+L102:     -難易度：''&color(Green){EZ};'' [1,000,000Pts,φ](理論値)
+L103:     Player－ぬるゆ。
+L104:     #youtube(yE45apqQ3bM)
+L105: 
+L106:     -難易度：''&color(Dodgerblue){HD};'' [1,000,000Pts,φ](理論値)
+L107:     Player－ぬるゆ。
+L108:     #youtube(7HaKFafVSeM)
+L109: 
+L110:     -難易度：''&color(red){IN};'' [1,000,000Pts,φ](理論値)
+L111:     Player－Retried_Gamer666
+L112:     #youtube(DAvggiFW4xs)
+L113: 
+L114:     -難易度：''&color(red){IN};'' [1,000,000Pts,φ](理論値)
+L115:     Player－Likey(譜面制作者)
+L116:     https://b23.tv/YzhEBrk
+L117: 
+L118:     -難易度：''&color(Purple){AT};'' [1,000,000Pts,φ](理論値)
+L119:     Player－エナメル巻きで食べるサラダ
+L120:     #youtube(5XYcmYQQ2xA)
+L121: 
+L122: 
+L123:     *公式音源 [#soundsource]
+L124:     -Youtube
+L125:     #youtube(OU-ANMiV-ts)
+L126: 
+L127:     //*解禁条件 [#conditions]
+L128: 
+L129:     ***コメント [#comment]
+L130:     #pcomment(,10,noname,above,below,reply)
+L131:     }}}
+--------------------------------------------------------------------------------
+Chapter 9 隠し曲 5 - phigros (https://wikiwiki.jp/phigros/Chapter%209%20%E9%9A%A0%E3%81%97%E6%9B%B2%205)
+citeturn25view1 [wordlim: 200] Crawled: yesterday; Content type: text/html; Source: open({"ref_id":"https://wikiwiki.jp/phigros/Chapter%209%20隠し曲%205","lineno":null}); Total lines: 152
+L0: TITLE: SECRET song 5
+L1:     ----
+L2:     #br
+L3:     CENTER:''&size(20){&color(White,Black){&#119826;&#119816;&#119814;：&#119820;&#119816;&#119825;&#119808;&#119814;&#119812;};};''
+L4:     CENTER:''映し返された虚影を追え。''
+L5:     #br
+L6:     ----
+L7:     *ヒント [#Hint]
+L8:     #ntbr(ここをタップすると表示されます※ネタバレ注意){{
+L9:     この曲の線対称の位置にある曲はどのように解禁した…？
+L10:     あるゲームモードの仕様に似ていたような…？
+L11:     また、どんな順番で曲は選ばれていた…？
+L12:     }}
+L13:     *解禁方法 [#Unlock]
+L14:     #ntbr(ここをタップすると表示されます※ネタバレ注意){{{{
+L15:     &color(Green){''[EZ]''};、&color(Dodgerblue){''[HD]''};、&color(Red){''[IN]''};((IN譜面はこれまで通りIN譜面で解禁作業を行う必要がある模様))
+L16:     1.[[ある楽曲>Chapter 9 隠し曲 4]]まで解禁する。
+L17:     2.解禁されているコレクション全てに目を通す。
+L18:     3.「[[Evanescent]]」から伸びた光の先のコレクションを読んでから、一度画面を戻り課題モードを開く。
+L19:     #fold(この先は更にネタバレ演出があるため2重にフォルダを設置。){{{
+L20:     課題モードに入ると選曲画面で「[[Evanescent]]」「[[About The Universe]]」の2曲で曲名と作曲者名が左右反転されている。
+L21:     「[[Evanescent]]」→「[[About The Universe]]」の順番で選曲すると演出が入り、その2曲で課題モード開始ボタンが押せるようになる。さらにさっきも見たようなLIFE表記がある。
+L22:     なお、このチャレンジは課題モード特有の''Perfect判定が通常より狭い状態''でプレイを強いられる。
+L23:     また、譜面はミラー状態になっている。
+L24: 
+L25:     //その横にはPerfect以外で-1、LIFE0で強制終了と書かれている。&color(Grey){パーフェクトチャレンジ};
+L26:     //↑これは私の環境では初回プレイが100LIFEからだったので、環境依存・直前のスコア依存で必ずしも強制APから始まらない模様
+L27: 
+L28:     このLIFEは強制終了された回数に応じ緩和される。ちなみに緩和後も緩和前のLIFE数で挑戦できる。
+L29: 
+L30:     方法（イメージ図）
+L31:     |BGCOLOR(red):CENTER:&size(15){XXX};&br;&size(9){LIFE};|　|
+L32:     |~|BGCOLOR(red):～～～～の判定で-1///Lifeが尽きると強制終了|
+L33:     |~|　|
+L34:     という部分があると思うが、左のライフの数字をタップすることで難易度を変更できる。上の図は普通の四角形だが、実際のゲームでは六角形になっていて、そこが難易度変更ボタンである。
+L35: 
+L36:     緩和条件は最緩和された状態で失敗した時のみ。
+L37:     難易度は&color(Green){''EZ''};、&color(Dodgerblue){''HD''};、&color(Red){''IN''};の中から選べる。
+L38:     #fold(緩和段階){{
+L39:     初期：50(10、1にもできる)
+L40:     2回目：100(ここからはBad,missのみでLIFE減少)
+L41:     3回目：200
+L42:     //4曲目を完走した段階によって初期LIFEの違いがあるようです。
+L43:     //僕の場合は4曲目を100で完走し5曲目は50からでした。
+L44:     }}
+L45:     この曲では「[[Evanescent]]」→「[[About The Universe]]」→本楽曲という順で演奏する。勿論本楽曲もLIFE付きで演奏する。
+L46:     LIFEを残して本楽曲を完走すれば解禁。しかし課題モード扱いのためスコアは残らない。
+L47: 
+L48:     ちなみに一度解禁演出を見ても失敗した場合、本楽曲をプレイするときに毎回解禁演出を見る。
+L49:     }}}
+L50:     &color(Purple){''[AT]''};
+L51:     &color(Red){''IN''};譜面で&color(Fuchsia){S};ランク以上を取得する。
+L52:     }}}}
+L53:     #accordion(楽曲情報等※ネタバレ注意(クリックして展開),*,close){{{
+L54:     |CENTER:150|CENTER:80|CENTER:90|CENTER:90|CENTER:90|CENTER:90|CENTER:90|CENTER:90|c
+L55:     |>|>|>|>|>|>|>|&attachref(./Exoplanetary_Mirage.jpg,nolink,1600x900);|
+L56:     |~Composer|>|>|>|>|>|>|[[かめりあ>楽曲一覧（アーティスト順）#Camellia]]|
+L57:     |~Charter|~EZ|>|>|>|>|>|[[Orbital Velocity: 7.900 km/s>譜面制作者#Unknown]]|
+L58:     |~|~HD|>|>|>|>|>|[[Orbital Velocity: 11.200 km/s>譜面制作者#Unknown]]|
+L59:     |~|~IN|>|>|>|>|>|[[Orbital Velocity: 16.700 km/s>譜面制作者#SimonAxis]]|
+L60:     |~|~AT|>|>|>|>|>|Orbital Velocity: ■■■ km/s(([[XMT小咩兔>譜面制作者#XMT]] & [[NerSAN>譜面制作者#NerSAN]]))|
+L61:     |~Cover Artist|>|>|>|>|>|>|[[神居冰&#32472;>Artwork製作者#kamiki]] feat. [[祈&#33714;>Artwork製作者#Panthullu]]|
+L62:     |~Difficulty|~EZ|&color(green){''8''};|~CC| &color(green){''8.6~''};|~Notes|>|670|
+L63:     |~|~HD|&color(dodgerblue){''13''};|~| &color(dodgerblue){''13.4''};|~|>|941|
+L64:     |~|~IN|&color(red,yellow){''16''};|~|&color(red,yellow){''16.9''};|~|>|&color(red,yellow){''2055''};|
+L65:     |~|~AT|&color(Purple,yellow){''17''};|~|&color(Purple,yellow){''17.9''};|~|>|&color(purple,yellow){''2077''};|
+L66:     |~Length|>|>|>|>|>|>|2:55|
+L67:     |~BPM|>|>|>|>|>|>|192|
+L68:     |~Genre|>|>|>|>|>|>|Hard Core / Break Core|
+L69:     |~Song Chapter|>|>|>|[[Chapter 9:穹窿の孤舟>楽曲一覧#M_9]]|~Song Number|>|5|
+L70: 
+L71:     -Ver.4.0.0追加楽曲。
+L72:     -書き下ろし楽曲。本楽曲は「SIG：MIRAGE」にあたる。
+L73:     -「Exoplanetary Mirage」は「太陽系外惑星の蜃気楼」を意味する。
+L74:     -ジャケットのキャラクターはPhigrosの主人公の一人である鳩（Geopelia）。
+L75:     //BMS収録楽曲や、ジャンル名が明記している楽曲はGenre欄を追加お願いします。
+L76: 
+L77:     *トリビア [#trivia]
+L78:     -譜面制作者名義の「Orbital Velocity」は軌道速度を意味する。
+L79:     -7.9km/sは第一宇宙速度、11.2km/sは第二宇宙速度、16.7km/sは第三宇宙速度である。
+L80:     --宇宙速度とはロケットや人工衛星などの人工的に作られた天体が地球もしくは太陽系の重力を振り切るために必要な地表もしくは宇宙空間での秒間速度のことを言う。
+L81: 
+L82:     //*歌詞 [#lyrics]
+L83:     //#fold(展開){{
+L84:     //--
+L85:     //}}
+L86: 
+L87: 
+L88:     *攻略 [#strategy]
+L89:     #fold(レベル・定数変更履歴){{
+L90:     |バージョン|EZ|HD|IN|AT|
+L91:     |*.*.*|||||
+L92:     }}
+L93:     //主観が入りすぎていない文章になっているかどうか更新前に確認をお願いします。
+L94: 
+L95:     ''[全難易度共通]''
+L96:     -''最終章の前座（？）だけあって全難易度最高定数を誇る。''
+L97: 
+L98:     &color(Green){''[EZ]''};
+L99:     -ギミックが多いため、リズムか見切る必要がある。
+L100: 
+L101:     &color(Dodgerblue){''[HD]''};
+L102:     -中盤にリズム難に近い配置が降ってくる。また、サビでドラッグが暴れるため、しっかりなぞることを意識しよう。
+L103: 
+L104:     &color(Red){''[IN]''};
+L105:     -&color(red){''IN譜面最難関''};。[[前座>Chapter 9 隠し曲 4]]がただでさえ難易度の高い譜面であるにも関わらず、譜面定数はそれをも上回る&color(red,yellow){''16.9''};である。
+L106:     難易度に気を取られがちだが本譜面は&color(Red){''IN譜面2例目の2000コンボ超え。''};縦連や爆速ドラッグなど物量は一つ前の曲より控えめ‥‥？だが譜面展開も目まぐるしく変わりギミックや指を越しする配置になっている。
+L107:     -中盤にドラッグだらけでコンボを稼げる箇所があるため、そこでどれだけMissを出さないかがスコアを伸ばす鍵になりそう。
+L108:     ちなみに&color(Red){''4点押し配置''};がある。
+L109: 
+L110:     &color(Purple){''[AT]''};
+L111:     -&color(red){''Ver4.0.0にて約5年ぶりに更新されたPhigros新最難関譜面。''};''遂に[[Rrhar'il]]を越えた&color(red){譜面定数};&color(purple,yellow){17.9};。''
+L112:     -譜面制作者は[[XMT小咩兔氏とNerSAN氏の合作>https://www.bilibili.com/opus/1251999390781931525?spm_id_from=333.1365.0.0]]。
+L113:     -この時点でもメインストーリーのボスとしては十分すぎる難易度なのだが、''最終章の前半''というのもあってか、この難易度ですら&color(red){''前座''};と言われている。
+L114:     //-&color(Gray){''[Legacy]''};
+L115:     //
+L116: 
+L117:     //-&color(Aqua,Black){''[SP]''};
+L118:     //--
+L119: 
+L120: 
+L121:     *プレイ動画 [#playvideo]
+L122:     -難易度：''&color(Green){EZ};'' [1,000,000Pts,φ](理論値)
+L123:     Player－ぬるゆ。
+L124:     #youtube(wpIfU5N97fU)
+L125: 
+L126:     -難易度：''&color(Dodgerblue){HD};'' [1,000,000Pts,φ](理論値)
+L127:     Player－ぬるゆ。
+L128:     #youtube(RfSykFYURmA)
+L129: 
+L130:     -難易度：''&color(red){IN};'' [1,000,000Pts,φ](理論値)
+L131:     Player－baka_otogame
+L132:     #youtube(nEQmLHMBWj8)
+L133: 
+L134:     -難易度：''&color(red){IN};'' [1,000,000Pts,φ](理論値)
+L135:     Player－Simon_Axis
+L136:     https://www.bilibili.com/video/BV1vghy6AECR
+L137: 
+L138:     -難易度：''&color(Purple){AT};'' [1,000,000Pts,φ](理論値)
+L139:     Player－baka_otogame
+L140:     #youtube(UrAJIOmayk4)
+L141: 
+L142: 
+L143:     *公式音源 [#soundsource]
+L144:     -YouTube公式音源
+L145:     #youtube(9LXJnT9LQSU)
+L146: 
+L147:     //*解禁条件 [#conditions]
+L148: 
+L149:     ***コメント [#comment]
+L150:     #pcomment(,10,noname,above,below,reply)
+L151:     }}}
+

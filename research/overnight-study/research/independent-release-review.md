@@ -1,0 +1,13 @@
+# Independent release-v2 review
+
+Reviewed release-v2 model digest `cbb268aca8fe847729c0890f538e156bf3203f794d0f7356da4f79c6e66323e5`, official/native exports and six actual rendered contact sheets. This supersedes the effects-v1 visual review while preserving its findings about explicit lateral variation.
+
+The1161 scoring objects retain baseline-v3 timing, kind, duration, side, speed and finger hypotheses. Native/official normalized tuples match the sidecar. Event values independently agree at every authored boundary and interval midpoint, maximum normalized error5.6e-17. One playing anchor, five single-Tap carriers and four empty guides remain distinct. All five carriers settle200ms before judgment at the visible main line; hidden carrier opacity does not hide the rendered notes. No sampled anchor misses, contradictory assigned ownership, opposite-side hand labels or exactly coincident separately assigned targets were found.
+
+1092 target x positions deliberately differ from the baseline, maximum79.2 native units. This varies phrase width/placement while keeping the four voice zones; exact target preservation is not claimed. Independent occupation accounting remains peak4. The shortest continuous-drag release-to-fresh window is100ms with essentially zero target travel. A human comfort/AT rating verdict is still unavailable.
+
+The main line lifts105.0667–106.6667s and returns108.8–110.9333s during the genuine note-free reset. It then lifts172.4–173.7912s after the last held tail172.2667s. None of these movement intervals overlaps an active hold. The reset sheet shows synchronized empty fans moving with the anchor and a stable pickup; the ending sheet shows a distinct fan opening while outer holds remain fixed, then line lift/fade after release. Dense47–66.7s samples and the letterboxed wide-aspect preview preserve distinguishable columns, held punctuation and connected figures. Sparse82–89.7s samples preserve a restrained two-finger contour. The23-sample full-song sheet also retains the phrase/rest/reprise contrast. Static contact sheets are actual rendering evidence, not complete continuous gameplay watching or human playtesting.
+
+The final public presentation replay uses bounded carrier-ID reads, superseding the earlier full-song read cost. `independent-compact-workflow-metrics.json` records compact JSON request/response sizes, observed tool and renderer times. These are transport/workflow measurements, not model token bills. No GPT-6 Luna evaluation occurred.
+
+Machine-readable evidence: `independent-release-v2-geometry.json`, `independent-original-release-v2.json`. Detailed baseline musical timing/provenance remains in `independent-original-review.md`.

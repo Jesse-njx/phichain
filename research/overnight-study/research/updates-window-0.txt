@@ -1,0 +1,415 @@
+アップデート履歴/3 - phigros (https://wikiwiki.jp/phigros/%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E5%B1%A5%E6%AD%B4/3)
+citeturn20view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"turn16view0","lineno":95}); Total lines: 1005
+L0: //#lazy_fold(v3.0.0 ~ ){{{
+L1:     //最新情報が初期値でcloseだと使いづらいため、openが使えるプラグインにします
+L2: 
+L3:     #fold(v3.0.0 ~ ,open){{{
+L4: 
+L5:     //Template
+L6:     //*ｰ.ｰ.ｰ [#vｰ-ｰ-ｰ]
+L7:     //#accordion(告知画像,***,close){{
+L8:     //&attachref(./ ,nolink,1600x900); (JP)
+L9:     //&attachref(./ ,nolink,1600x900);
+L10:     //#Youtube(
+L11:     //}}
+L12:     //西暦ｰ年ｰ月ｰ日
+L13:     //-「Phigros」×「？」コラボ
+L14:     //-「[[精選集>楽曲一覧#]]」
+L15:     //--「[[曲名]]」 by Composer
+L16: 
+L17:     //イベント専用の内容を「アップデート」として扱うのは不適と考えられます
+L18: 
+L19:     //*イベント情報 [#j243d512]
+L20:     //-「Phigros」×「南京&#21382;代云&#38182;博物&#39302;」
+L21:     //#accordion(云錦精選集,***,close){{
+L22:     //[[瓷&#23681;]]
+L23:     //[[Demiurge]]
+L24:     //[[Ποσειδ&#974;ν>Ποσειδωv]]
+L25:     //[[Khalid]]
+L26:     //[[&#30415;茗]]
+L27:     //[[Avataar ~Reincarnation of Kalpa~]]
+L28:     //[[Winter ↑cube↓]]
+L29:     //[[神話]]
+L30:     //[[cryout]]
+L31:     //[[心之所向]]
+L32:     //[[Demonkin]]
+L33:     //[[The Chariot ~REVIIVAL~]]
+L34:     //[[君往何&#22788; (Quo Vadis)]]
+L35:     //[[Re_Nascence (Psystyle Ver.)]]
+L36:     //[[Cipher:/2&//<l0>Cipher]]
+L37:     //[[Spotlight]]
+L38:     //[[重生]]
+L39:     //[[A journey to the moonlight]]
+L40:     //[[Luminescence]]
+L41:     //[[Shadow]]
+L42:     //[[inferior]]
+L43:     //[[黄金之城 (GOLD TOWN)]]
+L44:     //[[Flutter Echo]]
+L45:     //[[Quantum Hyperspace]]
+L46:     //[[Trojan]]
+L47:     //[[幻影鬼魅 (PLEASE)]]
+L48:     //[[青芽]]
+L49:     //[[Temporal Shifting]]
+L50:     //[[After Dawn]]
+L51:     //[[暗夜&#33487;醒 (REANIMATE)]]
+L52:     //[[Feast&#36828;&#19996;之宴]]
+L53:     //[[青丘]]
+L54:     //[[双重&#38388;&#35853; (Double Agent)]]
+L55:     //[[AbsoluTe disoRdeR]]
+L56:     //[[Retribution]]
+L57:     //[[Ad astra per aspera]]
+L58:     //[[Chronos Collapse - La Campanella]]
+L59:     //[[DESTRUCTION 3,2,1]]
+L60:     //}}
+L61: 
+L62:     *4.0.0 [#v4-0-0]
+L63:     #accordion(告知画像,***,close){{
+L64:     #youtube(oPNBV5lA3hw)
+L65:     &attachref(./In_Falsus_Collab.WEBP,nolink,1600x900);
+L66:     &attachref(./In_Falsus_Collab_English.WEBP,nolink,1600x900);
+L67:     }}
+L68:     2026年9月25日
+L69:     -『メインストーリー、[[第九章「穹窿の孤舟」>楽曲一覧#M_9]]』(読み方:きゅうりゅうのこしゅう、英語表記名:Solivault)を追加
+L70:     -「Phigros」×「In Falsus」コラボ
+L71:     --「[[シングル精選集>楽曲一覧#Single]]」に1曲追加
+L72:     ---「[[Cryogenic]]」by Camellia ft. Petra Gurin
+L73:     -一部譜面の変更
+L74:     -シングル精選集の楽曲解放に必要なゲーム内通貨の量が50%OFF(期間限定)
+L75: 
+L76:     *3.20.0 [#v3-20-0]
+L77:     #accordion(告知画像,***,close){{
+L78:     &attachref(./Paradigm_Reboot_vol3.png,nolink,1600x900);
+L79:     &attachref(./Liminality_vol2.png,nolink,1600x900);
+L80:     &attachref(./Archidoxen_AT_Addition.png,nolink,1600x900);
+L81:     &attachref(./Paradigm_Reboot_vol3_English.png,nolink,1600x900);
+L82:     &attachref(./Liminality_vol2_English.png,nolink,1600x900);
+L83:     &attachref(./Archidoxen_AT_Addition_English.png,nolink,1600x900);
+L84:     }}
+L85:     2026年9月5日
+L86:     -「Phigros」×「Paradigm: Reboot」コラボ第3弾
+L87:     --「[[Paradigm: Reboot精選集>楽曲一覧#Paradigm]]」に1曲追加
+L88:     ---「[[[NWAD]>NWAD]]」by Knighthood
+L89:     -「Phigros」×「Liminality」コラボ第2弾
+L90:     --「[[Liminality精選集>楽曲一覧#Liminality]]」に1曲追加
+L91:     ---「[[Devastating History]]」by NAMV
+L92:     -新規AT譜面追加
+L93:     --「[[Archidoxen]]」by Se_IRA
+L94:     -大規模な譜面定数の変更
+L95:     *3.19.5 [#v3-19-5]
+L96:     #accordion(告知画像,***,close){{
+L97:     &attachref(./Nanjing_Museum.JPG,1600x900);
+L98:     &attachref(./Nanjing_Museum_English.JPG,1600x900);
+L99:     }}
+L100:     2026年7月30日
+L101:     -「[[シングル精選集>楽曲一覧#Single]]」に南京雲錦博物館とのコラボイベント楽曲を1曲追加
+L102:     --「[[星拂云&#38182; feat. koi]]」by S9ryne
+L103:     &sizex(1){ (Phigros 書き下ろし曲)};
+L104: 
+L105:     *3.19.4 [#v3-19-4]
+L106:     #accordion(告知画像,***,close){{
+L107:     &attachref(./PMT2026.JPG,1600x900);
+L108:     &attachref(./PMT2026_English.JPG,1600x900);
+L109:     }}
+L110:     2026年7月3日
+L111:     -中国大陸対象のPhigros公式大会「Phigros Master Tournament 2026」課題曲3曲を「[[シングル精選集>楽曲一覧#Single]]」追加
+L112:     --「[[Gungnir Fracture]]」by Kry.exe
+L113:     --「[[夢の降る日に]]」by seatrus
+L114:     --「[[Der Schneid]]」by Ωμεγα
+L115:     *3.19.3 [#v3-19-3]
+L116:     #accordion(告知画像,***,close){{
+L117:     &attachref(./Cleyera_70.JPG,1600x900);
+L118:     &attachref(./Cleyera_70_English.JPG,1600x900);
+L119:     }}
+L120: 
+L121:     2026年6月12日
+L122:     -「[[シングル精選集>楽曲一覧#Single]]」に2曲追加
+L123:     --「[[Cleyera]]」by Riya
+L124:     --「[[70 Minutes Fighters]]」by かたぎり
+L125:     -「[[玩具狂奏曲 -終焉-]]」&color(Red){''[IN]''};の一部譜面変更
+L126: 
+L127:     *3.19.2 [#v3-19-2]
+L128:     #accordion(告知画像,***,close){{
+L129:     &attachref(./Dancer.JPG,1600x900);
+L130:     &attachref(./Dancer_English.JPG,1600x900);
+L131:     }}
+L132: 
+L133:     2026年5月22日
+L134:     -「[[シングル精選集>楽曲一覧#Single]]」に2曲追加
+L135:     --「[[亂★舞]]」by Nekock&#183;LK
+L136:     --「[[Snow Dance]]」by 悠叶いのり
+L137:     -「[[BANGING STRIKE]]」&color(Red){''[IN]''};の譜面変更(元の譜面に修正済み)
+L138: 
+L139:     *3.19.1.1 [#v3-19-1-1]
+L140:     2026年4月25日
+L141:     -Phigrosフォルダやプロフィールで確認できる総曲数と実際に収録されている曲数が合わないバグの修正
+L142: 
+L143:     *3.19.1 [#v3-19-1]
+L144:     #accordion(告知画像,***,close){{
+L145:     &attachref(./Xia_yi_miao.JPG,1600x900);
+L146:     &attachref(./Xia_yi_miao_English.JPG,1600x900);
+L147:     &attachref(./CHUNITHM_Collb_Vol.2.JPG,1600x900);
+L148:     &attachref(./CHUNITHM_Collab_Vol.2_English.JPG,1600x900);
+L149:     }}
+L150:     2026年4月24日
+L151:     -「[[シングル精選集>楽曲一覧#Single]]」に1曲追加
+L152:     --「[[下一秒]]」by Bob Hou & Sherlock卓智媛 feat. &#20848;音Reine
+L153:     &sizex(1){ (Phigros 書き下ろし曲)};
+L154:     -「Phigros」×「CHUNITHM」コラボ第2弾
+L155:     --「[[CHUNITHM 精選集>楽曲一覧#CHUNITHM]]」に1曲追加
+L156:     ---「[[玩具狂奏曲 -終焉-]]」by きくお
+L157: 
+L158:     *3.19.0.1 [#v3-19-0-1]
+L159:     2026年4月3日
+L160:     -エイプリルフール時のゲームタイトルが4月1日以降でも残り、通常のゲームタイトルと被るバグの修正
+L161:     -[[エイプリルフール楽曲>Oblivion  PHIN]]の一部音源変更
+L162: 
+L163:     *3.19.0 [#v3-19-0]
+L164:     #accordion(告知画像,***,close){{
+L165:     &attachref(./2026_April_Fool.JPG,nolink,1600x900);
+L166:     &attachref(./2026_April_Fool_English.JPG,nolink,1600x900);
+L167:     &attachref(./2026_April_Fool_2.JPG,nolink,1600x900);
+L168:     }}
+L169:     2026年4fter月2484И|&#20011;4日
+L170:     -「[[シングル精選集>楽曲一覧#Single]]」に1曲追加
+L171:     --「[[After ZABANIYA (MUG Edit)]]」by Daily天利
+L172:     -獲得した「[[ABYSS MOTION 192.333]]」のイラストが真っ白になるバグの修正
+L173:     -一緒にケモ耳も追加しておきました。
+L174: 
+L175:     2006年244月01日
+L176:     -「taすけτ！!!イ可もし τなﾚヽの にこ&#65533;ゎレ&#822; &#820;た&#820;！&#822;!! ?1(((たすけて！何もしてないのにこわれた！)&br;H3Lp!!!!!! My c0mPuT3r s33ms 2 b3 1nf3cT3d w1th 4 V1Ru5, wH4T sh0uLd 1 d0?!?!!&br;Help !! My computer seems to be infected with a Virus, What should I do !?))」
+L177:     #ntbr(and more...?,white){{
+L178: 
+L179:     -エイプリルフール限定楽曲を追加。
+L180:     --「[[Oblivion  PHIN]]」 by Daily天利 vs. Endcat-終猫 ft.Aiss w/夜輪
+L181:     &sizex(1){(Phigros書き下ろし楽曲)};
+L182:     }}
+L183: 
+L184:     *3.18.4 [#v3-18-4]
+L185:     #accordion(告知画像,***,close){{
+L186:     &attachref(./Xenophobia_Verr&#252;ckt.JPG,nolink,1600x900);
+L187:     &attachref(./Xenophobia_Verr&#252;ckt_English.JPG,nolink,1600x900);
+L188:     }}
+L189:     2026年3月6日
+L190:     -「[[シングル精選集>楽曲一覧#Single]]」に2曲追加
+L191:     --「[[Xenophobia]]」by XinG
+L192:     --「[[Verr&#252;ckt]]」by Raimukun
+L193:     -一部楽曲の譜面定数修正
+L194: 
+L195:     *3.18.3 [#v3-18-3]
+L196:     #accordion(告知画像,***,close){{
+L197:     &attachref(./CosmicRadio_Livemania.JPG,nolink,1600x900);
+L198:     &attachref(./CosmicRadio_Livemania_English.JPG,nolink,1600x900);
+L199:     }}
+L200:     2026年2月8日
+L201:     -「[[シングル精選集>楽曲一覧#Single]]」に2曲追加
+L202:     --「Phigros」×「音波狂潮 3.0」コラボ
+L203:     ---「[[ABYSS MOTION 192.333]]」by ariiol & 奏Sou
+L204:     --「Phigros」× 楽曲公募「Cosmic Radio 2025」コラボ
+L205:     ---「[[彼方へ、名もなき海辺より]]」by 打打だいず&月乃
+L206:     -一部楽曲の譜面定数変更
+L207: 
+L208:     *3.18.2 [#v3-18-2]
+L209:     #accordion(告知画像,***,close){{
+L210:     &attachref(./Cytus_vol2.JPG,nolink,1600x900);
+L211:     &attachref(./Cytus_vol2_English.JPG,nolink,1600x900);
+L212:     }}
+L213:     2026年1月16日
+L214:     -「Phigros」×「Cytus II」コラボ第2弾
+L215:     -「[[Cytus II 精選集>楽曲一覧#CytusII]]」に3曲追加
+L216:     --「[[Alb]]」by Avans
+L217:     --「[[Incyde]]」by YbeLL
+L218:     --「[[彩]]」by MisoilePunch♪
+L219: 
+L220:     *3.18.1.1 [#v3-18-1-1]
+L221:     2025年12月30日
+L222:     -ビデオ再生についての不具合修正
+L223:     -フレームレートに関する問題を修正
+L224:     -第8章の2曲（ネタバレ要素含むため曲名を伏せる）をプレイ中にゲームを一時停止できないバグを修正
+L225:     -その他のバグ修正と改善
+L226:     //googleplayでしか確認できていないので他のストアでも同様のアプデがあるか確認をお願いします。また、googleplayでは英文で更新が書かれていたため自力翻訳です。間違っている箇所がある可能性がありますので確認を出来る方はお願いしたいです。
+L227: 
+L228:     *3.18.1 [#v3-18-1]
+L229:     #accordion(告知画像,***,close){{
+L230:     &attachref(./Locomotive_Masterpiece.JPG,nolink,1600x900);
+L231:     &attachref(./Locomotive_Masterpiece_English.JPG,nolink,1600x900);
+L232:     }}
+L233:     2025年12月19日
+L234:     -「[[シングル精選集>楽曲一覧#Single]]」に2曲追加
+L235:     --「[[Locomotive]]」by &#9824;&#65038;K
+L236:     --「[[最高傑作]]」by PYKAMIA
+L237:     -一部譜面の変更
+L238:     -ビデオ再生の問題の修正（[[不具合一覧]]を参照）
+L239:     -一部デバイスでフレームレートが半分になる問題に対処するために、VSyncを無効に変更
+L240:     -一部デバイスでのノートの表示が大きすぎる問題の修正
+L241: 
+L242:     *3.18.0 [#v3-18-0]
+L243:     #accordion(告知画像,***,close){{
+L244:     #youtube(_JqYRHlpPQk)
+L245:     }}
+L246:     2025年11月21日
+L247:     -「Phigros」×「Cytus II」コラボ第1弾
+L248:     -「[[Cytus II 精選集>楽曲一覧#CytusII]]」を追加
+L249:     --「[[The Whole Rest]]」by KIVΛ
+L250:     --「[[Cristalisia]]」by onoken
+L251:     --「[[Hydra]]」by James Landino X Akira Complex
+L252: 
+L253:     -「[[Aphrodite's Child (short ver.)]]」のイラストを差し替え(([[ソース>https://x.com/immaculeesekai/status/1991122465473654932?s=46]]))
+L254:     -一部譜面変更
+L255:     -[[開発環境をUnity 2022にアップグレード>https://x.com/phigros_pgs_jp/status/1991068946167173498?s=46]]
+L256:     -不具合修正
+L257: 
+L258:     *3.17.0.1 [#v3-17-0-1]
+L259:     2025年11月1日((Google Play版のみ))
+L260:     -Google Play版のVer.3.17.0において、アプリを正常に起動・プレイできない問題の修正
+L261:     -楽曲プレイシーンで「[[百鬼&#1422;夜行]]」のタイトルが正しく表示されない不具合を修正
+L262:     -「[[BANGING STRIKE]]」のイラストを差し替え
+L263: 
+L264:     *3.17.0 [#v3-17-0]
+L265:     #accordion(告知画像,***,close){{
+L266:     &attachref(./PMT_Championship_2.JPG,1600x900);
+L267:     &attachref(./PMT_Championship_2_English.JPG,1600x900);
+L268:     #youtube(yCdpP1xs_uw)
+L269:     }}
+L270:     2025年10月31日
+L271:     -「Phigros」×「Liminality」コラボ
+L272:     -「[[Liminality 精選集>楽曲一覧#Liminality]]」を追加
+L273:     --「[[Xep+ion]]」by Acotto
+L274:     --「[[Archidoxen]]」by Se_IRA
+L275:     --「[[百鬼&#1422;夜行]]」by Salad Savior
+L276:     -中国大陸対象のPhigros公式大会「Phigros Master Tournament 2025」決勝課題曲を「[[シングル精選集>楽曲一覧#Single]]」に追加
+L277:     --「[[BANGING STRIKE]]」by Dew Pleiades
+L278:     &sizex(1){ (Phigros 書き下ろし曲)};
+L279: 
+L280:     *3.16.1 [#v3-16-1]
+L281:     #accordion(告知画像,***,close){{
+L282:     &attachref(./000_So_laggy.JPG,1600x900);
+L283:     &attachref(./000_So_laggy_English.JPG,1600x900);
+L284:     }}
+L285:     2025年10月10日
+L286:     -「[[シングル精選集>楽曲一覧#Single]]」に2曲追加
+L287:     --「[[000 -Ain Soph Aur-]]」by Yumeji
+L288:     --「[[So laggy! (feat. Uzumaki)]]」by ShrimpCats. (はぁち×後藤涼輔)
+L289:     &sizex(1){ (Phigros 書き下ろし曲)};
+L290: 
+L291:     *3.16.0 [#v3-16-0]
+L292:     #accordion(告知画像,***,close){{
+L293:     &attachref(./G1Dyvy-bIAAdY3j.jpeg,1600x900);
+L294:     &attachref(./G09DJi9bAAAScos.jpeg,1600x900);
+L295:     #youtube(ywCnXcJjQ-E)
+L296:     }}
+L297:     2025年9月19日
+L298:     -「Phigros」×「maimai でらっくす PRiSM PLUS」コラボ
+L299:     -「[[maimai 精選集>楽曲一覧#maimai]]」を追加
+L300:     --「[[Komplexe]]」by 雄之助 feat. Sennzai
+L301:     --「[[アンビバレンス]]」by すりぃ × 相沢
+L302:     --「[[s&#248;lips]]」by rintaro soma
+L303:     --「[[QZKago Requiem]]」by t+pazorite
+L304: 
+L305:     *3.15.1 [#v3-15-1]
+L306:     #accordion(告知画像,***,close){{
+L307:     &attachref(./AF.JPG,nolink,1600x900);
+L308:     &attachref(./AT.JPG,nolink,1600x900);
+L309:     &attachref(./AF_English.JPG,nolink,1600x900);
+L310:     &attachref(./AT_English.JPG,nolink,1600x900);
+L311:     }}
+L312:     2025年8月31日
+L313:     -「[[シングル精選集>楽曲一覧#Single]]」に2曲追加
+L314:     --「[[雪降り ~雪が降っている~]]」by AiSS w/ 夜輪 ft. 結月ゆかり
+L315:     --「[[Retribution ~ Cycle of Redemption ~]]」by Ardolf vs Daily天利
+L316:     -難易度&color(purple){AT};譜面を追加
+L317:     --「[[PANIC PARADISE]]」by DJ SHION.Y
+L318:     --「[[Der Richter]]」by Ωμεγα
+L319:     -一部譜面定数の変更
+L320:     -クレジットの更新
+L321: 
+L322:     *3.15.0 [#v3-15-0]
+L323:     #accordion(告知画像,***,close){{
+L324:     &attachref(アップデート履歴/Kalpa_Collab_Vol.2_Japanese.JPG,nolink,1600x900);
+L325:     &attachref(アップデート履歴/Kalpa_Collab_Vol.2.JPG,nolink,1600x900);
+L326:     }}
+L327:     2025年8月8日
+L328:     -「Phigros」×「KALPA:Cosmic Symphony」コラボ
+L329:     --「[[KALPA 精選集>楽曲一覧#Kalpa]]」に3曲追加
+L330:     ---「[[Flutter Echo]]」by Cansol
+L331:     ---「[[Re：birth]]」by ああああ
+L332:     ---「[[Avataar ~Reincarnation of Kalpa~]]」by Scarlette a.k.a. CrYmson
+L333: 
+L334:     *3.14.2 [#v3-14-2]
+L335:     #accordion(告知画像,***,close){{
+L336:     &attachref(アップデート履歴/Helios_Japanese.JPG,nolink,1600x900);
+L337:     &attachref(アップデート履歴/Helios.JPG,nolink,1600x900);
+L338:     }}
+L339:     2025年7月18日((特殊な事情によりiOS版のみ2025年7月23日に延期された))
+L340:     -「[[シングル精選集>楽曲一覧#Single]]」に1曲追加
+L341:     --「[[Helios]]」by NOA(Cortrix) & BotaNya
+L342:     -「[[Frozen Heart]]」&color(red){''[IN]''};の譜面修正
+L343: 
+L344:     *3.14.1 [#v3-14-1]
+L345:     #accordion(告知画像,***,close){{
+L346:     &attachref(アップデート履歴/Frozen_Heart_Japanese.JPG,nolink,1600x900);
+L347:     &attachref(アップデート履歴/Frozen_Heart.jpg,nolink,1600x900);
+L348:     }}
+L349:     2025年6月27日
+L350:     -「Phigros」×「Rizline」コラボ
+L351:     -「[[シングル精選集>楽曲一覧#Single]]」に1曲追加
+L352:     --「[[Frozen Heart]]」by A-39 / 沙包P
+L353:     -「[[Stardust:RAY>Stardust RAY]]」&color(green){''[EZ]''};の譜面修正
+L354: 
+L355:     *3.14.0 [#v3-14-0]
+L356:     #accordion(告知画像,***,close){{
+L357:     &attachref(アップデート履歴/O.N.G.E.K.I._Collaboration_Japanese.JPG,nolink,1600x900);
+L358:     &attachref(アップデート履歴/O.N.G.E.K.I._Collaboration.jpg,nolink,1600x900);
+L359:     #youtube(K-Xh_HjXCLE)
+L360:     }}
+L361:     2025年6月6日
+L362:     -「Phigros」×「オンゲキ Re:Fresh」コラボ
+L363:     -「[[オンゲキ 精選集>楽曲一覧#ONGEKI]]」を追加
+L364:     --「[[Radiance]]」by Nhato
+L365:     --「[[Diamond Dust]]」by Masahiro "Godspeed" Aoki
+L366:     --「[[Stardust:RAY>Stardust RAY]]」by kanone vs. BlackY
+L367: 
+L368:     *3.13.1 [#v3-13-1]
+L369:     #accordion(告知画像,***,close){{
+L370:     &attachref(アップデート履歴/Alice_in_a_xxxxxxxx_JP.JPG,nolink,1600x900);
+L371:     &attachref(アップデート履歴/Alice_in_a_xxxxxxxx.jpg,nolink,1600x900);
+L372:     &attachref(アップデート履歴/Shine_After_Anniversary_Avatars.JPG,nolink,1600x900);
+L373:     }}
+L374:     2025年5月17日((Google Play版もアップデート可。2025年5月16日更新予定だったがストアの審査の影響で1日遅延。))
+L375:     -「[[シングル精選集>楽曲一覧#Single]]」に1曲追加
+L376:     --「[[Alice in a xxxxxxxx]]」 by Nagiha
+L377:     -楽曲「[[Shine After]]」の収録1周年記念として新Avatarを2つ追加(([[「CITY SOUNDS」公式Twitterの投稿で判明した。>https://x.com/CTSD_Net/status/1920992180669137295]]))(詳しくは「[[Shine After]]」個別ページにて)
+L378:     --なお、このことはアップデート欄に記載されていない。
+L379:     -すでに解禁した「[[宇宙残骸少女 (Cosmic Dusty Girl)]]」が意図せずにロックされる問題の修正
+L380:     -再演機能で「[[重生]]」をプレイする時に、一部の演出効果が表示されない問題の修正
+L381: 
+L382:     *Phigros　Google Play版復活 [#a23e8003]
+L383:     2025年5月7日
+L384: 
+L385:     *3.13.0 [#v3-13-0]
+L386:     #accordion(告知画像,***,close){{
+L387:     #Youtube(Cg0Lb-dmq9c)
+L388:     }}
+L389:     2025年4月18日
+L390:     -「Phigros」×「Immacul&#233;e Sekai」コラボ
+L391:     -「[[Immacul&#233;e Sekai 精選集>楽曲一覧#Immaculee_Sekai]]」を追加
+L392:     --「[[Aphrodite's Child (short ver.)]]」 by RUQOA
+L393:     --「[[DevIAtiOn (short ver.)]]」 by polysha
+L394:     --「[[NO x]]」 by Juggernaut.
+L395:     -「再演」機能関連などにある様々なバグを修正
+L396: 
+L397:     *Phigros&#8193;&#65038;&#65038;Google Playから削除 [#maadf76a]
+L398:     2025年4月10日
+L399: 
+L400:     *3.12.0 [#v3-12-0]
+L401:     #accordion(告知画像,***,close){{
+L402:     &attachref(アップデート履歴/EGTS_Japanese.JPG,nolink,1600x900);
+L403:     &attachref(アップデート履歴/EGTS.PNG,nolink,1600x900);
+L404:     }}
+L405:     2025年4月1日
+L406:     -「Phigros」×「EGTS」コラボ第2弾
+L407:     -「[[EGTS 精選集>楽曲一覧#EGTS]]」を追加
+L408:     --「[[Resolver]]」 by Gomadare
+L409:     --「[[Luminous Entities Lost Heart]]」 by NormalM feat. Usagi Denki
+L410:     --「[[KIZUNA Resolution]]」 by TAG
+L411:     --「[[AbsoluTe disoRdeR]]」 by Acute Disarray((EGTS 2025決勝戦で発表された「Global Taiko Showdown」×「Phigros」×「A Dance of Fire and Ice」×「Orzmic」4機種収録曲))
+

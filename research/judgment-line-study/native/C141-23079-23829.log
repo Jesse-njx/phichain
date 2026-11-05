@@ -1,0 +1,1 @@
+2026-11-02T08:00:46.412848Z  WARN bevy_render::gpu_readback: Failed to send readback result: sending into a closed channel

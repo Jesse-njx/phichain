@@ -1,0 +1,21 @@
+const { chromium } = require('/Users/jesse/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs = require('fs');
+const root = '/Users/jesse/Projects/PhiChain/research/judgment-line-study';
+(async()=>{
+  const browser = await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});
+  const page = await browser.newPage({viewport:{width:1440,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('file://'+root+'/index.html');await page.locator('.card').first().waitFor();const all=await page.locator('.card').count();
+  await page.locator('#query').fill('kind:background');const background=await page.locator('.card').count();
+  await page.locator('#clear').click();await page.locator('#query').fill('chart:"Stardust:RAY"');const chartResults=await page.locator('.card').count();
+  await page.locator('#clear').click();await page.locator('#query').fill('line:17');const lineResults=await page.locator('.card').count();
+  await page.locator('#clear').click();await page.locator('#family').selectOption('invisible-carrier');const familyResults=await page.locator('.card').count();
+  await page.locator('#clear').click();await page.locator('#bank').scrollIntoViewIfNeeded();await page.screenshot({path:root+'/qa/index-desktop.png'});
+  const first=(JSON.parse(fs.readFileSync(root+'/search-index.json','utf8'))).find(c=>c.video);await page.goto('file://'+root+'/cases/'+first.id+'.html');
+  await page.locator('#scene').waitFor();const before=await page.locator('#time-label').textContent();await page.locator('#scrub').fill('10');const after=await page.locator('#time-label').textContent();
+  await page.locator('#play').click();await page.waitForTimeout(350);await page.locator('#play').click();const played=await page.locator('#time-label').textContent();
+  const video=page.locator('video').first();await video.evaluate(v=>v.load());await page.waitForFunction(()=>document.querySelector('video').readyState>=1);const metadata=await video.evaluate(v=>({duration:v.duration,width:v.videoWidth,height:v.videoHeight}));
+  await page.screenshot({path:root+'/qa/case-desktop.png'});
+  await page.setViewportSize({width:390,height:844});await page.goto('file://'+root+'/index.html');const mobileOverflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));await page.locator('#bank').scrollIntoViewIfNeeded();await page.screenshot({path:root+'/qa/index-mobile.png'});
+  const result={all,background,chartResults,lineResults,familyResults,sliderChanged:before!==after,playChanged:played!==after,metadata,mobileOverflow,errors};fs.writeFileSync(root+'/browser-verification.json',JSON.stringify(result,null,2));console.log(result);await browser.close();
+  if(errors.length||all<100||background<50||familyResults<1||before===after||mobileOverflow.scroll>mobileOverflow.width)process.exitCode=1;
+})().catch(e=>{console.error(e);process.exitCode=1});

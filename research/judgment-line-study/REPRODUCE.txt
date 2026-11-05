@@ -1,0 +1,53 @@
+Judgment-line performance atlas — reproduction notes
+
+Main deliverable: index.html. Open it in a browser. No server or network is needed
+for the search, embedded local MP4s, or source-derived diagnostic players.
+Keep the directory structure intact: cases/, native/, posters/, evidence/, sources/.
+Nothing has been published. The original source charts and live editor are unchanged.
+
+The index distinguishes 64 named mechanism families from their source-specific
+recipe variants. Source chart/difficulty, chart/audio seconds, zero-based line IDs,
+source event pointers and hashes are retained. Native clips show full source scenes.
+Silent clips are labeled; source audio is used when already locally available.
+
+To reproduce analysis using the existing local NumPy environment, from repo root:
+  research/music-flow-study/.venv/bin/python research/judgment-line-study/analyze.py
+  research/music-flow-study/.venv/bin/python research/judgment-line-study/ensembles.py
+  research/music-flow-study/.venv/bin/python research/judgment-line-study/build_bank.py
+
+The frozen inventory is authoritative for this delivered study. Recipe selection
+is deterministic for a fixed pipeline version; changing audit thresholds can change
+case IDs and requires regenerating diagnostics, evidence, native receipts and pages.
+Do not combine old case-ID assets with a newly selected bank without matching the
+source hash, mechanism and exact excerpt interval.
+
+Native render commands and output correspondence are in native-receipts.json and
+final-render-manifest.json. The renderer needs normal macOS GPU access; a restricted
+sandbox cannot initialize its GPU. Rendering uses packaged app assets, not the bare
+target/release renderer executable. The runner supports disjoint chart batches:
+  research/music-flow-study/.venv/bin/python research/judgment-line-study/render_native.py --shard 0
+  research/music-flow-study/.venv/bin/python research/judgment-line-study/render_native.py --shard 1
+
+Then merge receipts, validate, and build the offline artifact:
+  research/music-flow-study/.venv/bin/python research/judgment-line-study/qa.py
+  research/music-flow-study/.venv/bin/python research/judgment-line-study/publish.py
+  node research/judgment-line-study/browser_check.cjs
+
+Verification results: verification.json, browser-verification.json,
+visual-review.json, tool-provenance.json. Browser checking is headless; no visible
+preview is opened. Frame sampling is not a claim of complete motion/playability
+validation. Read the evidence limits in index.html before transferring a recipe.
+
+Every background exemplar highlights lines with zero notes over the whole source
+chart. A note-bearing line can still be decorative during some local intervals;
+this study does not infer that role without proving note visibility/occupancy.
+The empty-line total includes unused slots, not only active decoration.
+
+Source speed-event floors are absent and are reconstructed by integration.
+The diagnostic renderer uses right-continuous source-event selection; native
+inclusive event-boundary behavior and Hold body/tail rendering can differ.
+Ten multi-line-BPM charts are retained in corpus metrics but excluded from the
+native bank because the current official importer uses the first line BPM.
+
+Whole-chart baseline and cadence (2026-11-03)
+Use the same NumPy environment to run cadence.py followed by cadence_report.py from this directory. The report uses all source checksums in inventory.json and compares the saved independent Xterfusion Sol export separately. The original bank selection and native videos are independent of the cadence scan.

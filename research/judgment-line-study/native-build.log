@@ -1,0 +1,66 @@
+N001 pivot-locked-landing True 7.72 
+N002 pivot-locked-landing True 6.91 
+N004 side-entry True 7.92 
+N006 side-entry True 22.61 
+N007 diagonal-entry True 11.41 
+N008 diagonal-entry True 3.13 
+N009 diagonal-entry True 3.87 
+N010 rising-entry True 29.4 
+N011 rising-entry True 15.72 
+N012 rising-entry True 5.7 
+N013 turning-approach True 16.39 
+N014 turning-approach True 1.08 
+N016 half-turn-hook True 10.04 
+N017 half-turn-hook True 4.46 
+N020 spinning-approach True 15.24 
+N021 spinning-approach True 3.18 
+N022 pendulum-approach True 8.53 
+N023 pendulum-approach True 24.07 
+N024 pendulum-approach True 5.81 
+N025 lateral-carriage True 3.53 
+N026 lateral-carriage True 4.4 
+N027 lateral-carriage True 5.9 
+N028 elevator-approach True 15.19 
+N029 elevator-approach True 3.94 
+N030 elevator-approach True 6.32 
+N031 diagonal-carriage True 11.27 
+N032 diagonal-carriage True 9.82 
+N033 diagonal-carriage True 1.21 
+N034 serpentine-carriage True 1.31 
+N035 serpentine-carriage True 5.34 
+N036 serpentine-carriage False 0.34 renderer failed; see native log
+N037 moving-pivot-hook True 4.16 
+N038 moving-pivot-hook True 3.36 
+N040 stop-and-release True 10.12 
+N041 stop-and-release True 14.03 
+N042 stop-and-release True 10.08 
+N043 reverse-scroll True 30.56 
+N044 reverse-scroll True 7.72 
+N046 speed-up-entry True 5.77 
+N047 speed-up-entry True 18.01 
+N048 speed-up-entry True 6.83 
+N049 braking-entry True 3.66 
+N050 braking-entry True 1.0 
+N051 braking-entry True 25.9 
+N052 stepped-scroll True 10.57 
+Traceback (most recent call last):
+  File "/Users/jesse/Projects/PhiChain/research/judgment-line-study/render_native.py", line 42, in <module>
+    r['success']=video.is_file() and video.stat().st_size>0;r['video']=str(video);r['review_status']='rendered; awaiting frame review'
+                ^^^^^^
+  File "/Users/jesse/Projects/PhiChain/research/judgment-line-study/render_native.py", line 36, in main
+    if not dest.exists():dest.symlink_to(audio)
+                                                
+  File "/Users/jesse/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesse/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesse/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/subprocess.py", line 2141, in _communicate
+    self.wait(timeout=self._remaining_time(endtime))
+  File "/Users/jesse/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesse/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/subprocess.py", line 2047, in _wait
+    time.sleep(delay)
+KeyboardInterrupt

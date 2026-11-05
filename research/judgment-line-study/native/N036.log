@@ -1,0 +1,6 @@
+
+thread 'Compute Task Pool (0)' (27773869) panicked at phichain-renderer/src/main.rs:133:45:
+failed to read chart: EOF while parsing a list at line 1 column 423331
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Encountered a panic in system `<Enable the debug feature to see the name>`!
+Encountered a panic in system `<Enable the debug feature to see the name>`!

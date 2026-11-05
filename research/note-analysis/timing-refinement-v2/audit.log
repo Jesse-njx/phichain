@@ -1,0 +1,111 @@
+{
+  "checks": "Passed: frozen script hashes, identical event IDs/counts, strict event order, 25ms bound, midpoint guard, repeat inference.",
+  "validation_selected_winner": "parabolic",
+  "comparison": {
+    "regression": {
+      "5": {
+        "mean_difference_pp": 4.7285956841117125,
+        "songs_improved": 6,
+        "songs": 8,
+        "exploratory_bootstrap_95_interval_pp": [
+          0.36393141393057776,
+          8.426832114588933
+        ]
+      },
+      "10": {
+        "mean_difference_pp": 1.9466384675439887,
+        "songs_improved": 6,
+        "songs": 8,
+        "exploratory_bootstrap_95_interval_pp": [
+          0.6483931814802071,
+          3.5094633164021762
+        ]
+      },
+      "20": {
+        "mean_difference_pp": -0.34089211580482087,
+        "songs_improved": 2,
+        "songs": 8,
+        "exploratory_bootstrap_95_interval_pp": [
+          -1.1270980446416112,
+          0.15376974714143982
+        ]
+      },
+      "35": {
+        "mean_difference_pp": 0.09287100805119158,
+        "songs_improved": 2,
+        "songs": 8,
+        "exploratory_bootstrap_95_interval_pp": [
+          0.0,
+          0.24190230462347168
+        ]
+      }
+    },
+    "fresh_test": {
+      "5": {
+        "mean_difference_pp": 8.866812488680855,
+        "songs_improved": 5,
+        "songs": 6,
+        "exploratory_bootstrap_95_interval_pp": [
+          3.9628009146725742,
+          12.691340872838127
+        ]
+      },
+      "10": {
+        "mean_difference_pp": 2.1455937150239643,
+        "songs_improved": 6,
+        "songs": 6,
+        "exploratory_bootstrap_95_interval_pp": [
+          0.8576089015736513,
+          3.51762806318743
+        ]
+      },
+      "20": {
+        "mean_difference_pp": 0.08273759254956806,
+        "songs_improved": 2,
+        "songs": 6,
+        "exploratory_bootstrap_95_interval_pp": [
+          -0.18518518518518268,
+          0.3692517237606737
+        ]
+      },
+      "35": {
+        "mean_difference_pp": 0.030864197530864706,
+        "songs_improved": 1,
+        "songs": 6,
+        "exploratory_bootstrap_95_interval_pp": [
+          0.0,
+          0.09259259259259411
+        ]
+      }
+    }
+  },
+  "stability_song": {
+    "id": "RetributionCycleofRedemption.ArdolfvsDaily天利",
+    "scope": "One validation song; full flux+interpolation pipeline, no new label use"
+  },
+  "gain_tests": {
+    "0.5": {
+      "original_count": 1390,
+      "transformed_count": 1390,
+      "matched_within_1ms": 1387,
+      "fraction_matched_within_1ms": 0.9978417266187051
+    },
+    "2.0": {
+      "original_count": 1390,
+      "transformed_count": 1390,
+      "matched_within_1ms": 1389,
+      "fraction_matched_within_1ms": 0.9992805755395684
+    }
+  },
+  "parabolic_repeat_exact": true,
+  "cnn_repeat_max_difference_seconds": {
+    "17": 0.0,
+    "29": 0.0
+  },
+  "limitations": [
+    "Only six fresh test songs",
+    "Chart-alignment labels, not verified acoustic onset truth",
+    "Gain tested on one song; encoding and chunk/padding invariance not established",
+    "Global event budget depends on audio duration, unsuitable as a final production discovery rule"
+  ]
+}

@@ -1,0 +1,10 @@
+2026-11-02 12:50:23.519 python[80531:28394258] 2026-11-02 12:50:23.519470 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier
+TRANSCRIBE vocals
+Predicting MIDI for /Users/jesse/Projects/PhiChain/research/note-analysis/override-voices-v3/aligned-stems/vocals.wav...
+TRANSCRIBED vocals 614
+TRANSCRIBE bass
+Predicting MIDI for /Users/jesse/Projects/PhiChain/research/note-analysis/override-voices-v3/aligned-stems/bass.wav...
+TRANSCRIBED bass 487
+TRANSCRIBE other
+Predicting MIDI for /Users/jesse/Projects/PhiChain/research/note-analysis/override-voices-v3/aligned-stems/other.wav...
+TRANSCRIBED other 1958

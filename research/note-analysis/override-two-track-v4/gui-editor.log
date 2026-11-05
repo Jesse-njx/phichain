@@ -1,0 +1,4 @@
+2026-11-02T18:37:12.802959Z  WARN bevy_egui::render: Bindless textures are not yet supported on metal. Disabling bindless mode. See https://github.com/bevyengine/bevy/issues/18149 for more information
+2026-11-02T18:37:13.051432Z  WARN bevy_text::pipeline: Text span 62v0 has a font size <= 0.0. Nothing will be displayed.
+2026-11-02T18:38:19.161778Z  WARN bevy_winit::state: Skipped event Destroyed for unknown winit Window Id WindowId(524361093504)
+2026-11-02T18:38:19.164441Z  WARN bevy_egui::input: Cannot access an underlying winit window for a window entity 4v0

@@ -11,7 +11,9 @@ This repository is our fork of Ivan-1F/phichain. Keep the editor and its MCP ser
 
 This file covers editor and MCP development. Before any chart authoring or chart review, read `docs/AGENTS.md`, even when operating from the repository root. That file contains the charting workflow; song-specific requirements and progress belong in the corresponding local project records.
 
-Keep the MCP interface minimal. Do not add speculative AI-charting tools, presets, planning frameworks, or analysis workflows. The user will design and request new capabilities. Do not maintain a parallel standalone chart state or authoring server. The separate phigros-chart-mcp repository is historical reference, not a runtime dependency.
+The product direction is autonomous charting. It is recorded in `docs/roadmap/README.md`, and note arrangement is the current focus. The roadmap sets direction only; it does not authorize any specific tool.
+
+Keep the MCP interface minimal. Do not add speculative AI-charting tools, presets, planning frameworks, or analysis workflows. The user will design and request new capabilities, guided by the roadmap. Do not maintain a parallel standalone chart state or authoring server. The separate phigros-chart-mcp repository is historical reference, not a runtime dependency.
 
 Keep local charts, audio, credentials and generated artifacts in the workspace outside this repository; do not publish them.
 

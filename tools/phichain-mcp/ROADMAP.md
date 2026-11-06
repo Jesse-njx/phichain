@@ -12,8 +12,11 @@ ownership, exact compatible merging, dry-run and shared undo. It never allocates
 one line per note. Early-visible notes retain their later judgment times.
 See [README.md](README.md) for contracts and current limits.
 
-There is no planned AI-charting framework. Add capabilities only when the user
-explicitly designs or requests them, rather than anticipating charting needs.
+The product direction toward autonomous charting is set in the
+[project roadmap](../../docs/roadmap/README.md) (2026-11-05). Note arrangement is
+the current focus. That roadmap does not pre-authorize MCP tools. Add capabilities
+only when the user explicitly designs or requests them, rather than anticipating
+charting needs.
 
 ## MP3 note-decision analysis (2026-11-02)
 

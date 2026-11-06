@@ -36,3 +36,14 @@ __pycache__/
 
 # Third-party clone with its own Git history
 /research/overnight-study/research/downloader/
+
+# Research data stays local: official charts, song audio and stems, arrays, renders
+/research/**/*.json
+/research/**/*.wav
+/research/**/*.ogg
+/research/**/*.mp3
+/research/**/*.npy
+/research/**/*.npz
+/research/**/*.png
+/research/**/*.jpg
+/research/**/*.html

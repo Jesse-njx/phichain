@@ -103,7 +103,7 @@ fn create_files(
         write("meta.json".into(), &serde_json::to_vec_pretty(&meta)?)?;
         write(
             "chart.json".into(),
-            &serde_json::to_vec_pretty(&phichain_chart::serialization::PhichainChart::default())?,
+            &serde_json::to_vec_pretty(&crate::project::new_project_chart())?,
         )?;
         Ok(())
     })();

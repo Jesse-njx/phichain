@@ -1,8 +1,8 @@
 {
-  "tools": 31,
-  "examples": 31,
+  "tools": 27,
+  "examples": 27,
   "examples_schema_checked": true,
   "all_internal_links_valid": true,
   "charts_modified": false,
-  "schema_sha256": "fafb5440cd03df914bc3aafd0d0da8f8a17048b8221f14ff93b78c29d4093d6c"
+  "schema_sha256": "1ea1aa1b93e9ac65590cded9b452890cc962bc39bb3b88f9713e656224f50ee3"
 }

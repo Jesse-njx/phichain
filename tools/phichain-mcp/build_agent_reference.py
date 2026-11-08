@@ -26,7 +26,7 @@ EXAMPLES = {
  'editor_entities':{**G,'collection':'lines','query':'Chorus'},
  'editor_navigate':{**G,'unit':'global_beat','value':8},
  'editor_view':{**G,'ids':['1002'],'line_id':'1001'},
- 'diagnose':G,'chart_tools':{},'agent_tools':{'names':['chart_patch','chart_script']},'project_save':G,
+ 'diagnose':G,'agent_tools':{'names':['chart_patch','chart_script']},'project_save':G,
 }
 NOTES = {
  'chart_read':'Document collections are keyed by editable native IDs, not RPE array indices. Existing read_section still reads a passage. Root returns counts and metadata; specific paths return exact data. Read parent lines and preceding events explicitly.',
@@ -44,13 +44,14 @@ H=html.escape
 def code(value): return '<pre><code>'+H(json.dumps(value,indent=2,ensure_ascii=False))+'</code></pre>'
 
 def build(legacy_examples):
- examples={**legacy_examples,**EXAMPLES}
+ # Base examples for tools this server replaces (get_context, save, preview) are dropped.
+ examples={k:v for k,v in {**legacy_examples,**EXAMPLES}.items() if k in agent_server.BY_NAME}
  assert set(examples)==set(agent_server.BY_NAME)
  for tool in agent_server.TOOLS:server.validate(examples[tool['name']],tool['inputSchema'])
  css=(OUT/'reference.css').read_text()
  parts=['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PhiChain · Agent authoring MCP</title><style>'+css+'</style></head><body>',
- '<header><div class="eyebrow">PhiChain / rpe-agent-mcp branch / implemented</div><h1>Patch. Transform. Script.</h1><p>31 live tools: 13 base tools plus 18 rpe-next-style authoring operations adapted to native PhiChain. Charting decisions stay with the user and external Agent.</p><div class="rail"><span>Read exact native objects</span><span>Validate one candidate</span><span>Commit one undo entry</span></div></header><div class="layout"><aside>']
- for key,label in [('start','Setup'),('workflow','Writing workflow'),('document','Native document'),('scripts','Scripts & limits'),('catalog','31 tools'),('scope','Port scope & provenance')]:parts.append(f'<a class="major" href="#{key}">{label}</a>')
+ '<header><div class="eyebrow">PhiChain / rpe-agent-mcp branch / implemented</div><h1>Patch. Transform. Script.</h1><p>27 live tools: 10 base tools plus 17 rpe-next-style authoring operations adapted to native PhiChain. Each job has one tool name. Charting decisions stay with the user and external Agent.</p><div class="rail"><span>Read exact native objects</span><span>Validate one candidate</span><span>Commit one undo entry</span></div></header><div class="layout"><aside>']
+ for key,label in [('start','Setup'),('workflow','Writing workflow'),('document','Native document'),('scripts','Scripts & limits'),('catalog',f'{len(agent_server.TOOLS)} tools'),('scope','Port scope & provenance')]:parts.append(f'<a class="major" href="#{key}">{label}</a>')
  for tool in agent_server.TOOLS:parts.append(f'<a href="#tool-{tool["name"]}">{tool["name"]}</a>')
  parts.append('''</aside><main><h2 id="start">Connect to the running editor</h2><p>This is an implemented alternative MCP entrypoint on the experimental branch. It uses the same live PhiChain editor, endpoint and shared history as the minimal server. It does not run rpe-next or keep an offline chart store.</p>
 <pre><code>cargo build -p phichain
@@ -75,7 +76,7 @@ codex mcp add phichain-agent -- python3 "$PWD/tools/phichain-mcp/agent_server.py
 <h2 id="scripts">Computation and limits</h2><p>The copied rpe-next numeric expression parser supports safe arithmetic, comparisons, functions and conditional expressions. Numeric object fields plus beat/i/N/u are available; time-field expression results convert to canonical beats at 1/10000 resolution. Script code instead uses synchronous JavaScript and the native constructors shown by chart_templates.</p>
 <p>A fresh VM context in a separate memory-limited Node process receives only JSON data, script source and computational helpers. No process/require/editor/DOM/file/network API is supplied. Node permission mode restricts reads to adapter code and denies writes/process spawning; credentials and the endpoint are not passed. This is computation isolation, not a claim that Node VM is an OS security boundary. No async scripts. Default 10-second timeout; allowed 100–30,000 ms. Errors and timeout do not submit a candidate.</p>
 <ul><li>At most 20,000 editable objects; candidate bridge limit of 16 MiB may bind earlier (public MCP requests remain 1 MiB).</li><li>Patch: 1–2,000 operations. Generate: 1–10,000 objects. Read/query pages: at most 200.</li><li>Script input: 16 MiB; result: 8 MiB; final candidate bridge request must fit 16 MiB. Public MCP request: 1 MiB.</li><li>No-op candidates create no history entry. Dry runs are recomputed, not durable prepared-plan tokens.</li><li>Aliases: unique new:name, 5–80 ASCII bytes using letters, digits, underscore, hyphen or colon.</li></ul>
-<h2 id="catalog">Actual server tool reference</h2><p>These descriptions and schemas come directly from agent_server.TOOLS. The 13 base tools retain compatibility with the minimal entrypoint. Each example is schema-checked during generation.</p>''')
+<h2 id="catalog">Actual server tool reference</h2><p>These descriptions and schemas come directly from agent_server.TOOLS. The 10 base tools keep the minimal entrypoint's behavior; its get_context, save and preview are replaced here by editor_context, project_save and editor_navigate. Each example is schema-checked during generation.</p>''')
  for tool in agent_server.TOOLS:
   name=tool['name'];parts.append(f'<article class="tool" id="tool-{name}"><h3>{name}</h3><p>{H(tool["description"])}</p>')
   if name in NOTES:parts.append('<div class="behavior">'+H(NOTES[name])+'</div>')

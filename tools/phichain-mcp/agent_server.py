@@ -46,11 +46,23 @@ EXTRA_TOOLS = [
  tool('editor_navigate','Seek shared preview using explicit audio_seconds, chart_seconds or global_beat; convert using native BPM/offset. Does not retime chart objects.',guarded({'unit':{'enum':['audio_seconds','chart_seconds','global_beat']},'value':{'type':'number','minimum':0},'action':{'enum':['seek','play','pause']}},required=('unit','value'))),
  tool('editor_view','Select explicit native object IDs and optionally a line in the shared editor. Does not mutate chart data. Requires an idle editor.',guarded({'ids':{'type':'array','items':ID,'maxItems':1000,'uniqueItems':True},'line_id':ID},required=('ids',))),
  tool('diagnose','Run native chart validation on this guarded live revision. Structural/motion warnings are not an aesthetic or human-playability proof.',guarded({}),True),
- tool('chart_tools','Return actual available command schemas. All are already callable through tools/list; no second model loop or hidden command activation.',obj({'query':S,'names':{'type':'array','items':S,'maxItems':50}}),True),
  tool('agent_tools','Discover actual advertised tool names, descriptions and schemas. Does not activate hidden tools.',obj({'query':S,'names':{'type':'array','items':S,'maxItems':50}}),True),
  tool('project_save','Save the live editor project using current session/revision. Use when requested. Other writes remain in memory until save/autosave.',guarded({}),destructive=True),
 ]
-TOOLS = server.TOOLS + EXTRA_TOOLS
+# Base tools replaced here by an equivalent authoring tool, so each job has one name:
+# get_context -> editor_context, save -> project_save, preview -> editor_navigate.
+# The minimal server.py entrypoint keeps all 13 base tools.
+REPLACED_BASE_TOOLS = {'get_context':'editor_context','save':'project_save','preview':'editor_navigate'}
+
+
+def _base_tool(entry):
+    # history's description points at get_context; point it at the tool this server offers.
+    entry = copy.deepcopy(entry)
+    entry['description'] = entry['description'].replace('get_context', 'editor_context')
+    return entry
+
+
+TOOLS = [_base_tool(t) for t in server.TOOLS if t['name'] not in REPLACED_BASE_TOOLS] + EXTRA_TOOLS
 BY_NAME = {t['name']:t for t in TOOLS}
 assert len(BY_NAME)==len(TOOLS)
 INSTRUCTIONS = '''Use the native PhiChain runtime (GUI or headless) as the only source of truth. Start with editor_status. If needed, create_project imports music into a new project; poll status, then open_project and poll again. Once open, use editor_context, then chart_read/chart_query and relevant parent/event data. Notes means playable note objects, not beats. New object keys use unique new:name aliases and can reference each other in one candidate. Prefer chart_patch for local fields, chart_transform for repeated changes, chart_generate for sequences, chart_script for arbitrary multi-object algorithms. Read chart_templates before constructing objects. Always validate with dry_run=true first; then commit with current session/revision and dry_run=false. Dry runs are computations, not prepared-plan tokens. Writes use native PhiChain data, not RPE JSON. Preserve judgments unless explicitly requested. Review actual renders using inspect_motion/preview_passage; include full visibility and hold tails. Reread on stale state. After timeouts inspect before retrying. Shared undo requires matching human/agent author. Save only when requested.'''

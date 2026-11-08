@@ -13,12 +13,68 @@ If you are here to chart, do not edit the application's source code, including t
 
 ## Live editing workflow
 
-- Assume PhiChain is running with its MCP bridge and a project open. The live editor is the single source of truth. Read fresh context and the affected passage before every edit, including the user's latest manual changes. Do not overwrite them with an older snapshot.
-- If the editor or project is unavailable, report the prerequisite rather than creating an offline chart session. Do not maintain a parallel standalone chart state or authoring server.
+- The live editor is the single source of truth. Read fresh context and the affected passage before every edit, including the user's latest manual changes. Do not overwrite them with an older snapshot.
+- If no editor is running, start one as described in [Starting the editor](#starting-the-editor). If it cannot be started, or the MCP entry is not connected, report the prerequisite rather than creating an offline chart session. Do not maintain a parallel standalone chart state or authoring server.
 - State the intended range and concrete result briefly before editing. Identify the anchor, response notes, holds, and decorative lines involved; change only the requested layers.
 - Validate the proposed change with a dry-run, then apply it with current session/revision guards and shared undo history. If the revision changes, reread the passage and reconcile the edit.
 - Keep each coherent change independently undoable. Save completed live edits and update the current project records with the result and any remaining uncertainty.
 - Use existing editor capabilities, including moving and reusing judgment lines, before considering development work. A charting request does not authorize adding editor or MCP features. Explain any material difference between a requested effect and an available substitute.
+
+## Editor tools
+
+Two PhiChain MCP entries exist: `phichain` (13 tools) and the experimental `phichain-agent` (27 tools: 10 of the base tools plus 17 authoring tools). Enable only one per session. The steps below use `phichain-agent` names; on the base `phichain` entry, use `get_context` for `editor_context`, `save` for `project_save`, and `preview` (seconds only) for `editor_navigate`. Exact arguments and limits are in [the base reference](mcp-reference/index.html) and [the agent reference](mcp-reference/agent.html). If neither entry is connected, report it; do not drive the editor through another route.
+
+### Starting the editor
+
+No MCP tool launches the editor; start it with a shell command from `main/`. The MCP entry is registered with an `--endpoint` file path and rereads that file on every call, so it can be connected before the editor starts. The editor writes the file when it is ready and removes it on a clean exit.
+
+1. **Check first.** Call `editor_status`. If it succeeds, an editor is already running on that endpoint: use it, and never start a second one on the same endpoint. An error ending in `No such file or directory: '<endpoint path>'` means no editor is running.
+2. **Choose a mode.**
+   - **Window (GUI):** use this when the user will watch, play back audio or edit alongside you. Edits appear live in their window and share their undo history.
+   - **Headless:** use this for unattended work, batch jobs, tests or when nobody needs to watch. There is no window and no sound; playback is a silent clock.
+3. **Launch it in the background** (it keeps running), from `main/`, using the endpoint path the MCP entry was registered with:
+
+   ```sh
+   # Window
+   cargo run -p phichain -- --mcp-endpoint "$PWD/.phichain-mcp.json"
+   # Headless
+   cargo run -p phichain -- --headless --mcp-endpoint "$PWD/runtime/headless-endpoint.json"
+   ```
+
+   Add `--project /absolute/path/to/project` to open a project at launch. The first run compiles, which can take several minutes. Wait until the endpoint file exists, then call `editor_status`, check that `headless` matches the mode you chose, and poll until `pending` is null.
+4. **Register the MCP entry once** (Codex example; use one PhiChain entry per session and the same endpoint path as the launch):
+
+   ```sh
+   codex mcp add phichain-agent -- python3 "$PWD/tools/phichain-mcp/agent_server.py" --endpoint "$PWD/.phichain-mcp.json"
+   ```
+
+Rules:
+
+- Launch the build from this checkout (`cargo run`, or `target/debug/phichain` with `CARGO_MANIFEST_DIR="$PWD/phichain-editor"` set). `apps/PhiChain.app` is the unmodified upstream release with no MCP bridge, so nothing can connect to it.
+- An existing endpoint file whose `pid` is no longer running is stale, left by a crash. Confirm the process has exited before deleting the file. The editor refuses to replace an endpoint file that already exists.
+- Do not restart or close a window editor that holds unsaved work; ask the user to save first.
+- Headless mode does not autosave: save (`project_save`) before stopping. Stop only a headless editor you started yourself, and never open one project in two editors.
+- To stop a headless editor, `kill` the `pid` from `editor_status`. It does not handle the signal cleanly, so its endpoint file stays behind: once `kill -0 <pid>` fails, delete the file. A window editor is the user's: ask them to close it, and if its file remains after its `pid` has exited, delete it.
+- Endpoint files contain an access token. They are git-ignored (`/.phichain-mcp.json`, `/runtime/*endpoint*.json`); do not commit or share them.
+
+### Typical sequence
+
+1. `editor_status`, then `open_project` (or `create_project`), polling `editor_status` until `pending` is null.
+2. `editor_context`. It returns the `session` and `revision` that every later read and write must carry.
+3. Look: `read_section` for a beat range, `chart_query` to filter and sort notes, `chart_read` for exact fields. Run `chart_templates` before creating objects.
+4. Change: `chart_patch` for a few named fields, `chart_generate` for a patterned run of new notes, `chart_transform` for one formula across many IDs, `chart_script` for anything spanning several objects. Always send `dry_run: true` first, read the before/after list, then repeat with `dry_run: false`. `apply_edits` is the older equivalent: it replaces whole notes and has no dry run.
+5. Check: `diagnose` for structure, then `preview_passage` (at most 12 seconds) to look at the rendered result. `inspect_motion` gives frame-by-frame positions when line motion matters. A clean `diagnose` result is not evidence of quality or playability.
+6. `project_save` only when the work is complete or the user asks.
+
+### Practical details
+
+- Beats are `[whole, numerator, denominator]`: `[4,1,2]` is beat 4.5. IDs are opaque strings that are valid only in the current session.
+- A stale `revision` fails without changing anything. Reread, then redo the edit; never reuse an old snapshot.
+- `history` undoes one shared step and requires `author` to match the next step's owner. Undo only your own latest batch unless the user asks.
+- `chart_transform`'s `where` filter compares numbers only; a text test such as `kind=='tap'` is an error. Select by `ids` from `chart_query` instead.
+- Projects created before 2026-11-06 start with the first line at opacity 0. If `diagnose` reports `invisible_line` on every note, check that line's opacity events before anything else.
+- `line_manage`, `curve_notes`, `animate_selection` and `bpm_set` change line structure, generated notes, motion and timing. Use them only when the task calls for those layers.
+- `preview_passage` and `inspect_motion` need `target/debug/phichain-renderer` built from the current checkout. A `failed to load built-in resource pack` error means the binary is stale: rebuild it with `cargo build -p phichain-renderer`.
 
 ## Terminology and timing
 
@@ -102,6 +158,7 @@ For autonomous performance authoring, apply the [baseline movement and effect ca
 - For alternating-travel passages, use left/right alternation as the default fresh-hit order and give both fingers coherent spatial progressions. Alternation alone does not establish movement: compare successive actions of the SAME finger, not adjacent notes in chart order. Other passage styles may use different hand orders. Finger identity is not a fixed screen half; plan crossings, entry, exit and recovery explicitly.
 - Plan the hand-action sequence before placing notes. For four ordered positions 1, 2, 3, 4, compare proximity-based L,L,R,R with alternating L,R,L,R: the latter makes the left finger travel 1→3 and the right finger 2→4. Greater travel can support a more satisfying alternating rhythm; minimizing travel is not a quality objective. A hand may enter the opposite screen half without changing its identity. Check both fingers' timing and relative positions rather than assuming that crossing the center means the hands must collide.
 - Mirrored movement is equally valid: 4→3→2→1 is a valid counterpart to 1→2→3→4. For a corresponding mirrored fingering, R,L,R,L gives R:4→2 and L:3→1. Do not require every phrase to ascend or start with L. Choose the leading hand from the preceding phrase, mirror spatial targets and intended hand roles together when appropriate, and check the entry, return and exit. A spatial mirror does not require reversing hit timing or adding visual animation.
+- **User correction (2026-11-07):** in dense streams (a 168 BPM sixteenth wide-travel study the user otherwise rated good), most players would not use L,R for the majority of the chart; they would use multi-finger. Design so the stream reads well under multi-finger play too, and do not present two-finger alternation as the expected execution of a dense stream.
 - Watch for sudden same-hand consecutive fresh hits (L,L or R,R) within an otherwise alternating passage, especially at phrase joins, mirrors and hand-role exchanges. These double taps are not inherently incorrect, but they increase difficulty and can spoil the established alternating feel. Intentional double taps MUST follow the music very strictly: identify the concrete rhythmic or phrasing reason for both their timing and the break in alternation. An arbitrary double tap is unacceptable; calling it intentional, adding variety or increasing difficulty is not sufficient justification. Audit the hand sequence across boundaries, including rests and elapsed time. Evaluate actual intended or plausible fingering, not merely whether two notes lie on the same screen half; same-hand double taps can occur at different positions.
 - Preserve empty rhythmic slots when analyzing hand order. In `LRLRLRL_RLRLRLR_` and `LRLRLRL_LRLRLRL_`, `_` means an empty slot/rest with no playable note; both are valid examples supplied by the user. After the rest, the next group may start with the opposite hand or the same hand. Do not remove the rests and then misclassify the resulting apparent L,L adjacency as an uninterrupted double tap, or force alternation across every rest. Assess the actual timing, musical grouping and recovery; this does not authorize inserting arbitrary gaps to excuse poorly placed double taps.
 - Design coordinated two-hand travel as well as independent hand paths: the hands can move across the playfield as a pair while fresh hits remain alternating. Assess each hand's successive targets (every other hit in a strict alternating stream), including substantial lateral translation and purposeful returns. Nearby consecutive opposite-hand notes can coexist with broad same-hand travel. Establish a readable movement cell through repetition, then use mirrors, returns and anchor-role exchanges as deliberate variations.
@@ -135,6 +192,7 @@ For autonomous performance authoring, apply the [baseline movement and effect ca
 
 ### Pattern families and concrete design records
 
+- Guidance and hand-order design only matter when the speed constrains fingering. In slow passages (the rejected 126 BPM Sonnet study, 2026-11-07) any fingering works, so there is nothing to guide and L,R order is irrelevant. Do not build a slow section around guidance cells.
 - Use **引导 / Guidance** to establish intended hand choices through the preceding playable sequence. Read [the guidance principle](chart-design.md#guidance-intended-hands-through-progressive-repetition). The user's example gradually develops an intuitive left/right-separated1,3,2,4 cell into1,2,3,4 while preserving the learned L,R,L,R order. Repetition and incremental position changes can carry hand roles across the screen; internal hand labels alone cannot. Record what establishes the allocation and what remains recognizable across changes, including section joins. This is player-readable phrasing, not compulsory note animation, an enforced fingering, or a reason to manufacture musical repeats.
 
 Before authoring one of these styles, read its linked reference and feedback. The user names these three passage-level families **位移交互**, **卡手爆发**, and **双单双**. Their English labels are local working translations. Do not force every dense passage into one family or treat the families as exclusive.
@@ -161,7 +219,9 @@ Before authoring one of these styles, read its linked reference and feedback. Th
 
 ### Four-key and moving multi-finger arrangements
 
-- The user names the four current 4K categories **叠、技、乱、切**, corresponding in this conversation to Jack, Tech, Speed, and Stream/Stamina. Use these Chinese names instead of the earlier assistant labels 叠、技、速、耐. These are separate from the three two-finger movement families above.
+- The user names the four current 4K categories **叠、技、乱、切**, corresponding in this conversation to Jack, Tech, Speed, and Stream/Stamina. Use these Chinese names instead of the earlier assistant labels 叠、技、速、耐. These are separate from the three two-finger movement families above. **Correction (2026-11-07):** in practice multi-finger (键盘) charts are described as either **Jack** or **Stream**; do not organize a multi-finger chart around 技 / 乱 as separate textures.
+- **Terminology (user, 2026-11-07):** **键盘 / jianpan** is the usual term for multi-finger charts. **多押 / duoya** means several notes pressed at the same time (simultaneous hits, chords); it does not mean multi-finger.
+- **User correction (2026-11-07), moving multi-finger:** a Sonnet study that crammed notes into one shared central window was rejected ([study](../../charts/silent/sonnet-styles-2026-11-07/README.md)). The player has two independent hands, each with its own working region (for example left 0.1–0.4, right 0.4–0.7). Movement means one hand shifting its region on its own, e.g. right-hand notes at 0.6 then 0.9 move the right hand right while the left stays. The hands are not tied together and do not share one window. Keep the finger allocation fairly straightforward to read, though not strictly fixed.
 - **Jack speed uses a sixteenth-note BPM convention in this user's terminology.** A "150 BPM jack" means repeated strikes 100 ms apart (150 quarter-note BPM, sixteenths), not 200 ms apart. The existing exercise uses eighth-note chord repeats at an editor tempo of 150 BPM: its effective jack speed is **75 BPM**, with 200 ms repeat intervals. Report editor/song tempo, subdivision, actual repeated-column interval, and equivalent jack BPM separately. For a regular repeat interval `dt` in seconds, equivalent jack BPM is `60 / (4 * dt)`. Count simultaneous chord members separately as objects, not as sequential jack strikes; a two-note chord every 200 ms does not become a 150 BPM jack because its object density is 10 notes/s. Repeated-column intervals and group boundaries still need checking when chords change.
 - [The four 10-second studies](../../charts/silent/silent-150-four-key/README.md) now have user feedback: 技、乱、切 are "pretty much correct"; 叠 received the speed correction above. Keep the original chart timing as evidence unless a revision is requested. Their fixed four positions were an isolation exercise, not the default geometry for Phigros multi-finger charting. A 10-second 切 excerpt illustrates the texture; it cannot certify sustained stamina difficulty. The Chinese 乱 label does not authorize arbitrary random note placement.
 - For an explicitly fixed four-key exercise, analyze four candidate fingers and simultaneous subsets of lanes. Do not force two-finger alternation or wide travel onto that stationary task. Distinguish per-finger repetition, within-hand coordination, overall onset speed, chord density, and duration/recovery.

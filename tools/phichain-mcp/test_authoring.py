@@ -100,6 +100,14 @@ class AuthoringTests(unittest.TestCase):
         tools=json.loads(process.stdout.splitlines()[1])['result']['tools']
         self.assertEqual({t['name'] for t in tools},set(agent_server.BY_NAME))
         self.assertIn('chart_script',{t['name'] for t in tools});self.assertIn('inspect_motion',{t['name'] for t in tools})
+    def test_agent_catalog_has_one_name_per_job(self):
+        names={t['name'] for t in agent_server.TOOLS}
+        self.assertEqual(len(agent_server.TOOLS),27)
+        for removed,kept in [('get_context','editor_context'),('save','project_save'),('preview','editor_navigate'),('chart_tools','agent_tools')]:
+            self.assertNotIn(removed,names);self.assertIn(kept,names)
+        self.assertNotIn('get_context',' '.join(t['description'] for t in agent_server.TOOLS))
+        response=self.adapter.dispatch({'jsonrpc':'2.0','id':1,'method':'tools/call','params':{'name':'get_context','arguments':{}}})
+        self.assertEqual(response['error']['message'],'Unknown tool')
 
 
 @unittest.skipUnless(shutil.which('node'),'Node.js required')

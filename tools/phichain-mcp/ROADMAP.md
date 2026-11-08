@@ -68,8 +68,10 @@ Existing saved layouts receive this pane once. MCP tool catalogs are unchanged.
 
 Explicitly requested by the user on 2026-10-27: retain PhiChain as the live editor
 and port the rpe-next Agent chart-write vocabulary into an MCP server. The new
-`agent_server.py` is a separate experimental entrypoint with 31 tools; the minimal
-13-tool `server.py` entrypoint remains available. This request expands the
+`agent_server.py` is a separate experimental entrypoint, now with 27 tools; the minimal
+13-tool `server.py` entrypoint remains available. On 2026-11-06 the user asked to remove
+duplicate tools: the agent entry dropped `get_context`, `save`, `preview` and `chart_tools`
+in favour of `editor_context`, `project_save`, `editor_navigate` and `agent_tools`. This request expands the
 previous user-approved scope for this branch.
 
 Implemented: ID-keyed native chart reads and queries, partial patch, vendored safe

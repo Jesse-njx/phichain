@@ -81,7 +81,7 @@ is initialized; native chart entities, editing commands, undo and save are share
 the GUI implementation. The current executable still links GUI dependencies.</p>
 <p>Call editor_status, then create_project with absolute path/music_path and optional
 illustration_path/meta. The destination must be new with an existing parent. MP3/WAV/OGG/FLAC
-and PNG/JPG/JPEG are validated and copied; sources remain unchanged. Poll editor_status
+and PNG/JPG/JPEG are validated and copied; sources remain unchanged. The new chart has one visible judgment line (opacity 255). Poll editor_status
 until pending=null, verify last_error=null, then open_project with created_path and poll
 again. An opened project supplies session/revision. Save before guarded close_project.
 Creation does not open automatically; existing-project audio replacement is not exposed.</p>
@@ -165,7 +165,7 @@ visible lifetime through judgment and hold tails; never infer occupancy from hit
 approximate fitting occurs. Default line budget 24 counts decoration too; explicitly raise it for
 larger charts. Review results with inspection and passage preview. Refresh the editor and MCP
 client after rebuilding.</p>
-<div class="notice">This branch also implements an alternative <a href="agent.html">31-tool Agent authoring MCP</a> with patch, transform, generate and script writes. The 13 tools below belong to the minimal server.py entrypoint.</div>
+<div class="notice">This branch also implements an alternative <a href="agent.html">27-tool Agent authoring MCP</a> with patch, transform, generate and script writes. The 13 tools below belong to the minimal server.py entrypoint.</div>
 <h2 id="catalog">13-tool reference</h2>
 <p>Descriptions and schemas below come directly from <code>tools/phichain-mcp/server.py</code>.</p>''')
 for tool in server.TOOLS:

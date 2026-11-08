@@ -108,7 +108,7 @@ def execute(name, args, bridge, catalog):
             result['authoring_model'] = 'ID-keyed native document; chart_read path="" lists fields'
             result['capabilities'] = [t['name'] for t in catalog]
         return result
-    if name in ('chart_tools', 'agent_tools'):
+    if name == 'agent_tools':
         query = args.get('query', '').lower()
         tools = [t for t in catalog if (not query or query in (t['name'] + ' ' + t['description']).lower()) and (not args.get('names') or t['name'] in args['names'])]
         return {'tools': tools, 'count': len(tools), 'activation': 'All listed tools are already advertised by tools/list'}

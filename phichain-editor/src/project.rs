@@ -323,6 +323,25 @@ fn unload_project_system(
     }
 }
 
+/// The chart written into a newly created project: one judgment line, fully visible.
+///
+/// The shared line default starts at opacity 0, so new lines added later stay hidden
+/// until they are styled. The first line of a new project is where notes go first,
+/// so it starts visible (255).
+pub(crate) fn new_project_chart() -> PhichainChart {
+    use phichain_chart::event::{LineEventKind, LineEventValue};
+
+    let mut chart = PhichainChart::default();
+    for line in &mut chart.lines {
+        for event in &mut line.events {
+            if event.kind == LineEventKind::Opacity {
+                event.value = LineEventValue::constant(255.0);
+            }
+        }
+    }
+    chart
+}
+
 /// Create a new empty project
 pub fn create_project(
     root_path: PathBuf,
@@ -352,7 +371,7 @@ pub fn create_project(
     let meta_string = serde_json::to_string_pretty(&project_meta)?;
     std::fs::write(project_path.meta_path(), meta_string).context("Failed to write meta")?;
 
-    let chart_string = serde_json::to_string_pretty(&PhichainChart::default())?;
+    let chart_string = serde_json::to_string_pretty(&new_project_chart())?;
     std::fs::write(project_path.chart_path(), chart_string).context("Failed to write chart")?;
 
     Ok(())
@@ -432,6 +451,16 @@ mod tests {
             serde_json::from_str(&std::fs::read_to_string(project_dir.join("chart.json")).unwrap())
                 .unwrap();
         assert_eq!(chart.lines.len(), 1);
+        let opacity = chart.lines[0]
+            .events
+            .iter()
+            .find(|event| event.kind == phichain_chart::event::LineEventKind::Opacity)
+            .expect("new line has an opacity event");
+        assert_eq!(
+            opacity.value,
+            phichain_chart::event::LineEventValue::constant(255.0),
+            "the first line of a new project must be visible"
+        );
 
         // Verify no illustration was created
         assert!(ProjectPath(project_dir).illustration_path().is_none());

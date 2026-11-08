@@ -59,6 +59,8 @@ mode, not a separate dependency-minimized build.
    `illustration_path` and `meta` (name, composer, charter, illustrator, level).
 3. Poll `editor_status` until `pending` is null. Check `last_error` is null and
    use `created_path` for `open_project`. Creation does not open automatically.
+   The new chart has one judgment line at opacity 255. Projects created before
+   2026-11-06 started that line at opacity 0 (invisible).
 4. Poll again until `project` is present and `last_error` is null. Obtain fresh
    guards from `get_context`/`editor_context`, then edit, undo/redo and save normally.
 5. Save with fresh guards before `close_project`; wait for `pending` and `project`
@@ -126,7 +128,7 @@ source/project/revision and commits one undoable batch. This adds no MCP command
 | Tool | Behavior |
 | --- | --- |
 | `editor_status` | Runtime mode, project, pending lifecycle operation, last error and created path; works without a project. |
-| `create_project` | Create a new project and copy/validate music and optional cover from absolute paths; poll status, then open it. |
+| `create_project` | Create a new project and copy/validate music and optional cover from absolute paths; poll status, then open it. The new chart has one visible judgment line (opacity 255). |
 | `open_project` | Open an existing native project without dialogs; poll status until loaded. |
 | `close_project` | Guarded close; refuses unsaved work. |
 | `get_context` | Project/audio file paths, metadata, BPM, offset, line hierarchy, selected objects, current beat, audio and chart time, playback and history state. |
@@ -478,8 +480,10 @@ codex mcp add phichain-agent -- python3 "$PWD/tools/phichain-mcp/agent_server.py
 Restart/refresh the MCP client afterward. Prefer enabling one PhiChain entry in a
 chat to avoid duplicate tool names. Do not restart an editor containing unsaved
 work without saving through the normal UI first. The existing `server.py` still
-advertises 13 tools; `agent_server.py` advertises those 13 plus
-18 authoring tools (31 total). Python 3.9+ supports patch/read operations; **Node.js
+advertises 13 tools. `agent_server.py` advertises 27: 10 of those base tools plus
+17 authoring tools. It omits the base `get_context`, `save` and `preview`, because
+its `editor_context`, `project_save` and `editor_navigate` do the same jobs; each job
+has one tool name. Python 3.9+ supports patch/read operations; **Node.js
 22.13+ with permission-mode support** is additionally required for transform,
 generate and JavaScript scripts. No npm packages are required. `node` must be on
 the MCP process's PATH. Render tools retain their renderer/ffmpeg/GPU prerequisites.
@@ -501,8 +505,8 @@ the MCP process's PATH. Render tools retain their renderer/ffmpeg/GPU prerequisi
 | `editor_navigate` | Seek/play/pause with explicit audio seconds, chart seconds or beats. |
 | `editor_view` | Select editable objects and optionally their line. |
 | `diagnose` | Guarded native structural/motion checks. |
-| `chart_tools`, `agent_tools` | Discover actual tool descriptions/schemas, no hidden activation. |
-| `project_save` | Alias of guarded native save. |
+| `agent_tools` | Discover actual tool descriptions/schemas, no hidden activation. |
+| `project_save` | Guarded native save (replaces the base `save` in this entry). |
 
 ### Candidate document and atomic commits
 

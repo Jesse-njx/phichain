@@ -6,7 +6,7 @@ research/arrangement-training. IN files are reused from that corpus after a
 checksum check; AT files are fetched from the same pinned commit and verified
 against the pinned Git tree.
 
-Representation: the pure configuration from tools/pure-configuration
+Representation: the pure configuration from agent-tools/pure-configuration
 (`flatten`, the converter used for the QQ bot). Every note is kept, on one static
 horizontal line, at its head-time horizontal position. Each note is four numbers,
 [time_s, type, x, hold_s]: time (relative to the window start in windows), type
@@ -205,7 +205,7 @@ def main():
     with gzip.open(out / "windows.json.gz", "wt") as f:
         json.dump(windows, f, ensure_ascii=False, separators=(",", ":"))
     total = lambda key, rs=rows: sum(r[key] for r in rs)
-    stats = dict(config=CONFIG, since=args.since, source=lock, representation="tools/pure-configuration flatten()",
+    stats = dict(config=CONFIG, since=args.since, source=lock, representation="agent-tools/pure-configuration flatten()",
                  charts=len(rows), songs=len(songs), levels=dict(collections.Counter(r["level"] for r in rows)),
                  totals={k: total(k) for k in ("notes", "windows", "window_unique_notes", "offscreen_x_notes")},
                  splits={s: dict(songs=sum(v == s for v in split.values()), charts=sum(r["split"] == s for r in rows),

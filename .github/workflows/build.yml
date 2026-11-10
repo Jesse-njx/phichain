@@ -11,6 +11,9 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agent-tools/Phichain
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +31,7 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-            target/
+            agent-tools/Phichain/target/
           key: ${{ runner.os }}-cargo-check-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-check-
@@ -73,6 +76,9 @@ jobs:
             target: aarch64-apple-darwin
 
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: agent-tools/Phichain
 
     steps:
       - uses: actions/checkout@v4
@@ -91,7 +97,7 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-            target/
+            agent-tools/Phichain/target/
           key: ${{ runner.os }}-cargo-build-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-build-${{ matrix.target }}-
@@ -108,7 +114,7 @@ jobs:
         id: version
         uses: SebRollen/toml-action@v1.2.0
         with:
-          file: phichain-editor/Cargo.toml
+          file: agent-tools/Phichain/editor/Cargo.toml
           field: package.version
 
       # Dev: 0.1.0+build.10
@@ -133,7 +139,7 @@ jobs:
       - name: Update version in Cargo.toml
         uses: colathro/toml-editor@1.1.0
         with:
-          file: phichain-editor/Cargo.toml
+          file: agent-tools/Phichain/editor/Cargo.toml
           key: package.version
           value: ${{ steps.full_version.outputs.phichain_version }}
 
@@ -162,7 +168,7 @@ jobs:
             cp ./target/${{ matrix.target }}/release/phichain-renderer "./build/phichain-renderer"
           fi
 
-          mv LICENSE README.md README_en.md assets phichain-editor/lang ./build
+          mv ../../LICENSE README.md README_en.md assets editor/lang ./build
 
       - name: Move Windows files
         if: matrix.platform == 'windows'
@@ -174,4 +180,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.build_name.outputs.build_name }}
-          path: build
+          path: agent-tools/Phichain/build

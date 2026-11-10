@@ -7,7 +7,7 @@
 AutoPhiChain is a fork of [phichain](https://github.com/Ivan-1F/phichain), a
 Phigros chart editor, plus the MCP tools, agent prompts and research that aim
 to make charting autonomous. The upstream editor README is archived as
-[PHICHAIN-README.md](PHICHAIN-README.md) (with its translations).
+[agent-tools/Phichain/README.md](agent-tools/Phichain/README.md) (with its translations).
 
 This repository is the `main/` folder of a private workspace. Charts, audio and
 generated artifacts live beside it, outside Git, and are never published. See
@@ -18,7 +18,7 @@ generated artifacts live beside it, outside Git, and are never published. See
 Today an agent charts well when directed passage by passage. The goal is the
 shift from an agent that follows charting instructions to one that makes the
 charting decisions itself, with the user as reviewer, not director. Full
-roadmap: [docs/roadmap/README.md](docs/roadmap/README.md).
+roadmap: [research/roadmap/README.md](research/roadmap/README.md).
 
 Charting breaks down into three steps, with a fourth above them:
 
@@ -41,12 +41,10 @@ Every term has a three-character code: **component letter, aspect letter, item
 digit**, for example `MG1` = music understanding, grid, tempo. Component letters
 are N, M, P, G above and X for cross-cutting vocabulary (claim status, evidence
 source, time scales, records). The digit is an identifier, never reused. The
-single registry is [docs/terminology.md](docs/terminology.md); new terms are
+single registry is [prompts/shared/terminology.md](prompts/shared/terminology.md); new terms are
 added there first, and no other document defines competing codes.
 
 ## Read next
 
-- [AGENTS.md](AGENTS.md): editor and MCP development, Git rules, verification.
-- [docs/AGENTS.md](docs/AGENTS.md): chart authoring and review, the live editor workflow, the user's accumulated corrections.
-- [docs/terminology.md](docs/terminology.md): the code registry.
-- [docs/roadmap/](docs/roadmap/README.md): the three steps, milestones and current state.
+- [prompts/](prompts/README.md): the system agents follow, including chart authoring and review, the live editor workflow, editor development and the term registry.
+- [research/](research/README.md): how to improve the system, including the roadmap and where each rule came from.

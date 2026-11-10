@@ -1,28 +1,20 @@
-# PhiChain development
+# AutoPhiChain
 
-This repository is our fork of Ivan-1F/phichain. Keep the editor and its MCP server together here.
+This repository holds tools and the prompts that guide agents. Run commands from this folder unless a prompt says otherwise.
 
-- `origin`: https://github.com/Jesse-njx/phichain.git
-- `upstream`: https://github.com/Ivan-1F/phichain.git
-- MCP stdio server: `tools/phichain-mcp/server.py`
-- Live editor bridge: `phichain-editor/src/mcp.rs` and `phichain-editor/src/mcp/`
+| Path | Contents |
+| --- | --- |
+| `agent-tools/` | Tools an agent uses to do the work, including the Phichain editor and MCP server in `agent-tools/Phichain/` |
+| `research-tools/` | Tools for designing the system: frameworks, evaluation, calibration and model training |
+| `prompts/` | The system: everything an agent follows |
+| `research/` | How to improve the system |
+| `runtime/` | Local model and Python environment |
 
-## Development scope and architecture
+Read the file for your task before starting:
 
-This file covers editor and MCP development. Before any chart authoring or chart review, read `docs/AGENTS.md`, even when operating from the repository root. That file contains the charting workflow; song-specific requirements and progress belong in the corresponding local project records.
+- Chart authoring or review: `prompts/charting/rules.md`
+- Editor or MCP development: `prompts/development/editor-and-mcp.md`
+- Song analysis: `prompts/analysis/song-analysis.md`
+- Improving the system: `research/README.md`
 
-The product direction is autonomous charting. It is recorded in `docs/roadmap/README.md`, and note arrangement is the current focus. The roadmap sets direction only; it does not authorize any specific tool.
-
-Keep the MCP interface minimal. Do not add speculative AI-charting tools, presets, planning frameworks, or analysis workflows. The user will design and request new capabilities, guided by the roadmap. Do not maintain a parallel standalone chart state or authoring server. The separate phigros-chart-mcp repository is historical reference, not a runtime dependency.
-
-Keep local charts, audio, credentials and generated artifacts in the workspace outside this repository; do not publish them.
-
-## Git and previews
-
-Never use `codex/` in branch names. Use descriptive branch names. Do not open rendered artifacts in Codex; provide a link for the user to open in a browser.
-
-## Verification
-
-Whenever the MCP server or editor bridge is edited, update the documentation in the same task. Keep `tools/phichain-mcp/README.md` and the HTML reference at `docs/mcp-reference/index.html` accurate for the current tools, arguments, behavior, and limits. Update `docs/mcp-reference/build.py` as needed, rebuild with `python3 docs/mcp-reference/build.py`, and check its schema examples and internal links. Update `tools/phichain-mcp/ROADMAP.md` when scope changes. Provide the HTML link without opening it in Codex.
-
-Run `python3 -m unittest discover -s tools/phichain-mcp -p 'test_*.py'` for adapter changes and `cargo test -p phichain mcp::` for Rust bridge changes.
+The index and the rule separating `prompts/` from `research/` are in `prompts/README.md`. What belongs in each tool folder is in `agent-tools/README.md` and `research-tools/README.md`.

@@ -23,7 +23,7 @@ samples are not designed yet.
 
 ## Representation
 
-Charts are flattened with `flatten()` from `tools/pure-configuration/convert.py`,
+Charts are flattened with `flatten()` from `agent-tools/pure-configuration/convert.py`,
 the pure-configuration converter used for the QQ bot. It keeps every note: each
 note's horizontal judgment position at its head time (line translation and
 rotation included) goes onto one static horizontal line. Line performance, y,

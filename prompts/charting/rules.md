@@ -1,0 +1,251 @@
+# PhiChain charting
+
+This file governs chart authoring and review in the local workspace, including operations launched from the repository root. Read the relevant song's current project records before editing. Keep song-specific design decisions, section maps, progress, and evidence in those records rather than in the development guide.
+
+If you are here to chart, do not edit the application's source code, including the editor, renderer, or MCP implementation. Work through existing chart-editing capabilities. If a requested effect requires application changes, explain the limitation; only undertake source-code changes when the user explicitly requests development work.
+
+## Local reference charts
+
+- For Phigros IN references, use the downloaded originals listed under [Official IN charts](../shared/references.md#official-in-charts), which also names the manifest and the coverage and provenance notes.
+- The current local snapshot covers 327 songs (game metadata version 4.0.1.2), with only Random variant `.0` retained. Read these local files directly instead of browsing Swordalt, phigros.tools, or fetching the same charts from GitHub again. Website URLs in older study records are historical provenance, not the current retrieval workflow.
+- Use the original `raw/` charts for studying arrangement, judgment-line motion, and effects. The angle-filtered, single-line training data is a derived representation and must not replace the original reference. Keep source files unchanged; make requested chart edits through the live editor workflow below.
+- This collection contains IN chart JSON only. For AT, audio, or older-version evidence, first check existing local study manifests such as the [audio corpus](../shared/references.md#audio-corpus) and the relevant song's records. Report any remaining coverage gap; fetch missing or newer assets only when the task calls for them.
+
+## Live editing workflow
+
+- The live editor is the single source of truth. Read fresh context and the affected passage before every edit, including the user's latest manual changes. Do not overwrite them with an older snapshot.
+- If no editor is running, start one as described in [Starting the editor](#starting-the-editor). If it cannot be started, or the MCP entry is not connected, report the prerequisite rather than creating an offline chart session. Do not maintain a parallel standalone chart state or authoring server.
+- State the intended range and concrete result briefly before editing. Identify the anchor, response notes, holds, and decorative lines involved; change only the requested layers.
+- Validate the proposed change with a dry-run, then apply it with current session/revision guards and shared undo history. If the revision changes, reread the passage and reconcile the edit.
+- Keep each coherent change independently undoable. Save completed live edits and update the current project records with the result and any remaining uncertainty.
+- Use existing editor capabilities, including moving and reusing judgment lines, before considering development work. A charting request does not authorize adding editor or MCP features. Explain any material difference between a requested effect and an available substitute.
+
+## Editor tools
+
+Two PhiChain MCP entries exist: `phichain` (13 tools) and the experimental `phichain-agent` (27 tools: 10 of the base tools plus 17 authoring tools). Enable only one per session. The steps below use `phichain-agent` names; on the base `phichain` entry, use `get_context` for `editor_context`, `save` for `project_save`, and `preview` (seconds only) for `editor_navigate`. Exact arguments and limits are in [the base reference](../../agent-tools/Phichain/mcp/reference/phichain/index.html) and [the agent reference](../../agent-tools/Phichain/mcp/reference/phichain/agent.html). If neither entry is connected, report it; do not drive the editor through another route.
+
+### Starting the editor
+
+No MCP tool launches the editor; start it with a shell command from `main/`. The MCP entry is registered with an `--endpoint` file path and rereads that file on every call, so it can be connected before the editor starts. The editor writes the file when it is ready and removes it on a clean exit.
+
+1. **Check first.** Call `editor_status`. If it succeeds, an editor is already running on that endpoint: use it, and never start a second one on the same endpoint. An error ending in `No such file or directory: '<endpoint path>'` means no editor is running.
+2. **Choose a mode.**
+   - **Window (GUI):** use this when the user will watch, play back audio or edit alongside you. Edits appear live in their window and share their undo history.
+   - **Headless:** use this for unattended work, batch jobs, tests or when nobody needs to watch. There is no window and no sound; playback is a silent clock.
+3. **Launch it in the background** (it keeps running), from `main/`, using the endpoint path the MCP entry was registered with:
+
+   ```sh
+   # Window
+   cargo run --manifest-path agent-tools/Phichain/Cargo.toml -p phichain -- --mcp-endpoint "$PWD/.phichain-mcp.json"
+   # Headless
+   cargo run --manifest-path agent-tools/Phichain/Cargo.toml -p phichain -- --headless --mcp-endpoint "$PWD/runtime/headless-endpoint.json"
+   ```
+
+   Add `--project /absolute/path/to/project` to open a project at launch. The first run compiles, which can take several minutes. Wait until the endpoint file exists, then call `editor_status`, check that `headless` matches the mode you chose, and poll until `pending` is null.
+4. **Register the MCP entry once** (Codex example; use one PhiChain entry per session and the same endpoint path as the launch):
+
+   ```sh
+   codex mcp add phichain-agent -- python3 "$PWD/agent-tools/Phichain/mcp/agent_server.py" --endpoint "$PWD/.phichain-mcp.json"
+   ```
+
+Rules:
+
+- Launch the build from this checkout (`cargo run`, or `agent-tools/Phichain/target/debug/phichain` with `CARGO_MANIFEST_DIR="$PWD/agent-tools/Phichain/editor"` set). `apps/PhiChain.app` is the unmodified upstream release with no MCP bridge, so nothing can connect to it.
+- An existing endpoint file whose `pid` is no longer running is stale, left by a crash. Confirm the process has exited before deleting the file. The editor refuses to replace an endpoint file that already exists.
+- Do not restart or close a window editor that holds unsaved work; ask the user to save first.
+- Headless mode does not autosave: save (`project_save`) before stopping. Stop only a headless editor you started yourself, and never open one project in two editors.
+- To stop a headless editor, `kill` the `pid` from `editor_status`. It does not handle the signal cleanly, so its endpoint file stays behind: once `kill -0 <pid>` fails, delete the file. A window editor is the user's: ask them to close it, and if its file remains after its `pid` has exited, delete it.
+- Endpoint files contain an access token. They are git-ignored (`/.phichain-mcp.json`, `/runtime/*endpoint*.json`); do not commit or share them.
+
+### Typical sequence
+
+1. `editor_status`, then `open_project` (or `create_project`), polling `editor_status` until `pending` is null.
+2. `editor_context`. It returns the `session` and `revision` that every later read and write must carry.
+3. Look: `read_section` for a beat range, `chart_query` to filter and sort notes, `chart_read` for exact fields. Run `chart_templates` before creating objects.
+4. Change: `chart_patch` for a few named fields, `chart_generate` for a patterned run of new notes, `chart_transform` for one formula across many IDs, `chart_script` for anything spanning several objects. Always send `dry_run: true` first, read the before/after list, then repeat with `dry_run: false`. `apply_edits` is the older equivalent: it replaces whole notes and has no dry run.
+5. Check: `diagnose` for structure, then `preview_passage` (at most 12 seconds) to look at the rendered result. `inspect_motion` gives frame-by-frame positions when line motion matters. A clean `diagnose` result is not evidence of quality or playability.
+6. `project_save` only when the work is complete or the user asks.
+
+### Practical details
+
+- Beats are `[whole, numerator, denominator]`: `[4,1,2]` is beat 4.5. IDs are opaque strings that are valid only in the current session.
+- A stale `revision` fails without changing anything. Reread, then redo the edit; never reuse an old snapshot.
+- `history` undoes one shared step and requires `author` to match the next step's owner. Undo only your own latest batch unless the user asks.
+- `chart_transform`'s `where` filter compares numbers only; a text test such as `kind=='tap'` is an error. Select by `ids` from `chart_query` instead.
+- Projects created before 2026-11-06 start with the first line at opacity 0. If `diagnose` reports `invisible_line` on every note, check that line's opacity events before anything else.
+- `line_manage`, `curve_notes`, `animate_selection` and `bpm_set` change line structure, generated notes, motion and timing. Use them only when the task calls for those layers.
+- `preview_passage` and `inspect_motion` need `agent-tools/Phichain/target/debug/phichain-renderer` built from the current checkout. A `failed to load built-in resource pack` error means the binary is stale: rebuild it with `cargo build --manifest-path agent-tools/Phichain/Cargo.toml -p phichain-renderer`.
+
+## Terminology and timing
+
+- Codes such as `MG1`, `NT3` or `XS4` are defined in [terminology.md](../shared/terminology.md), the single registry of terms across note arrangement (N), music understanding (M), performance (P), game design (G) and cross-cutting vocabulary (X). Use its codes and names; do not define competing ones.
+- **纯配置 / Chun Pei Zhi / Pure configuration** means exactly one judgment line carrying every playable note. Merely removing decorative animation while retaining multiple note carriers does not satisfy this request. Modest rotations such as 20–30 degrees do not meaningfully change the configuration by themselves. For the requested no-performance version, use one static receiver and ordinary straight approach; preserve source timing and note types unless rearrangement is separately requested.
+- “Notes” means individual playable objects (tap, hold, drag, or flick), not musical beats. “Notes 1–41” means the first 41 playable objects in chart order, inclusive. Do not silently reinterpret this as beats or include extra simultaneous objects. If simultaneous notes make numbering ambiguous, state the ordering convention or clarify it.
+- Use “beats” for musical timing when the user explicitly refers to beats. Beat positions may also locate a requested note range. Distinguish editor beats from musical note values rather than assuming they are interchangeable.
+- Translate descriptions into concrete timing, positions, durations, note types, and motion before implementation. Resolve material ambiguity using the conversation and current passage; ask only when needed.
+- Distinguish temporal density from scroll speed. Double density means halving the interval between notes; change scroll speed only when requested.
+- State tempo and subdivision separately. At 180 quarter-note BPM, continuous sixteenth notes mean four fresh hits per beat, 12 hits per second, and 83.333 ms between hits. Do not interpret this request as an average density of three hits per second, or count Drag contact checkpoints as fresh hits.
+- For human-recorded rhythms, preserve the original timing evidence, estimate the recording offset, and quantize to the user's specified grid before arranging lanes. Avoid changing the global audio offset merely to correct a recording delay. Verify the rhythm separately from lane placement.
+- Use 32/64-beat phrases and other multiples of 32 as structural clues, not absolute rules. When a section has a different length, inspect pickups, buildups, transitions, and overlaps; record the evidence and uncertainty rather than forcing a boundary.
+
+## Pattern and motion design
+
+### Section difficulty
+
+**Use different difficulty values for different parts of a chart. Never chart a whole song at one difficulty value.**
+
+- Before placing or generating notes, assign every section its own difficulty value from the song's structure, and record the values in the song's project records.
+- Give climaxes the highest values. Give slower sections, and sections intended to be charted sparsely, clearly lower values. Build-ups, verses and returns sit between them according to their role in the song.
+- Treat a target level for the whole chart as the ceiling reached at the climax, not as the value for every section.
+- Decide each value from the section's musical intent. A loud passage is not automatically a climax, and a slow passage is not automatically easy to read.
+- When a note generator takes a difficulty value, such as Mapperatorinator's `difficulty`, generate each section separately with its own value using `start_time` and `end_time`. Convert a Phigros level from 14 to 18 with `level_to_mania_star` in `agent-tools/mania-level/mania_level.py`.
+- A difficulty value is a condition on the generator, not a note count. Check the resulting density of each section against its intent before using the notes.
+
+### Movement and performance density
+
+- Movement coverage and wide-step statistics do not establish interesting play
+  or musical choreography. Four continuously moving crossing lines read as the
+  same noisy animation throughout a song. Design section-specific visual composition and action phrasing from the music, with
+  controlled focus and meaningful changes of role; do not maximize activity or
+  reuse a constant four-line ensemble as a universal solution.
+
+- When a task requests wide travel and sustained performance, sparse decorative
+  punctuation, occasional receiver dips and slowly drifting two-lane note paths
+  do not meet the request.
+- Compose actual wide-travel cells: successive targets of the SAME intended hand
+  must make substantial, articulated excursions, reversals and returns. Slowly
+  interpolating two lane centers across several beats is not a wide-travel cell.
+  Use coordinated hand relationships, learned repeats and controlled variation;
+  do not copy the approved Silent chart's coordinates or cells. Do not impose this
+  style on every rest, sustain or contrasting section.
+- Distinct sections require visibly/playably distinct action grammar, not merely
+  different labels, object counts or slowly shifted lane centers. Record concrete
+  cells, return transformations, anchor exchanges and entry/exit hand states.
+- In designated performance sections, background lines must dance throughout the
+  musical phrase with connected travel, reversals, arrivals and responses. A few
+  isolated sweeps or stationary opacity envelopes do not satisfy sustained dancing.
+  Low visual priority should come from deliberate geometry and contrast, not making
+  the requested performance practically absent. Quiet sections may deliberately rest.
+- For beat-driven receiver jumps, establish a repeating response to the selected
+  rhythmic figure and sustain that phase through its repetitions. Change it at
+  evidenced fills, rests and section changes. Sparse unrelated punctuation every
+  several bars does not satisfy this request. Compose one nonoverlapping motion
+  channel; do not create competing per-note triggers. Small motion during Holds
+  is allowed when contact geometry remains readable and playable.
+- Judge performance over whole active phrases. Report visible-motion coverage,
+  response intervals and actual same-hand trajectories. Event existence, named
+  easing, technical validity and section labels are not acceptance criteria for
+  the requested movement density. Do not silently reduce the requested movement
+  to satisfy self-imposed restraint. Keep manual user review as the quality gate.
+
+Read [Chart design fundamentals for autonomous agents](design.md) before authoring or reviewing chart arrangements. Apply its phrase composition, recurring motifs, transitions, visual priority, spacing, musical grouping, whole-chart contrast, and readability checks as routine design work. These are user-accepted baseline principles, not a requirement for constant animation or a validated emotion-to-effect mapping. Record song-specific decisions in the existing project records.
+
+### Background-line choreography and musical rhythm
+
+For every new judgment-line performance, use the [phrase workflow and review criteria](design.md#compose-line-performance-from-a-musical-phrase). Before generating events, put the target cues, the bank lookup and the chosen reference passage in the song record. Before extending a motif, render a complete statement and its handoff with the target audio. Revise any failed musical or readability check and record the reviewed clip. Apply this once per distinct musical idea and reuse the decision on comparable returns.
+
+For autonomous performance authoring, apply the [baseline movement and effect cadence guide](design.md#baseline-movement-and-effect-cadence). Give each section a default receiving geometry and movement vocabulary. Distinguish repeated accents within one figure, alterations to an ongoing figure, and entrances or exits of a special. Compare whole-phrase coverage and recurrence with the linked official examples, then verify against the song's audio. The measured rates are reference distributions, not per-chart quotas.
+
+- **Background-line movement MUST be 100% on rhythm.** This applies equally to autonomous charting and user-directed work. Every visible motion phrase must follow an identifiable musical rhythm; decorative status does not authorize arbitrary timing. Place perceptual accents—such as changes of direction, arrivals, pulses, flashes, and formation changes—on the chosen musical events. Smooth interpolation between those anchors is allowed; this rule concerns perceived choreography, not snapping every animation frame to a beat.
+- Identify the musical layer driving the background lines before selecting an effect. Drum/percussion-driven choreography is the usual starting point. When the drum figure repeats regularly, preserve a consistent phase and interval between the corresponding visual changes; at constant tempo this normally means constant time intervals. Follow the actual drum pattern, including its rests, syncopations, fills, and tempo changes, rather than imposing an unrelated periodic animation or treating every grid position as an audible drum hit.
+- Main-melody-driven background motion is also valid, but less common: the main melody is usually already represented by the playable notes. When choosing it, follow the actual melody's rhythm and phrasing and explain the background's supporting role. Do not assume that melody-driven decoration is forbidden, or that duplicating the playable melody automatically improves the chart.
+- Rhythm alignment is necessary, but does not establish emotional suitability. The judgment-line bank documents observed mechanisms and source-specific recipes; it is not a validated mapping from musical emotion to visual pattern. Do not infer that a rotation, fan, sweep, or other bank entry fits a passage merely because it exists in an official chart. Base choices on the current passage's audible articulation, intensity, phrasing, and relationship to the playable layer; distinguish evidence from an aesthetic hypothesis.
+- In an autonomous run, prefer restrained, rhythmically justified motion over an elaborate effect with no supported musical purpose. If the driving rhythm cannot be established, leave the background static or omit that decorative phrase rather than inventing timing. In the song's project record, identify the driving layer, concrete beat/time anchors, motion accents, and the reason for choosing the pattern. Review native motion with the corresponding audio to verify their alignment; a silent render can establish geometry, not musical or emotional fit.
+
+### Playable-line visibility and motion
+
+- The user also requests **impact-responsive judgment-line motion**: on selected musical contacts/accents, let the active line visibly dip as if struck by the arriving notes, then recover with an articulated easing profile. Design the perceived contact-to-depression-to-return sequence rather than an unrelated up/down loop. Check actual judgment positions, approaches and sustained contact through the full response. Do not trigger competing overlapping pulses independently for every dense note, or assume one pulse recipe suits every section.
+
+- A playable line may remain visible when no notes are coming if its identity is clear and players will not mistake it for the receiver of notes landing on another line. There is no blanket idle-fade requirement. Fade or subordinate ambiguous competing carriers when needed; derive any reveal from the full incoming-note/hold-tail window rather than only judgment time.
+- Players must be able to tell which line receives the current notes. Keep active playable lines visually distinct from inactive carriers and decoration. Overlapping background lines or persistent unused targets must not suggest false judgment surfaces. Low opacity alone does not resolve a misleading layout.
+- Small rhythmic x/y movement of the active playable line is explicitly welcome when it preserves similar hit regions and readable approach. This is distinct from generic lateral animation added to individual notes. Check actual landing/contact motion, sustained contacts, and transitions; do not assume every small displacement is harmless.
+- Choreography needs perceptible articulation: acceleration, deceleration, impulse, arrival and recovery selected for the musical action. Merely applying a sine-easing label to long, repeated pose-to-pose motion does not establish visible phrasing. Avoid stale slow travel or perceptually uniform-speed movement as the default performance treatment. Align the perceptual accent, not only an event boundary, with an evidenced musical hit; actual drum/percussion accents are a preferred driver when established.
+
+### Player actions and two-finger arrangement
+
+- **位移交互 / Wide-movement trills** is the user's name for the approved style of alternating fresh hits with substantial, coherent same-hand travel, including mirrored forms. Treat it as a particular movement style, not a universal rule for all dense Tap passages or all two-finger charting. The English name is the local working term.
+- Design the player's screen hits and finger movement before selecting note objects. Identify intended fresh hits, assign candidate left/right fingers, and plan each finger's successive contact positions. Musical timestamps alone are not an arrangement.
+- Expect spatial finger movement in ordinary two-finger passages. Stationary repetition should have an explicit purpose, such as an anchor, jack, hand lock or recovery. Do not maximize travel or randomly relocate every hit.
+- For alternating-travel passages, use left/right alternation as the default fresh-hit order and give both fingers coherent spatial progressions. Alternation alone does not establish movement: compare successive actions of the SAME finger, not adjacent notes in chart order. Other passage styles may use different hand orders. Finger identity is not a fixed screen half; plan crossings, entry, exit and recovery explicitly.
+- Plan the hand-action sequence before placing notes. For four ordered positions 1, 2, 3, 4, compare proximity-based L,L,R,R with alternating L,R,L,R: the latter makes the left finger travel 1→3 and the right finger 2→4. Greater travel can support a more satisfying alternating rhythm; minimizing travel is not a quality objective. A hand may enter the opposite screen half without changing its identity. Check both fingers' timing and relative positions rather than assuming that crossing the center means the hands must collide.
+- Mirrored movement is equally valid: 4→3→2→1 is a valid counterpart to 1→2→3→4. For a corresponding mirrored fingering, R,L,R,L gives R:4→2 and L:3→1. Do not require every phrase to ascend or start with L. Choose the leading hand from the preceding phrase, mirror spatial targets and intended hand roles together when appropriate, and check the entry, return and exit. A spatial mirror does not require reversing hit timing or adding visual animation.
+- In dense streams, most players would not use L,R for the majority of the chart; they would use multi-finger. Design so the stream reads well under multi-finger play too, and do not present two-finger alternation as the expected execution of a dense stream.
+- Watch for sudden same-hand consecutive fresh hits (L,L or R,R) within an otherwise alternating passage, especially at phrase joins, mirrors and hand-role exchanges. These double taps are not inherently incorrect, but they increase difficulty and can spoil the established alternating feel. Intentional double taps MUST follow the music very strictly: identify the concrete rhythmic or phrasing reason for both their timing and the break in alternation. An arbitrary double tap is unacceptable; calling it intentional, adding variety or increasing difficulty is not sufficient justification. Audit the hand sequence across boundaries, including rests and elapsed time. Evaluate actual intended or plausible fingering, not merely whether two notes lie on the same screen half; same-hand double taps can occur at different positions.
+- Preserve empty rhythmic slots when analyzing hand order. In `LRLRLRL_RLRLRLR_` and `LRLRLRL_LRLRLRL_`, `_` means an empty slot/rest with no playable note; both are valid examples supplied by the user. After the rest, the next group may start with the opposite hand or the same hand. Do not remove the rests and then misclassify the resulting apparent L,L adjacency as an uninterrupted double tap, or force alternation across every rest. Assess the actual timing, musical grouping and recovery; this does not authorize inserting arbitrary gaps to excuse poorly placed double taps.
+- Design coordinated two-hand travel as well as independent hand paths: the hands can move across the playfield as a pair while fresh hits remain alternating. Assess each hand's successive targets (every other hit in a strict alternating stream), including substantial lateral translation and purposeful returns. Nearby consecutive opposite-hand notes can coexist with broad same-hand travel. Establish a readable movement cell through repetition, then use mirrors, returns and anchor-role exchanges as deliberate variations.
+- Evaluate movement satisfaction and difficulty separately. Predictable alternation and recurring movement cells can feel good while remaining easy; do not automatically add density, awkwardness or complexity to make an approved movement pattern harder. Density and spacing changed together in the approved silent study, so its success does not isolate either variable as the sole cause.
+- Evaluate multiple plausible fingerings, including nearest-hand, continuous alternation, and multi-finger solutions. A two-finger design target means preserving a viable two-finger interpretation; it does not restrict the player to two fingers or require that interpretation to be easiest. Make the intended action phrase readable through entry, repetition and exit; require alternation only when it belongs to the chosen style. Distinguish intended, naturally encouraged and engine-enforced actions. A companion Hold occupies a contact in the two-finger interpretation, not every other finger of the player. Do not call a same-hand group globally forced when extra fingers can redistribute it.
+- Multiple satisfying execution methods can be a design strength. At 150 BPM, sixteenths are 100 ms apart: expect many players to use extra fingers for the fast groups, and treat this alternative as welcome. Preserve the demanding two-finger route and the multi-finger option; do not add restrictions merely to defeat the latter. Evaluate entry, contact continuity and exit for each plausible route. Multi-finger availability does not excuse an incoherent or infeasible two-finger route when two-finger play is requested. Separate difficulty by fingering instead of assigning the intended one-finger repetition burden to every player.
+- Small coordinate changes often do not produce a perceptible hand movement. Evaluate successive same-finger contact regions using actual judgment tolerance and screen scale when available, not only note-center displacement. Check whether a mostly stationary contact position could satisfy the sequence. Do not count such movement as a successful broad travel phrase. If judgment geometry is unavailable, label the movement claim provisional rather than inventing a universal distance threshold. Broad movement still needs rhythm, coherent direction, manageable turns and recovery; do not enlarge every interval indiscriminately.
+- Use Entrance to the Chaos IN as an additional reference for alternating travel across spatial regions. Derive candidate hand paths from timed judgment positions, including line transforms. A source chart's coordinates alone do not establish human fingering or perceived comfort.
+- Calibrate arrangement through controlled short comparisons: preserve rhythm and change one variable, such as same-hand travel span, when a comparison is requested. Record the user's preference and the conditions under which it applies. Prefer testing a specific hypothesis over accumulating unexamined pattern examples. A requested full-length draft authorizes that scope; do not stop at a smaller sample solely because of the usual sample-first rule.
+- Review musical timing and physical arrangement separately, then check their combination. Silent studies can isolate movement preferences. Preserve accepted hit timing while evaluating alternative spatial arrangements; do not claim musical suitability for a silent exercise. Treat playability/comfort predictions as hypotheses that user playtesting can overturn.
+- A locally stationary/repeating hand paired with a traveling opposite hand, followed by a role exchange, is a useful regular two-finger pattern. Do not force both hands to change position on every hit. Assign complete Tap-to-Drag gestures to hands before evaluating releases: the next chronological Tap can belong to the free opposite hand, while the gesture hand recovers before its own next fresh hit.
+- Tap requires a fresh screen hit. Drag requires a finger to be present rather than a fresh hit; use drags primarily for moving contact or deliberate hand locking. Do not count every drag object as an independent strike or add drags to meet a type quota.
+- Flick has two possible performance intentions: a fresh hit followed by a flick, or a flick from existing contact. State which is intended. A standalone flick may naturally invite a fresh hit-and-flick through context; use simultaneous Tap + Flick when that fresh hit must actually be enforced, after checking the target engine's contact behavior. Do not assume every flick requires a new hit.
+- Treat Hold as a stricter initial Tap followed by sustained Drag-like contact requirements. Track its initial hit and subsequent finger occupancy separately. Release is an availability transition, not automatically a new musical strike.
+- Track each finger's contact occupancy, release time, last position and time to its next action. Do not assign a fresh hit to an occupied finger without a valid release or explicitly supported transition. Two-finger feasibility concerns independent simultaneous contacts and fresh-hit requirements, not raw note counts.
+- A nonzero release gap is NOT proof of a good transition. Do not put a fresh Tap immediately after the same finger's last Drag/Hold contact, or immediately after its terminal Flick, forcing a last-moment lift and instant repress. A Flick can be a natural end to a Drag gesture; it should be allowed to finish that gesture. Judge the next same-finger hit in the whole musical/action phrase, including what the other hand can take.
+- Do not manufacture an off-rhythm release solely to make an occupancy checker pass. For example, a sustain ending at 7/8 of a beat with a terminal Flick followed immediately by a Tap on the next beat creates an unintuitive lift/repress. A musically complete short contact-and-flick gesture followed by a naturally spaced next hit can work, including at the same location. There is no universal millisecond threshold that substitutes for this musical/action judgment.
+- Use actual screen-space judgment/contact requirements, including carrier transforms. Note approach animation is not finger travel. Distinguish intended fingering, engine-enforced requirements, naturally encouraged actions and verified player execution.
+- Compose movement as phrases: progression, return, expansion, contraction and purposeful direction changes. Explain a phrase's hit order, each finger's spatial progression, occupancy and entry/exit before implementing it. Use actual musical evidence; do not invent instrument identities or call onset detection a transcription.
+- Default to ordinary straight note approach. Finger travel comes from the successive positions the player must hit or contact, not from cosmetic lateral note motion. Do not add automatic sine drift, per-hand approach swaying, sideways entrance slides or settle-before-hit effects as a default "good animation" treatment. Use exceptional note motion only when the musical flow specifically calls for it or the user explicitly requests that particular effect. Generic requests for good animation do not authorize pervasive lateral sliding.
+- Perfect lane alignment is not a universal requirement. The user accepts small positional misalignments, particularly when other note animation makes them natural. Evaluate the full visible trajectory, readability and actual judgment positions instead of rejecting a phrase solely for an imperfect static grid. This acceptance does not make small offsets equivalent to substantial hand travel or authorize default cosmetic sliding.
+- When a specific note animation is justified, preserve intended hit times and landing positions and account for every affected note's full visible lifetime and hold tail. Hidden note carriers are implementation details, not a reason to add decorative line performance. Study Verrückt IN as a reference for regular two-finger hand movement; extract concrete timed hand-flow examples rather than copying its decorative line motion or treating chart metadata as a hand assignment.
+- Structural checks and autoplay do not prove comfort or quality. Record unresolved fingering and timing assumptions, review representative native renders, and retain human review as the aesthetic/playability check.
+
+- For a new pattern or animation, first implement a short representative sample: usually 4–8 beats for patterns or one complete motion cycle. Let the user review it before extending a new design across a large section. Established, already-approved patterns can be extended directly when requested.
+- Preserve anchor timing and lane rules while arranging responses. Use the requested lane variation, density, and locked-finger changes; do not extrapolate these into an unrequested redesign.
+- Decorative effects must not add playable notes, combo, or scoring. A note displayed early is still playable at its later judgment time; do not call it fake. If the existing format cannot reproduce the requested visual exactly, state the limitation and the proposed substitute clearly.
+- Animate paths and approach speed without changing intended hit times merely to obtain a visual effect. A mirrored judgment position must be handled explicitly rather than inferred from note orientation alone.
+- Reuse judgment lines when compatible, accounting for the entire visible lifetime of every note and hold tail. Avoid event conflicts or resets that affect notes still on screen.
+- A chart's judgment-line limit, when it has one, is in that song's project records.
+
+### Pattern families and concrete design records
+
+- Guidance and hand-order design only matter when the speed constrains fingering. In slow passages any fingering works, so there is nothing to guide and L,R order is irrelevant. Do not build a slow section around guidance cells.
+- Use **引导 / Guidance** to establish intended hand choices through the preceding playable sequence. Read [the guidance principle](design.md#guidance-intended-hands-through-progressive-repetition). The user's example gradually develops an intuitive left/right-separated1,3,2,4 cell into1,2,3,4 while preserving the learned L,R,L,R order. Repetition and incremental position changes can carry hand roles across the screen; internal hand labels alone cannot. Record what establishes the allocation and what remains recognizable across changes, including section joins. This is player-readable phrasing, not compulsory note animation, an enforced fingering, or a reason to manufacture musical repeats.
+
+Before authoring one of these styles, read its linked reference and feedback. The user names these three passage-level families **位移交互**, **卡手爆发**, and **双单双**. Their English labels are local working translations. Do not force every dense passage into one family or treat the families as exclusive.
+
+| Family | Action structure and design purpose | Reference and status |
+| --- | --- | --- |
+| 位移交互 / Wide-movement trills | Alternating fresh hits with coherent, substantial successive travel by each finger. Preserve rests, mirror variants and phrase entries/exits. Judge perceived travel separately from difficulty. | [180 BPM study](../../../charts/silent/silent-180-sixteenths/README.md), strongly approved by the user. |
+| 卡手爆发 / Constrained-hand bursts | Short rapid groups assigned to one finger in a two-finger route, often while the opposite finger handles contact or another action, followed by role exchange. Difficulty comes from concentrated repeat speed, independence and transitions; broad travel is not required. Extra fingers may redistribute this work. | [150 BPM style one](../../../charts/silent/silent-150-two-styles/style-one/README.md), assessed as acceptable by the user; multi-finger alternatives explicitly welcomed. Reference witnesses: CROSS†SOUL IN, 70 Minutes Fighters IN, Re: End of a Dream AT. |
+| 双单双 / Chord–single–chord patterns | Changing-span simultaneous hits, chord/single alternation, short ABA_ bursts, and free-hand repeated strikes alongside complete contact gestures. Design synchronization, asymmetry, gaps and role changes as whole action groups. | [150 BPM style two](../../../charts/silent/silent-150-two-styles/style-two/README.md), assessed as acceptable by the user. Reference witnesses: Cthugha IN/AT, +ERABY+E CONNEC+10N IN, Retribution ~ Cycle of Redemption ~ IN. |
+
+- Read [the seven-chart study](../shared/references.md#tap-pattern-study) for timed source witnesses and its later user corrections. The first group is deliberately demanding; do not explain away its difficulty by calling it an ordinary alternating roll. Conversely, repeated coordinates alone do not prove a same-hand assignment. Examine the surrounding tasks and alternative fingerings.
+- Third-beat subdivisions are optional, not a requirement of either new family. The user explains the reference thirds as following the music. Source positions 0, 11/32 and 21/32 are source-format observations, not an authoring rule or a special difficulty mechanism. PhiChain supports exact rational thirds; use the subdivision required by the music, and keep tempo separate from subdivision.
+- For each authored phrase, record a compact concrete action account in the project record: beat times (including blank slots and simultaneous sets), judgment positions, fresh hits versus ongoing contacts, candidate finger paths, complete releases, and the entry/exit to the next phrase. Existing `input.json` action rows and `sol-proposal.json` phrase notes in the two 150 BPM studies show this format. Do not create a separate chart state or new tool framework for this documentation.
+- Explain the intended source of difficulty and compare plausible two-finger and multi-finger routes. Use per-finger fresh-hit intervals and contact obligations, not object count alone. For example, continuous sixteenths at 150 BPM are 10 fresh hits/s; alternating them evenly gives each finger 200 ms between hits, while assigning a short consecutive group to one finger requires 100 ms internal intervals. Short groups are not equivalent to sustaining that rate indefinitely; rests and group boundaries matter. Chords contribute multiple hits at one onset and must remain simultaneous.
+- For a musical chart, identify the actual rhythmic/phrasing basis for intentional repeats and transitions. For an explicitly silent study, label it a composed exercise, not validated musical transcription. Apply fresh-context/dry-run/save, structural and native-render review, then update the record with the user's actual feedback. Do not promote inferred comfort, exact fingering, or one accepted sample into a universal rule.
+
+### User-approved local movement reference
+
+- The user explicitly ranks **Silent sixteenths — wide travel** as the best current AI-generated note arrangement by a large margin. Treat it as the leading local arrangement-quality preference reference. Read its [understanding study](../../../charts/silent/silent-180-sixteenths/UNDERSTANDING.md) alongside the original record. **Do not directly copy it:** do not transplant its coordinate arrays or action cells, including cosmetic scaling, mirroring or retiming. Learn its coordinated hand paths, controlled variation, anchor exchanges and continuity, then compose new phrases from the target music. Its approval does not make every future passage a wide-travel trill or certify derivatives.
+
+- Read [Silent sixteenths — wide travel](../../../charts/silent/silent-180-sixteenths/README.md) when designing **位移交互 / Wide-movement trills**, the user's approved alternating-travel style. The user explicitly approved this chart and asked to retain it as a reference. Its saved native project is `../charts/silent/silent-180-sixteenths/project/`; the playable export is `../charts/silent/silent-180-sixteenths/silent-180-sixteenths.pez`. These paths are relative to the repository root.
+- Preserve that approved chart, audio, background and export as a baseline; author variations in a separate project unless the user explicitly requests changes to the reference. `../charts/silent/silent-180-sixteenths/reference-baseline.json` records asset hashes. The earlier `silent-180-arrangement` study is historical, not the preferred movement reference.
+- Transfer its coherent alternating travel, recognizable cells, mirrors and returns. Its 180 BPM, continuous sixteenths, 360 Taps, static presentation and exact coordinates describe this example, not universal requirements for future charts. User approval establishes a preference reference; it does not certify every inferred hand assignment, animation or tempo variant.
+
+### Four-key and moving multi-finger arrangements
+
+- The four current 4K categories are **叠、技、乱、切**, corresponding to Jack, Tech, Speed, and Stream/Stamina. Use these Chinese names. These are separate from the three two-finger movement families above. In practice multi-finger (键盘) charts are described as either **Jack** or **Stream**; do not organize a multi-finger chart around 技 / 乱 as separate textures.
+- **Terminology:** **键盘 / jianpan** is the usual term for multi-finger charts. **多押 / duoya** means several notes pressed at the same time (simultaneous hits, chords); it does not mean multi-finger.
+- **Moving multi-finger:** do not cram notes into one shared central window. The player has two independent hands, each with its own working region (for example left 0.1–0.4, right 0.4–0.7). Movement means one hand shifting its region on its own, e.g. right-hand notes at 0.6 then 0.9 move the right hand right while the left stays. The hands are not tied together and do not share one window. Keep the finger allocation fairly straightforward to read, though not strictly fixed.
+- **Jack speed uses a sixteenth-note BPM convention in this user's terminology.** A "150 BPM jack" means repeated strikes 100 ms apart (150 quarter-note BPM, sixteenths), not 200 ms apart. The existing exercise uses eighth-note chord repeats at an editor tempo of 150 BPM: its effective jack speed is **75 BPM**, with 200 ms repeat intervals. Report editor/song tempo, subdivision, actual repeated-column interval, and equivalent jack BPM separately. For a regular repeat interval `dt` in seconds, equivalent jack BPM is `60 / (4 * dt)`. Count simultaneous chord members separately as objects, not as sequential jack strikes; a two-note chord every 200 ms does not become a 150 BPM jack because its object density is 10 notes/s. Repeated-column intervals and group boundaries still need checking when chords change.
+- [The four 10-second studies](../../../charts/silent/silent-150-four-key/README.md) are the reference for these textures: 技、乱、切 are accepted; 叠 is subject to the speed convention above. Keep the original chart timing as evidence unless a revision is requested. Their fixed four positions were an isolation exercise, not the default geometry for Phigros multi-finger charting. A 10-second 切 excerpt illustrates the texture; it cannot certify sustained stamina difficulty. The Chinese 乱 label does not authorize arbitrary random note placement.
+- For an explicitly fixed four-key exercise, analyze four candidate fingers and simultaneous subsets of lanes. Do not force two-finger alternation or wide travel onto that stationary task. Distinguish per-finger repetition, within-hand coordination, overall onset speed, chord density, and duration/recovery.
+- **Ordinary Phigros multi-finger arrangements should also design spatial variation.** Do not merely place a keyboard pattern into four permanent columns. Use changing judgment positions to require coherent lateral hand movement: a hand's working region can translate left/right, finger spacing can change, and responsibilities can transfer between regions. The player may need to read the coming layout, choose a hand/finger allocation, and react by repositioning. Preserve that decision-and-movement component rather than optimizing every passage into stationary contacts. Fixed regions remain valid where musically or physically purposeful; do not require all fingers to move on every hit.
+- Distinguish **target-position count, simultaneous contact demand, and chosen finger count**. A five-position ("5K") touch layout can sometimes be played with four fingers by moving and reallocating them over time. Do not assume position 5 requires finger 5, or that four fingers require exactly four fixed positions. Equally, do not claim every five-position pattern is four-finger feasible: check simultaneous fresh hits, sustained contacts, releases and reachable next targets under the actual judgment rules. Four-position and five-plus-position layouts can have very different difficulty even when the same four fingers play them.
+- Before implementing a moving multi-finger phrase, record each onset's simultaneous hit positions, candidate finger identities, active contacts, and each hand's current working region. Trace successive targets of the SAME finger and coordinated shifts of the SAME hand; include travel distance, available time, formation changes, phrase entry/exit, and upcoming visual information needed to choose the shift. For a five-position/four-finger route, explicitly show which available finger takes the additional position and how the remaining fingers cover the next actions. A list of lanes alone is not that explanation. Compare plausible alternative allocations without assuming that the intended route is enforced.
+- Movement demand comes from actual judgment/contact positions, including carrier transforms, not decorative approach animation. Preserve the default straight note approach. Small coordinate jitter that a stationary contact can cover is not meaningful repositioning. Avoid unprepared spatial jumps or release/repress traps merely to force movement; temporal execution, spatial travel and reading/decision demand are separate difficulty dimensions that must work together. Musical charts still require musical justification; silent studies establish only provisional action examples.
+
+## Verification and records
+
+- Treat actual PhiChain renders as visual ground truth: they match the in-game presentation. Inspect motion across its full duration, including transitions, overlaps, final approach, and line reuse, rather than judging only a single frame.
+- Check judgment behavior as well as appearance: note types, hit times, note counts, and unintended combo/scoring changes. Confirm that unrelated layers and the user's manual work remain intact.
+- Do not automatically open rendered artifacts in Codex for the user. Provide a preview link for them to open in a browser; inspect rendered frames yourself when needed for verification.
+- Keep one clearly labeled current state at the front of the project records. Move superseded proposals and counts into history; distinguish current requirements, provisional analysis, and historical evidence.
+- Record material implementation differences, timing corrections, and unresolved questions. Do not present a substitute as an exact implementation or a technically valid chart as user-approved design.
+- Keep charts, credentials and generated artifacts outside the repository, in the surrounding workspace. Do not publish them.

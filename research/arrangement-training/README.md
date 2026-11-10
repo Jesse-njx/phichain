@@ -38,7 +38,7 @@ For ordinary chart reference work, read `manifest.json` and the original files
 under `raw/` directly. This local collection is the default IN reference source;
 the websites and download script below document acquisition and reproduction,
 not a prerequisite for using the charts. Keep the originals unchanged and use
-the editor workflow in `docs/AGENTS.md` for requested chart edits.
+the editor workflow in `prompts/charting/rules.md` for requested chart edits.
 
 The public Swordalt chart downloader reads assets from
 <https://github.com/7aGiven/Phigros_Resource>. Its resource URL implementation was

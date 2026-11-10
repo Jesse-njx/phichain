@@ -1,0 +1,2310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PhiChain · Live MCP reference</title><style>
+
+:root{--ink:#203547;--muted:#526b7a;--bg:#edf3f6;--paper:#fff;--blue:#156e9c;--gold:#bd7313;--line:#c8d8e1;--code:#142d40}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}h1,h2,h3{line-height:1.2}h1{font-family:"Avenir Next","Trebuchet MS",sans-serif;font-size:clamp(34px,5vw,64px);letter-spacing:-2px;max-width:860px}h2{font-size:30px;margin-top:60px}h3{font-size:22px;overflow-wrap:anywhere}h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:20px 0 10px}a{color:var(--blue)}header{padding:52px max(5vw,24px) 38px;background:#dcecf5;border-bottom:6px solid var(--blue)}header p{max-width:850px}.eyebrow,.badge{font:12px ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em}.eyebrow{color:var(--blue)}.rail{display:flex;flex-wrap:wrap;gap:0;margin-top:28px}.rail span{padding:10px 20px;border-left:3px solid var(--gold);background:#ffffff80;margin-right:8px}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1560px;margin:auto}aside{padding:28px 16px;position:sticky;top:0;height:100vh;overflow:auto;border-right:1px solid var(--line)}aside a{display:block;font:12px/1.6 ui-monospace,Menlo,monospace;padding:5px 8px;text-decoration:none;border-radius:5px}aside a:hover{background:#d6e8f2}aside .major{font:600 14px/1.5 -apple-system,sans-serif;margin:10px 0}main{padding:28px 42px 100px;min-width:0}.controls{position:sticky;top:0;z-index:2;background:var(--bg);padding:10px 0;display:flex;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line)}input,select{font:inherit;padding:12px;border:1px solid #8fa9b8;border-radius:6px;background:white}input{flex:1;min-width:180px}button{cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.tool,.step,.operation{background:white;border:1px solid var(--line);border-radius:10px;padding:26px;margin:22px 0}.toolhead{display:flex;align-items:center;gap:15px}.badge{padding:6px 8px;background:#deedf5;color:#125e83}.tool[data-server=live] .badge{background:#fff0d5;color:#87520b}.toolhead h3{margin:0}.muted{color:var(--muted)}.codebox{position:relative;margin:14px 0}pre{margin:0;background:var(--code);color:#e2f2fc;border-radius:6px;padding:24px 18px;overflow:auto;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;tab-size:2}.copy{position:absolute;right:8px;top:8px;border:1px solid #6e8b9e;background:#25475f;color:white;border-radius:4px;padding:4px 9px}p code,td code{background:#eaf1f5;padding:2px 4px;border-radius:3px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted)}.tablewrap{overflow:auto}.behavior{border-left:3px solid var(--gold);padding:0 16px;margin:24px 0}details{margin:20px 0}summary{cursor:pointer;color:var(--blue);font-weight:600}.notice{padding:18px 22px;background:#fff5df;border-left:4px solid var(--gold)}.stepnum{float:right;font:32px ui-monospace,monospace;color:var(--blue)}.hidden{display:none!important}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.grid>div{background:white;padding:20px;border-radius:8px}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;font-size:13px}@media(max-width:950px){.layout{grid-template-columns:1fr}aside{position:static;height:auto;max-height:210px;border-bottom:1px solid var(--line)}aside .toolsnav{display:none}main{padding:20px}.grid{grid-template-columns:1fr}.toolhead{display:block}.toolhead h3{margin-top:10px}.tool{padding:18px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{aside,.controls,.copy{display:none}.layout{display:block}pre{white-space:pre-wrap}.tool{break-inside:avoid}body{background:white}}
+
+</style></head><body><header><div class="eyebrow">PhiChain / minimal live MCP</div><h1>Read. Edit. Preview.</h1><p>13 tools for the project open in PhiChain. Charting decisions stay with you.</p><div class="rail"><span>Read the passage</span><span>Apply one undo step</span><span>Preview &amp; save</span></div></header><div class="layout"><aside><a class="major" href="#start">Setup</a><a class="major" href="#workflow">Editing workflow</a><a class="major" href="#catalog">13 tools</a><a class="major" href="#music">Local music MCP</a><a class="major" href="#note-analysis">MP3 note analysis</a><a class="major" href="#operations">Edit operations</a><a class="major" href="#limits">Units &amp; recovery</a>
+<a href="#tool-editor_status">editor_status</a>
+<a href="#tool-create_project">create_project</a>
+<a href="#tool-open_project">open_project</a>
+<a href="#tool-close_project">close_project</a>
+<a href="#tool-get_context">get_context</a>
+<a href="#tool-read_section">read_section</a>
+<a href="#tool-inspect_motion">inspect_motion</a>
+<a href="#tool-apply_edits">apply_edits</a>
+<a href="#tool-preview">preview</a>
+<a href="#tool-history">history</a>
+<a href="#tool-save">save</a>
+<a href="#tool-preview_passage">preview_passage</a>
+<a href="#tool-animate_selection">animate_selection</a>
+</aside><main><h2 id="start">Start with an open project</h2>
+<p>The Python adapter forwards validated requests to the authenticated editor bridge.
+The live editor is the only chart state. Start PhiChain with its bridge enabled and
+create/import and open your project using MCP lifecycle tools. Run these commands from the repository root:</p>
+<p>The bridge handles at most one request per frame in <code>PreUpdate</code>, before
+gameplay and render-state propagation. Newly edited sprites and hold parts are
+initialized before that frame renders, preventing full-size texture bands during
+continuous agent edits. Rebuild and restart the editor for this fix.</p>
+<p>The default editor layout includes a live whole-chart Note Density pane below
+Inspector and Timeline Setting. It counts each playable note head once, including
+generated notes, and supports click/drag seeking through shared playback controls.
+No MCP tools or arguments are added; the preview-only layout stays preview-only.</p>
+<pre><code>cargo run -p phichain -- --mcp-endpoint "$PWD/.phichain-mcp.json"
+codex mcp add phichain -- python3 "$PWD/agent-tools/Phichain/mcp/server.py" --endpoint "$PWD/.phichain-mcp.json"</code></pre>
+<p>Python 3.9+ is sufficient; no Python packages are required. The adapter accepts
+<code>--endpoint</code> and optional <code>--renderer</code>. Motion inspection also requires
+<code>phichain-renderer</code>, ffmpeg on PATH and a GPU. Rebuild and restart the editor for the new bridge command.
+Restart the MCP client to refresh the tool inventory. The endpoint is reread on every call.</p>
+<div class="notice">Examples are documentation only. Replace guards and numeric IDs
+with values from the live project. This page makes no editor calls.</div>
+<h2 id="headless">Headless operation</h2>
+<pre><code>cargo run -p phichain -- --headless --mcp-endpoint "$PWD/runtime/headless-endpoint.json"</code></pre>
+<p>Connect either chart adapter to that unique endpoint. No window, GPU or audio output
+is initialized; native chart entities, editing commands, undo and save are shared with
+the GUI implementation. The current executable still links GUI dependencies.</p>
+<p>Call editor_status, then create_project with absolute path/music_path and optional
+illustration_path/meta. The destination must be new with an existing parent. MP3/WAV/OGG/FLAC
+and PNG/JPG/JPEG are validated and copied; sources remain unchanged. The new chart has one visible judgment line (opacity 255). Poll editor_status
+until pending=null, verify last_error=null, then open_project with created_path and poll
+again. An opened project supplies session/revision. Save before guarded close_project.
+Creation does not open automatically; existing-project audio replacement is not exposed.</p>
+<p>Headless preview uses a silent seek/play/pause clock. Save explicitly; there is no
+headless autosave. Motion/passage rendering still requires the independent renderer,
+ffmpeg and GPU. Use a separate endpoint and project from other running agents. Forced
+termination may leave a stale endpoint; confirm its PID exited before removal.</p>
+<h2 id="workflow">Read, edit, review</h2><ol>
+<li>Call <code>get_context</code> to identify the project, selected objects and lines.</li>
+<li>Call <code>read_section</code> for the affected beat range. Use its fresh session and revision.</li>
+<li>Send explicit operations through <code>apply_edits</code>. One successful batch is one shared undo entry.</li>
+<li>Read the changed passage and use <code>preview</code> to review it in PhiChain.</li>
+<li>Use current guards with <code>save</code> when the user asks to save.</li></ol>
+<p>Project creation imports local audio and an optional cover without dialogs.
+There are no authoring presets or planning caches in this MCP interface. It advertises tools
+only, with no MCP resources or prompts. Future capabilities are user-designed.</p>
+<h2 id="note-analysis">MP3 note decisions and musical intensity</h2>
+<p>The user-requested local CLI <code>research-tools/music-analysis/analyze.py</code> accepts
+MP3/WAV/OGG and exports timestamped note decisions, musical intensity (0–100),
+separate priority and confidence, texture sections and candidate climax intervals.
+It retains omitted candidates and produces a local HTML report with original/hits
+audio comparison and source-bound JSON review corrections. Open reports yourself.</p>
+<p>This is an acoustic heuristic draft, not verified transcription or a playable
+chart. It does not edit the live project or add MCP tools. No automatic model
+downloads or remote inference. Optional known BPM annotates beats without snapping.</p>
+<pre><code>research/music-flow-study/.venv/bin/python research-tools/music-analysis/analyze.py /absolute/path/song.mp3 --out research/note-analysis/song</code></pre>
+<p>Requires ffmpeg/ffprobe and the dependencies in
+<code>research-tools/music-analysis/requirements.txt</code>. See
+<a href="../../../../../research-tools/music-analysis/README.md">the CLI documentation</a> for setup,
+score definitions, stem manifests, review syntax and limits. Keep artifacts under
+the workspace outside the repository. Output directories must be new to preserve reviews.</p>
+<p>For editor-native inspection, <code>research-tools/music-analysis/to_phichain.py</code>
+imports selected analysis decisions into a new empty live experiment using the
+existing experimental <code>chart_script</code> tool. It checks the exact project,
+PCM audio hash and revision, dry-runs, then optionally applies/saves one undo entry.
+Layer grouping makes one fixed track per acoustic layer; reason grouping is
+multi-label and deliberately duplicates note objects. In-track horizontal position
+encodes intensity; the shared judgment line brightens at candidate climaxes.
+Names appear in the line list, not as arbitrary gameplay text. No MCP schema changes.</p>
+<h2 id="motion">Inspect motion without editing</h2>
+<p>Select 1–32 editable notes or pass explicit <code>note_ids</code>, fresh guards,
+and an elapsed-audio window of at most 12 seconds. Request 2–12 frames (default 6).
+This captures unsaved live state without changing playback, selection or history.</p>
+<p>The response includes real PNG frames, note/line IDs, landing positions, sampled
+head and hold-tail trajectories, hidden carrier and ancestor transforms, shared-line
+note counts, and overlapping/inherited event IDs (capped at 4,000 with truncation reported).
+The local HTML report overlays IDs, carriers and paths on those frames. PNGs are unmodified.</p>
+<p>Sampling uses native easing and scroll math at 960×540 on a 30 fps lattice. Times
+are audio seconds; the renderer receives chart seconds after subtracting offset.
+Default styling is used, hit effects are hidden, and generated curves appear in
+frames but are not selectable targets. This is not a playability or occlusion proof.</p>
+<p>Artifacts live under <code>../artifacts/motion-inspections/</code>. Temporary chart
+and asset copies are deleted after rendering. <code>live_revision_changed</code>
+reports subsequent human edits (null if disconnected). Missing renderer/GPU/audio
+fails explicitly; no offline chart session or fallback image is created.</p>
+<h2 id="passage">Preview a passage</h2><p>PhiChain renders are visual ground truth.
+<code>preview_passage</code> captures a guarded live revision and renders up to 12 audio seconds
+within the loaded audio duration, returning a local MP4 and HTML video with playback, loop and scrub
+controls. It does not open the report or change shared editor playback. Output is 960×540 at 30 fps,
+default styling, hidden hit effects; the same renderer/ffmpeg/GPU requirements apply.
+Artifacts live under <code>../artifacts/passage-previews/</code>; the response reports whether the live revision changed.</p>
+<h2 id="line-roles">Human-facing line roles</h2><p>The editor line list displays Simple,
+Complex and Decorative labels. Change the role in the line inspector; changes support undo/redo
+and persist in native charts. Existing charts default to Simple. These are authoring labels,
+not automatic motion or occupancy constraints. Decorative lines containing notes show a warning;
+all those notes remain playable. External formats do not preserve native role labels.</p>
+<p>Context and section line rows include <code>role</code>; changes invalidate revision guards.
+MCP line updates preserve the existing role; no role-writing tool has been added.
+Early-visible notes keep their later judgments. Truly fake RPE notes are currently converted
+to playable notes on import, or removed with the existing import option; this UI does not add fake-note support.</p>
+<h2 id="groups">Animate motion groups</h2><p><code>animate_selection</code> takes explicit groups of
+note IDs, an existing carrier and native events. Explicit <code>dry_run</code> chooses validation or
+one atomic agent undo step. Every note on each affected carrier must belong to the group,
+including future notes. Child lines and curve dependencies reject. Merging requires identical
+source event timelines and the same parent; similar direction alone is insufficient.</p>
+<p>Supplied event channels replace their entire timelines; omitted channels remain. Include later
+scroll/release events. Overlapping events reject. Note IDs and hit times remain unchanged.
+Zero and negative scroll speeds support early-visible playable notes. Reserve the complete
+visible lifetime through judgment and hold tails; never infer occupancy from hit times alone.</p>
+<p>No new lines are allocated, no emptied source lines deleted, and no automatic splitting or
+approximate fitting occurs. Default line budget 24 counts decoration too; explicitly raise it for
+larger charts. Review results with inspection and passage preview. Refresh the editor and MCP
+client after rebuilding.</p>
+<div class="notice">This branch also implements an alternative <a href="agent.html">27-tool Agent authoring MCP</a> with patch, transform, generate and script writes. The 13 tools below belong to the minimal server.py entrypoint.</div>
+<h2 id="catalog">13-tool reference</h2>
+<p>Descriptions and schemas below come directly from <code>agent-tools/Phichain/mcp/server.py</code>.</p>
+<article class="tool" id="tool-editor_status"><h3>editor_status</h3><p>Read GUI/headless runtime status without an open project. Includes headless, project, pending, last_error and created_path. Poll after lifecycle requests; pending=null and last_error=null means completion. A successful create reports created_path; open_project is a separate step.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;editor_status&quot;,
+    &quot;arguments&quot;: {}
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {},
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-create_project"><h3>create_project</h3><p>Create a new native project and import a local song plus optional cover without dialogs. Requires no open project or pending lifecycle job. path must be a NEW absolute directory with an existing parent; never overwrites. music_path: MP3/WAV/OGG/FLAC; optional illustration_path: PNG/JPG/JPEG. Source data is decoded/validated, copied into the project and left unchanged. meta defaults to empty fields. The new chart has one visible judgment line (opacity 255). Asynchronous: poll editor_status, then open_project using created_path. Not undoable.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;create_project&quot;,
+    &quot;arguments&quot;: {
+      &quot;path&quot;: &quot;/absolute/path/new-project&quot;,
+      &quot;music_path&quot;: &quot;/absolute/path/song.mp3&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;music_path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;illustration_path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;meta&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;name&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;composer&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;charter&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;illustrator&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;level&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;name&quot;,
+        &quot;composer&quot;,
+        &quot;charter&quot;,
+        &quot;illustrator&quot;,
+        &quot;level&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    }
+  },
+  &quot;required&quot;: [
+    &quot;path&quot;,
+    &quot;music_path&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-open_project"><h3>open_project</h3><p>Open an existing native project by absolute path without a file dialog. Requires no open project or pending lifecycle job. Asynchronous: poll editor_status until pending=null; check last_error and project before editing.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;open_project&quot;,
+    &quot;arguments&quot;: {
+      &quot;path&quot;: &quot;/absolute/path/new-project&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;path&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;path&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-close_project"><h3>close_project</h3><p>Close the current project with fresh session/revision. Unsaved work and active edits reject; save first. Poll editor_status until project=null and pending=null before opening another project.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;close_project&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;,
+    &quot;revision&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-get_context"><h3>get_context</h3><p>Read the open project&#x27;s session/revision, lines, BPM, offset, selected objects and IDs, selected line, playback and undo state, including undo_author/redo_author (agent, human, or null). Start here. IDs are opaque strings valid only in this project session.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;get_context&quot;,
+    &quot;arguments&quot;: {}
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {},
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-read_section"><h3>read_section</h3><p>Read editable notes, overlapping holds and line events in [start_beat,end_beat). Defaults to beats 0–32. Optionally filter by line_id. Includes curve track references; generated curve notes are not editable. Returns fresh session/revision.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;read_section&quot;,
+    &quot;arguments&quot;: {
+      &quot;start_beat&quot;: 0,
+      &quot;end_beat&quot;: 8,
+      &quot;line_id&quot;: &quot;1001&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;start_beat&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;end_beat&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;line_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    }
+  },
+  &quot;required&quot;: [],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-inspect_motion"><h3>inspect_motion</h3><p>Inspect 1–32 explicit note IDs, or the current selected editable notes. Requires live session/revision and an elapsed-audio range of at most 12 seconds. Returns 2–12 actual rendered frames (default 6), screen trajectories, landing positions, carrier/ancestor IDs, sampled transforms and contributing events, including hidden lines. Read-only: no playback, chart, selection or history changes. Requires local phichain-renderer, ffmpeg and GPU; never falls back to an offline chart. Frames use default styling at 960×540 and 30 fps, with hit effects hidden. A local HTML report overlays IDs, carriers and trajectories. Results remain tied to the captured revision; check live_revision_changed. Generated notes appear in frames but cannot be selected as targets.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;inspect_motion&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;note_ids&quot;: [
+        &quot;1002&quot;
+      ],
+      &quot;from_seconds&quot;: 0,
+      &quot;to_seconds&quot;: 2,
+      &quot;frames&quot;: 6
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;note_ids&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+      },
+      &quot;minItems&quot;: 1,
+      &quot;maxItems&quot;: 32,
+      &quot;uniqueItems&quot;: true
+    },
+    &quot;from_seconds&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 86400
+    },
+    &quot;to_seconds&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;exclusiveMinimum&quot;: 0,
+      &quot;maximum&quot;: 86400
+    },
+    &quot;frames&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 2,
+      &quot;maximum&quot;: 12
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;,
+    &quot;revision&quot;,
+    &quot;from_seconds&quot;,
+    &quot;to_seconds&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-apply_edits"><h3>apply_edits</h3><p>Validate and apply 1–1000 operations as ONE undo step. Supply session/revision from the latest read. Update operations replace the full note/event: preserve unmodified fields. Each existing ID may occur once. Hold notes require positive hold_beat. Curve endpoints cannot be deleted. Returns before/after changes and created IDs. Does not save. Stale edits fail without mutation; re-read and regenerate.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;apply_edits&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;operations&quot;: [
+        {
+          &quot;op&quot;: &quot;create_note&quot;,
+          &quot;line_id&quot;: &quot;1001&quot;,
+          &quot;note&quot;: {
+            &quot;kind&quot;: &quot;tap&quot;,
+            &quot;above&quot;: true,
+            &quot;beat&quot;: [
+              4,
+              0,
+              1
+            ],
+            &quot;x&quot;: 120,
+            &quot;speed&quot;: 1
+          }
+        }
+      ]
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;operations&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;minItems&quot;: 1,
+      &quot;maxItems&quot;: 1000,
+      &quot;items&quot;: {
+        &quot;oneOf&quot;: [
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;create_note&quot;
+              },
+              &quot;line_id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;note&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                  &quot;kind&quot;: {
+                    &quot;enum&quot;: [
+                      &quot;tap&quot;,
+                      &quot;drag&quot;,
+                      &quot;hold&quot;,
+                      &quot;flick&quot;
+                    ]
+                  },
+                  &quot;above&quot;: {
+                    &quot;type&quot;: &quot;boolean&quot;
+                  },
+                  &quot;beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  },
+                  &quot;x&quot;: {
+                    &quot;type&quot;: &quot;number&quot;
+                  },
+                  &quot;speed&quot;: {
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;exclusiveMinimum&quot;: 0
+                  },
+                  &quot;hold_beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  }
+                },
+                &quot;required&quot;: [
+                  &quot;kind&quot;,
+                  &quot;above&quot;,
+                  &quot;beat&quot;,
+                  &quot;x&quot;,
+                  &quot;speed&quot;
+                ],
+                &quot;additionalProperties&quot;: false
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;line_id&quot;,
+              &quot;note&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;update_note&quot;
+              },
+              &quot;id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;note&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                  &quot;kind&quot;: {
+                    &quot;enum&quot;: [
+                      &quot;tap&quot;,
+                      &quot;drag&quot;,
+                      &quot;hold&quot;,
+                      &quot;flick&quot;
+                    ]
+                  },
+                  &quot;above&quot;: {
+                    &quot;type&quot;: &quot;boolean&quot;
+                  },
+                  &quot;beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  },
+                  &quot;x&quot;: {
+                    &quot;type&quot;: &quot;number&quot;
+                  },
+                  &quot;speed&quot;: {
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;exclusiveMinimum&quot;: 0
+                  },
+                  &quot;hold_beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  }
+                },
+                &quot;required&quot;: [
+                  &quot;kind&quot;,
+                  &quot;above&quot;,
+                  &quot;beat&quot;,
+                  &quot;x&quot;,
+                  &quot;speed&quot;
+                ],
+                &quot;additionalProperties&quot;: false
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;id&quot;,
+              &quot;note&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;delete_note&quot;
+              },
+              &quot;id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;id&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;create_event&quot;
+              },
+              &quot;line_id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;event&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                  &quot;kind&quot;: {
+                    &quot;enum&quot;: [
+                      &quot;x&quot;,
+                      &quot;y&quot;,
+                      &quot;rotation&quot;,
+                      &quot;opacity&quot;,
+                      &quot;speed&quot;
+                    ]
+                  },
+                  &quot;start_beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  },
+                  &quot;end_beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  },
+                  &quot;value&quot;: {
+                    &quot;oneOf&quot;: [
+                      {
+                        &quot;type&quot;: &quot;object&quot;,
+                        &quot;properties&quot;: {
+                          &quot;type&quot;: {
+                            &quot;const&quot;: &quot;constant&quot;
+                          },
+                          &quot;value&quot;: {
+                            &quot;type&quot;: &quot;number&quot;
+                          }
+                        },
+                        &quot;required&quot;: [
+                          &quot;type&quot;,
+                          &quot;value&quot;
+                        ],
+                        &quot;additionalProperties&quot;: false
+                      },
+                      {
+                        &quot;type&quot;: &quot;object&quot;,
+                        &quot;properties&quot;: {
+                          &quot;type&quot;: {
+                            &quot;const&quot;: &quot;transition&quot;
+                          },
+                          &quot;start&quot;: {
+                            &quot;type&quot;: &quot;number&quot;
+                          },
+                          &quot;end&quot;: {
+                            &quot;type&quot;: &quot;number&quot;
+                          },
+                          &quot;easing&quot;: {
+                            &quot;description&quot;: &quot;PhiChain easing value; copy from read_section.&quot;
+                          }
+                        },
+                        &quot;required&quot;: [
+                          &quot;type&quot;,
+                          &quot;start&quot;,
+                          &quot;end&quot;,
+                          &quot;easing&quot;
+                        ],
+                        &quot;additionalProperties&quot;: false
+                      }
+                    ]
+                  }
+                },
+                &quot;required&quot;: [
+                  &quot;kind&quot;,
+                  &quot;start_beat&quot;,
+                  &quot;end_beat&quot;,
+                  &quot;value&quot;
+                ],
+                &quot;additionalProperties&quot;: false
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;line_id&quot;,
+              &quot;event&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;update_event&quot;
+              },
+              &quot;id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;event&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                  &quot;kind&quot;: {
+                    &quot;enum&quot;: [
+                      &quot;x&quot;,
+                      &quot;y&quot;,
+                      &quot;rotation&quot;,
+                      &quot;opacity&quot;,
+                      &quot;speed&quot;
+                    ]
+                  },
+                  &quot;start_beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  },
+                  &quot;end_beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  },
+                  &quot;value&quot;: {
+                    &quot;oneOf&quot;: [
+                      {
+                        &quot;type&quot;: &quot;object&quot;,
+                        &quot;properties&quot;: {
+                          &quot;type&quot;: {
+                            &quot;const&quot;: &quot;constant&quot;
+                          },
+                          &quot;value&quot;: {
+                            &quot;type&quot;: &quot;number&quot;
+                          }
+                        },
+                        &quot;required&quot;: [
+                          &quot;type&quot;,
+                          &quot;value&quot;
+                        ],
+                        &quot;additionalProperties&quot;: false
+                      },
+                      {
+                        &quot;type&quot;: &quot;object&quot;,
+                        &quot;properties&quot;: {
+                          &quot;type&quot;: {
+                            &quot;const&quot;: &quot;transition&quot;
+                          },
+                          &quot;start&quot;: {
+                            &quot;type&quot;: &quot;number&quot;
+                          },
+                          &quot;end&quot;: {
+                            &quot;type&quot;: &quot;number&quot;
+                          },
+                          &quot;easing&quot;: {
+                            &quot;description&quot;: &quot;PhiChain easing value; copy from read_section.&quot;
+                          }
+                        },
+                        &quot;required&quot;: [
+                          &quot;type&quot;,
+                          &quot;start&quot;,
+                          &quot;end&quot;,
+                          &quot;easing&quot;
+                        ],
+                        &quot;additionalProperties&quot;: false
+                      }
+                    ]
+                  }
+                },
+                &quot;required&quot;: [
+                  &quot;kind&quot;,
+                  &quot;start_beat&quot;,
+                  &quot;end_beat&quot;,
+                  &quot;value&quot;
+                ],
+                &quot;additionalProperties&quot;: false
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;id&quot;,
+              &quot;event&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;delete_event&quot;
+              },
+              &quot;id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;id&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;set_offset&quot;
+              },
+              &quot;offset&quot;: {
+                &quot;type&quot;: &quot;number&quot;
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;offset&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;set_meta&quot;
+              },
+              &quot;meta&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                  &quot;name&quot;: {
+                    &quot;type&quot;: &quot;string&quot;
+                  },
+                  &quot;composer&quot;: {
+                    &quot;type&quot;: &quot;string&quot;
+                  },
+                  &quot;charter&quot;: {
+                    &quot;type&quot;: &quot;string&quot;
+                  },
+                  &quot;illustrator&quot;: {
+                    &quot;type&quot;: &quot;string&quot;
+                  },
+                  &quot;level&quot;: {
+                    &quot;type&quot;: &quot;string&quot;
+                  }
+                },
+                &quot;required&quot;: [
+                  &quot;name&quot;,
+                  &quot;composer&quot;,
+                  &quot;charter&quot;,
+                  &quot;illustrator&quot;,
+                  &quot;level&quot;
+                ],
+                &quot;additionalProperties&quot;: false
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;meta&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;create_line&quot;
+              },
+              &quot;name&quot;: {
+                &quot;type&quot;: &quot;string&quot;
+              },
+              &quot;parent_id&quot;: {
+                &quot;oneOf&quot;: [
+                  {
+                    &quot;type&quot;: &quot;string&quot;,
+                    &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+                  },
+                  {
+                    &quot;type&quot;: &quot;null&quot;
+                  }
+                ]
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;name&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;update_line&quot;
+              },
+              &quot;id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;name&quot;: {
+                &quot;type&quot;: &quot;string&quot;
+              },
+              &quot;parent_id&quot;: {
+                &quot;oneOf&quot;: [
+                  {
+                    &quot;type&quot;: &quot;string&quot;,
+                    &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+                  },
+                  {
+                    &quot;type&quot;: &quot;null&quot;
+                  }
+                ]
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;id&quot;,
+              &quot;name&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;delete_line&quot;
+              },
+              &quot;id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;cascade&quot;: {
+                &quot;type&quot;: &quot;boolean&quot;
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;id&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;reorder_lines&quot;
+              },
+              &quot;line_ids&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {
+                  &quot;type&quot;: &quot;string&quot;,
+                  &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+                },
+                &quot;minItems&quot;: 1
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;line_ids&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;create_curve_track&quot;
+              },
+              &quot;line_id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;from_id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;to_id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;options&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                  &quot;kind&quot;: {
+                    &quot;enum&quot;: [
+                      &quot;tap&quot;,
+                      &quot;drag&quot;,
+                      &quot;flick&quot;,
+                      &quot;hold&quot;
+                    ]
+                  },
+                  &quot;hold_beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  },
+                  &quot;density&quot;: {
+                    &quot;type&quot;: &quot;integer&quot;,
+                    &quot;minimum&quot;: 1,
+                    &quot;maximum&quot;: 256
+                  },
+                  &quot;curve&quot;: {
+                    &quot;type&quot;: &quot;object&quot;
+                  }
+                },
+                &quot;required&quot;: [
+                  &quot;kind&quot;,
+                  &quot;density&quot;,
+                  &quot;curve&quot;
+                ],
+                &quot;additionalProperties&quot;: false
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;line_id&quot;,
+              &quot;from_id&quot;,
+              &quot;to_id&quot;,
+              &quot;options&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;update_curve_track&quot;
+              },
+              &quot;id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;from_id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;to_id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              },
+              &quot;options&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                  &quot;kind&quot;: {
+                    &quot;enum&quot;: [
+                      &quot;tap&quot;,
+                      &quot;drag&quot;,
+                      &quot;flick&quot;,
+                      &quot;hold&quot;
+                    ]
+                  },
+                  &quot;hold_beat&quot;: {
+                    &quot;type&quot;: &quot;array&quot;,
+                    &quot;items&quot;: {
+                      &quot;type&quot;: &quot;integer&quot;
+                    },
+                    &quot;minItems&quot;: 3,
+                    &quot;maxItems&quot;: 3,
+                    &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                  },
+                  &quot;density&quot;: {
+                    &quot;type&quot;: &quot;integer&quot;,
+                    &quot;minimum&quot;: 1,
+                    &quot;maximum&quot;: 256
+                  },
+                  &quot;curve&quot;: {
+                    &quot;type&quot;: &quot;object&quot;
+                  }
+                },
+                &quot;required&quot;: [
+                  &quot;kind&quot;,
+                  &quot;density&quot;,
+                  &quot;curve&quot;
+                ],
+                &quot;additionalProperties&quot;: false
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;id&quot;,
+              &quot;from_id&quot;,
+              &quot;to_id&quot;,
+              &quot;options&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;delete_curve_track&quot;
+              },
+              &quot;id&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;id&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          },
+          {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {
+              &quot;op&quot;: {
+                &quot;const&quot;: &quot;set_bpm_list&quot;
+              },
+              &quot;bpm_list&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;minItems&quot;: 1,
+                &quot;maxItems&quot;: 1000,
+                &quot;items&quot;: {
+                  &quot;type&quot;: &quot;object&quot;,
+                  &quot;properties&quot;: {
+                    &quot;beat&quot;: {
+                      &quot;type&quot;: &quot;array&quot;,
+                      &quot;items&quot;: {
+                        &quot;type&quot;: &quot;integer&quot;
+                      },
+                      &quot;minItems&quot;: 3,
+                      &quot;maxItems&quot;: 3,
+                      &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                    },
+                    &quot;bpm&quot;: {
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;minimum&quot;: 1,
+                      &quot;maximum&quot;: 1000
+                    }
+                  },
+                  &quot;required&quot;: [
+                    &quot;beat&quot;,
+                    &quot;bpm&quot;
+                  ],
+                  &quot;additionalProperties&quot;: false
+                }
+              }
+            },
+            &quot;required&quot;: [
+              &quot;op&quot;,
+              &quot;bpm_list&quot;
+            ],
+            &quot;additionalProperties&quot;: false
+          }
+        ]
+      }
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;,
+    &quot;revision&quot;,
+    &quot;operations&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-preview"><h3>preview</h3><p>Play, pause, or seek the editor preview. Supply the current project session. time_seconds is elapsed audio time, including chart offset. Optional time_seconds seeks before play/pause; seek requires time_seconds. Seeking is processed on the next editor frame. Read context to observe actual playback position. GUI mode changes the human&#x27;s shared playback controls. Headless mode uses a silent clock with the same seek/play/pause actions and stops at the audio duration.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;preview&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+      &quot;action&quot;: &quot;seek&quot;,
+      &quot;time_seconds&quot;: 2
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;action&quot;: {
+      &quot;enum&quot;: [
+        &quot;play&quot;,
+        &quot;pause&quot;,
+        &quot;seek&quot;
+      ]
+    },
+    &quot;time_seconds&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;,
+    &quot;action&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-history"><h3>history</h3><p>Undo or redo ONE entry in the shared history. Explicitly choose author: agent or human. Must match the next undo_author/redo_author from get_context; mismatch fails without mutation. Cannot skip entries. Requires fresh session/revision. This may undo a human edit; only use when requested or when reverting your known latest batch.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;history&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;action&quot;: &quot;undo&quot;,
+      &quot;author&quot;: &quot;agent&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;action&quot;: {
+      &quot;enum&quot;: [
+        &quot;undo&quot;,
+        &quot;redo&quot;
+      ]
+    },
+    &quot;author&quot;: {
+      &quot;enum&quot;: [
+        &quot;agent&quot;,
+        &quot;human&quot;
+      ]
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;,
+    &quot;revision&quot;,
+    &quot;action&quot;,
+    &quot;author&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-save"><h3>save</h3><p>Save the current live chart and metadata to the open project&#x27;s files. Requires fresh session/revision. Use when the user asks to save; edits remain in memory until saved or autosaved by PhiChain.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;save&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;,
+    &quot;revision&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-preview_passage"><h3>preview_passage</h3><p>Render a guarded live passage of at most 12 audio seconds to a local MP4 and HTML video with play/pause, looping and scrubbing. Does not open the report or alter editor playback, chart or history. Uses PhiChain rendering as visual ground truth; 960×540, 30 fps, default styling, hidden hit effects. Requires renderer, ffmpeg and GPU. Returns captured revision and live_revision_changed.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;preview_passage&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;from_seconds&quot;: 1,
+      &quot;to_seconds&quot;: 3
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;from_seconds&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;minimum&quot;: 0,
+      &quot;maximum&quot;: 86400
+    },
+    &quot;to_seconds&quot;: {
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;exclusiveMinimum&quot;: 0,
+      &quot;maximum&quot;: 86400
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;,
+    &quot;revision&quot;,
+    &quot;from_seconds&quot;,
+    &quot;to_seconds&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<article class="tool" id="tool-animate_selection"><h3>animate_selection</h3><p>Apply explicit motion groups on existing carriers, as one undo step. dry_run must be explicit. Every note on each affected carrier must be included (including future notes); child lines and curve dependencies reject. Merge only identical event timelines with the same parent; preserve note IDs, kinds, hit times, local x, speed and hold durations. Supplied event channels replace their ENTIRE timelines on the destination carrier; omitted channels stay unchanged. Supports zero/negative line speed for early-visible playable notes. Never allocates lines or deletes source carriers. Default budget 24 counts ALL lines, including decoration; explicitly raise for larger charts. Review full visibility and landing motion before applying.</p><h4>Example call</h4>
+<pre><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;animate_selection&quot;,
+    &quot;arguments&quot;: {
+      &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+      &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+      &quot;dry_run&quot;: true,
+      &quot;groups&quot;: [
+        {
+          &quot;carrier_id&quot;: &quot;1001&quot;,
+          &quot;note_ids&quot;: [
+            &quot;1002&quot;,
+            &quot;1003&quot;
+          ],
+          &quot;events&quot;: [
+            {
+              &quot;kind&quot;: &quot;speed&quot;,
+              &quot;start_beat&quot;: [
+                0,
+                0,
+                1
+              ],
+              &quot;end_beat&quot;: [
+                4,
+                0,
+                1
+              ],
+              &quot;value&quot;: {
+                &quot;type&quot;: &quot;constant&quot;,
+                &quot;value&quot;: 0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}</code></pre>
+<details><summary>Exact input schema</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;session&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;revision&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;dry_run&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;line_budget&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 1,
+      &quot;maximum&quot;: 1024
+    },
+    &quot;groups&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;minItems&quot;: 1,
+      &quot;maxItems&quot;: 24,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+          &quot;carrier_id&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+          },
+          &quot;note_ids&quot;: {
+            &quot;type&quot;: &quot;array&quot;,
+            &quot;items&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+            },
+            &quot;minItems&quot;: 1,
+            &quot;maxItems&quot;: 1000,
+            &quot;uniqueItems&quot;: true
+          },
+          &quot;events&quot;: {
+            &quot;type&quot;: &quot;array&quot;,
+            &quot;items&quot;: {
+              &quot;type&quot;: &quot;object&quot;,
+              &quot;properties&quot;: {
+                &quot;kind&quot;: {
+                  &quot;enum&quot;: [
+                    &quot;x&quot;,
+                    &quot;y&quot;,
+                    &quot;rotation&quot;,
+                    &quot;opacity&quot;,
+                    &quot;speed&quot;
+                  ]
+                },
+                &quot;start_beat&quot;: {
+                  &quot;type&quot;: &quot;array&quot;,
+                  &quot;items&quot;: {
+                    &quot;type&quot;: &quot;integer&quot;
+                  },
+                  &quot;minItems&quot;: 3,
+                  &quot;maxItems&quot;: 3,
+                  &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                },
+                &quot;end_beat&quot;: {
+                  &quot;type&quot;: &quot;array&quot;,
+                  &quot;items&quot;: {
+                    &quot;type&quot;: &quot;integer&quot;
+                  },
+                  &quot;minItems&quot;: 3,
+                  &quot;maxItems&quot;: 3,
+                  &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+                },
+                &quot;value&quot;: {
+                  &quot;oneOf&quot;: [
+                    {
+                      &quot;type&quot;: &quot;object&quot;,
+                      &quot;properties&quot;: {
+                        &quot;type&quot;: {
+                          &quot;const&quot;: &quot;constant&quot;
+                        },
+                        &quot;value&quot;: {
+                          &quot;type&quot;: &quot;number&quot;
+                        }
+                      },
+                      &quot;required&quot;: [
+                        &quot;type&quot;,
+                        &quot;value&quot;
+                      ],
+                      &quot;additionalProperties&quot;: false
+                    },
+                    {
+                      &quot;type&quot;: &quot;object&quot;,
+                      &quot;properties&quot;: {
+                        &quot;type&quot;: {
+                          &quot;const&quot;: &quot;transition&quot;
+                        },
+                        &quot;start&quot;: {
+                          &quot;type&quot;: &quot;number&quot;
+                        },
+                        &quot;end&quot;: {
+                          &quot;type&quot;: &quot;number&quot;
+                        },
+                        &quot;easing&quot;: {
+                          &quot;description&quot;: &quot;PhiChain easing value; copy from read_section.&quot;
+                        }
+                      },
+                      &quot;required&quot;: [
+                        &quot;type&quot;,
+                        &quot;start&quot;,
+                        &quot;end&quot;,
+                        &quot;easing&quot;
+                      ],
+                      &quot;additionalProperties&quot;: false
+                    }
+                  ]
+                }
+              },
+              &quot;required&quot;: [
+                &quot;kind&quot;,
+                &quot;start_beat&quot;,
+                &quot;end_beat&quot;,
+                &quot;value&quot;
+              ],
+              &quot;additionalProperties&quot;: false
+            },
+            &quot;minItems&quot;: 1,
+            &quot;maxItems&quot;: 512
+          }
+        },
+        &quot;required&quot;: [
+          &quot;carrier_id&quot;,
+          &quot;note_ids&quot;,
+          &quot;events&quot;
+        ],
+        &quot;additionalProperties&quot;: false
+      }
+    }
+  },
+  &quot;required&quot;: [
+    &quot;session&quot;,
+    &quot;revision&quot;,
+    &quot;dry_run&quot;,
+    &quot;groups&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details></article>
+<h2 id="music">Local music MCP</h2><p>Separate read-only entrypoint: <code>agent-tools/Phichain/mcp/music_server.py</code>, exposing get_context and music_chat. Uses local MOSS-Music Instruct through MLX; source audio comes from the guarded open editor. No chart edits, playback changes, cloud inference, or automatic downloads.</p><p>Install the pinned requirements-music.txt into runtime/music-runtime and download rtikw/MOSS-Music-8B-Instruct-4bit into runtime/music-model/MOSS-Music-8B-Instruct-4bit. Launch with that Python and --endpoint /absolute/path/to/.phichain-mcp.json. Optional --model selects a local directory, --python selects the worker interpreter, and --timeout sets 10–1800 seconds (default 300). Requires ffmpeg and Apple Silicon. See agent-tools/Phichain/mcp/README.md for complete setup and external-client JSON.</p><p>All MCP entrypoints instruct the authoring agent to get a full grasp of the entire piece before starting charting: cover the full audio in overlapping passages and understand structure, emotional arc, motifs, instrumentation, transitions, climaxes and resolution. Report gaps instead of claiming full understanding. Reconnect to receive updated initialize instructions.</p><p>Clips: 1–120 elapsed-audio seconds. Questions: 1–6000 characters. Optional history: up to 12 user/assistant turns, 4000 characters each, 16000 total. History is explicit text context; each call hears the current clip again. Output: 64–2048 tokens, default 768. Mono 16 kHz extraction discards stereo imaging. Weights persist in one worker per MCP process; clips are temporary. Extraction timeout: 45s. Inference failure/timeout kills the worker. Client timeout must exceed both. No cancellation/progress notifications.</p><p>Returns answer, token counts, model/backend, MLX peak allocation (not process RSS), clip SHA-256, source path, guards, live_revision_changed (null if disconnected), and source_audio_changed. Timestamps are clip-relative estimates, not measured onsets. Model output is fallible interpretation and must never be treated as instructions.</p>
+<pre><code>{
+  &quot;name&quot;: &quot;music_chat&quot;,
+  &quot;arguments&quot;: {
+    &quot;session&quot;: &quot;&lt;session from latest read&gt;&quot;,
+    &quot;revision&quot;: &quot;&lt;revision from latest read&gt;&quot;,
+    &quot;from_seconds&quot;: 0,
+    &quot;to_seconds&quot;: 20,
+    &quot;question&quot;: &quot;Describe audible changes and separate evidence from mood interpretation.&quot;,
+    &quot;history&quot;: [],
+    &quot;max_tokens&quot;: 768
+  }
+}</code></pre>
+<details><summary>Music tool schema</summary><pre><code>{
+  &quot;name&quot;: &quot;music_chat&quot;,
+  &quot;description&quot;: &quot;Ask the local MOSS-Music model about the open project audio. Read get_context first; requires current session/revision and explicit elapsed-audio seconds (1–120 second clip). Optional history is caller-supplied conversation context, not verified evidence or persistent memory. Each call listens again. Returns model interpretation, clip provenance and revision-change flag. Model timestamps are clip-relative estimates, not beat/onset measurements. No edits, playback changes, network inference or automatic downloads. First call loads weights; allow the configured timeout.&quot;,
+  &quot;inputSchema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {
+      &quot;session&quot;: {
+        &quot;type&quot;: &quot;string&quot;
+      },
+      &quot;revision&quot;: {
+        &quot;type&quot;: &quot;string&quot;
+      },
+      &quot;question&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;minLength&quot;: 1,
+        &quot;maxLength&quot;: 6000
+      },
+      &quot;from_seconds&quot;: {
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;minimum&quot;: 0,
+        &quot;maximum&quot;: 86400
+      },
+      &quot;to_seconds&quot;: {
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;exclusiveMinimum&quot;: 0,
+        &quot;maximum&quot;: 86400
+      },
+      &quot;history&quot;: {
+        &quot;type&quot;: &quot;array&quot;,
+        &quot;maxItems&quot;: 12,
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;role&quot;: {
+              &quot;enum&quot;: [
+                &quot;user&quot;,
+                &quot;assistant&quot;
+              ]
+            },
+            &quot;content&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;minLength&quot;: 1,
+              &quot;maxLength&quot;: 4000
+            }
+          },
+          &quot;required&quot;: [
+            &quot;role&quot;,
+            &quot;content&quot;
+          ],
+          &quot;additionalProperties&quot;: false
+        }
+      },
+      &quot;max_tokens&quot;: {
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;minimum&quot;: 64,
+        &quot;maximum&quot;: 2048
+      }
+    },
+    &quot;required&quot;: [
+      &quot;session&quot;,
+      &quot;revision&quot;,
+      &quot;question&quot;,
+      &quot;from_seconds&quot;,
+      &quot;to_seconds&quot;
+    ],
+    &quot;additionalProperties&quot;: false
+  },
+  &quot;annotations&quot;: {
+    &quot;readOnlyHint&quot;: true,
+    &quot;destructiveHint&quot;: false,
+    &quot;idempotentHint&quot;: false,
+    &quot;openWorldHint&quot;: false
+  }
+}</code></pre></details>
+<h2 id="operations">Native edit operations</h2>
+<p>Place operations in <code>apply_edits.arguments.operations</code> with current guards.
+These are low-level edits, not separate MCP tools. Updates replace complete notes/events;
+preserve unchanged fields. Create lines first and use their returned IDs in a later batch.
+Root reordering must be separate from line creation, updates, or deletion.</p>
+<details class="operation"><summary>create_note</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;create_note&quot;
+    },
+    &quot;line_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;note&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;kind&quot;: {
+          &quot;enum&quot;: [
+            &quot;tap&quot;,
+            &quot;drag&quot;,
+            &quot;hold&quot;,
+            &quot;flick&quot;
+          ]
+        },
+        &quot;above&quot;: {
+          &quot;type&quot;: &quot;boolean&quot;
+        },
+        &quot;beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        },
+        &quot;x&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;speed&quot;: {
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;exclusiveMinimum&quot;: 0
+        },
+        &quot;hold_beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;kind&quot;,
+        &quot;above&quot;,
+        &quot;beat&quot;,
+        &quot;x&quot;,
+        &quot;speed&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;line_id&quot;,
+    &quot;note&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>update_note</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;update_note&quot;
+    },
+    &quot;id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;note&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;kind&quot;: {
+          &quot;enum&quot;: [
+            &quot;tap&quot;,
+            &quot;drag&quot;,
+            &quot;hold&quot;,
+            &quot;flick&quot;
+          ]
+        },
+        &quot;above&quot;: {
+          &quot;type&quot;: &quot;boolean&quot;
+        },
+        &quot;beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        },
+        &quot;x&quot;: {
+          &quot;type&quot;: &quot;number&quot;
+        },
+        &quot;speed&quot;: {
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;exclusiveMinimum&quot;: 0
+        },
+        &quot;hold_beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;kind&quot;,
+        &quot;above&quot;,
+        &quot;beat&quot;,
+        &quot;x&quot;,
+        &quot;speed&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;id&quot;,
+    &quot;note&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>delete_note</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;delete_note&quot;
+    },
+    &quot;id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;id&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>create_event</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;create_event&quot;
+    },
+    &quot;line_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;event&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;kind&quot;: {
+          &quot;enum&quot;: [
+            &quot;x&quot;,
+            &quot;y&quot;,
+            &quot;rotation&quot;,
+            &quot;opacity&quot;,
+            &quot;speed&quot;
+          ]
+        },
+        &quot;start_beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        },
+        &quot;end_beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        },
+        &quot;value&quot;: {
+          &quot;oneOf&quot;: [
+            {
+              &quot;type&quot;: &quot;object&quot;,
+              &quot;properties&quot;: {
+                &quot;type&quot;: {
+                  &quot;const&quot;: &quot;constant&quot;
+                },
+                &quot;value&quot;: {
+                  &quot;type&quot;: &quot;number&quot;
+                }
+              },
+              &quot;required&quot;: [
+                &quot;type&quot;,
+                &quot;value&quot;
+              ],
+              &quot;additionalProperties&quot;: false
+            },
+            {
+              &quot;type&quot;: &quot;object&quot;,
+              &quot;properties&quot;: {
+                &quot;type&quot;: {
+                  &quot;const&quot;: &quot;transition&quot;
+                },
+                &quot;start&quot;: {
+                  &quot;type&quot;: &quot;number&quot;
+                },
+                &quot;end&quot;: {
+                  &quot;type&quot;: &quot;number&quot;
+                },
+                &quot;easing&quot;: {
+                  &quot;description&quot;: &quot;PhiChain easing value; copy from read_section.&quot;
+                }
+              },
+              &quot;required&quot;: [
+                &quot;type&quot;,
+                &quot;start&quot;,
+                &quot;end&quot;,
+                &quot;easing&quot;
+              ],
+              &quot;additionalProperties&quot;: false
+            }
+          ]
+        }
+      },
+      &quot;required&quot;: [
+        &quot;kind&quot;,
+        &quot;start_beat&quot;,
+        &quot;end_beat&quot;,
+        &quot;value&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;line_id&quot;,
+    &quot;event&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>update_event</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;update_event&quot;
+    },
+    &quot;id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;event&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;kind&quot;: {
+          &quot;enum&quot;: [
+            &quot;x&quot;,
+            &quot;y&quot;,
+            &quot;rotation&quot;,
+            &quot;opacity&quot;,
+            &quot;speed&quot;
+          ]
+        },
+        &quot;start_beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        },
+        &quot;end_beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        },
+        &quot;value&quot;: {
+          &quot;oneOf&quot;: [
+            {
+              &quot;type&quot;: &quot;object&quot;,
+              &quot;properties&quot;: {
+                &quot;type&quot;: {
+                  &quot;const&quot;: &quot;constant&quot;
+                },
+                &quot;value&quot;: {
+                  &quot;type&quot;: &quot;number&quot;
+                }
+              },
+              &quot;required&quot;: [
+                &quot;type&quot;,
+                &quot;value&quot;
+              ],
+              &quot;additionalProperties&quot;: false
+            },
+            {
+              &quot;type&quot;: &quot;object&quot;,
+              &quot;properties&quot;: {
+                &quot;type&quot;: {
+                  &quot;const&quot;: &quot;transition&quot;
+                },
+                &quot;start&quot;: {
+                  &quot;type&quot;: &quot;number&quot;
+                },
+                &quot;end&quot;: {
+                  &quot;type&quot;: &quot;number&quot;
+                },
+                &quot;easing&quot;: {
+                  &quot;description&quot;: &quot;PhiChain easing value; copy from read_section.&quot;
+                }
+              },
+              &quot;required&quot;: [
+                &quot;type&quot;,
+                &quot;start&quot;,
+                &quot;end&quot;,
+                &quot;easing&quot;
+              ],
+              &quot;additionalProperties&quot;: false
+            }
+          ]
+        }
+      },
+      &quot;required&quot;: [
+        &quot;kind&quot;,
+        &quot;start_beat&quot;,
+        &quot;end_beat&quot;,
+        &quot;value&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;id&quot;,
+    &quot;event&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>delete_event</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;delete_event&quot;
+    },
+    &quot;id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;id&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>set_offset</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;set_offset&quot;
+    },
+    &quot;offset&quot;: {
+      &quot;type&quot;: &quot;number&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;offset&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>set_meta</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;set_meta&quot;
+    },
+    &quot;meta&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;name&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;composer&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;charter&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;illustrator&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;level&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;name&quot;,
+        &quot;composer&quot;,
+        &quot;charter&quot;,
+        &quot;illustrator&quot;,
+        &quot;level&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;meta&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>create_line</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;create_line&quot;
+    },
+    &quot;name&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;parent_id&quot;: {
+      &quot;oneOf&quot;: [
+        {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+        },
+        {
+          &quot;type&quot;: &quot;null&quot;
+        }
+      ]
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;name&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>update_line</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;update_line&quot;
+    },
+    &quot;id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;name&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;parent_id&quot;: {
+      &quot;oneOf&quot;: [
+        {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+        },
+        {
+          &quot;type&quot;: &quot;null&quot;
+        }
+      ]
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;id&quot;,
+    &quot;name&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>delete_line</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;delete_line&quot;
+    },
+    &quot;id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;cascade&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;id&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>reorder_lines</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;reorder_lines&quot;
+    },
+    &quot;line_ids&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+      },
+      &quot;minItems&quot;: 1
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;line_ids&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>create_curve_track</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;create_curve_track&quot;
+    },
+    &quot;line_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;from_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;to_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;options&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;kind&quot;: {
+          &quot;enum&quot;: [
+            &quot;tap&quot;,
+            &quot;drag&quot;,
+            &quot;flick&quot;,
+            &quot;hold&quot;
+          ]
+        },
+        &quot;hold_beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        },
+        &quot;density&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;minimum&quot;: 1,
+          &quot;maximum&quot;: 256
+        },
+        &quot;curve&quot;: {
+          &quot;type&quot;: &quot;object&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;kind&quot;,
+        &quot;density&quot;,
+        &quot;curve&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;line_id&quot;,
+    &quot;from_id&quot;,
+    &quot;to_id&quot;,
+    &quot;options&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>update_curve_track</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;update_curve_track&quot;
+    },
+    &quot;id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;from_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;to_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    },
+    &quot;options&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;kind&quot;: {
+          &quot;enum&quot;: [
+            &quot;tap&quot;,
+            &quot;drag&quot;,
+            &quot;flick&quot;,
+            &quot;hold&quot;
+          ]
+        },
+        &quot;hold_beat&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          &quot;minItems&quot;: 3,
+          &quot;maxItems&quot;: 3,
+          &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+        },
+        &quot;density&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;minimum&quot;: 1,
+          &quot;maximum&quot;: 256
+        },
+        &quot;curve&quot;: {
+          &quot;type&quot;: &quot;object&quot;
+        }
+      },
+      &quot;required&quot;: [
+        &quot;kind&quot;,
+        &quot;density&quot;,
+        &quot;curve&quot;
+      ],
+      &quot;additionalProperties&quot;: false
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;id&quot;,
+    &quot;from_id&quot;,
+    &quot;to_id&quot;,
+    &quot;options&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>delete_curve_track</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;delete_curve_track&quot;
+    },
+    &quot;id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9]+$&quot;
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;id&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<details class="operation"><summary>set_bpm_list</summary><pre><code>{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;op&quot;: {
+      &quot;const&quot;: &quot;set_bpm_list&quot;
+    },
+    &quot;bpm_list&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;minItems&quot;: 1,
+      &quot;maxItems&quot;: 1000,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+          &quot;beat&quot;: {
+            &quot;type&quot;: &quot;array&quot;,
+            &quot;items&quot;: {
+              &quot;type&quot;: &quot;integer&quot;
+            },
+            &quot;minItems&quot;: 3,
+            &quot;maxItems&quot;: 3,
+            &quot;description&quot;: &quot;[whole, numerator, denominator], denominator positive. E.g. [4,1,2] = beat 4.5.&quot;
+          },
+          &quot;bpm&quot;: {
+            &quot;type&quot;: &quot;number&quot;,
+            &quot;minimum&quot;: 1,
+            &quot;maximum&quot;: 1000
+          }
+        },
+        &quot;required&quot;: [
+          &quot;beat&quot;,
+          &quot;bpm&quot;
+        ],
+        &quot;additionalProperties&quot;: false
+      }
+    }
+  },
+  &quot;required&quot;: [
+    &quot;op&quot;,
+    &quot;bpm_list&quot;
+  ],
+  &quot;additionalProperties&quot;: false
+}</code></pre></details>
+<h2 id="limits">Units and recovery</h2><ul>
+<li>“Notes” means playable note objects. Beats describe musical timing.</li>
+<li>Beat fractions use <code>[whole, numerator, denominator]</code>, such as
+<code>[4, 1, 2]</code> for beat 4.5. Write canonical fractions with positive denominators.</li>
+<li>Note x uses native coordinates. Note speed changes approach speed, not hit timing.</li>
+<li>Offset uses milliseconds; preview time uses elapsed audio seconds. Convert beats
+using the BPM map, then add offset / 1000.</li>
+<li>Holds require a positive hold duration. Generated curve notes cannot be edited directly;
+curve endpoints cannot be deleted while referenced.</li>
+<li>A batch contains 1–1000 operations. Each existing target may occur once.
+The editor validates the whole batch before applying it.</li>
+<li>Stale guards fail without mutation. Re-read and reconsider the edits. Active human
+interactions can also block writes.</li>
+<li>After a transport timeout, inspect current state before retrying: edits may have executed.</li>
+<li>History requires an explicit <code>author</code>: <code>agent</code> or <code>human</code>.
+Read <code>undo_author</code> / <code>redo_author</code> from context (null means no entry).
+A mismatch fails without mutation; entries cannot be skipped. Rebuild and restart the editor
+and refresh the MCP client after this update. History is shared with the human. Undo only when requested or reverting your known latest batch.</li>
+<li>Edits stay in memory until saved or autosaved. Preview requests are acknowledgments;
+read context to observe playback after the editor processes them.</li></ul>
+<footer>Generated by <code>agent-tools/Phichain/mcp/reference/phichain/build.py</code> from the current server.
+Examples are schema-checked; no live chart changes are performed during generation.</footer>
+</main></div></body></html>

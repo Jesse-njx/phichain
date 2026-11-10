@@ -1,0 +1,85 @@
+[workspace]
+members = [
+    "asset-loader",
+    "chart",
+    "compiler",
+    "converter",
+    "editor",
+    "format",
+    "game",
+    "i18n",
+    "renderer",
+    "telemetry",
+]
+resolver = "2"
+
+# Enable only a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable max optimizations for dependencies, but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1
+incremental = false
+debug = false
+
+# Fast-to-build optimized profile for profiling with Tracy.
+# Keeps opt-level 3 so timings stay representative, but drops LTO and adds
+# debug info so links are fast and Tracy shows function names.
+[profile.profiling]
+inherits = "release"
+lto = false
+codegen-units = 16
+incremental = true
+debug = "line-tables-only"
+
+[workspace.dependencies]
+bevy = { version = "0.18.1", default-features = false, features = [
+    "bevy_asset",
+    "bevy_camera",
+    "bevy_color",
+    "bevy_core_pipeline",
+    "bevy_gilrs",
+    "bevy_gizmos",
+    "bevy_gizmos_render",
+    "bevy_image",
+    "bevy_log",
+    "bevy_mesh",
+    "bevy_picking",
+    "bevy_post_process",
+    "bevy_render",
+    "bevy_scene",
+    "bevy_shader",
+    "bevy_sprite",
+    "bevy_sprite_render",
+    "bevy_state",
+    "bevy_text",
+    "bevy_ui",
+    "bevy_ui_render",
+    "bevy_window",
+    "bevy_winit",
+    "custom_cursor",
+    "default_font",
+    "hdr",
+    "mesh_picking",
+    "multi_threaded",
+    "png",
+    "serialize",
+    "sprite_picking",
+    "sysinfo_plugin",
+    "ui_picking",
+    "webgl2",
+    "x11",
+] }
+bevy_kira_audio = { version = "0.25.0", features = [
+    "mp3",
+    "ogg",
+    "flac",
+    "wav",
+] }
+bevy_prototype_lyon = "0.16.0"

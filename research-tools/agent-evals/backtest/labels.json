@@ -1,0 +1,38 @@
+{
+  "note": "User verdicts copied from existing project records. An axis is labelled only where the record states it; null means the record does not say. Slices are in seconds. happy-climax = source beats 472..520 at 219 BPM.",
+  "slices": {
+    "happy-climax": [129.315, 142.466]
+  },
+  "cases": [
+    {"id": "silent-180-wide-travel", "path": "charts/silent/silent-180-sixteenths/project/chart.json", "hand": "pass", "line": null, "overall": null, "evidence": "prompts/charting/rules.md: explicitly approved; best AI-generated note arrangement. Static presentation, so line is not assessed."},
+    {"id": "silent-150-style-one", "path": "charts/silent/silent-150-two-styles/style-one/project/chart.json", "hand": "pass", "line": null, "overall": null, "evidence": "README: acceptable, 'all right'; narrower than the 180 approval."},
+    {"id": "silent-150-style-two", "path": "charts/silent/silent-150-two-styles/style-two/project/chart.json", "hand": "pass", "line": null, "overall": null, "evidence": "README: acceptable, 'all right'; narrower than the 180 approval."},
+    {"id": "silent-150-tech", "path": "charts/silent/silent-150-four-key/tech/project/chart.json", "hand": "pass", "line": null, "overall": null, "evidence": "README: 'pretty much correct'. Fixed four-lane isolation study."},
+    {"id": "silent-150-speed", "path": "charts/silent/silent-150-four-key/speed/project/chart.json", "hand": "pass", "line": null, "overall": null, "evidence": "README: 'pretty much correct'. Fixed four-lane isolation study."},
+    {"id": "silent-150-stream", "path": "charts/silent/silent-150-four-key/stream/project/chart.json", "hand": "pass", "line": null, "overall": null, "evidence": "README: 'pretty much correct'. Fixed four-lane isolation study."},
+
+    {"id": "climax-C-approved", "path": "charts/happy-ending/happy-ending-climax-diagnostics/C/project/chart.json", "hand": "pass", "line": "pass", "overall": "pass", "evidence": "RUN.txt: USER APPROVED current C ensemble revision as really good."},
+    {"id": "climax-C-before-ensemble", "path": "charts/happy-ending/happy-ending-climax-diagnostics/history/C-before-ensemble/project/chart.json", "hand": null, "line": "fail", "overall": "fail", "evidence": "user-feedback.json: orientation okay; background lines absolutely terrible, one line dancing left and right."},
+    {"id": "climax-C-before-orientation", "path": "charts/happy-ending/happy-ending-climax-diagnostics/history/C-before-orientation-fix/project/chart.json", "hand": null, "line": null, "overall": "fail", "evidence": "user-feedback.json: C best, still very bad; notes do not clearly indicate their receiving line."},
+    {"id": "climax-A", "path": "charts/happy-ending/happy-ending-climax-diagnostics/A/project/chart.json", "hand": null, "line": null, "overall": "fail", "evidence": "user-feedback.json: slightly better, still very bad."},
+    {"id": "climax-B", "path": "charts/happy-ending/happy-ending-climax-diagnostics/B/project/chart.json", "hand": null, "line": null, "overall": "fail", "evidence": "user-feedback.json: slightly better, still very bad."},
+
+    {"id": "he-run02", "path": "charts/happy-ending/happy-ending-guided-run02/project/chart.json", "slice": "happy-climax", "hand": "fail", "line": "fail", "overall": "fail", "evidence": "RUN.md: pale and boring against the wide-travel reference; lines do not perceptibly dance; reactions isolated."},
+    {"id": "he-run03", "path": "charts/happy-ending/happy-ending-performance-run03/project/chart.json", "slice": "happy-climax", "hand": null, "line": "fail", "overall": "fail", "evidence": "RUN.md: very boring; moving background too noisy and similar across sections."},
+    {"id": "he-presentation-r01", "path": "charts/happy-ending/happy-ending-sol-baseline/presentation-revision-01/project/chart.json", "slice": "happy-climax", "hand": null, "line": "fail", "overall": "fail", "evidence": "sol-baseline README: rejected as not yet viable; blinking as the only all-song vocabulary; unclear section development."},
+    {"id": "he-five-A", "path": "charts/happy-ending/happy-ending-five-authors/A/project/chart.json", "slice": "happy-climax", "hand": null, "line": null, "overall": "fail", "evidence": "RUN.txt: all five rejected as still absolutely terrible."},
+    {"id": "he-five-B", "path": "charts/happy-ending/happy-ending-five-authors/B/project/chart.json", "slice": "happy-climax", "hand": null, "line": null, "overall": "fail", "evidence": "RUN.txt: all five rejected as still absolutely terrible."},
+    {"id": "he-five-C", "path": "charts/happy-ending/happy-ending-five-authors/C/project/chart.json", "slice": "happy-climax", "hand": null, "line": null, "overall": "fail", "evidence": "RUN.txt: all five rejected as still absolutely terrible."},
+    {"id": "he-five-D", "path": "charts/happy-ending/happy-ending-five-authors/D/project/chart.json", "slice": "happy-climax", "hand": null, "line": null, "overall": "fail", "evidence": "RUN.txt: all five rejected as still absolutely terrible."},
+    {"id": "he-five-E", "path": "charts/happy-ending/happy-ending-five-authors/E/project/chart.json", "slice": "happy-climax", "hand": null, "line": null, "overall": "fail", "evidence": "RUN.txt: all five rejected as still absolutely terrible."},
+
+    {"id": "iris-original", "path": "charts/xterfusion/xterfusion-iris-study/project/chart.json", "hand": null, "line": "fail", "overall": "fail", "approach": "fail", "evidence": "PROJECT-STATE.md: user rejected the original for slow note approach and stiff performance."},
+    {"id": "override-three-a", "path": "charts/override/override-three-2026-11-02/a/project/chart.json", "hand": null, "line": null, "overall": "fail", "evidence": "README: user rejected all three drafts; sideways note approach, late release before immediate same-finger hit."},
+    {"id": "override-three-b", "path": "charts/override/override-three-2026-11-02/b/project/chart.json", "hand": null, "line": null, "overall": "fail", "evidence": "README: user rejected all three drafts; sideways note approach, late release before immediate same-finger hit."},
+    {"id": "override-three-c", "path": "charts/override/override-three-2026-11-02/c/project/chart.json", "hand": null, "line": null, "overall": "fail", "evidence": "README: user rejected all three drafts; sideways note approach, late release before immediate same-finger hit."}
+  ],
+  "unlabelled": [
+    {"id": "he-official-climax", "path": "research/reference-studies/happy-ending-official-in/native-reference/chart.json", "slice": "happy-climax", "note": "Official IN of the same passage, for direct comparison."},
+    {"id": "he-full-c", "path": "charts/happy-ending/happy-ending-full-c-revision/full/project/chart.json", "note": "Full-song judgment pending."}
+  ]
+}

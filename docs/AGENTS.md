@@ -78,6 +78,7 @@ Rules:
 
 ## Terminology and timing
 
+- Codes such as `MG1`, `NT3` or `XS4` are defined in [terminology.md](terminology.md), the single registry of terms across note arrangement (N), music understanding (M), performance (P), game design (G) and cross-cutting vocabulary (X). Use its codes and names; do not define competing ones.
 - **纯配置 / Chun Pei Zhi / Pure configuration** means exactly one judgment line carrying every playable note. Merely removing decorative animation while retaining multiple note carriers does not satisfy this request. The user clarified this during the Poseidon AT adaptation (2026-11-02), noting that modest rotations such as 20–30 degrees do not meaningfully change the configuration by themselves. For the requested no-performance version, use one static receiver and ordinary straight approach; preserve source timing and note types unless rearrangement is separately requested.
 - “Notes” means individual playable objects (tap, hold, drag, or flick), not musical beats. “Notes 1–41” means the first 41 playable objects in chart order, inclusive. Do not silently reinterpret this as beats or include extra simultaneous objects. If simultaneous notes make numbering ambiguous, state the ordering convention or clarify it.
 - Use “beats” for musical timing when the user explicitly refers to beats. Beat positions may also locate a requested note range. Distinguish editor beats from musical note values rather than assuming they are interchangeable.
@@ -88,6 +89,17 @@ Rules:
 - Use 32/64-beat phrases and other multiples of 32 as structural clues, not absolute rules. When a section has a different length, inspect pickups, buildups, transitions, and overlaps; record the evidence and uncertainty rather than forcing a boundary.
 
 ## Pattern and motion design
+
+### Section difficulty
+
+**Use different difficulty values for different parts of a chart. Never chart a whole song at one difficulty value.**
+
+- Before placing or generating notes, assign every section its own difficulty value from the song's structure, and record the values in the song's project records.
+- Give climaxes the highest values. Give slower sections, and sections intended to be charted sparsely, clearly lower values. Build-ups, verses and returns sit between them according to their role in the song.
+- Treat a target level for the whole chart as the ceiling reached at the climax, not as the value for every section.
+- Decide each value from the section's musical intent. A loud passage is not automatically a climax, and a slow passage is not automatically easy to read.
+- When a note generator takes a difficulty value, such as Mapperatorinator's `difficulty`, generate each section separately with its own value using `start_time` and `end_time`. Convert a Phigros level from 14 to 18 with `level_to_mania_star` in `research/phigros-finetune/convert_mania.py`.
+- A difficulty value is a condition on the generator, not a note count. Check the resulting density of each section against its intent before using the notes.
 
 ### User correction: movement and performance density (2026-11-02)
 

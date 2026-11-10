@@ -85,7 +85,9 @@ README section 3 (model rules 1–11, measurement rules 12–16) and section 5
 ## 4. Record schema the viewer depends on
 
 Keep these field names and shapes exactly; `artifacts/song-analysis-viewer/build.py`
-reads them.
+reads them. They are the legacy keys listed in `docs/terminology.md` section 8
+(`L0_identity_grid` = MG, `L1_form` = MF, `L2_layers` = ML0–ML2,
+`L3_lead_line` = ML3–ML4, `L5_energy` = ME); do not rename them in a record.
 
 - `L0_identity_grid`: `bpm.value`, `beat_zero_offset_seconds.value`,
   `duration_seconds`, `meter`, optional `tempo_segments` (list of
@@ -110,9 +112,9 @@ reads them.
 
 ## 5. Report back
 
-Concretely and briefly: the L0 grid (single or piecewise) with uncertainty;
-the L1 table (beats, seconds, function, group, lead, boundary status, function
-status); recurrence groups; vocal presence result; climax candidates in
+Concretely and briefly: the grid (MG, single or piecewise) with uncertainty;
+the section table (MF0: beats, seconds, function, group, lead, boundary status,
+function status); recurrence groups; vocal presence result; climax candidates in
 position-prior order; main failures or surprises, especially where the
 framework broke; files written; any outside-the-audio information that reached
 you.

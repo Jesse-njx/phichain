@@ -35,19 +35,25 @@ with one plain question; the pilot below uses it that way.
 
 ## 2. The Song Analysis Record
 
-The framework's output is a **Song Analysis Record (SAR)**: one JSON document per
-song, hierarchical, where every claim carries its evidence source and status. A
-chart agent reads the SAR; it never reads raw detector output directly.
+The framework's output is a **Song Analysis Record (SAR, XR0)**: one JSON
+document per song, hierarchical, where every claim carries its evidence source
+and status. A chart agent reads the SAR; it never reads raw detector output
+directly. Item codes such as `MG1` are defined in
+[docs/terminology.md](../../docs/terminology.md); the SAR holds the
+song- and section-scale items of its music-understanding tables, the Phrase
+Rhythm Record (`../phrase-rhythm-framework/README.md`) the rest. Existing
+records keep the legacy keys `L0_identity_grid` … `L5_energy`; the registry's
+section 8 maps them.
 
-| Level | Content | Primary evidence | Secondary |
+| Aspect and items | Content | Primary evidence | Secondary |
 | --- | --- | --- | --- |
-| L0 Identity and grid | Audio hash, duration, BPM, beat-zero offset, meter, key (optional) | Measurement (pulse fit, onset alignment) or user | Model for key only; model BPM is never used |
-| L1 Form | Ordered sections `[start,end)` in beats, **function label**, phrase length, pickup/anacrusis flag, recurrence group (A, A', B...) | Model listening + chroma self-similarity + stem energy | allin1 labels as a third vote |
-| L2 Layer inventory | Per section: layers present (lead vocal, lead synth, guitar, bass, drums, pads, FX), role (foreground/background), entrances and exits with times | Model listening (entrances) + stem energy (presence) | |
-| L3 Lead line | Per section: which layer a player should follow, its rhythmic character (sustained, steady eighths, sixteenth runs, syncopated, call-and-response), vocal phrase boundaries, hook motif occurrences, lyric lines | Model listening (lead, lyrics) + pitch tracking on the named stem | |
-| L4 Rhythm vocabulary | Drum pattern class (four-on-the-floor, half-time, breakbeat, absent), subdivision, fills and breaks with times, pattern changes | Model listening + drum-stem pulse analysis | |
-| L5 Energy and tension arc | Per 4-beat bin: energy 1–5, tension (building/steady/releasing), drops, breaks, build-ups; climax spans **with a musical reason** | Model ratings reconciled with measured energy | |
-| L6 Charting implications | Derived only: which layer each section follows, density envelope, sustain candidates, section relations to preserve, background-line driver layer | Computed from L1–L5 plus reference charts; never asked of the model | |
+| MG Grid: MG0 audio identity, MG1 tempo, MG2 beat zero, MG3 meter, MG4 tempo segments, MG5 key | Audio hash, duration, BPM, beat-zero offset, meter, piecewise grid where tempo or meter changes, key (optional) | Measurement (pulse fit, onset alignment) or user | Model for key only; model BPM is never used |
+| MF Form: MF0 sections, MF1 recurrence groups, MF2 pickups | Ordered sections `[start,end)` in beats, **function label**, phrase length, pickup/anacrusis flag, recurrence group (A, A', B...) | Model listening + chroma self-similarity + stem energy | allin1 labels as a third vote |
+| ML Layers: ML0 inventory, ML1 entrances and exits, ML2 vocal ranges | Per section: layers present (lead vocal, lead synth, guitar, bass, drums, pads, FX), role (foreground/background), entrances and exits with times | Model listening (entrances) + stem energy (presence) | |
+| ML3 lead layer, ML4 lyric lines | Per section: which layer a player should follow, its rhythmic character (sustained, steady eighths, sixteenth runs, syncopated, call-and-response), vocal phrase boundaries, hook motif occurrences, lyric lines | Model listening (lead, lyrics) + pitch tracking on the named stem | |
+| MR Rhythm: MR0 drum pattern class, MR3 fills and breaks | Drum pattern class (four-on-the-floor, half-time, breakbeat, absent), subdivision, fills and breaks with times, pattern changes | Model listening + drum-stem pulse analysis | |
+| ME Energy: ME0 energy per bin, ME1 tension, ME2 pairwise intensity, ME3 climax candidates, ME4 drops, breaks and build-ups | Per 4-beat bin: energy 1–5, tension (building/steady/releasing), drops, breaks, build-ups; climax spans **with a musical reason** | Model ratings reconciled with measured energy | |
+| MH Hits (derived): MH4 density envelope, MH6 background driver, plus sustain candidates (MR6) and section relations (MF1) | Derived only: which layer each section follows, density envelope, sustain candidates, section relations to preserve, background-line driver layer | Computed from MF, ML, MR and ME plus reference charts; never asked of the model | |
 
 Every claim is an object:
 
@@ -76,10 +82,10 @@ Override pilot (`charts/override/override-analysis-pilot-2026-11-07/README.md`).
 
 1. **Native prompt, one question per call.** Plain chat template, no
    meta-wrapper, no injected history, no negative instructions about
-   hallucination. Temperature 0. Each question targets one SAR level.
+   hallucination. Temperature 0. Each question targets one SAR aspect.
 2. **Clips aligned to the measured grid.** Section questions use clips cut at
    the candidate section boundaries in beats. Clip-relative times are converted
-   to absolute seconds and then to beats with the L0 grid; the model never
+   to absolute seconds and then to beats with the grid (MG1, MG2); the model never
    sees beats.
 3. **Resolution cap.** A model timestamp is accepted to ±2 s and is only
    promoted to a beat when a measured boundary (energy step, stem entrance,
@@ -171,12 +177,12 @@ model path, prompt and absolute offset. The table is the v1 design; the
 
 | Pass | Clips | Questions | Feeds | Keep? |
 | --- | --- | --- | --- | --- |
-| A Overview | 4 overlapping 40–50 s windows | A1 structure list; A2 entrances/exits; A3 energy per 4 s; A4 lyrics with timestamps | L1, L2, L3, L5 | A4 yes, on vocal passages only. A1 only on the first window; A2, A3 dropped (rule 7) |
-| B Sections | One clip per candidate section (≤ 20 s) | B1 lead layer; B2 drum pattern; B3 function, energy, tension, pickup, ending | L1, L3, L4, L5 | B3 yes; B1 reduced to vocal/instrumental; B2 dropped (rule 11) |
-| C Recurrence | Pairs plus a control | SAME / VARIATION / DIFFERENT; lyric-agnostic variant | L1 recurrence groups | Yes, both orders, both variants (rule 9) |
-| D Stability | Shifted windows | A1 again | Status of L1 boundaries | Replaced by cross-question agreement (rule 4) |
+| A Overview | 4 overlapping 40–50 s windows | A1 structure list; A2 entrances/exits; A3 energy per 4 s; A4 lyrics with timestamps | MF0, ML1, ML4, ME0 | A4 yes, on vocal passages only. A1 only on the first window; A2, A3 dropped (rule 7) |
+| B Sections | One clip per candidate section (≤ 20 s) | B1 lead layer; B2 drum pattern; B3 function, energy, tension, pickup, ending | MF0, ML3, MR0, ME0–ME1 | B3 yes; B1 reduced to vocal/instrumental; B2 dropped (rule 11) |
+| C Recurrence | Pairs plus a control | SAME / VARIATION / DIFFERENT; lyric-agnostic variant | MF1 recurrence groups | Yes, both orders, both variants (rule 9) |
+| D Stability | Shifted windows | A1 again | Status of MF0 boundaries | Replaced by cross-question agreement (rule 4) |
 | E Grid check | One 30 s clip | BPM and meter | Documents numeric error | Yes, one call |
-| New: pairwise intensity | Section pairs in both orders | Which is more intense, A/B/EQUAL | L5 ordering | Added (rule 9) |
+| New: pairwise intensity | Section pairs in both orders | Which is more intense, A/B/EQUAL | ME2 ordering | Added (rule 9) |
 
 Measured cost on the M5 32 GB machine: model load 2–4 s, 1–4 s per call on
 section clips, 8–35 s on 50 s windows, 6.6 GB peak memory; the 55-call v1 pass
@@ -283,3 +289,5 @@ rate difficulty, does not claim emotional truth, and does not replace listening
 by the user. Its job is to give the charting agent a song description that is
 musically structured, time-aligned to the grid, and honest about what is
 measured, what is heard by a model, and what the user has confirmed.
+The micro level (which grid slots get notes, per phrase and layer) is
+proposed separately in `../phrase-rhythm-framework/README.md`.

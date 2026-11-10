@@ -1,26 +1,52 @@
-> **Agent-assisted charting fork:** [Jesse-njx/phichain](https://github.com/Jesse-njx/phichain), based on [Ivan-1F/phichain](https://github.com/Ivan-1F/phichain). The live editor MCP server is included in [`tools/phichain-mcp`](tools/phichain-mcp/README.md), with its Rust bridge in `phichain-editor/src/mcp.rs`. See the [development roadmap](tools/phichain-mcp/ROADMAP.md).
+# AutoPhiChain
 
-> **Pure configuration CLI:** [Convert official-v3 JSON/PEZ charts to exactly one static judgment line](tools/pure-configuration/README.md), without an agent or running editor.
+> **Always hesitate before adding information to this file.** Add something
+> only if the user or a developer absolutely cannot skip it. Otherwise, do not.
+> Details belong in the documents linked below.
 
-> [!WARNING]
-> 仍处于开发的早期阶段，可能存在不完整的功能和未预期的行为
+AutoPhiChain is a fork of [phichain](https://github.com/Ivan-1F/phichain), a
+Phigros chart editor, plus the MCP tools, agent prompts and research that aim
+to make charting autonomous. The upstream editor README is archived as
+[PHICHAIN-README.md](PHICHAIN-README.md) (with its translations).
 
-## Phichain
+This repository is the `main/` folder of a private workspace. Charts, audio and
+generated artifacts live beside it, outside Git, and are never published. See
+[CHARTS.md](CHARTS.md) for what can be re-downloaded.
 
-**简体中文** | [繁體中文](https://github.com/Ivan-1F/phichain/blob/master/README_tw.md) | [English](https://github.com/Ivan-1F/phichain/blob/master/README_en.md) | [日本語](https://github.com/Ivan-1F/phichain/blob/master/README_ja.md)
+## Goal and roadmap
 
-[![GitHub License](https://img.shields.io/github/license/Ivan-1F/phichain)](https://github.com/Ivan-1F/phichain/blob/master/LICENSE)
-[![Dev Builds](https://github.com/Ivan-1F/phichain/actions/workflows/cargo.yml/badge.svg)](https://github.com/Ivan-1F/phichain/actions/workflows/cargo.yml)
+Today an agent charts well when directed passage by passage. The goal is the
+shift from an agent that follows charting instructions to one that makes the
+charting decisions itself, with the user as reviewer, not director. Full
+roadmap: [docs/roadmap/README.md](docs/roadmap/README.md).
 
-基于 Rust 和 Bevy 的 Phigros 制谱工具链
+Charting breaks down into three steps, with a fourth above them:
 
-- QQ 群: [768476938](https://phicha.in/qq)
-- Discord: [discord.gg/ESUwcdMBPv](https://phicha.in/discord)
+| Code | Step | Decides | State |
+| --- | --- | --- | --- |
+| N | Note arrangement | Given hit times: position, type, hand plan | **Current focus** (roadmap step 1) |
+| M | Music understanding | Which sounds become notes, phrases and sections, intensity and climax | Macro analysis usable; micro (which timestamps) proposed |
+| P | Performance | Judgment-line motion, effects, choreography | After N and M |
+| G | Game design | Difficulty identity, pacing | Out of the roadmap's scope |
 
-![screenshot](screenshots/phichain-editor-zh-CN.png)
+Each step is made autonomous on its own inputs before the next begins. Autonomy
+is measured on four levels, A0 manual to A3 autonomous; the target for every
+step is A3. The quality gate is the user's blind review of agent output
+against official charts for the same passage, and the count of per-passage
+instructions the user had to give, which must fall to zero.
 
-## 致谢
+## Terminology
 
-- [Phira](https://github.com/teamflos/phira)
-- [cmdysj](https://space.bilibili.com/252635690) 的 Re:PhiEdit
-- `assets/image` 和 `assets/audio` 目录下的资源文件来自 [https://github.com/MisaLiu/phi-chart-render], 并且遵循 [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) 许可协议
+Every term has a three-character code: **component letter, aspect letter, item
+digit**, for example `MG1` = music understanding, grid, tempo. Component letters
+are N, M, P, G above and X for cross-cutting vocabulary (claim status, evidence
+source, time scales, records). The digit is an identifier, never reused. The
+single registry is [docs/terminology.md](docs/terminology.md); new terms are
+added there first, and no other document defines competing codes.
+
+## Read next
+
+- [AGENTS.md](AGENTS.md): editor and MCP development, Git rules, verification.
+- [docs/AGENTS.md](docs/AGENTS.md): chart authoring and review, the live editor workflow, the user's accumulated corrections.
+- [docs/terminology.md](docs/terminology.md): the code registry.
+- [docs/roadmap/](docs/roadmap/README.md): the three steps, milestones and current state.
